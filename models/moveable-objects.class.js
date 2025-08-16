@@ -6,7 +6,9 @@ y = 0;
 width = 200;
 height = 200;
 speed = 0.25;
-keyboard;
+speedY;
+speedX;
+
     /**
      * This Function loads a single image and sets it as the current imge of this object
      * 
@@ -16,7 +18,6 @@ keyboard;
         this.img = new Image();
         this.img.src = path;
     }
-
 
     /**
      * This Function preloads images and stores them in the object imgCache
@@ -32,14 +33,38 @@ keyboard;
        });
     }
 
+     /**
+     * This Function calls the Objects Animations
+     * If the Array contains 'Sharkie', Movement-Animation is called seperately
+     * 
+     * @param {Array} sprites - Array of image-paths
+     */
+    animateObject(sprites){
+        if (sprites.some(element => element.includes('Sharkie'))) {
+        this.animateCharacterMovement();
+        }
+        this.animateObjectSprite(sprites);
+    }
+        
     /**
-     * This Function iterates through an image-Array and updates the displayed image.
-     * It loops through the Array until it reaches the last index.
-     * The Iteration is done every 100 miliseconds per frame
+     * This Function sets the active Character Movement to 60 FPS
      * 
      */
-    animate(sprites){
+    animateCharacterMovement(){
         setInterval(() => {
+        this.moveCharacter(this.world.keyboard);
+        }, 1000 / 60);
+    }
+
+    /**
+     * This Function updates the displayed image in each iteration
+     * The Iteration is done every 100 miliseconds per frame
+     * Its done for Character, Enemies and Collectables
+     * 
+     * @param {Array} sprites - Array of image-paths
+     */
+    animateObjectSprite(sprites){
+         setInterval(() => {
             let i = this.currentImg % sprites.length;
             let path = sprites[i];
             this.img = this.imgCache[path];
@@ -47,51 +72,93 @@ keyboard;
         }, 100)
     }
 
+    /**
+     * This Function calls the actual Moveset from the Character
+     * 
+     * @param {object} key - Object with the listened Keyboard Keys
+     */
+    moveCharacter(key){
+        this.moveUp(this.speedY,key);
+        this.moveDown(this.speedY,key);
+        this.moveRight(this.speedX,key);
+        this.moveLeft(this.speedX,key);
+    }
+    
+ /**
+     * This Function moves the Enemies from right to left
+     * The Y-Coordinate is set randomly to vary the height-movement
+     * 
+     * @param {Number} speedX - px-value for X-Coordinate 
+     * @param {Number} speedY - px-value for Y-Coordinate 
+     */
+    enemyMinionMovement(speedX, speedY){
+        this.moveLeft(speedX);
+        this.setRandomCoordinateY(speedY);
+    }
+
 
     /**
+     * This Function let the assigned Object move a random height up and down 
+     * 
+     * @param {Number} speedY - px-value for Y-Coordinate
+     */
+    setRandomCoordinateY(speedY){
+         setInterval(() => {
+            setTimeout(() => {
+                this.moveDown(speedY);
+            }, Math.floor(Math.random() * 300 ) + 100);
+            
+            setTimeout(() => {
+                this.moveUp(speedY);
+            }, Math.floor(Math.random() * 300 ) + 100);
+        }, this.randomHeightInterval);
+    }
+
+     /**
      * This function reduces the Y-Coordinate and let the Object move up 
      * 
      * @param {Number} speed - The px-value
+     * @param {Object} key - Object with the listened Keyboard Keys
      */
-    moveTop(speed){
-        setInterval(() => {
+    moveUp(speed, key){
+        if (key.UP == true && this.y) {
             this.y = this.y - speed;
-        }, 1000 / 60);
+        }
     }
-
     /**
      * This function raises the Y-Coordinate and let the Object move down 
      * 
      * @param {Number} speed - The px-value
+     * @param {Object} key - Object with the listened Keyboard Keys
      */
-     moveDown(speed){
-        setInterval(() => {
-            this.y = this.y + speed;
-        }, 1000 / 60);
+     moveDown(speed, key){
+        if (key.DOWN == true) {
+             this.y = this.y + speed;
+        }
     }
-
 
     /**
      * This function raises the X-Coordinate and let the Object move right 
      * 
      * @param {Number} speed - The px-value
+     * @param {Object} key - Object with the listened Keyboard Keys
      */
-     moveRight(speed){
-        setInterval(() => {
+     moveRight(speed, key){
+        if (key.RIGHT == true) {
             this.x = this.x + speed;
-        }, 1000 / 60);
+        }
     }
 
     /**
      * This function reduces the X-Coordinate and let the Object move left 
      * 
      * @param {Number} speed - The px-value
+     * @param {Object} key - Object with the listened Keyboard Keys
      */
-     moveLeft(speed){
-        setInterval(() => {
+     moveLeft(speed, key){
+        if (key.LEFT == true) {
             this.x = this.x - speed;
-        }, 1000 / 60);
+        }
     }
 
-    
 }

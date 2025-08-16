@@ -16,7 +16,7 @@ enemies_IDLE = [
     constructor(path){
         super().loadImg(path);
         this.loadImgCache(this.enemies_IDLE);
-        this.animate(this.enemies_IDLE)
+        this.animateObject(this.enemies_IDLE)
         this.enemyMinionMovement(this.speedX, this.speedY);
         this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
@@ -24,33 +24,53 @@ enemies_IDLE = [
         this.height = this.width;
     }
 
-    /**
-     * This Function moves the Enemies from right to left
-     * The Y-Coordinate is set randomly to vary the height-movement
+   /**
+     * This function reduces the Y-Coordinate and let the Enemy move up 
+     * The Movement is set to 60 FPS
      * 
-     * @param {Number} speedX - px-value for X-Coordinate 
-     * @param {Number} speedY - px-value for Y-Coordinate 
+     * @param {Number} speed - The px-value
      */
-    enemyMinionMovement(speedX, speedY){
-        this.moveLeft(speedX);
-        this.setRandomCoordinateY(speedY);
+    moveUp(speed){
+        setInterval(() => {
+            this.y = this.y - speed;
+        }, 1000 / 60);
+    }
+
+    /**
+     * This function raises the Y-Coordinate and let the Enemy move down 
+     * The Movement is set to 60 FPS
+     * 
+     * @param {Number} speed - The px-value
+     */
+     moveDown(speed){
+        setInterval(() => {
+            this.y = this.y + speed;
+        }, 1000 / 60);
     }
 
 
     /**
-     * This Function let the assigned Object move a random height up and down 
+     * This function raises the X-Coordinate and let the Enemy move right 
+     * The Movement is set to 60 FPS
      * 
-     * @param {Number} speedY - px-value for Y-Coordinate
+     * @param {Number} speed - The px-value
      */
-    setRandomCoordinateY(speedY){
-         setInterval(() => {
-            setTimeout(() => {
-                this.moveDown(speedY);
-            }, Math.floor(Math.random() * 300 ) + 100);
-            
-            setTimeout(() => {
-                this.moveTop(speedY);
-            }, Math.floor(Math.random() * 300 ) + 100);
-        }, this.randomHeightInterval);
+     moveRight(speed){
+        setInterval(() => {
+            this.x = this.x + speed;
+        }, 1000 / 60);
     }
+
+    /**
+     * This function reduces the X-Coordinate and let the Enemy move left 
+     * The Movement is set to 60 FPS
+     * 
+     * @param {Number} speed - The px-value
+     */
+     moveLeft(speed){
+        setInterval(() => {
+            this.x = this.x - speed;
+        }, 1000 / 60);
+    }
+    
 }

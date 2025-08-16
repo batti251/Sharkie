@@ -1,5 +1,8 @@
 class Character extends MoveableObjects{
 currentImg = 0
+world;
+speedX = 4;
+speedY = 3;
 sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
@@ -23,7 +26,8 @@ sharkie_IDLE = [
     constructor(path){
         super().loadImg(path);
         this.loadImgCache(this.sharkie_IDLE)
-        this.animate(this.sharkie_IDLE)
+        this.animateObject(this.sharkie_IDLE)
     }
 
+    
 }
