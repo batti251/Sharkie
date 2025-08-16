@@ -18,7 +18,7 @@ height = 200;
 
 
     /**
-     * This Function preloads images and stores them in the object imgCahce
+     * This Function preloads images and stores them in the object imgCache
      * 
      * @param {Array} sprites - This is an Array of image-paths
      */

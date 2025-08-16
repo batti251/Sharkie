@@ -1,7 +1,22 @@
 class World {
 canvas;
 ctx;
-background;
+background = [
+  new Background('/assets/img/3. Background/Layers/5. Water/L1.png', 0, 0),
+  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L1.png', 0, 0),
+  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L1.png', 0, 0),
+  new Background('/assets/img/3. Background/Layers/2. Floor/L1.png', 0, 0),
+  new Background('/assets/img/3. Background/Layers/1. Light/1.png', 0, 0),
+
+
+  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 760, 0),
+  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 760, 0),
+  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 760, 0),
+  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png', 760, 0),
+  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 760, 0)
+
+
+];
 character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png")
 enemies;
 collectables;
@@ -20,7 +35,9 @@ collectables;
       this.drawCanvas()
 
       console.log("world.class.js: draw-function");
+      this.addImgObjectsToMap(this.background);
       this.addImgObjectToMap(this.character);
+      
       this.imgAnimationLoop();
   } 
 
@@ -43,6 +60,17 @@ collectables;
      */
     addImgObjectToMap(object){
     this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
+    }
+
+    /**
+     * This Function iterates through an Array and draws an Image-Layer for each Element in it
+     * 
+     * @param {Array} objectArray - Array with all new called Objects 
+     */
+    addImgObjectsToMap(objectArray){
+      objectArray.forEach(object => {
+        this.addImgObjectToMap(object);
+      });
     }
 
 
