@@ -20,7 +20,7 @@ height = 200;
     /**
      * This Function preloads images and stores them in the object imgCache
      * 
-     * @param {Array} sprites - This is an Array of image-paths
+     * @param {Array} sprites - Array of image-paths
      */
     loadImgCache(sprites){
        sprites.forEach((sprite) => {
@@ -29,5 +29,21 @@ height = 200;
         this.imgCache[sprite] = imgFrame;
         
        });
+    }
+
+
+    /**
+     * This Function iterates through an image-Array and updates the displayed image.
+     * It loops through the Array until it reaches the last index.
+     * The Iteration is done every 100 miliseconds per frame
+     * 
+     */
+    animate(sprites){
+        setInterval(() => {
+            let i = this.currentImg % sprites.length;
+            let path = sprites[i];
+            this.img = this.imgCache[path];
+            this.currentImg++
+        }, 100)
     }
 }

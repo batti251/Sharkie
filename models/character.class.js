@@ -1,6 +1,6 @@
 class Character extends MoveableObjects{
 currentImg = 0
-sprites_IDLE = [
+sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
     'assets/img/1.Sharkie/1.IDLE/3.png',
@@ -22,22 +22,8 @@ sprites_IDLE = [
 ]
     constructor(path){
         super().loadImg(path);
-        this.loadImgCache(this.sprites_IDLE)
-        this.animate()
+        this.loadImgCache(this.sharkie_IDLE)
+        this.animate(this.sharkie_IDLE)
     }
 
-    /**
-     * This Function iterates through an image-Array and pupdates the displayed image.
-     * It loops through the Array until it reaches the last index.
-     * The Iteration is done every 100 miliseconds per frame
-     * 
-     */
-    animate(){
-        setInterval(() => {
-            let i = this.currentImg % this.sprites_IDLE.length;
-            let path = this.sprites_IDLE[i];
-            this.img = this.imgCache[path];
-            this.currentImg++
-        }, 100)
-    }
 }
