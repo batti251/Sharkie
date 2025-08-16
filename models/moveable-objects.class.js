@@ -5,7 +5,8 @@ x = 0;
 y = 0;
 width = 200;
 height = 200;
-
+speed = 0.25;
+keyboard;
     /**
      * This Function loads a single image and sets it as the current imge of this object
      * 
@@ -31,7 +32,6 @@ height = 200;
        });
     }
 
-
     /**
      * This Function iterates through an image-Array and updates the displayed image.
      * It loops through the Array until it reaches the last index.
@@ -46,4 +46,52 @@ height = 200;
             this.currentImg++
         }, 100)
     }
+
+
+    /**
+     * This function reduces the Y-Coordinate and let the Object move up 
+     * 
+     * @param {Number} speed - The px-value
+     */
+    moveTop(speed){
+        setInterval(() => {
+            this.y = this.y - speed;
+        }, 1000 / 60);
+    }
+
+    /**
+     * This function raises the Y-Coordinate and let the Object move down 
+     * 
+     * @param {Number} speed - The px-value
+     */
+     moveDown(speed){
+        setInterval(() => {
+            this.y = this.y + speed;
+        }, 1000 / 60);
+    }
+
+
+    /**
+     * This function raises the X-Coordinate and let the Object move right 
+     * 
+     * @param {Number} speed - The px-value
+     */
+     moveRight(speed){
+        setInterval(() => {
+            this.x = this.x + speed;
+        }, 1000 / 60);
+    }
+
+    /**
+     * This function reduces the X-Coordinate and let the Object move left 
+     * 
+     * @param {Number} speed - The px-value
+     */
+     moveLeft(speed){
+        setInterval(() => {
+            this.x = this.x - speed;
+        }, 1000 / 60);
+    }
+
+    
 }
