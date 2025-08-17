@@ -9,6 +9,7 @@ speed = 0.25;
 speedY;
 speedX;
 
+
     /**
      * This Function loads a single image and sets it as the current imge of this object
      * 
@@ -121,7 +122,7 @@ speedX;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     moveUp(speed, key){
-        if (key.UP == true && this.y) {
+        if (key.UP == true && this.y > -60) {
             this.y = this.y - speed;
         }
     }
@@ -132,7 +133,7 @@ speedX;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveDown(speed, key){
-        if (key.DOWN == true) {
+        if (key.DOWN == true && this.y < 300) {
              this.y = this.y + speed;
         }
     }
@@ -146,6 +147,7 @@ speedX;
      moveRight(speed, key){
         if (key.RIGHT == true) {
             this.x = this.x + speed;
+            this.world.cameraX = -this.x;
         }
     }
 
@@ -156,9 +158,28 @@ speedX;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveLeft(speed, key){
-        if (key.LEFT == true) {
+        if (key.LEFT == true && this.x > -300) {
             this.x = this.x - speed;
+            this.world.cameraX = -this.x;
         }
     }
+
+    isInsideBorder(){
+      /*   this.y < 300 // not down
+        this.y > -60 // not up
+        this.x > - 300 // not left
+ */
+        switch (this) {
+            case y < 300: true
+                break;
+        case y > -60: true
+                break;
+         case x > -300: true
+                break;
+            default: false
+                break;
+        }
+    }
+    
 
 }

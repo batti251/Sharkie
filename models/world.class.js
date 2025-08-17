@@ -2,19 +2,20 @@ class World {
 character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png")
 canvas;
 ctx;
+cameraX = 0;
 background = [
-  new Background('/assets/img/3. Background/Layers/5. Water/L1.png', 0, 0),
-  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L1.png', 0, 0),
-  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L1.png', 0, 0),
-  new Background('/assets/img/3. Background/Layers/2. Floor/L1.png', 0, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/1.png', 0, 0),
+  new Background('/assets/img/3. Background/Layers/5. Water/L1.png', -300, 0),
+  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L1.png', -300, 0),
+  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L1.png', -300, 0),
+  new Background('/assets/img/3. Background/Layers/2. Floor/L1.png', -300, 0),
+  new Background('/assets/img/3. Background/Layers/1. Light/1.png', -300, 0),
 
 
-  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 760, 0),
-  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 760, 0),
-  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 760, 0),
-  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png', 760, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 760, 0)
+  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 479, 0),
+  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 479, 0),
+  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 479, 0),
+  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',479, 0),
+  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 479, 0)
 
 
 ];
@@ -44,13 +45,14 @@ collectables;
      */
     draw() {
       this.drawCanvas()
-
+      this.ctx.translate(this.cameraX, 0)
       console.log("world.class.js: draw-function");
       this.addImgObjectsToMap(this.background);
       this.addImgObjectsToMap(this.enemies);
       this.addImgObjectToMap(this.character);
       
       this.imgAnimationLoop();
+      this.ctx.translate(-this.cameraX, 0)
   } 
 
     /**
@@ -61,6 +63,7 @@ collectables;
         this.ctx.clearRect(0, 0, canvas.width, canvas.height); // clears the Canvas on the current frame 
         this.ctx.fillStyle = "black"; //background-color
         this.ctx.fillRect(0, 0, canvas.width, canvas.height); // adds x, y, width and height to the canvas + fillstyle
+
     }
 
     /**
