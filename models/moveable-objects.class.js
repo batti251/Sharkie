@@ -8,7 +8,7 @@ height = 200;
 speed = 0.25;
 speedY;
 speedX;
-
+mirrorImage;
 
     /**
      * This Function loads a single image and sets it as the current imge of this object
@@ -148,6 +148,7 @@ speedX;
         if (key.RIGHT == true) {
             this.x = this.x + speed;
             this.world.cameraX = -this.x;
+            this.mirrorImage = false;
         }
     }
 
@@ -161,6 +162,7 @@ speedX;
         if (key.LEFT == true && this.x > -300) {
             this.x = this.x - speed;
             this.world.cameraX = -this.x;
+            this.mirrorImage = true;
         }
     }
 

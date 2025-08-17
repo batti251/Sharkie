@@ -74,9 +74,19 @@ collectables;
      * It draws depending on the objects: img, x-coordinate, y-coordinate, width and height
      */
     addImgObjectToMap(object){
+      if (object.mirrorImage) {
+            this.ctx.save()
+            this.ctx.translate(object.width, 0);
+            this.ctx.scale(-1, 1);
+            object.x = object.x * -1;
+      }
+    
     this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
+      if (object.mirrorImage) {
+              object.x = object.x * -1;
+              this.ctx.restore()
     }
-
+  }
     /**
      * This Function iterates through an Array and draws an Image-Layer for each Element in it
      * 
