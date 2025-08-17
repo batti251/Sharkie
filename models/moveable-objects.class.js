@@ -9,6 +9,9 @@ speed = 0.25;
 speedY;
 speedX;
 mirrorImage;
+coinToss;
+resetIntervalX;
+resetIntervalY;
 
     /**
      * This Function loads a single image and sets it as the current imge of this object
@@ -85,18 +88,37 @@ mirrorImage;
         this.moveLeft(this.speedX,key);
     }
     
- /**
-     * This Function moves the Enemies from right to left
+    /**
+     * This Function calls Enemies (Minions) to move
+     * The Turning-direction is set randomly, until character detection
      * The Y-Coordinate is set randomly to vary the height-movement
      * 
      * @param {Number} speedX - px-value for X-Coordinate 
      * @param {Number} speedY - px-value for Y-Coordinate 
      */
     enemyMinionMovement(speedX, speedY){
-        this.moveLeft(speedX);
+        this.randomTurn(speedX)
         this.setRandomCoordinateY(speedY);
+        // Function for character detection
     }
 
+    /**
+     * This Function wether let the Enemies move left, or right, depending on coinToss-Function
+     * The Function is called every 2 seconds 
+     * 
+     * @param {*} speedX - px-value for X-Coordinate 
+     */
+    randomTurn(speedX){
+        setInterval(() => {
+        this.coinToss = Math.random() * 1;
+        if (this.coinToss > 0.5) {
+                this.enemyLeft(speedX);
+                return
+        } else {
+            this.enemyRight(speedX)
+            return
+        }}, 2000);
+    }
 
     /**
      * This Function let the assigned Object move a random height up and down 
@@ -115,7 +137,7 @@ mirrorImage;
         }, this.randomHeightInterval);
     }
 
-     /**
+    /**
      * This function reduces the Y-Coordinate and let the Object move up 
      * 
      * @param {Number} speed - The px-value
@@ -167,10 +189,6 @@ mirrorImage;
     }
 
     isInsideBorder(){
-      /*   this.y < 300 // not down
-        this.y > -60 // not up
-        this.x > - 300 // not left
- */
         switch (this) {
             case y < 300: true
                 break;

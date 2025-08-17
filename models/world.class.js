@@ -20,8 +20,8 @@ background = [
 
 ];
 enemies = [
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
+  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')/* ,
+  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png') */
 ];
 keyboard;
 
