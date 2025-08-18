@@ -204,27 +204,22 @@ resetIntervalY;
     }
 
 
-    //Collision Detection
+    //Collision Detection // refactor to all enemies
     isInsideBorder(){
         setInterval(() => {
-            let rectangle = this.hitboxWidth * this.hitboxHeight
-            console.log("character:" + rectangle);
-            let positionANDrectangle = rectangle + this.x
-            console.log("character Hit:" + positionANDrectangle);
-            console.log(this.x);
-            
-        }, 2000);
+            let charXY = [(this.world.character.hitboxX + this.world.character.x),  (this.world.character.hitboxY + this.world.character.y)]
+            let charXY2 = [(this.world.character.hitboxX + this.world.character.x + this.world.character.hitboxWidth), (this.world.character.hitboxY + this.world.character.y + this.world.character.hitboxHeight)]
+            let enemyXY = [this.world.enemies[0].x , this.world.enemies[0].y]
+            let enemyXY2 = [(this.world.enemies[0].x + this.world.enemies[0].hitboxWidth), (this.world.enemies[0].y + this.world.enemies[0].hitboxHeight)]
+    
+                if (charXY2[0] > enemyXY[0] && charXY[0] < enemyXY2[0] &&
+                    charXY2[1] > enemyXY[1] && charXY[1] < enemyXY2[1]
+                    ){
+                    console.log("hit");
+                }
+        }, 120);
     }
     
 
-  isInsideBorderE(){
-        setInterval(() => {
-            console.log(this.x);
-            let rectangle = this.hitboxWidth * this.hitboxHeight;
-            console.log("enemy:" + rectangle);
-            let positionANDrectangle = rectangle + this.x
-            console.log("enemy Hit:" + positionANDrectangle);
-            
-        }, 2000);
-    }
+ 
 }

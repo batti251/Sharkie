@@ -25,9 +25,7 @@ enemies_IDLE = [
         this.width = Math.floor(Math.random() * 50) + 40;
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
         this.height = this.width;
-        this.setHitbox(1, 4.5, 1.1, 1.5)
-        this.isInsideBorderE()
-
+        this.setHitbox(0, 4.5, 1.1, 1.5)
     }
 
     

@@ -17,7 +17,7 @@ background = [
   new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',479, 0),
   new Background('/assets/img/3. Background/Layers/1. Light/2.png', 479, 0),
 
-    new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 1259, 0),
+  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 1259, 0),
   new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 1259, 0),
   new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 1259, 0),
   new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',1259, 0),
@@ -26,10 +26,7 @@ background = [
 
 ];
 enemies = [
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')/* ,
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png') */
+  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
 ];
 keyboard;
 
@@ -54,7 +51,6 @@ collectables;
     draw() {
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0)
-      console.log("world.class.js: draw-function");
       this.addImgObjectsToMap(this.background);
       this.addImgObjectsToMap(this.enemies);
       this.addImgObjectToMap(this.character);
