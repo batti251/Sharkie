@@ -3,6 +3,11 @@ currentImg = 0
 world;
 speedX = 4;
 speedY = 3;
+
+// this.ctx.strokeRect(object.x+40, object.y+90, object.hitboxWidth+20, object.hitboxHeight-30);
+
+
+
 sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
@@ -23,10 +28,14 @@ sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/17.png',
     'assets/img/1.Sharkie/1.IDLE/18.png'
 ]
-    constructor(path){
+    constructor(path, x, y){
         super().loadImg(path);
-        this.loadImgCache(this.sharkie_IDLE)
-        this.animateObject(this.sharkie_IDLE)
+        this.x = x;
+        this.y = y;
+        this.loadImgCache(this.sharkie_IDLE);
+        this.animateObject(this.sharkie_IDLE);
+        this.setHitbox(40, 95, 1.66, 3.3);
+        this.isInsideBorder(this.x);
     }
 
     

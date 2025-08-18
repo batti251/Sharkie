@@ -1,5 +1,5 @@
 class World {
-character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png")
+character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png", 0, 0)
 canvas;
 ctx;
 cameraX = 0;
@@ -15,12 +15,20 @@ background = [
   new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 479, 0),
   new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 479, 0),
   new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',479, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 479, 0)
+  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 479, 0),
+
+    new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 1259, 0),
+  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 1259, 0),
+  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 1259, 0),
+  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',1259, 0),
+  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 1259, 0)
 
 
 ];
 enemies = [
   new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')/* ,
+  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
   new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png') */
 ];
 keyboard;
@@ -64,6 +72,7 @@ collectables;
         this.ctx.fillStyle = "black"; //background-color
         this.ctx.fillRect(0, 0, canvas.width, canvas.height); // adds x, y, width and height to the canvas + fillstyle
 
+
     }
 
     /**
@@ -78,15 +87,20 @@ collectables;
             this.ctx.save()
             this.ctx.translate(object.width, 0);
             this.ctx.scale(-1, 1);
+
             object.x = object.x * -1;
       }
-    
-    this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
-      if (object.mirrorImage) {
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = "black";
+            this.ctx.strokeRect(object.x +object.hitboxX, object.y + object.hitboxY, object.hitboxWidth, object.hitboxHeight);
+
+            
+      this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
+        if (object.mirrorImage) {
               object.x = object.x * -1;
               this.ctx.restore()
+      }
     }
-  }
     /**
      * This Function iterates through an Array and draws an Image-Layer for each Element in it
      * 

@@ -1,8 +1,8 @@
 class MoveableObjects{
 img;
 imgCache = {};
-x = 0;
-y = 0;
+x ;
+y ;
 width = 200;
 height = 200;
 speed = 0.25;
@@ -97,8 +97,8 @@ resetIntervalY;
      * @param {Number} speedY - px-value for Y-Coordinate 
      */
     enemyMinionMovement(speedX, speedY){
-        this.randomTurn(speedX)
-        this.setRandomCoordinateY(speedY);
+       /*  this.randomTurn(speedX)
+        this.setRandomCoordinateY(speedY); */
         // Function for character detection
     }
 
@@ -188,18 +188,43 @@ resetIntervalY;
         }
     }
 
+    /**
+     * This Function sets the Hitbox of the Objects, scaled by any size
+     * 
+     * @param {Number} hitboxX - X-Position of the Objects Hitbox
+     * @param {Number} hitboxY - Y-Position of the Objects Hitbox 
+     * @param {Number} hitboxWidth - Width of the Objects Hitbox
+     * @param {Number} hitboxHeight - Height of the Objects Hitbox
+     */
+    setHitbox(hitboxX, hitboxY, hitboxWidth, hitboxHeight){
+        this.hitboxX = hitboxX;
+        this.hitboxY = hitboxY;
+        this.hitboxWidth = this.width / hitboxWidth;
+        this.hitboxHeight = this.height / hitboxHeight;
+    }
+
+
+    //Collision Detection
     isInsideBorder(){
-        switch (this) {
-            case y < 300: true
-                break;
-        case y > -60: true
-                break;
-         case x > -300: true
-                break;
-            default: false
-                break;
-        }
+        setInterval(() => {
+            let rectangle = this.hitboxWidth * this.hitboxHeight
+            console.log("character:" + rectangle);
+            let positionANDrectangle = rectangle + this.x
+            console.log("character Hit:" + positionANDrectangle);
+            console.log(this.x);
+            
+        }, 2000);
     }
     
 
+  isInsideBorderE(){
+        setInterval(() => {
+            console.log(this.x);
+            let rectangle = this.hitboxWidth * this.hitboxHeight;
+            console.log("enemy:" + rectangle);
+            let positionANDrectangle = rectangle + this.x
+            console.log("enemy Hit:" + positionANDrectangle);
+            
+        }, 2000);
+    }
 }

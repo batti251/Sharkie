@@ -3,7 +3,8 @@ currentImg = 0
 speedX = 0.75;
 speedY = 0.25;
 randomHeightInterval = 500;
-randomTurnIntervaL = 3000
+randomTurnIntervaL = 3000;
+
 enemies_IDLE = [
     '/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
     '/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -24,7 +25,12 @@ enemies_IDLE = [
         this.width = Math.floor(Math.random() * 50) + 40;
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
         this.height = this.width;
+        this.setHitbox(1, 4.5, 1.1, 1.5)
+        this.isInsideBorderE()
+
     }
+
+    
 
    /**
      * This function reduces the Y-Coordinate and let the Enemy move up 
