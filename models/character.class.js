@@ -35,7 +35,6 @@ sharkie_IDLE = [
         this.loadImgCache(this.sharkie_IDLE);
         this.animateObject(this.sharkie_IDLE);
         this.setHitbox(40, 95, 1.66, 3.3);
-        this.isInsideBorder(this.x);
     }
 
     

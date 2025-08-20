@@ -97,8 +97,8 @@ resetIntervalY;
      * @param {Number} speedY - px-value for Y-Coordinate 
      */
     enemyMinionMovement(speedX, speedY){
-       /*  this.randomTurn(speedX)
-        this.setRandomCoordinateY(speedY); */
+        this.randomTurn(speedX)
+        this.setRandomCoordinateY(speedY);
         // Function for character detection
     }
 
@@ -203,23 +203,18 @@ resetIntervalY;
         this.hitboxHeight = this.height / hitboxHeight;
     }
 
-
-    //Collision Detection // refactor to all enemies
-    isInsideBorder(){
-        setInterval(() => {
-            let charXY = [(this.world.character.hitboxX + this.world.character.x),  (this.world.character.hitboxY + this.world.character.y)]
-            let charXY2 = [(this.world.character.hitboxX + this.world.character.x + this.world.character.hitboxWidth), (this.world.character.hitboxY + this.world.character.y + this.world.character.hitboxHeight)]
-            let enemyXY = [this.world.enemies[0].x , this.world.enemies[0].y]
-            let enemyXY2 = [(this.world.enemies[0].x + this.world.enemies[0].hitboxWidth), (this.world.enemies[0].y + this.world.enemies[0].hitboxHeight)]
-    
-                if (charXY2[0] > enemyXY[0] && charXY[0] < enemyXY2[0] &&
-                    charXY2[1] > enemyXY[1] && charXY[1] < enemyXY2[1]
-                    ){
-                    console.log("hit");
-                }
-        }, 120);
+    /**
+     * This Function checks, if the character is colliding with a dedicated Object
+     * 
+     * 
+     * @param {Object} mo - The dedicated Object: Enemies
+     * @returns - returns true, to indicate a Collision, returns false if no Collision is detected
+     */
+    isInsideBorder(object){
+        return this.x + this.hitboxX + this.hitboxWidth> object.x &&
+        this.x + this.hitboxX < object.x + object.hitboxWidth &&
+        this.y + this.hitboxY + this.hitboxHeight > object.y &&
+        this.y + this.hitboxY < object.y + object.hitboxHeight;
     }
-    
-
  
 }
