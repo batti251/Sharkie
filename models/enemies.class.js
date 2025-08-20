@@ -4,6 +4,7 @@ speedX = 0.75;
 speedY = 0.25;
 randomHeightInterval = 500;
 randomTurnIntervaL = 3000;
+damage = 20;
 
 enemies_IDLE = [
     '/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',

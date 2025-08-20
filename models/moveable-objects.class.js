@@ -1,8 +1,4 @@
-class MoveableObjects{
-img;
-imgCache = {};
-x ;
-y ;
+class MoveableObjects extends GameObjects{
 width = 200;
 height = 200;
 speed = 0.25;
@@ -12,30 +8,8 @@ mirrorImage;
 coinToss;
 resetIntervalX;
 resetIntervalY;
-
-    /**
-     * This Function loads a single image and sets it as the current imge of this object
-     * 
-     * @param {String} path - The given path to an image (.png)
-     */
-    loadImg(path){
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    /**
-     * This Function preloads images and stores them in the object imgCache
-     * 
-     * @param {Array} sprites - Array of image-paths
-     */
-    loadImgCache(sprites){
-       sprites.forEach((sprite) => {
-        let imgFrame = new Image();
-        imgFrame.src = sprite;
-        this.imgCache[sprite] = imgFrame;
-        
-       });
-    }
+maxLife;
+life;
 
      /**
      * This Function calls the Objects Animations
@@ -217,4 +191,16 @@ resetIntervalY;
         this.y + this.hitboxY < object.y + object.hitboxHeight;
     }
  
+    /**
+     * This Function decreases the targets life by 20
+     * 
+     * @param {Object} object - The Target that takes the Damage
+     */
+    damage(object){
+        object.life = object.life - 20
+        if (object.life <= 0) {
+            console.log("tot");
+            
+        }
+    }
 }

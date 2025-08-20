@@ -35,7 +35,7 @@ enemies = [
   new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
 ];
 keyboard;
-
+healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 collectables;
 
 
@@ -44,7 +44,7 @@ collectables;
     this.draw();
     this.keyboard = keyboard
     this.setWorld();
-    this.checkCollisions()
+    this.checkCollisions();
   }
 
   /**
@@ -57,6 +57,9 @@ collectables;
       this.enemies.forEach(object => {
         if(this.character.isInsideBorder(object)){
           console.log("hit ", object);
+          this.character.damage(this.character);
+          console.log(this.character.life);
+          
         }
       });
     }, 200);
@@ -77,9 +80,12 @@ collectables;
       this.addImgObjectsToMap(this.background);
       this.addImgObjectsToMap(this.enemies);
       this.addImgObjectToMap(this.character);
-      
       this.imgAnimationLoop();
       this.ctx.translate(-this.cameraX, 0)
+
+
+      this.addImgObjectToMap(this.healthbar);
+
   } 
 
     /**
