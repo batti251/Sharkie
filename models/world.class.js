@@ -59,7 +59,7 @@ collectables;
           console.log("hit ", object);
           this.character.damage(this.character);
           console.log(this.character.life);
-          
+          this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
         }
       });
     }, 200);
@@ -83,10 +83,10 @@ collectables;
       this.imgAnimationLoop();
       this.ctx.translate(-this.cameraX, 0)
 
-
       this.addImgObjectToMap(this.healthbar);
 
   } 
+
 
     /**
      * This Function refreshes the Canvas on each frame

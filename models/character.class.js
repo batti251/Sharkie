@@ -3,7 +3,8 @@ currentImg = 0
 world;
 speedX = 4;
 speedY = 3;
-life = 1000;
+maxLife = 1000;
+life = this.maxLife;
 // this.ctx.strokeRect(object.x+40, object.y+90, object.hitboxWidth+20, object.hitboxHeight-30);
 
 
