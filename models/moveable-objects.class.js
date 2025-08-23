@@ -10,28 +10,68 @@ resetIntervalX;
 resetIntervalY;
 maxLife;
 life;
+isMoving;
+lastIsMoving ;
+fallAsleep;
 
      /**
      * This Function calls the Objects Animations
      * If the Array contains 'Sharkie', Movement-Animation is called seperately
      * 
      * @param {Array} sprites - Array of image-paths
+     * @param {Number} miliseconds - specified interval for setInterval()
+     * 
      */
-    animateObject(sprites){
+    animateObject(sprites, miliseconds){
         if (sprites.some(element => element.includes('Sharkie'))) {
         this.animateCharacterMovement();
-        }
-        this.animateObjectSprite(sprites);
+        } else this.animateObjectSprite(sprites, miliseconds);
     }
         
     /**
-     * This Function sets the active Character Movement to 60 FPS
+     * This Function picks the needed Sprite-Array depending on the characters Status
+     * When Character moves = [Swim-Array]
+     * When Character doesn't move = [Idle-Array]
+     * When Character doesn't move > 15 seconds = [sleep-Array]
+     * It sets the active Character Movement to 60 FPS
      * 
      */
     animateCharacterMovement(){
-        setInterval(() => {
-        this.moveCharacter(this.world.keyboard);
+        clearInterval(this.characterMovementInterval);
+        this.characterMovementInterval = setInterval(() => {
+            this.moveCharacter(this.world.keyboard);
+            if (this.isMoving !== this.lastIsMoving ) {
+                this.lastIsMoving  = this.isMoving;
+                if (this.isMoving) {
+                    this.characterSwims();
+                  } else {
+                this.characterFallAsleep();
+                }
+            }
         }, 1000 / 60);
+}
+
+    /**
+     * This Function calls the character swim-Animation
+     * 
+     */
+    characterSwims(){
+        this.animateObjectSprite(this.sharkie_SWIM, 100);
+    }
+
+    /**
+     * This Function sets the Timer, when Character falls asleep
+     * After 15 seconds the sleep Animation starts
+     * 
+     */
+    characterFallAsleep(){
+         this.animateObjectSprite(this.sharkie_IDLE, 100);
+                setTimeout(() => {
+                    this.fallAsleep = this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
+                    setTimeout(() => {
+                         this.animateObjectSprite(this.sharkie_SLEEPING, 300);
+                    }, 700);
+                }, 15000);
     }
 
     /**
@@ -40,14 +80,16 @@ life;
      * Its done for Character, Enemies and Collectables
      * 
      * @param {Array} sprites - Array of image-paths
+     * @param {Number} miliseconds - specified interval for setInterval()
      */
-    animateObjectSprite(sprites){
-         setInterval(() => {
+    animateObjectSprite(sprites, miliseconds){
+        clearInterval(this.objectSpriteInterval);
+         this.objectSpriteInterval =  setInterval(() => {
             let i = this.currentImg % sprites.length;
             let path = sprites[i];
             this.img = this.imgCache[path];
             this.currentImg++
-        }, 100)
+        }, miliseconds)
     }
 
     /**
@@ -60,6 +102,7 @@ life;
         this.moveDown(this.speedY,key);
         this.moveRight(this.speedX,key);
         this.moveLeft(this.speedX,key);
+        this.isMoving = key.UP || key.DOWN || key.LEFT || key.RIGHT;
     }
     
     /**
@@ -113,6 +156,7 @@ life;
 
     /**
      * This function reduces the Y-Coordinate and let the Object move up 
+     * Returns either true, for Swim-Animation, or false for Idle-Animation
      * 
      * @param {Number} speed - The px-value
      * @param {Object} key - Object with the listened Keyboard Keys
@@ -120,22 +164,26 @@ life;
     moveUp(speed, key){
         if (key.UP == true && this.y > -60) {
             this.y = this.y - speed;
-        }
+            return this.isMoving = true
+            } else return this.isMoving = false
     }
     /**
      * This function raises the Y-Coordinate and let the Object move down 
+     * Returns either true, for Swim-Animation, or false for Idle-Animation
      * 
      * @param {Number} speed - The px-value
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveDown(speed, key){
         if (key.DOWN == true && this.y < 300) {
-             this.y = this.y + speed;
-        }
+            this.y = this.y + speed;
+            return this.isMoving = true
+            } else return this.isMoving = false
     }
 
     /**
      * This function raises the X-Coordinate and let the Object move right 
+     * Returns either true, for Swim-Animation, or false for Idle-Animation
      * 
      * @param {Number} speed - The px-value
      * @param {Object} key - Object with the listened Keyboard Keys
@@ -145,11 +193,13 @@ life;
             this.x = this.x + speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = false;
-        }
+            return this.isMoving = true
+        } else return this.isMoving = false
     }
 
     /**
      * This function reduces the X-Coordinate and let the Object move left 
+     * Returns either true, for Swim-Animation, or false for Idle-Animation
      * 
      * @param {Number} speed - The px-value
      * @param {Object} key - Object with the listened Keyboard Keys
@@ -159,7 +209,8 @@ life;
             this.x = this.x - speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = true;
-        }
+             return this.isMoving = true
+        } else return this.isMoving = false
     }
 
     /**

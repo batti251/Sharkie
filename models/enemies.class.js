@@ -19,7 +19,7 @@ enemies_IDLE = [
     constructor(path){
         super().loadImg(path);
         this.loadImgCache(this.enemies_IDLE);
-        this.animateObject(this.enemies_IDLE)
+        this.animateObject(this.enemies_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
         this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
