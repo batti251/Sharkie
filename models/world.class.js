@@ -34,9 +34,26 @@ enemies = [
   new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
   new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
 ];
+
+
+
 keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
-collectables;
+coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
+poisonbar = new Poisonbar('/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
+coins = [
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+];
+
+poison = [
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png')
+]
 
 
   constructor(canvas, keyboard) {
@@ -98,12 +115,16 @@ collectables;
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0)
       this.addImgObjectsToMap(this.background);
+      this.addImgObjectsToMap(this.coins);
+      this.addImgObjectsToMap(this.poison);
       this.addImgObjectsToMap(this.enemies);
       this.addImgObjectToMap(this.character);
       this.imgAnimationLoop();
       this.ctx.translate(-this.cameraX, 0)
 
       this.addImgObjectToMap(this.healthbar);
+      this.addImgObjectToMap(this.coinbar);
+      this.addImgObjectToMap(this.poisonbar);
 
   } 
 
