@@ -40,13 +40,9 @@ fallAsleep;
         clearInterval(this.characterMovementInterval);
         this.characterMovementInterval = setInterval(() => {
             this.moveCharacter(this.world.keyboard);
-            if (this.isMoving !== this.lastIsMoving ) {
+            if (this.isMoving !== this.lastIsMoving) {
                 this.lastIsMoving  = this.isMoving;
-                if (this.isMoving) {
-                    this.characterSwims();
-                  } else {
-                this.characterFallAsleep();
-                }
+                this.applyCharacterMovement();
             }
         }, 1000 / 60);
 }
@@ -60,14 +56,15 @@ fallAsleep;
     }
 
     /**
-     * This Function sets the Timer, when Character falls asleep
-     * After 15 seconds the sleep Animation starts
+     * This Function calls the character sleep-Animation 
+     * The Timer is set to 15 seconds unttil it starts the Animation
      * 
      */
     characterFallAsleep(){
+        clearTimeout(this.fallAsleep)
          this.animateObjectSprite(this.sharkie_IDLE, 100);
-                setTimeout(() => {
-                    this.fallAsleep = this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
+                this.fallAsleep =  setTimeout(() => {
+                    this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
                     setTimeout(() => {
                          this.animateObjectSprite(this.sharkie_SLEEPING, 300);
                     }, 700);
@@ -92,6 +89,7 @@ fallAsleep;
         }, miliseconds)
     }
 
+    
     /**
      * This Function calls the actual Moveset from the Character
      * 
@@ -102,6 +100,7 @@ fallAsleep;
         this.moveDown(this.speedY,key);
         this.moveRight(this.speedX,key);
         this.moveLeft(this.speedX,key);
+        this.finSlap(key)
         this.isMoving = key.UP || key.DOWN || key.LEFT || key.RIGHT;
     }
     
@@ -164,9 +163,7 @@ fallAsleep;
     moveUp(speed, key){
         if (key.UP == true && this.y > -60) {
             this.y = this.y - speed;
-            return this.isMoving = true
-            } else return this.isMoving = false
-    }
+    }}
     /**
      * This function raises the Y-Coordinate and let the Object move down 
      * Returns either true, for Swim-Animation, or false for Idle-Animation
@@ -177,8 +174,7 @@ fallAsleep;
      moveDown(speed, key){
         if (key.DOWN == true && this.y < 300) {
             this.y = this.y + speed;
-            return this.isMoving = true
-            } else return this.isMoving = false
+            } 
     }
 
     /**
@@ -193,12 +189,11 @@ fallAsleep;
             this.x = this.x + speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = false;
-            return this.isMoving = true
-        } else return this.isMoving = false
+        }
     }
 
     /**
-     * This function reduces the X-Coordinate and let the Object move left 
+     * This Function reduces the X-Coordinate and let the Object move left 
      * Returns either true, for Swim-Animation, or false for Idle-Animation
      * 
      * @param {Number} speed - The px-value
@@ -209,8 +204,22 @@ fallAsleep;
             this.x = this.x - speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = true;
-             return this.isMoving = true
-        } else return this.isMoving = false
+        } 
+    }
+
+    /**
+     * This Function let the character slap.
+     * 
+     * 
+     * @param {Object} key - Object with the listened Keyboard Keys
+     */
+    finSlap(key){
+        if (key.SPACE === true) {
+            // hit enemy , let enemy take damage
+            // expand hitbox 
+            
+        this.animateObjectSprite(this.sharkie_FIN_SLAP, 150)
+        }  
     }
 
     /**
@@ -244,14 +253,44 @@ fallAsleep;
  
     /**
      * This Function decreases the targets life by 20
+     * Calls poisened-Animation for 150 miliseconds, then goes over into animation-mode
      * 
      * @param {Object} object - The Target that takes the Damage
      */
     damage(object){
-        object.life = object.life - 20
-        if (object.life <= 0) {
-            console.log("tot");
-            
-        }
+       object.life = object.life - 20
+        this.animateObjectSprite(this.sharkie_POISENED,100)
+        setTimeout(() => {
+          this.applyCharacterMovement();
+        }, 150);
     }
+
+    /**
+     * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on hiis moving-state 
+     * 
+     */
+    applyCharacterMovement(){
+        if(this.isMoving){
+            this.characterSwims();
+            } else {
+                this.characterFallAsleep()
+            }           
+    }
+
+    /**
+     * This Function calls the dead Animation for Sharkie
+     * 
+     */
+    sharkieDieAnimation(){
+       this.sharkieDies = setTimeout(() => {
+            this.animateObjectSprite(this.sharkie_DEAD,100)
+                setTimeout(() => {
+                   this.animateObjectSprite(this.sharkie_DEAD_SURFACE,200)
+                    setInterval(() => {
+                    this.y = this.y - 5
+                    }, 100);
+                }, 200);
+            }, 100);
+    }
+
 }

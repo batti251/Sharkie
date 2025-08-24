@@ -53,17 +53,22 @@ collectables;
    * 
    */
   checkCollisions(){
-    setInterval(() => {
+    clearInterval(this.collisionInterval)
+    this.collisionInterval = setInterval(() => {
       this.enemies.forEach(object => {
-        if(this.character.isInsideBorder(object)){
-          console.log("hit ", object);
-          this.character.damage(this.character);
-          console.log(this.character.life);
-          this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
-        }
+        if(this.character.isInsideBorder(object) && this.character.life > 0){
+            this.character.damage(this.character);
+            this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
+              if (this.character.life <=0) {
+                this.character.sharkieDieAnimation();
+                this.keyboard = "";
+                return
+              } else return
+          }
       });
     }, 200);
   }
+
 
 
   setWorld(){
