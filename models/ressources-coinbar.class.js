@@ -3,6 +3,8 @@ x = 350;
 y = -20;
 width = 300;
 height = 80;
+max = 10;
+coinCount = [];
 
 coinbarCache = [
     '/assets/img/4. Marcadores/green/Coin/0_  copia 4.png',
@@ -18,30 +20,41 @@ coinbarCache = [
     }
 
     /**
-     * This Function updates the character Healthbar depending on it's percentual Life
+     * This Function updates the character Coinbar
+     * It pushes all collected coins into an array-collector 
      * 
-     * @param {*} maxLife - Objects max Life 
-     * @param {*} currentLife - Objects current Life 
+     * @param {Object} coin - the collected coin-object
      */
-    updatehealthbar(maxLife, currentLife){
-        let healthbarIndicator = currentLife / maxLife
-        if (healthbarIndicator <= 0.8) {
-            this.loadImg(this.healthbarCache[4])
-        } if (healthbarIndicator <= 0.60) {
-            this.loadImg(this.healthbarCache[3])
-        } if (healthbarIndicator <= 0.40) {
-            this.loadImg(this.healthbarCache[2])
-        } if (healthbarIndicator <= 0.20) {
-            this.loadImg(this.healthbarCache[1])
-        } if (healthbarIndicator <= 0) {
-            this.loadImg(this.healthbarCache[0])
-            this.deadAnimation();
-        }
+    fillCoinbar(coin){
+        this.coinCount.push(coin)
+        coin.x = -1000;
+        coin.y = -1000;
+        this.updateCoinbar()
     }
 
-    deadAnimation(){
-        console.log(("dead"));
-        
+    /**
+     * This Function updates the Coinbar, depending on the current amount of collected coins
+     * 
+     */
+    updateCoinbar(){
+        if (this.coinCount.length >= 2) {
+                this.loadImg('/assets/img/4. Marcadores/green/Coin/20_  copia 2.png');
+        }
+         if (this.coinCount.length >= 4) {
+                this.loadImg('/assets/img/4. Marcadores/green/Coin/40_  copia 4.png');
+        }
+           if (this.coinCount.length >= 6) {
+                this.loadImg('/assets/img/4. Marcadores/green/Coin/60_  copia 4.png');
+        }
+         if (this.coinCount.length >= 8) {
+                this.loadImg('/assets/img/4. Marcadores/green/Coin/80_  copia 4.png');
+        }
+         if (this.coinCount.length >= 10) {
+                this.loadImg('/assets/img/4. Marcadores/green/Coin/100_ copia 4.png');
+        }
+
     }
+
+
 
 }

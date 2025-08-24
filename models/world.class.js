@@ -47,9 +47,17 @@ coins = [
   new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
   new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
   new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
+  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
 ];
 
 poison = [
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
+  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
   new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
   new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
   new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png')
@@ -63,9 +71,38 @@ poison = [
     this.setWorld();
     this.enemyDetection()
     this.checkCollisions();
+    this.checkCollectiblesCollisions();
+  }
+
+
+  /**
+   * This Function detects collision from the character with the collectibles
+   * If a collision is detected, it calls the fill-bar-function
+   * 
+   */
+  checkCollectiblesCollisions(){
+    setInterval(() => {
+      this.coins.forEach(coin => {
+        if (this.character.isInsideBorder(coin)) {
+            this.coinbar.fillCoinbar(coin);
+            }
+           })
+    }, 200);
+
+    setInterval(() => {
+      this.poison.forEach(poison => {
+        if (this.character.isInsideBorder(poison)) {
+            this.poisonbar.fillPoisonbar(poison);
+           }
+           })
+    }, 200);
   }
 
   
+    /**
+     * This Function let the enemies trigger the transformation Animation
+     * 
+     */
     enemyDetection(){
       clearInterval(this.detection)
        this.detection = setInterval(() => {

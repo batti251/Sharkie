@@ -1,7 +1,9 @@
 class COINS extends MoveableObjects{
-    currentImg = 0;
+currentImg = 0;
 width = 40;
 height = 40;
+value = 1;
+collected = false;
 
 coins_IDLE = [
     '/assets/img/4. Marcadores/1. Coins/1.png',
@@ -20,4 +22,7 @@ coins_IDLE = [
         this.y = Math.floor(Math.random() * 200) + 200;
         this.setHitbox(5, 5, 1.5, 1.5);
     }
+
+
+
 }

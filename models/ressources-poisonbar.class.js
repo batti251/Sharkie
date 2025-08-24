@@ -3,8 +3,10 @@ x = 650;
 y = -20;
 width = 300;
 height = 80;
+max = 10;
+poisonCount = [];
 
-coinbarCache = [
+poisonCache = [
     '/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png',
     '/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png',
     '/assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png',
@@ -18,30 +20,40 @@ coinbarCache = [
     }
 
     /**
-     * This Function updates the character Healthbar depending on it's percentual Life
+     * This Function updates the character Poisonbar
+     * It pushes all collected poison-potions into an array-collector  
      * 
-     * @param {*} maxLife - Objects max Life 
-     * @param {*} currentLife - Objects current Life 
+     * @param {Object} poison - the collected poison-object
      */
-    updatehealthbar(maxLife, currentLife){
-        let healthbarIndicator = currentLife / maxLife
-        if (healthbarIndicator <= 0.8) {
-            this.loadImg(this.healthbarCache[4])
-        } if (healthbarIndicator <= 0.60) {
-            this.loadImg(this.healthbarCache[3])
-        } if (healthbarIndicator <= 0.40) {
-            this.loadImg(this.healthbarCache[2])
-        } if (healthbarIndicator <= 0.20) {
-            this.loadImg(this.healthbarCache[1])
-        } if (healthbarIndicator <= 0) {
-            this.loadImg(this.healthbarCache[0])
-            this.deadAnimation();
-        }
+    fillPoisonbar(poison){
+        this.poisonCount.push(poison)
+        poison.x = -1000;
+        poison.y = -1000;
+        this.updatePoisonbar()
+        
     }
 
-    deadAnimation(){
-        console.log(("dead"));
-        
+    /**
+     * This Function updates the Coinbar, depending on the current amount of collected coins
+     * 
+     */
+    updatePoisonbar(){
+        if (this.poisonCount.length >= 2) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
+        }
+         if (this.poisonCount.length >= 4) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
+        }
+           if (this.poisonCount.length >= 6) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png');
+        }
+         if (this.poisonCount.length >= 8) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png');
+        }
+         if (this.poisonCount.length >= 10) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png');
+        }
+
     }
 
 }

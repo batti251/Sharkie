@@ -39,9 +39,4 @@ healthbarCache = [
         }
     }
 
-    deadAnimation(){
-        console.log(("dead"));
-        
-    }
-
 }

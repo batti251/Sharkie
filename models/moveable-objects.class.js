@@ -9,6 +9,7 @@ coinToss;
 resetIntervalX;
 resetIntervalY;
 maxLife;
+max;
 life;
 isMoving;
 lastIsMoving ;
