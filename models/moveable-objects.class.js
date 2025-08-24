@@ -114,10 +114,32 @@ fallAsleep;
      */
     enemyMinionMovement(speedX, speedY){
         this.randomTurn(speedX)
-        this.setRandomCoordinateY(speedY);
-        // Function for character detection
+        this.setRandomCoordinateY(speedY)
+        /* this.enemyDetectionAnimation() */
     }
 
+    isDetected(object){
+        return this.x + this.hitboxX + this.hitboxWidth - object.x > -200 
+    }
+
+    /**
+     * This Function updates the Enemie Animation from passiv mode to offensiv mode
+     * It lets the pufferfishes puff
+     * 
+     */
+    enemyDetectionAnimation(enemie){
+        clearTimeout(this.enemyDetector)
+            this.enemyDetector = setTimeout(() => {
+                     this.animateObjectSprite(this.enemies_TRANSITION, 100);
+                       setTimeout(() => {
+                        enemie.animateObjectSprite(this.enemies_ANGRY, 200);
+                    }, 100);
+            }, 200);
+    }
+
+    enemyIdleState(){
+        this.animateObjectSprite(this.enemies_IDLE, 200)
+    }
     /**
      * This Function wether let the Enemies move left, or right, depending on coinToss-Function
      * The Function is called every 2 seconds 

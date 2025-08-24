@@ -44,8 +44,23 @@ collectables;
     this.draw();
     this.keyboard = keyboard
     this.setWorld();
+    this.enemyDetection()
     this.checkCollisions();
   }
+
+  
+    enemyDetection(){
+      clearInterval(this.detection)
+       this.detection = setInterval(() => {
+          this.enemies.forEach(enemie => {
+            if (this.character.isDetected(enemie) && !enemie.angry){
+              enemie.enemyDetectionAnimation(enemie);
+              enemie.angry = true;
+            } 
+          });
+        }, 100);
+    }
+
 
   /**
    * This Function indicates the Collision from the character with an Object

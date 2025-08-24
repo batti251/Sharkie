@@ -4,7 +4,8 @@ speedX = 0.75;
 speedY = 0.25;
 randomHeightInterval = 500;
 randomTurnIntervaL = 3000;
-damage = 20;
+damage = 20
+angry = false
 
 enemies_IDLE = [
     '/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
@@ -14,11 +15,29 @@ enemies_IDLE = [
     '/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
 ]
 
+enemies_TRANSITION = [
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition1.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition2.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition3.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition4.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition5.png'
+]
+
+enemies_ANGRY = [
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim1.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim2.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim3.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim4.png',
+    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.png'
+]
+
 
 
     constructor(path){
         super().loadImg(path);
         this.loadImgCache(this.enemies_IDLE);
+        this.loadImgCache(this.enemies_TRANSITION);
+        this.loadImgCache(this.enemies_ANGRY);
         this.animateObject(this.enemies_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
         this.x = Math.floor(Math.random() * 1000) + 200;
