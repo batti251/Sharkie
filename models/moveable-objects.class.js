@@ -15,6 +15,8 @@ isMoving;
 lastIsMoving ;
 fallAsleep;
 
+
+
      /**
      * This Function calls the Objects Animations
      * If the Array contains 'Sharkie', Movement-Animation is called seperately
@@ -81,6 +83,7 @@ fallAsleep;
      * @param {Number} miliseconds - specified interval for setInterval()
      */
     animateObjectSprite(sprites, miliseconds){
+        this.resetCurrentImg(sprites)
         clearInterval(this.objectSpriteInterval);
          this.objectSpriteInterval =  setInterval(() => {
             let i = this.currentImg % sprites.length;
@@ -88,8 +91,20 @@ fallAsleep;
             this.img = this.imgCache[path];
             this.currentImg++
         }, miliseconds)
+        console.log(sprites);
     }
 
+    /**
+     * This Function resets currentImg-Index to 0, everytime a sprite-change is triggered
+     * 
+     * @param {Array} sprites - 
+     */
+     resetCurrentImg(sprites) {
+            if (this.lastSprite !== sprites && this.isSlapping){
+             this.currentImg = 0
+        }
+        this.lastSprite = sprites;
+    }
     
     /**
      * This Function calls the actual Moveset from the Character
@@ -237,12 +252,16 @@ fallAsleep;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-        if (key.SPACE === true) {
+            if (key.SPACE === true) {
             // hit enemy , let enemy take damage
             // expand hitbox 
-            
-        this.animateObjectSprite(this.sharkie_FIN_SLAP, 150)
-        }  
+            this.isSlapping = true
+        this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
+        setTimeout(() => {
+          this.applyCharacterMovement();
+        }, 750);
+        }   
+        this.isSlapping = false
     }
 
     /**

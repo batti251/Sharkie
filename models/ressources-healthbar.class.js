@@ -35,7 +35,6 @@ healthbarCache = [
             this.loadImg(this.healthbarCache[1])
         } if (healthbarIndicator <= 0) {
             this.loadImg(this.healthbarCache[0])
-            this.deadAnimation();
         }
     }
 
