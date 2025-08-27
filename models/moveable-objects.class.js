@@ -14,7 +14,10 @@ life;
 isMoving;
 lastIsMoving ;
 fallAsleep;
-
+hitboxWidth;
+hitboxHeight;
+hitboxSlap = 320;
+hitboxReset = 120
 
 
      /**
@@ -91,7 +94,6 @@ fallAsleep;
             this.img = this.imgCache[path];
             this.currentImg++
         }, miliseconds)
-        console.log(sprites);
     }
 
     /**
@@ -255,14 +257,31 @@ fallAsleep;
             if (key.SPACE === true) {
             // hit enemy , let enemy take damage
             // expand hitbox 
-            this.isSlapping = true
+        this.isSlapping = true
         this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
+        this.expandHitbox()
+        this.stallCharacterAnimationBy(720)
+        setTimeout(() => {
+        this.hitboxWidth = 120
+        }, 800);
+        }   
+    }
+
+
+    stallCharacterAnimationBy(miliseconds){
         setTimeout(() => {
           this.applyCharacterMovement();
-        }, 750);
-        }   
-        this.isSlapping = false
+          this.isSlapping = false
+
+        }, miliseconds);
     }
+
+    expandHitbox(){
+        setTimeout(() => {
+          this.hitboxWidth = this.hitboxSlap
+                    }, 400);
+    }
+
 
     /**
      * This Function sets the Hitbox of the Objects, scaled by any size

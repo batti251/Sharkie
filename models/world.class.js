@@ -125,6 +125,9 @@ poison = [
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.enemies.forEach(object => {
+        if (this.character.isInsideBorder(object) && this.character.isSlapping) {
+                  console.log("SLAP!");
+              } else 
         if(this.character.isInsideBorder(object) && this.character.life > 0){
             this.character.damage(this.character);
             this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
