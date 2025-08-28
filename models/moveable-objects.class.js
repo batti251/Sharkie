@@ -16,7 +16,7 @@ lastIsMoving ;
 fallAsleep;
 hitboxWidth;
 hitboxHeight;
-hitboxSlap = 320;
+hitboxSlap = 140;
 hitboxReset = 120
 
 
@@ -46,7 +46,7 @@ hitboxReset = 120
         clearInterval(this.characterMovementInterval);
         this.characterMovementInterval = setInterval(() => {
             this.moveCharacter(this.world.keyboard);
-            if (this.isMoving !== this.lastIsMoving) {
+            if (this.isMoving !== this.lastIsMoving && !this.isSlapping) {
                 this.lastIsMoving  = this.isMoving;
                 this.applyCharacterMovement();
             }
@@ -249,33 +249,46 @@ hitboxReset = 120
 
     /**
      * This Function let the character slap.
-     * 
+     * During slap-animation the character cannot collect collectibles
      * 
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-            if (key.SPACE === true) {
-            // hit enemy , let enemy take damage
-            // expand hitbox 
+            if (key.SPACE === true && !this.slapCooldown) {
+                console.log(this.slapCooldown);
+                this.slapCooldown = true
+                console.log(this.slapCooldown);
         this.isSlapping = true
+        this.canCollect = false
         this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
         this.expandHitbox()
         this.stallCharacterAnimationBy(720)
         setTimeout(() => {
         this.hitboxWidth = 120
-        }, 800);
+        }, 600);
         }   
     }
 
-
+    /**
+     * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
+     * It also works as Cooldown for collection and key.SPACE-listener
+     * 
+     * @param {Number} miliseconds - Timer, when Function should be called 
+     */
     stallCharacterAnimationBy(miliseconds){
         setTimeout(() => {
           this.applyCharacterMovement();
           this.isSlapping = false
-
+          this.canCollect = true
+          this.slapCooldown = true
         }, miliseconds);
     }
 
+    /**
+     * This Function increases Hitbox from character slight
+     * New Hitbox width 140px,  
+     * 
+     */
     expandHitbox(){
         setTimeout(() => {
           this.hitboxWidth = this.hitboxSlap
@@ -311,6 +324,7 @@ hitboxReset = 120
         this.y + this.hitboxY + this.hitboxHeight > object.y &&
         this.y + this.hitboxY < object.y + object.hitboxHeight;
     }
+
  
     /**
      * This Function decreases the targets life by 20

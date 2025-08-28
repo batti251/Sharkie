@@ -83,12 +83,11 @@ poison = [
   checkCollectiblesCollisions(){
     setInterval(() => {
       this.coins.forEach(coin => {
-        if (this.character.isInsideBorder(coin)) {
+        if (this.character.isInsideBorder(coin) && this.character.canCollect) {
             this.coinbar.fillCoinbar(coin);
             }
            })
     }, 200);
-
     setInterval(() => {
       this.poison.forEach(poison => {
         if (this.character.isInsideBorder(poison)) {
@@ -118,6 +117,7 @@ poison = [
 
   /**
    * This Function indicates the Collision from the character with an Object
+   * It indicates collision during slap-animation
    * This Function iterates each 200 miliseconds
    * 
    */
@@ -126,7 +126,7 @@ poison = [
     this.collisionInterval = setInterval(() => {
       this.enemies.forEach(object => {
         if (this.character.isInsideBorder(object) && this.character.isSlapping) {
-                  console.log("SLAP!");
+                  object.x = -1000
               } else 
         if(this.character.isInsideBorder(object) && this.character.life > 0){
             this.character.damage(this.character);

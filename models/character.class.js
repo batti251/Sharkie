@@ -5,6 +5,10 @@ speedX = 4;
 speedY = 3;
 maxLife = 1000;
 life = this.maxLife;
+canCollect = true;
+slapCooldown = false
+slapCooldownTime = 1500;
+
 
 // this.ctx.strokeRect(object.x+40, object.y+90, object.hitboxWidth+20, object.hitboxHeight-30);
 
