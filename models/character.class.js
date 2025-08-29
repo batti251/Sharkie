@@ -6,6 +6,7 @@ speedY = 3;
 maxLife = 1000;
 life = this.maxLife;
 canCollect = true;
+hitted = false;
 slapCooldown = false
 slapCooldownTime = 1500;
 
@@ -120,6 +121,7 @@ sharkie_DEAD_SURFACE = [
         this.loadImgCache(this.sharkie_FIN_SLAP);
         this.animateObject(this.sharkie_IDLE, 100);
         this.setHitbox(40, 95, 1.66, 3.3);
+
     }
 
 

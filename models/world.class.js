@@ -125,15 +125,15 @@ poison = [
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.enemies.forEach(object => {
-        if (this.character.isInsideBorder(object) && this.character.isSlapping) {
+        if (this.character.isInsideBorder(object) && this.character.isSlapping && !this.character.hitted) {
                   object.x = -1000
-              } else 
+              }  
         if(this.character.isInsideBorder(object) && this.character.life > 0){
             this.character.damage(this.character);
             this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
               if (this.character.life <=0) {
+                this.keyboard = null
                 this.character.sharkieDieAnimation();
-                this.keyboard = "";
                 return
               } else return
           }

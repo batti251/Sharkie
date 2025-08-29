@@ -254,21 +254,19 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-            if (key.SPACE === true && !this.slapCooldown) {
-                console.log(this.slapCooldown);
+            if (key.SPACE === true && !this.slapCooldown && !this.hitted) {
                 this.slapCooldown = true
-                console.log(this.slapCooldown);
-        this.isSlapping = true
-        this.canCollect = false
-        this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
-        this.expandHitbox()
-        this.stallCharacterAnimationBy(720)
-        setTimeout(() => {
-        this.hitboxWidth = 120
-        }, 600);
-        }   
+                this.isSlapping = true
+                this.canCollect = false
+                this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
+                this.expandHitbox()
+                this.stallCharacterAnimationBy(720)
+                setTimeout(() => {
+                this.hitboxWidth = 120
+                }, 600);
+                }   
     }
-
+    
     /**
      * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
      * It also works as Cooldown for collection and key.SPACE-listener
@@ -280,7 +278,7 @@ hitboxReset = 120
           this.applyCharacterMovement();
           this.isSlapping = false
           this.canCollect = true
-          this.slapCooldown = true
+          this.slapCooldown = false
         }, miliseconds);
     }
 
@@ -333,11 +331,29 @@ hitboxReset = 120
      * @param {Object} object - The Target that takes the Damage
      */
     damage(object){
+        this.hitted = true
        object.life = object.life - 20
         this.animateObjectSprite(this.sharkie_POISENED,100)
         setTimeout(() => {
           this.applyCharacterMovement();
-        }, 150);
+        }, 150)
+        this.notHittedReset(500)
+    }
+
+    /**
+     * Debounce-Method
+     * This Function resets character hitted-state to false, when character is not hitted anymore
+     * Reset is called after 500miliseconds 
+     * 
+     * @param {Number} miliseconds - Timer, when Function should be called 
+     */
+    notHittedReset(miliseconds){
+        if (this.hitTimer) {
+            clearTimeout(this.hitTimer)  }
+            this.hitTimer = setTimeout(() => {
+            this.hitted = false;
+            this.hitTimer = null
+            }, miliseconds);
     }
 
     /**
@@ -349,7 +365,8 @@ hitboxReset = 120
             this.characterSwims();
             } else {
                 this.characterFallAsleep()
-            }           
+            }     
+                  
     }
 
     /**
