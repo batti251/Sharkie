@@ -119,7 +119,7 @@ hitboxReset = 120
         this.moveRight(this.speedX,key);
         this.moveLeft(this.speedX,key);
         this.finSlap(key)
-        this.isMoving = key.UP || key.DOWN || key.LEFT || key.RIGHT;
+        this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
     }
     
     /**
@@ -201,7 +201,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     moveUp(speed, key){
-        if (key.UP == true && this.y > -60) {
+        if (key?.UP == true && this.y > -60) {
             this.y = this.y - speed;
     }}
     /**
@@ -212,7 +212,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveDown(speed, key){
-        if (key.DOWN == true && this.y < 300) {
+        if (key?.DOWN == true && this.y < 300) {
             this.y = this.y + speed;
             } 
     }
@@ -225,7 +225,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveRight(speed, key){
-        if (key.RIGHT == true) {
+        if (key?.RIGHT == true) {
             this.x = this.x + speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = false;
@@ -240,7 +240,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveLeft(speed, key){
-        if (key.LEFT == true && this.x > -300) {
+        if (key?.LEFT == true && this.x > -300) {
             this.x = this.x - speed;
             this.world.cameraX = -this.x;
             this.mirrorImage = true;
@@ -254,7 +254,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-            if (key.SPACE === true && !this.slapCooldown && !this.hitted) {
+            if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
                 this.slapCooldown = true
                 this.isSlapping = true
                 this.canCollect = false
