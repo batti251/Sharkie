@@ -3,37 +3,7 @@ character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png", 0, 0)
 canvas;
 ctx;
 cameraX = 0;
-background = [
-  new Background('/assets/img/3. Background/Layers/5. Water/L1.png', -300, 0),
-  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L1.png', -300, 0),
-  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L1.png', -300, 0),
-  new Background('/assets/img/3. Background/Layers/2. Floor/L1.png', -300, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/1.png', -300, 0),
-
-
-  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 479, 0),
-  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 479, 0),
-  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 479, 0),
-  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',479, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 479, 0),
-
-  new Background('/assets/img/3. Background/Layers/5. Water/L2.png', 1259, 0),
-  new Background('/assets/img/3. Background/Layers/4.Fondo 2/L2.png', 1259, 0),
-  new Background('/assets/img/3. Background/Layers/3.Fondo 1/L2.png', 1259, 0),
-  new Background('/assets/img/3. Background/Layers/2. Floor/L2.png',1259, 0),
-  new Background('/assets/img/3. Background/Layers/1. Light/2.png', 1259, 0)
-
-
-];
-enemies = [
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Enemies('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
-];
+level = new Level1()
 
 
 
@@ -41,27 +11,7 @@ keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
-coins = [
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-  new COINS ('/assets/img/4. Marcadores/1. Coins/1.png'),
-];
 
-poison = [
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png'),
-  new POISONS ('/assets/img/4. Marcadores/Posión/Animada/1.png')
-]
 
 
   constructor(canvas, keyboard) {
@@ -82,14 +32,14 @@ poison = [
    */
   checkCollectiblesCollisions(){
     setInterval(() => {
-      this.coins.forEach(coin => {
+      this.level.coins.forEach(coin => {
         if (this.character.isInsideBorder(coin) && this.character.canCollect) {
             this.coinbar.fillCoinbar(coin);
             }
            })
     }, 200);
     setInterval(() => {
-      this.poison.forEach(poison => {
+      this.level.poison.forEach(poison => {
         if (this.character.isInsideBorder(poison)) {
             this.poisonbar.fillPoisonbar(poison);
            }
@@ -105,7 +55,7 @@ poison = [
     enemyDetection(){
       clearInterval(this.detection)
        this.detection = setInterval(() => {
-          this.enemies.forEach(enemie => {
+          this.level.enemies.forEach(enemie => {
             if (this.character.isDetected(enemie) && !enemie.angry){
               enemie.enemyDetectionAnimation(enemie);
               enemie.angry = true;
@@ -124,7 +74,7 @@ poison = [
   checkCollisions(){
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
-      this.enemies.forEach(object => {
+      this.level.enemies.forEach(object => {
         if (this.character.isInsideBorder(object) && this.character.isSlapping && !this.character.hitted) {
                   object.x = -1000
               }  
@@ -154,10 +104,10 @@ poison = [
     draw() {
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0)
-      this.addImgObjectsToMap(this.background);
-      this.addImgObjectsToMap(this.coins);
-      this.addImgObjectsToMap(this.poison);
-      this.addImgObjectsToMap(this.enemies);
+      this.addImgObjectsToMap(this.level.background)
+      this.addImgObjectsToMap(this.level.coins);
+      this.addImgObjectsToMap(this.level.poison);
+      this.addImgObjectsToMap(this.level.enemies)
       this.addImgObjectToMap(this.character);
       this.imgAnimationLoop();
       this.ctx.translate(-this.cameraX, 0)

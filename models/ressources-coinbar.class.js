@@ -37,6 +37,9 @@ coinbarCache = [
      * 
      */
     updateCoinbar(){
+
+        
+        
         if (this.coinCount.length >= 2) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/20_  copia 2.png');
         }
