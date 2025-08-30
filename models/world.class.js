@@ -3,14 +3,11 @@ character = new Character("/assets/img/1.Sharkie/1.IDLE/1.png", 0, 0)
 canvas;
 ctx;
 cameraX = 0;
-level = new Level1()
-
-
-
 keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
+level = new Level1()
 
 
 

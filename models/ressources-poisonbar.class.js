@@ -3,9 +3,9 @@ x = 650;
 y = -20;
 width = 300;
 height = 80;
-max = 10;
+maxPoison;
 poisonCount = [];
-
+collectedPoisonPercentage;
 poisonCache = [
     '/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png',
     '/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png',
@@ -38,19 +38,23 @@ poisonCache = [
      * 
      */
     updatePoisonbar(){
-        if (this.poisonCount.length >= 2) {
+        this.maxPoison = world.level.poison.length
+        console.log(this.maxPoison);
+        
+        this.collectedPoisonPercentage = this.poisonCount.length / this.maxPoison
+        if (this.collectedPoisonPercentage >= 0.2) {
                 this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
         }
-         if (this.poisonCount.length >= 4) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
-        }
-           if (this.poisonCount.length >= 6) {
+         if (this.collectedPoisonPercentage >= 0.4) {
                 this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png');
         }
-         if (this.poisonCount.length >= 8) {
+           if (this.collectedPoisonPercentage >= 0.6) {
+                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png');
+        }
+         if (this.collectedPoisonPercentage >= 0.8) {
                 this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png');
         }
-         if (this.poisonCount.length >= 10) {
+         if (this.collectedPoisonPercentage >= 1) {
                 this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png');
         }
 

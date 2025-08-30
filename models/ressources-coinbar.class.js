@@ -3,8 +3,10 @@ x = 350;
 y = -20;
 width = 300;
 height = 80;
-max = 10;
+maxCoins;
 coinCount = [];
+collectedCoinsPercentage;
+
 
 coinbarCache = [
     '/assets/img/4. Marcadores/green/Coin/0_  copia 4.png',
@@ -17,6 +19,7 @@ coinbarCache = [
     constructor(path){
         super().loadImg(path);
         /* this.loadImgCache(this.healthbarCache) */
+
     }
 
     /**
@@ -37,22 +40,22 @@ coinbarCache = [
      * 
      */
     updateCoinbar(){
-
+        this.maxCoins = world.level.coins.length
+        this.collectedCoinsPercentage = this.coinCount.length / this.maxCoins
         
-        
-        if (this.coinCount.length >= 2) {
+        if (this.collectedCoinsPercentage >= 0.2) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/20_  copia 2.png');
         }
-         if (this.coinCount.length >= 4) {
+         if (this.collectedCoinsPercentage >= 0.4) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/40_  copia 4.png');
         }
-           if (this.coinCount.length >= 6) {
+           if (this.collectedCoinsPercentage >= 0.6) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/60_  copia 4.png');
         }
-         if (this.coinCount.length >= 8) {
+         if (this.collectedCoinsPercentage >= 0.8) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/80_  copia 4.png');
         }
-         if (this.coinCount.length >= 10) {
+         if (this.collectedCoinsPercentage >= 1) {
                 this.loadImg('/assets/img/4. Marcadores/green/Coin/100_ copia 4.png');
         }
 
