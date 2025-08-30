@@ -141,22 +141,26 @@ hitboxReset = 120
     }
 
     /**
-     * This Function updates the Enemie Animation from passiv mode to offensiv mode
+     * This Function updates the pufferfish Animation from passiv mode to offensiv mode
      * It lets the pufferfishes puff
      * 
      */
     enemyDetectionAnimation(enemie){
         clearTimeout(this.enemyDetector)
             this.enemyDetector = setTimeout(() => {
-                     this.animateObjectSprite(this.enemies_TRANSITION, 100);
+                     this.animateObjectSprite(this.pufferfish_TRANSITION, 100);
                        setTimeout(() => {
-                        enemie.animateObjectSprite(this.enemies_ANGRY, 200);
+                        enemie.animateObjectSprite(this.pufferfish_ANGRY, 200);
                     }, 100);
             }, 200);
     }
 
+    /**
+     * This Function turns puffed pufferfish back into unpuffed state.
+     * 
+     */
     enemyIdleState(){
-        this.animateObjectSprite(this.enemies_IDLE, 200)
+        this.animateObjectSprite(this.pufferfish_IDLE, 200)
     }
     /**
      * This Function wether let the Enemies move left, or right, depending on coinToss-Function
