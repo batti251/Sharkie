@@ -21,6 +21,8 @@ coins_IDLE = [
         this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
         this.setHitbox(5, 5, 1.5, 1.5);
+        console.log(this);
+        
     }
 
 
