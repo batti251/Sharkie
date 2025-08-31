@@ -3,10 +3,10 @@ damage = 40
 
 
 jellyfish_lila_IDLE = [
-    '/assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png',
+    'assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
+    'assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
+    'assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
+    'assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png',
 ]
 
 jellyfish_yellow_IDLE = [
@@ -17,17 +17,17 @@ jellyfish_yellow_IDLE = [
 ]
 
 jellyfish_green_IDLE = [
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png',
 ]
 
 jellyfish_pink_IDLE = [
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
-    '/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
+    'assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
 ]
 
 

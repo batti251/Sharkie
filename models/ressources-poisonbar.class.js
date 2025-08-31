@@ -7,12 +7,12 @@ maxPoison;
 poisonCount = [];
 collectedPoisonPercentage;
 poisonCache = [
-    '/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png',
-    '/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png',
-    '/assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png',
-    '/assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png',
-    '/assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png',
-    '/assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png'
+    'assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png',
+    'assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png',
+    'assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png',
+    'assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png',
+    'assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png',
+    'assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png'
 ];
     constructor(path){
         super().loadImg(path);
@@ -43,19 +43,19 @@ poisonCache = [
         
         this.collectedPoisonPercentage = this.poisonCount.length / this.maxPoison
         if (this.collectedPoisonPercentage >= 0.2) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
+                this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
         }
          if (this.collectedPoisonPercentage >= 0.4) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png');
+                this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png');
         }
            if (this.collectedPoisonPercentage >= 0.6) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png');
+                this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png');
         }
          if (this.collectedPoisonPercentage >= 0.8) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png');
+                this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png');
         }
          if (this.collectedPoisonPercentage >= 1) {
-                this.loadImg('/assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png');
+                this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png');
         }
 
     }

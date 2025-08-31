@@ -47,26 +47,26 @@ sharkie_SWIM = [
 
 sharkie_Long_IDLE = [
     'assets/img/1.Sharkie/2.Long_IDLE/i1.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i2.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i3.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i4.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i5.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i6.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i7.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i8.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i9.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i10.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i11.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i12.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i13.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i14.png'
+    'assets/img/1.Sharkie/2.Long_IDLE/I2.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I3.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I4.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I5.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I6.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I7.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I8.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I9.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I10.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I11.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I12.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I13.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I14.png'
 ]
 
 sharkie_SLEEPING = [
-    'assets/img/1.Sharkie/2.Long_IDLE/i11.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i12.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i13.png',
-    'assets/img/1.Sharkie/2.Long_IDLE/i14.png'
+    'assets/img/1.Sharkie/2.Long_IDLE/I11.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I12.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I13.png',
+    'assets/img/1.Sharkie/2.Long_IDLE/I14.png'
 ]
 
 sharkie_FIN_SLAP = [
