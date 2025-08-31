@@ -42,4 +42,43 @@ pufferfish_ANGRY = [
         this.setHitbox(0, 4.5, 1.1, 1.5)
     }
 
+
+    /**
+     * This Function let the enemies trigger the transformation Animation
+     * 
+     */
+    enemyDetection(){
+      clearInterval(this.detection)
+       this.detection = setInterval(() => {
+          this.level.enemies.forEach(enemie => {
+            if (this.character.isDetected(enemie) && !enemie.angry){
+              enemie.enemyDetectionAnimation(enemie);
+              enemie.angry = true;
+            } 
+          });
+        }, 100);
+    }
+
+    /**
+     * This Function updates the pufferfish Animation from passiv mode to offensiv mode
+     * It lets the pufferfishes puff
+     * 
+     */
+    enemyDetectionAnimation(enemie){
+        clearTimeout(this.enemyDetector)
+            this.enemyDetector = setTimeout(() => {
+                     this.animateObjectSprite(this.pufferfish_TRANSITION, 100);
+                       setTimeout(() => {
+                        enemie.animateObjectSprite(this.pufferfish_ANGRY, 200);
+                    }, 100);
+            }, 200);
+    }
+
+    /**
+     * This Function turns puffed pufferfish back into unpuffed state.
+     * 
+     */
+    enemyIdleState(){
+        this.animateObjectSprite(this.pufferfish_IDLE, 200)
+    }
 }

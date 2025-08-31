@@ -7,7 +7,7 @@ keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('/assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
-level = new Level1(0)
+level = new Level1(2)
 
 
 
@@ -52,8 +52,8 @@ level = new Level1(0)
     enemyDetection(){
       clearInterval(this.detection)
        this.detection = setInterval(() => {
-          this.level.enemies.forEach(enemie => {
-            if (this.character.isDetected(enemie) && !enemie.angry){
+            this.level.enemies.forEach(enemie => {
+            if (this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Pufferfish){
               enemie.enemyDetectionAnimation(enemie);
               enemie.angry = true;
             } 

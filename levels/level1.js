@@ -28,7 +28,8 @@ enemies = [
   new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
   new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
   new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Jellyfish('/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png')
 ];
 
 
@@ -64,7 +65,7 @@ poison = [
 
     /**
      * This Function generates the Background for the level
-     * Depending on the defined level-length the background-frame will be lined up next to each other
+     * Depending on the defined level-length the amount of background-frames will be lined up next to each other
      * 
      */
     generateBackground(){
@@ -95,4 +96,18 @@ poison = [
         this.x1 = this.x1 += this.multiplicator;
     }
 
+
+
+    generateEnemies(){
+      enemyStack = [
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new Pufferfish('/assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
+  new JellyFish('/assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png')
+];
+    }
 }
