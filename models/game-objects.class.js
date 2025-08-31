@@ -5,8 +5,6 @@ x ;
 y ;
 width;
 height;
-
-
         /**
      * This Function loads a single image and sets it as the current imge of this object
      * 

@@ -1,37 +1,16 @@
 class Pufferfish extends Enemies {
 damage = 20
+type;
+pufferfish_IDLE;
+pufferfish_TRANSITION;
+pufferfish_ANGRY;
 
 
-pufferfish_IDLE = [
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
-]
-
-pufferfish_TRANSITION = [
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition1.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition2.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition3.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition4.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/1.transition5.png'
-]
-
-pufferfish_ANGRY = [
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim1.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim2.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim3.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim4.png',
-    'assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.png'
-]
-
-
-    constructor(path){
+    constructor(path, type){
         super().loadImg(path);
-        this.loadImgCache(this.pufferfish_IDLE);
-        this.loadImgCache(this.pufferfish_TRANSITION);
-        this.loadImgCache(this.pufferfish_ANGRY);
+        this.type = type
+        this.buildPufferfish();
+        this.loadPufferfishImgCache();
         this.animateObject(this.pufferfish_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
         this.x = Math.floor(Math.random() * 1000) + 200;
@@ -42,26 +21,77 @@ pufferfish_ANGRY = [
         this.setHitbox(0, 4.5, 1.1, 1.5)
     }
 
-
     /**
-     * This Function let the enemies trigger the transformation Animation
+     * This Function calls all loadImgCache-Functions
      * 
      */
-    enemyDetection(){
-      clearInterval(this.detection)
-       this.detection = setInterval(() => {
-          this.level.enemies.forEach(enemie => {
-            if (this.character.isDetected(enemie) && !enemie.angry){
-              enemie.enemyDetectionAnimation(enemie);
-              enemie.angry = true;
-            } 
-          });
-        }, 100);
+    loadPufferfishImgCache(){
+        this.loadImgCache(this.pufferfish_IDLE);
+        this.loadImgCache(this.pufferfish_TRANSITION);
+        this.loadImgCache(this.pufferfish_ANGRY);
     }
 
     /**
-     * This Function updates the pufferfish Animation from passiv mode to offensiv mode
-     * It lets the pufferfishes puff
+     * This Function updates all the pufferfish Arrays, according to its defined type
+     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * 
+     */
+    buildPufferfish(){
+        this.pufferfish_IDLE = this.buildIDLE()
+        this.pufferfish_TRANSITION = this.buildTRANSITION();
+        this.pufferfish_ANGRY = this.buildANGRY();
+    }
+    /**
+     * This Function updates the IDLE-Arrays image paths, according to the defined type
+     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * 
+     * @returns - returns new IDLE-Arrray image-paths
+     */
+    buildIDLE(){
+    return [
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim5.png`
+        ]
+    }
+
+    /**
+     * This Function updates the TRANSITION-Arrays image paths, according to the defined type
+     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * 
+     * @returns - returns new TRANSITION-Arrray image-paths
+     */
+    buildTRANSITION(){
+        return [
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition5.png`
+        ]
+    }
+
+    /**
+     * This Function updates the ANGRY-Arrays image paths, according to the defined type
+     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * 
+     * @returns - returns new ANGRY-Arrray image-paths
+     */
+    buildANGRY(){
+        return [
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim5.png`
+        ]
+    }
+
+    /**
+     * This Function updates the pufferfish Animation from IDLE mode to ANGRY mode
+     * It lets the pufferfishe puff
      * 
      */
     enemyDetectionAnimation(enemie){
