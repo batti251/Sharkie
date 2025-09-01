@@ -14,7 +14,7 @@ type;
         this.width = Math.floor(Math.random() * 50) + 60;
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
         this.height = this.width;
-        this.setHitbox(0, 4.5, 1.1, 1.5)
+        this.setHitbox(15, 5, 2, 1.5)
     }
 
     /**
@@ -23,16 +23,18 @@ type;
      * @param {Number} type - the defined type: (1,2,3,4) represents a specific color for the jellyfish
      *                         1: green Jellyfish
      *                         2: pink Jellyfish
-     *                         3: lila Jellyfish
-     *                         4: yellow Jellyfish
+     *                         3: lila Jellyfish, sets damage to 80 additionaly
+     *                         4: yellow Jellyfish, sets damage to 80 additionaly
      */
     buildJellyfish(type){
         switch (type) {
             case 1:
         this.jellyfish_IDLE = this.buildJellyGreenIDLE();
+        this.damage = 80
                 break;
             case 2:
         this.jellyfish_IDLE = this.buildJellyPinkIDLE();
+        this.damage = 80
                 break;
             case 3:
         this.jellyfish_IDLE = this.buildJellyLilaIDLE();
