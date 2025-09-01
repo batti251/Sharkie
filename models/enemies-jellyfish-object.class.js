@@ -1,6 +1,9 @@
 class Jellyfish extends Enemies{
 damage = 40
 type;
+jellyfish_IDLE;
+speedY = 0.6;
+speedX = 0.25;
 
     constructor(path, type){
         super().loadImg(path);
