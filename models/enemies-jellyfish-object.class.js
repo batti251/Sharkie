@@ -17,59 +17,87 @@ type;
         this.setHitbox(0, 4.5, 1.1, 1.5)
     }
 
-buildJellyfish(type){
-    switch (type) {
-        case 1:
-    this.jellyfish_IDLE = this.buildJellyGreenIDLE();
-            break;
-        case 2:
-    this.jellyfish_IDLE = this.buildJellyPinkIDLE();
-            break;
-        case 3:
-    this.jellyfish_IDLE = this.buildJellyLilaIDLE();
-            break;
-        case 4:
-    this.jellyfish_IDLE = this.buildJellyYellowIDLE();
-            break;
-        default:
-            break;
+    /**
+     * This Function builds the Jellyfish-IDLE, according to its defined type
+     * 
+     * @param {Number} type - the defined type: (1,2,3,4) represents a specific color for the jellyfish
+     *                         1: green Jellyfish
+     *                         2: pink Jellyfish
+     *                         3: lila Jellyfish
+     *                         4: yellow Jellyfish
+     */
+    buildJellyfish(type){
+        switch (type) {
+            case 1:
+        this.jellyfish_IDLE = this.buildJellyGreenIDLE();
+                break;
+            case 2:
+        this.jellyfish_IDLE = this.buildJellyPinkIDLE();
+                break;
+            case 3:
+        this.jellyfish_IDLE = this.buildJellyLilaIDLE();
+                break;
+            case 4:
+        this.jellyfish_IDLE = this.buildJellyYellowIDLE();
+                break;
+            default:
+                break;
+        }
     }
-}
 
+    /**
+     * This Function builds the IDLE-Array for Jellyfish, according to its defined type 1
+     * 
+     * @returns - returns lila Jellyfish Array
+     */
+    buildJellyLilaIDLE(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png`
+      ]
+    }
 
-buildJellyLilaIDLE(){
-  return [
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png`
-  ]
-}
+    /**
+     * This Function builds the IDLE-Array for Jellyfish, according to its defined type 2
+     * 
+     * @returns - returns yellow Jellyfish Array
+     */
+    buildJellyYellowIDLE(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png`
+      ]
+    }
 
-buildJellyYellowIDLE(){
-  return [
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png`
-  ]
-}
+    /**
+     * This Function builds the IDLE-Array for Jellyfish, according to its defined type 3
+     * 
+     * @returns - returns green Jellyfish Array
+     */
+    buildJellyGreenIDLE(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png`
+      ]
+    }
 
-buildJellyGreenIDLE(){
-  return [
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png`
-  ]
-}
-
-buildJellyPinkIDLE(){
-  return [
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png`,
-    `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png`
-  ]
-}
+    /**
+     * This Function builds the IDLE-Array for Jellyfish, according to its defined type 4
+     * 
+     * @returns - returns pink Jellyfish Array
+     */
+    buildJellyPinkIDLE(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png`
+      ]
+    }
 }
