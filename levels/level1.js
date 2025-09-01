@@ -27,8 +27,8 @@ enemies = [
   new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${2}.swim1.png`,2),
   new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${3}.swim1.png`,3),
   new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${3}.swim1.png`,3),
-  new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${3}.swim1.png`,3)
-/*   new Jellyfish('assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png') */
+  new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${3}.swim1.png`,3),
+  new Jellyfish(`assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,4)
 ];
 
 
@@ -59,7 +59,7 @@ poison = [
         this.levelLength = level;
         this.x = this.xStart + this.multiplicator
         this.x1 = this.x1Start  + this.multiplicator;
-        this.generateBackground()
+        this.generateBackground();
     }
 
     /**
@@ -105,7 +105,10 @@ poison = [
         new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${1}.swim1.png`,1),
         new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${1}.swim1.png`,1),
         new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${1}.swim1.png`,1),
-        /* new JellyFish('assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png') */
+        new Jellyfish('assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png'),
+        new Jellyfish('assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png'),
+        new Jellyfish('assets/img/2.Enemy/2 Jelly fish/Regular dangerous/Yellow 1.png'),
+        new Jellyfish('assets/img/2.Enemy/2 Jelly fish/Regular dangerous/Lila 1.png')
       ];
     }
 }
