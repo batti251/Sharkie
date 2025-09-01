@@ -9,7 +9,7 @@ pufferfish_ANGRY;
     constructor(path, type){
         super().loadImg(path);
         this.type = type
-        this.buildPufferfish();
+        this.buildPufferfish(this.type);
         this.loadPufferfishImgCache();
         this.animateObject(this.pufferfish_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
@@ -22,7 +22,7 @@ pufferfish_ANGRY;
     }
 
     /**
-     * This Function calls all loadImgCache-Functions
+     * This Function calls all loadImgCache-Functions for predefined pufferfish-type
      * 
      */
     loadPufferfishImgCache(){
@@ -33,61 +33,78 @@ pufferfish_ANGRY;
 
     /**
      * This Function updates all the pufferfish Arrays, according to its defined type
-     * the defined type: (1,2,3) represents a specific color for the bubblefish
      * 
+     * @param {Number} type - the defined type: (1,2,3) represents a specific color for the bubblefish
+     *                         1: green Pufferfish
+     *                         2: pink Pufferfish
+     *                         3: red Pufferfish
      */
-    buildPufferfish(){
-        this.pufferfish_IDLE = this.buildIDLE()
-        this.pufferfish_TRANSITION = this.buildTRANSITION();
-        this.pufferfish_ANGRY = this.buildANGRY();
-    }
+    buildPufferfish(type){
+        this.pufferfish_IDLE = this.buildPufferIDLE(type);
+        this.pufferfish_TRANSITION = this.buildPufferTRANSITION(type);
+        this.pufferfish_ANGRY = this.buildPufferANGRY(type);  
+        }
+
+
     /**
-     * This Function updates the IDLE-Arrays image paths, according to the defined type
-     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * This Function builds the IDLE-Array for Pufferfish, according to its defined type
      * 
-     * @returns - returns new IDLE-Arrray image-paths
+     * @param {Number} type - the defined type: (1,2,3) represents a specific color for the bubblefish
+     *                         1: green Pufferfish
+     *                         2: pink Pufferfish
+     *                         3: red Pufferfish
+     * @returns - returns new IDLE Array for Img-Cache
      */
-    buildIDLE(){
+    buildPufferIDLE(type){
     return [
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim1.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim2.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim3.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim4.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${this.type}.swim5.png`
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim5.png`
         ]
     }
 
+
     /**
-     * This Function updates the TRANSITION-Arrays image paths, according to the defined type
-     * the defined type: (1,2,3) represents a specific color for the bubblefish
+     * This Function builds the TRANSITION-Array for Pufferfish, according to its defined type
      * 
-     * @returns - returns new TRANSITION-Arrray image-paths
+     * @param {Number} type - the defined type: (1,2,3) represents a specific color for the bubblefish
+     *                         1: green Pufferfish
+     *                         2: pink Pufferfish
+     *                         3: red Pufferfish
+     * @returns - returns new TRANSITION Array for Img-Cache
      */
-    buildTRANSITION(){
+    buildPufferTRANSITION(type){
         return [
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition1.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition2.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition3.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition4.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${this.type}.transition5.png`
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition5.png`
+        ]
+    }
+    
+    /**
+     * This Function builds the ANGRY-Array for Pufferfish, according to its defined type
+     * 
+     * @param {Number} type - the defined type: (1,2,3) represents a specific color for the bubblefish
+     *                         1: green Pufferfish
+     *                         2: pink Pufferfish
+     *                         3: red Pufferfish
+     * @returns - returns new ANGRY Array for Img-Cache
+     */
+    buildPufferANGRY(type){
+        return [
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim1.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim2.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim3.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim4.png`,
+    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim5.png`
         ]
     }
 
-    /**
-     * This Function updates the ANGRY-Arrays image paths, according to the defined type
-     * the defined type: (1,2,3) represents a specific color for the bubblefish
-     * 
-     * @returns - returns new ANGRY-Arrray image-paths
-     */
-    buildANGRY(){
-        return [
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim1.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim2.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim3.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim4.png`,
-    `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${this.type}.bubbleswim5.png`
-        ]
-    }
+
 
     /**
      * This Function updates the pufferfish Animation from IDLE mode to ANGRY mode
