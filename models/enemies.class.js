@@ -7,23 +7,6 @@ randomTurnIntervaL = 3000;
 damage;
 angry = false
 
-/* 
-    constructor(path){
-        super().loadImg(path);
-        this.loadImgCache(this.pufferfish_IDLE);
-        this.loadImgCache(this.pufferfish_TRANSITION);
-        this.loadImgCache(this.pufferfish_ANGRY);
-        this.animateObject(this.pufferfish_IDLE, 100)
-        this.enemyMinionMovement(this.speedX, this.speedY);
-        this.x = Math.floor(Math.random() * 1000) + 200;
-        this.y = Math.floor(Math.random() * 200) + 200;
-        this.width = Math.floor(Math.random() * 50) + 40;
-        /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; 
-        this.height = this.width;
-        this.setHitbox(0, 4.5, 1.1, 1.5)
-    } 
-*/
-    
 
    /**
      * This function reduces the Y-Coordinate and let the Enemy move up 

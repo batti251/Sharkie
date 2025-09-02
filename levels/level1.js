@@ -57,6 +57,7 @@ poison = [
         this.x1 = this.x1Start  + this.multiplicator;
         this.generateBackground();
         this.generateEnemies();
+        
     }
 
     /**
@@ -101,9 +102,10 @@ poison = [
       this.enemyArray = (this.levelLength*this.enemyMultiplicator)
         for (let index = 0; index < this.enemyArray; index++) {
         this.setRandomTypes();
+        this.setRandomPosition();
         this.enemyTemplate = [
-        new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png`,this.randomPufferType),
-        new Jellyfish(`assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,this.randomJellyType),
+        new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png`,this.randomPufferType, this.randomXPosition),
+        new Jellyfish(`assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,this.randomJellyType, this.randomXPosition),
       ];
       this.enemyTemplate.forEach(layer => this.enemies.push(layer))
       }
@@ -117,6 +119,13 @@ poison = [
     setRandomTypes(){
         this.randomJellyType = Math.floor(Math.random()*4)+1;
         this.randomPufferType = Math.floor(Math.random()*3)+1;
+    }
+
+    /**
+     * This function sets a random x-value for collectibles and enemies
+     */
+    setRandomPosition(){
+      this.randomXPosition = Math.floor(Math.random() * this.x);
     }
 
 }

@@ -6,14 +6,15 @@ pufferfish_TRANSITION;
 pufferfish_ANGRY;
 
 
-    constructor(path, type){
+    constructor(path, type, x){
         super().loadImg(path);
         this.type = type;
+        this.x = x
+        
         this.buildPufferfish(this.type);
         this.loadPufferfishImgCache();
         this.animateObject(this.pufferfish_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
-        this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
         this.width = Math.floor(Math.random() * 50) + 40;
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */

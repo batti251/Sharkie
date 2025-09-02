@@ -5,14 +5,14 @@ jellyfish_IDLE;
 speedY = 0.6;
 speedX = 0.25;
 
-    constructor(path, type){
+    constructor(path, type, x){
         super().loadImg(path);
         this.type = type;
+        this.x = x
         this.buildJellyfish(this.type);
         this.loadImgCache(this.jellyfish_IDLE);
         this.animateObject(this.jellyfish_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
-        this.x = Math.floor(Math.random() * 100) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
         this.width = Math.floor(Math.random() * 50) + 60;
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
