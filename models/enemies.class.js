@@ -34,7 +34,9 @@ angry = false
     moveUp(speedY){
         clearInterval(this.resetIntervalY)
         this.resetIntervalY = setInterval(() => {
+            if (this.y > 20) {
             this.y = this.y - speedY;
+            }
         }, 1000 / 60);
     }
 
@@ -47,7 +49,9 @@ angry = false
      moveDown(speedY){
         clearInterval(this.resetIntervalY)
         this.resetIntervalY = setInterval(() => {
+            if (this.y < 400) {
             this.y = this.y + speedY;
+            }
         }, 1000 / 60);
     }
 
