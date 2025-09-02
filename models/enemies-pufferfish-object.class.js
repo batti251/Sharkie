@@ -8,7 +8,7 @@ pufferfish_ANGRY;
 
     constructor(path, type){
         super().loadImg(path);
-        this.type = type
+        this.type = type;
         this.buildPufferfish(this.type);
         this.loadPufferfishImgCache();
         this.animateObject(this.pufferfish_IDLE, 100)

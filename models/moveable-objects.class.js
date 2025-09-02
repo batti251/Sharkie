@@ -266,7 +266,7 @@ hitboxReset = 120
     }
 
     /**
-     * This Function increases Hitbox from character slight
+     * This Function increases Hitbox from character slighty
      * New Hitbox width 140px,  
      * 
      */
