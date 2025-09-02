@@ -14,11 +14,11 @@ coins_IDLE = [
 
 
 
-    constructor(imgPath){
+    constructor(imgPath, x){
         super().loadImg(imgPath);
+        this.x = x
         this.loadImgCache(this.coins_IDLE);
         this.animateObject(this.coins_IDLE, 220);
-        this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
         this.setHitbox(5, 5, 1.5, 1.5);
         

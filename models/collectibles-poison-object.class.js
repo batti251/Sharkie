@@ -15,11 +15,11 @@ poison_IDLE = [
     'assets/img/4. Marcadores/Posión/Animada/8.png'
 ]
 
-    constructor(imgPath){
+    constructor(imgPath, x){
         super().loadImg(imgPath);
+        this.x = x
         this.loadImgCache(this.poison_IDLE);
         this.animateObject(this.poison_IDLE, 220);
-        this.x = Math.floor(Math.random() * 1000) + 200;
         this.y = Math.floor(Math.random() * 200) + 200;
         this.setHitbox(10, 25, 2, 2);
     }
