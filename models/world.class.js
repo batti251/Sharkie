@@ -19,8 +19,23 @@ level = new Level1(1);
     this.enemyDetection();
     this.checkCollisions();
     this.checkCollectiblesCollisions();
+    this.finishedLevel();
   }
 
+  /**
+   * This Function sets the end of the level
+   * 
+   */
+  finishedLevel(){
+    this.levelEnd = this.level.x - 1000
+    setInterval(() => {
+      if (this.character.x == this.levelEnd) {
+        console.log("success");
+        // 
+      }
+    }, 200);
+    
+  }
 
   /**
    * This Function detects collision from the character with the collectibles
