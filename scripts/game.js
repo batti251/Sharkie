@@ -1,13 +1,14 @@
 let world;
+let menu;
 let keyboard = new Keyboard();
-
 /**
  * This function initializes the Canvas-Screen
  * 
  */
 function init() {
     const canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    /* world = new World(canvas, keyboard); */
+    menu = new Menu(canvas)
 }
 
 
