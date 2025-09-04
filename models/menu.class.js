@@ -7,6 +7,7 @@ constructor(canvas) {
 
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     this.draw();
+
 }
 
 
@@ -15,7 +16,6 @@ constructor(canvas) {
       this.addImgObjectToMap(this.background)
       this.addImgObjectToMap(this.button)
       this.imgAnimationLoop();
-      
   } 
 
 
