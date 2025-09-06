@@ -1,20 +1,27 @@
 class Menu{
-background = new menuBackground('assets/background.png');
-button = new Button('assets/img/6.Botones/Start/3.png');
+  background = new menuBackground('assets/background.png');
+  header = new menuObj('assets/sharkie-title.png', 0, -25, 300, 200 ,"title", "center");
+  hero = new menuObj('assets/sharkie-background.png', 0, 200, 400, 200 ,"hero", "center");
+  button = new menuObj('assets/img/6.Botones/Start/3.png', 0, 500, 200, 50, "button", "center");
+  instruction = new menuObj('assets/img/6.Botones/Instructions 2.png', 1200, 500, 500, 300 ,"instruction", "");
 
 
 constructor(canvas) {
-
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     this.draw();
-
+    this.button.isInHitbox()
+    this.button.startGame()
+    
 }
 
 
     draw() {
       this.drawCanvas()
       this.addImgObjectToMap(this.background)
+      this.addImgObjectToMap(this.header)
       this.addImgObjectToMap(this.button)
+      this.addImgObjectToMap(this.instruction)
+      this.addImgObjectToMap(this.hero)
       this.imgAnimationLoop();
   } 
 
@@ -27,11 +34,13 @@ constructor(canvas) {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height); // clears the Canvas on the current frame 
         this.ctx.fillStyle = "black"; //background-color
         this.ctx.fillRect(0, 0, canvas.width, canvas.height); // adds x, y, width and height to the canvas + fillstyle
-    }
+      }
 
 
         addImgObjectToMap(object){
       this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
+      this.ctx.strokeRect(object.x, object.y, object.width, object.height);
+
     }
     imgAnimationLoop(){
     let self = this;
