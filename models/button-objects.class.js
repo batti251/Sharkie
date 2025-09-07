@@ -18,42 +18,49 @@ height ;
         this.centered = centered
         this.x2 = this.x + this.width;
         this.y2 = this.y + this.height;
-       /*  this.startGame(); */
         this.centralObj(width)
         this.getCanvasMousePosition()
     }
 
+    /**
+     * This Function gets the canvas-width depending on its current viewport & calculates the factor for the actual x & y position
+     * 
+     * @returns - an object with the scaled x- & y-factor
+     *            This Factor is needed to multiply it with the mouse.event.client-coordinates
+     */
     getCanvasMousePosition(){
         this.canvasPosition = canvas.getBoundingClientRect()
-        console.log(this.canvasPosition);
         this.scaledX = canvas.width  / this.canvasPosition.width;
         this.scaledY = canvas.height / this.canvasPosition.height;
-        console.log(canvas);
-        console.log(this.scaledX);
-
+        return {x: this.scaledX, y: this.scaledY}
     }
 
     /**
-     * This Function starts the game, when Start-Button was clicked 
+     * This Function starts the game, when Start-Button was clicked successfully
      * 
      */
     startGame(){
-    canvas.addEventListener("mousedown",(event) => {
-        if (this.isInHitbox(event.x , event.y) && this.type == "button"){
-            world = new World(canvas, keyboard);
+        this.scaledMouseEvent = this.getCanvasMousePosition();
+        canvas.addEventListener("mousedown",(event) => {
+            this.mouseX = this.scaledMouseEvent.x * event.clientX;
+            this.mouseY = this.scaledMouseEvent.y * event.clientY;
+            if (this.isInHitbox(this.mouseX , this.mouseY)){
+                world = new World(canvas, keyboard);
+            }
+        })
+   }
 
-    console.log("start"
 
-);
+   /**
+    * This Function formats the addressed object in central position to the canvas
+    * 
+    * @param {*} width - referenced object - width
+    */
+    centralObj(width){
+        if (this.centered == "center") {
+            this.x = (canvas.width - width) / 2
         }
-    })
-   }
-
-   centralObj(width){
-    if (this.centered == "center") {
-        this.x = (canvas.width - width) / 2
-    } else return
-   }
+    }
 
        /**
      * This Function sets indication, wether a menu-object was hitted within its defined Hitbox
@@ -63,6 +70,14 @@ height ;
      * @returns - returns true or false -state for startGame-indication
      */
     isInHitbox(mouseX, mouseY){
+        console.log(mouseX);
+        console.log(mouseY);
+        console.log(this.x);
+        console.log(this.x2);
+        console.log(this.y);
+        console.log(this.y2);
+        console.log(mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2);
+        
         
         return mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
    }
