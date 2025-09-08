@@ -123,4 +123,27 @@ sharkie_DEAD_SURFACE = [
     }
 
 
+        /**
+     * This Function calls the character swim-Animation
+     * 
+     */
+    characterSwims(){
+        this.animateObjectSprite(this.sharkie_SWIM, 100);
+    }
+
+    /**
+     * This Function calls the character sleep-Animation 
+     * The Timer is set to 15 seconds unttil it starts the Animation
+     * 
+     */
+    characterFallAsleep(){
+        clearTimeout(this.fallAsleep)
+         this.animateObjectSprite(this.sharkie_IDLE, 100);
+                this.fallAsleep =  setTimeout(() => {
+                    this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
+                    setTimeout(() => {
+                         this.animateObjectSprite(this.sharkie_SLEEPING, 300);
+                    }, 700);
+                }, 15000);
+    }
 }

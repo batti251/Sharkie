@@ -53,29 +53,7 @@ hitboxReset = 120
         }, 1000 / 60);
 }
 
-    /**
-     * This Function calls the character swim-Animation
-     * 
-     */
-    characterSwims(){
-        this.animateObjectSprite(this.sharkie_SWIM, 100);
-    }
 
-    /**
-     * This Function calls the character sleep-Animation 
-     * The Timer is set to 15 seconds unttil it starts the Animation
-     * 
-     */
-    characterFallAsleep(){
-        clearTimeout(this.fallAsleep)
-         this.animateObjectSprite(this.sharkie_IDLE, 100);
-                this.fallAsleep =  setTimeout(() => {
-                    this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
-                    setTimeout(() => {
-                         this.animateObjectSprite(this.sharkie_SLEEPING, 300);
-                    }, 700);
-                }, 15000);
-    }
 
     /**
      * This Function updates the displayed image in each iteration
@@ -124,6 +102,7 @@ hitboxReset = 120
     
     /**
      * This Function calls Enemies (Minions) to move
+     * If the Enemy gets angry-state the Movement is set to left, to try to hit the character
      * The Turning-direction is set randomly, until character detection
      * The Y-Coordinate is set randomly to vary the height-movement
      * 
@@ -131,50 +110,20 @@ hitboxReset = 120
      * @param {Number} speedY - px-value for Y-Coordinate 
      */
     enemyMinionMovement(speedX, speedY){
-        this.randomTurn(speedX)
-        this.setRandomCoordinateY(speedY)
-        /* this.enemyDetectionAnimation() */
+        clearInterval(this.interval)
+        this.interval = setInterval(() => {
+            if (this.angry) {
+                this.enemyLeft(2.5)
+        } 
+        }, 100);
+            this.randomTurn(speedX)
+            this.setRandomCoordinateY(speedY) 
     }
 
     isDetected(object){
         return this.x + this.hitboxX + this.hitboxWidth - object.x > -200 
     }
 
-
-    /**
-     * This Function wether let the Enemies move left, or right, depending on coinToss-Function
-     * The Function is called every 2 seconds 
-     * 
-     * @param {*} speedX - px-value for X-Coordinate 
-     */
-    randomTurn(speedX){
-        setInterval(() => {
-        this.coinToss = Math.random() * 1;
-        if (this.coinToss > 0.5) {
-                this.enemyLeft(speedX);
-                return
-        } else {
-            this.enemyRight(speedX)
-            return
-        }}, 2000);
-    }
-
-    /**
-     * This Function let the assigned Object move a random height up and down 
-     * 
-     * @param {Number} speedY - px-value for Y-Coordinate
-     */
-    setRandomCoordinateY(speedY){
-         setInterval(() => {
-            setTimeout(() => {
-                this.moveDown(speedY);
-            }, Math.floor(Math.random() * 300 ) + 100);
-            
-            setTimeout(() => {
-                this.moveUp(speedY);
-            }, Math.floor(Math.random() * 300 ) + 100);
-        }, this.randomHeightInterval);
-    }
 
     /**
      * This function reduces the Y-Coordinate and let the Object move up 

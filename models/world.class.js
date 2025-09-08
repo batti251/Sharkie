@@ -20,6 +20,7 @@ level = new Level(3);
     this.checkCollisions();
     this.checkCollectiblesCollisions();
     this.finishedLevel();
+    this.enemyJellyfishDetection();
   }
 
   /**
@@ -76,6 +77,18 @@ level = new Level(3);
         }, 100);
     }
 
+    enemyJellyfishDetection(){
+      clearInterval(this.detectionJellyfish)
+      this.detectionJellyfish = setInterval(() => {
+        this.level.enemies.forEach(enemie => {
+          if(this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Jellyfish){
+            enemie.angry = true;
+            console.log(enemie);
+            
+         } 
+          });
+        }, 100);
+    }
 
   /**
    * This Function indicates the Collision from the character with an Object
@@ -102,7 +115,6 @@ level = new Level(3);
       });
     }, 200);
   }
-
 
 
   setWorld(){

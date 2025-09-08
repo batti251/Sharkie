@@ -8,6 +8,44 @@ damage;
 angry = false
 
 
+
+
+
+    /**
+     * This Function wether let the Enemies move left, or right, depending on coinToss-Function
+     * The Function is called every 2 seconds 
+     * 
+     * @param {*} speedX - px-value for X-Coordinate 
+     */
+    randomTurn(speedX){
+        setInterval(() => {            
+        this.coinToss = Math.random() * 1;
+        if (this.coinToss > 0.5) {
+                this.enemyLeft(speedX);
+                return
+        } else {
+            this.enemyRight(speedX)
+            return
+        }}, 2000);
+    }
+
+    /**
+     * This Function let the assigned Object move a random height up and down 
+     * 
+     * @param {Number} speedY - px-value for Y-Coordinate
+     */
+    setRandomCoordinateY(speedY){
+         setInterval(() => {
+            setTimeout(() => {
+                this.moveDown(speedY);
+            }, Math.floor(Math.random() * 300 ) + 100);
+            
+            setTimeout(() => {
+                this.moveUp(speedY);
+            }, Math.floor(Math.random() * 300 ) + 100);
+        }, this.randomHeightInterval);
+    }
+
    /**
      * This function reduces the Y-Coordinate and let the Enemy move up 
      * The Movement is set to 60 FPS
