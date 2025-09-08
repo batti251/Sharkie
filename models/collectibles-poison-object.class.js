@@ -1,7 +1,7 @@
 class POISONS extends MoveableObjects{
 currentImg = 0;
-width = 40;
-height = 55;
+width = 80;
+height = 95;
 
 
 poison_IDLE = [

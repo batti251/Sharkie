@@ -16,7 +16,7 @@ lastIsMoving ;
 fallAsleep;
 hitboxWidth;
 hitboxHeight;
-hitboxSlap = 140;
+hitboxSlap = 240;
 hitboxReset = 120
 
 
@@ -184,7 +184,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     moveUp(speed, key){
-        if (key?.UP == true && this.y > -60) {
+        if (key?.UP == true && this.y > -100) {
             this.y = this.y - speed;
     }}
     /**
@@ -195,7 +195,7 @@ hitboxReset = 120
      * @param {Object} key - Object with the listened Keyboard Keys
      */
      moveDown(speed, key){
-        if (key?.DOWN == true && this.y < 300) {
+        if (key?.DOWN == true && this.y < 680) {
             this.y = this.y + speed;
             } 
     }
@@ -245,7 +245,7 @@ hitboxReset = 120
                 this.expandHitbox()
                 this.stallCharacterAnimationBy(720)
                 setTimeout(() => {
-                this.hitboxWidth = 120
+                this.hitboxWidth = 200
                 }, 600);
                 }   
     }

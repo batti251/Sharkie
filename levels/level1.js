@@ -1,5 +1,4 @@
-class Level1 {
-
+class Level {
 levelLength;
 xStart = -300;
 x1Start = 479;

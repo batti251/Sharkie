@@ -10,7 +10,7 @@ constructor(canvas) {
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     this.draw();
     this.button.startGame()
-    
+    this.button.isInHitbox();
 }
 
 

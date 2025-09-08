@@ -19,28 +19,17 @@ height ;
         this.x2 = this.x + this.width;
         this.y2 = this.y + this.height;
         this.centralObj(width)
-        this.getCanvasMousePosition()
+        this.getCanvasPosition();
     }
 
-    /**
-     * This Function gets the canvas-width depending on its current viewport & calculates the factor for the actual x & y position
-     * 
-     * @returns - an object with the scaled x- & y-factor
-     *            This Factor is needed to multiply it with the mouse.event.client-coordinates
-     */
-    getCanvasMousePosition(){
-        this.canvasPosition = canvas.getBoundingClientRect()
-        this.scaledX = canvas.width  / this.canvasPosition.width;
-        this.scaledY = canvas.height / this.canvasPosition.height;
-        return {x: this.scaledX, y: this.scaledY}
-    }
+
 
     /**
      * This Function starts the game, when Start-Button was clicked successfully
      * 
      */
     startGame(){
-        this.scaledMouseEvent = this.getCanvasMousePosition();
+        this.scaledMouseEvent = this.getCanvasPosition();
         canvas.addEventListener("mousedown",(event) => {
             this.mouseX = this.scaledMouseEvent.x * event.clientX;
             this.mouseY = this.scaledMouseEvent.y * event.clientY;
@@ -70,15 +59,6 @@ height ;
      * @returns - returns true or false -state for startGame-indication
      */
     isInHitbox(mouseX, mouseY){
-        console.log(mouseX);
-        console.log(mouseY);
-        console.log(this.x);
-        console.log(this.x2);
-        console.log(this.y);
-        console.log(this.y2);
-        console.log(mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2);
-        
-        
         return mouseX > this.x && mouseX < this.x2 && mouseY > this.y && mouseY < this.y2;
    }
 

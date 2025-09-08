@@ -1,18 +1,16 @@
 class Character extends MoveableObjects{
 currentImg = 0
+width = 400;
+height = 400;
 world;
 speedX = 4;
-speedY = 3;
+speedY = 4;
 maxLife = 1000;
 life = this.maxLife;
 canCollect = true;
 hitted = false;
 slapCooldown = false
 slapCooldownTime = 1500;
-
-
-// this.ctx.strokeRect(object.x+40, object.y+90, object.hitboxWidth+20, object.hitboxHeight-30);
-
 
 
 sharkie_IDLE = [
@@ -109,8 +107,8 @@ sharkie_DEAD_SURFACE = [
 
     constructor(path, x, y){
         super().loadImg(path);
-        this.x = x;
-        this.y = y;
+        this.x = x 
+        this.y = y
         this.loadImgCache(this.sharkie_IDLE);
         this.loadImgCache(this.sharkie_Long_IDLE);
         this.loadImgCache(this.sharkie_SLEEPING);
@@ -120,7 +118,7 @@ sharkie_DEAD_SURFACE = [
         this.loadImgCache(this.sharkie_DEAD_SURFACE);
         this.loadImgCache(this.sharkie_FIN_SLAP);
         this.animateObject(this.sharkie_IDLE, 100);
-        this.setHitbox(40, 95, 1.66, 3.3);
+        this.setHitbox(100, 200, 1.9, 4);
 
     }
 
