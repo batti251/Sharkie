@@ -33,7 +33,7 @@ height ;
         canvas.addEventListener("mousedown",(event) => {
             this.mouseX = this.scaledMouseEvent.x * event.clientX;
             this.mouseY = this.scaledMouseEvent.y * event.clientY;
-            if (this.isInHitbox(this.mouseX , this.mouseY)){
+            if (this.isInHitbox(this.mouseX , this.mouseY) && !world){
                 world = new World(canvas, keyboard);
             }
         })
