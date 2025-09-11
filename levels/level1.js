@@ -155,7 +155,7 @@ poison = [];
      * This function sets a random x-value for collectibles and enemies
      */
     setRandomPosition(){
-      this.randomXPosition = Math.floor(Math.random() * this.x);
+      this.randomXPosition = Math.floor(Math.random() * this.x) + 600;
     }
 
 }
