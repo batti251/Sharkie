@@ -96,10 +96,13 @@ hitboxReset = 120
         this.moveDown(this.speedY,key);
         this.moveRight(this.speedX,key);
         this.moveLeft(this.speedX,key);
-        this.finSlap(key)
+        this.finSlap(key);
+        this.negatefinSlapX();
         this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
+
     }
-    
+
+
     /**
      * This Function calls Enemies (Minions) to move
      * If the Enemy gets angry-state the Movement is set to left, to try to hit the character
@@ -120,8 +123,15 @@ hitboxReset = 120
             this.setRandomCoordinateY(speedY) 
     }
 
+
+    /**
+     * This Function triggers the enemies character detection 
+     * 
+     * @param {Object} object - The dedicated Object: Enemies
+     * @returns returns true, when charactter and object - X coordinate is under 600px
+     */
     isDetected(object){
-        return this.x + this.hitboxX + this.hitboxWidth - object.x > -200 
+        return this.x + this.hitboxX + this.hitboxWidth - object.x > -600 
     }
 
 
@@ -179,51 +189,6 @@ hitboxReset = 120
         } 
     }
 
-    /**
-     * This Function let the character slap.
-     * During slap-animation the character cannot collect collectibles
-     * 
-     * @param {Object} key - Object with the listened Keyboard Keys
-     */
-    finSlap(key){
-            if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
-                this.slapCooldown = true
-                this.isSlapping = true
-                this.canCollect = false
-                this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
-                this.expandHitbox()
-                this.stallCharacterAnimationBy(720)
-                setTimeout(() => {
-                this.hitboxWidth = 200
-                }, 600);
-                }   
-    }
-    
-    /**
-     * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
-     * It also works as Cooldown for collection and key.SPACE-listener
-     * 
-     * @param {Number} miliseconds - Timer, when Function should be called 
-     */
-    stallCharacterAnimationBy(miliseconds){
-        setTimeout(() => {
-          this.applyCharacterMovement();
-          this.isSlapping = false
-          this.canCollect = true
-          this.slapCooldown = false
-        }, miliseconds);
-    }
-
-    /**
-     * This Function increases Hitbox from character slighty
-     * New Hitbox width 140px,  
-     * 
-     */
-    expandHitbox(){
-        setTimeout(() => {
-          this.hitboxWidth = this.hitboxSlap
-                    }, 400);
-    }
 
 
     /**
@@ -242,10 +207,10 @@ hitboxReset = 120
     }
 
     /**
-     * This Function checks, if the character is colliding with a dedicated Object
+     * This Function checks, if the characters Hitbox is colliding with a dedicated Object
      * 
      * 
-     * @param {Object} mo - The dedicated Object: Enemies
+     * @param {Object} object - The dedicated Object: Enemies
      * @returns - returns true, to indicate a Collision, returns false if no Collision is detected
      */
     isInsideBorder(object){
@@ -254,6 +219,34 @@ hitboxReset = 120
         this.y + this.hitboxY + this.hitboxHeight > object.y &&
         this.y + this.hitboxY < object.y + object.hitboxHeight;
     }
+
+
+        
+    /**
+     * This Function negates the finSlapX-coordinate to have a proper detection if the character swims to the left, to hit an enemy
+     * 
+     */
+    negatefinSlapX(){
+        if (this.mirrorImage) {
+            this.finSlapX = this.hitboxX - this.finSlapHitboxWidth; 
+        } else {
+            this.finSlapX = this.hitboxX + this.hitboxWidth;
+        }
+    }
+
+    /**
+     * This Function checks, if the characters finslap-Hitbox is colliding with the objects hitbox
+     * 
+     * @param {Object} object - The dedicated Object: Enemies
+     * @returns - returns true, to indicate a Collision, returns false if no Collision is detected
+     */
+    isInsideSlapBorder(object){ 
+        return this.x + this.finSlapX + this.finSlapHitboxWidth > object.x && 
+        this.x + this.finSlapX < object.x + object.hitboxWidth && 
+        this.y + this.hitboxY + this.hitboxHeight > object.y && 
+        this.y + this.hitboxY < object.y + object.hitboxHeight; 
+    }
+
 
  
     /**

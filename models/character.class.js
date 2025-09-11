@@ -12,7 +12,6 @@ hitted = false;
 slapCooldown = false
 slapCooldownTime = 1500;
 
-
 sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
@@ -146,4 +145,59 @@ sharkie_DEAD_SURFACE = [
                     }, 700);
                 }, 15000);
     }
+
+
+
+        /**
+     * This Function let the character slap.
+     * During slap-animation the character cannot collect collectibles
+     * 
+     * @param {Object} key - Object with the listened Keyboard Keys
+     */
+    finSlap(key){
+            if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
+                this.slapCooldown = true
+                this.isSlapping = true
+                this.canCollect = false
+                this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
+                this.expandHitbox()
+                this.stallCharacterAnimationBy(720)
+                setTimeout(() => {
+                this.hitboxWidth = 210
+                }, 600);
+                }   
+    }
+    
+    /**
+     * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
+     * It also works as Cooldown for collection and key.SPACE-listener
+     * 
+     * @param {Number} miliseconds - Timer, when Function should be called 
+     */
+    stallCharacterAnimationBy(miliseconds){
+        setTimeout(() => {
+          this.applyCharacterMovement();
+          this.isSlapping = false
+          this.canCollect = true
+          this.slapCooldown = false
+        }, miliseconds);
+    }
+
+    /**
+     * This Function increases Hitbox from character slighty
+     * New Hitbox width 140px,  
+     * 
+     */
+    expandHitbox(){
+        this.oldHitBoxWidth = this.hitboxWidth
+        setTimeout(() => {
+          this.hitboxWidth = this.hitboxSlap
+this.finSlapX = this.oldHitBoxWidth + this.hitboxX
+this.finSlapHitboxWidth = this.hitboxSlap - this.oldHitBoxWidth
+                    }, 400);
+    }
+
+
+
+
 }

@@ -62,7 +62,8 @@ level = new Level(5);
 
   
     /**
-     * This Function let the enemies trigger the transformation Animation
+     * This Function let the Pufferfishes trigger the transformation Animation and get into angry-state
+     * They will move towards the character
      * 
      */
     enemyDetection(){
@@ -70,21 +71,24 @@ level = new Level(5);
        this.detection = setInterval(() => {
             this.level.enemies.forEach(enemie => {
             if (this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Pufferfish){
-              enemie.enemyDetectionAnimation(enemie);
+              enemie?.enemyDetectionAnimation(enemie);
               enemie.angry = true;
             } 
           });
         }, 100);
     }
 
+    /**
+     * This Function let the Jellyfishes trigger the angry-state
+     * They will move towards the character
+     * 
+     */
     enemyJellyfishDetection(){
       clearInterval(this.detectionJellyfish)
       this.detectionJellyfish = setInterval(() => {
         this.level.enemies.forEach(enemie => {
           if(this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Jellyfish){
             enemie.angry = true;
-            console.log(enemie);
-            
          } 
           });
         }, 100);
@@ -100,7 +104,7 @@ level = new Level(5);
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
-        if (this.character.isInsideBorder(object) && this.character.isSlapping && !this.character.hitted) {
+        if (this.character.isInsideSlapBorder(object) && this.character.isSlapping && !this.character.hitted) {
                   object.x = -1000
               }  
         if(this.character.isInsideBorder(object) && this.character.life > 0){
@@ -167,7 +171,6 @@ level = new Level(5);
             this.ctx.save()
             this.ctx.translate(object.width, 0);
             this.ctx.scale(-1, 1);
-
             object.x = object.x * -1;
       }
             this.ctx.lineWidth = 2;
