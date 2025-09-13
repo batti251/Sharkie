@@ -131,21 +131,38 @@ level = new Level(5);
      */
     draw() {
       this.drawCanvas()
-      this.ctx.translate(this.cameraX, 0)
-      this.addImgObjectsToMap(this.level.background)
-      this.addImgObjectsToMap(this.level.coins);
-      this.addImgObjectsToMap(this.level.poison);
-      this.addImgObjectsToMap(this.level.enemies)
-      this.addImgObjectToMap(this.character);
+      this.ctx.translate(this.cameraX, 0) 
+      this.drawObjects();
+      this.ctx.translate(-this.cameraX, 0) 
+      this.drawHUD();
       this.imgAnimationLoop();
-      this.ctx.translate(-this.cameraX, 0)
-
-      this.addImgObjectToMap(this.healthbar);
-      this.addImgObjectToMap(this.coinbar);
-      this.addImgObjectToMap(this.poisonbar);
-
   } 
 
+
+    /**
+     * This function draws all Objects, that move relative to the camera
+     *  => Background, collectibles, enemies, character
+     * 
+     */
+     drawObjects(){
+        this.addImgObjectsToMap(this.level.background)
+        this.addImgObjectsToMap(this.level.coins);
+        this.addImgObjectsToMap(this.level.poison);
+        this.addImgObjectsToMap(this.level.enemies)
+        this.addImgObjectToMap(this.character);
+    }
+
+
+    /**
+     * This Function draws all Objects, that don't move relative to the camera
+     *  => Health-, Coin-, Poisonbar
+     * 
+     */
+     drawHUD(){
+        this.addImgObjectToMap(this.healthbar);
+        this.addImgObjectToMap(this.coinbar);
+        this.addImgObjectToMap(this.poisonbar);
+    }
 
     /**
      * This Function refreshes the Canvas on each frame

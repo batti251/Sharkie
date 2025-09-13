@@ -122,7 +122,7 @@ sharkie_DEAD_SURFACE = [
     }
 
 
-        /**
+    /**
      * This Function calls the character swim-Animation
      * 
      */
@@ -132,7 +132,7 @@ sharkie_DEAD_SURFACE = [
 
     /**
      * This Function calls the character sleep-Animation 
-     * The Timer is set to 15 seconds unttil it starts the Animation
+     * The Timer is set to 15 seconds until it starts the Animation
      * 
      */
     characterFallAsleep(){
@@ -148,8 +148,8 @@ sharkie_DEAD_SURFACE = [
 
 
 
-        /**
-     * This Function let the character slap.
+    /**
+     * This Function let the character attack with his fin.
      * During slap-animation the character cannot collect collectibles
      * 
      * @param {Object} key - Object with the listened Keyboard Keys
@@ -191,9 +191,9 @@ sharkie_DEAD_SURFACE = [
     expandHitbox(){
         this.oldHitBoxWidth = this.hitboxWidth
         setTimeout(() => {
-          this.hitboxWidth = this.hitboxSlap
-this.finSlapX = this.oldHitBoxWidth + this.hitboxX
-this.finSlapHitboxWidth = this.hitboxSlap - this.oldHitBoxWidth
+            this.hitboxWidth = this.hitboxSlap
+            this.finSlapX = this.oldHitBoxWidth + this.hitboxX
+            this.finSlapHitboxWidth = this.hitboxSlap - this.oldHitBoxWidth
                     }, 400);
     }
 
