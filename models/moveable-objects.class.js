@@ -45,7 +45,7 @@ class MoveableObjects extends GameObjects {
     clearInterval(this.characterMovementInterval);
     this.characterMovementInterval = setInterval(() => {
       this.moveCharacter(this.world.keyboard);
-      if (this.isMoving !== this.lastIsMoving && !this.isSlapping) {
+      if (this.isMoving !== this.lastIsMoving && !this.isSlapping && !this.isShooting) {
         this.lastIsMoving = this.isMoving;
         this.applyCharacterMovement();
       }
@@ -77,7 +77,7 @@ class MoveableObjects extends GameObjects {
    * @param {Array} sprites -
    */
   resetCurrentImg(sprites) {
-    if (this.lastSprite !== sprites && this.isSlapping) {
+    if (this.lastSprite !== sprites && this.isSlapping || this.isShooting) {
       this.currentImg = 0;
     }
     this.lastSprite = sprites;
@@ -95,6 +95,7 @@ class MoveableObjects extends GameObjects {
     this.moveLeft(this.speedX, key);
     this.finSlap(key);
     this.negatefinSlapX();
+    this.shootBubble(key);
     this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
   }
 

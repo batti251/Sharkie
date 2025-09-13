@@ -34,7 +34,9 @@ document.addEventListener("keydown",(event) => {
     case " ":
       keyboard.SPACE = true;
       break;
-
+    case "q":
+      keyboard.Q = true;
+      break;
     default:
       break;
   }
@@ -62,7 +64,9 @@ document.addEventListener("keyup", (event) => {
     case " ":
       keyboard.SPACE = false;
       break;
-
+    case "q":
+      keyboard.Q = false;
+      break;
     default:
       break;
   }

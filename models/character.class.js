@@ -11,7 +11,7 @@ canCollect = true;
 hitted = false;
 slapCooldown = false
 slapCooldownTime = 1500;
-
+shotBubble = false
 sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
@@ -77,6 +77,17 @@ sharkie_FIN_SLAP = [
     'assets/img/1.Sharkie/4.Attack/Fin slap/8.png'
 ]
 
+sharkie_Bubble_TRAP = [
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+    'assets/img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+]
+
 sharkie_POISENED = [
     'assets/img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
     'assets/img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -116,6 +127,7 @@ sharkie_DEAD_SURFACE = [
         this.loadImgCache(this.sharkie_DEAD);
         this.loadImgCache(this.sharkie_DEAD_SURFACE);
         this.loadImgCache(this.sharkie_FIN_SLAP);
+        this.loadImgCache(this.sharkie_Bubble_TRAP);
         this.animateObject(this.sharkie_IDLE, 100);
         this.setHitbox(100, 200, 1.9, 4);
 
@@ -168,6 +180,43 @@ sharkie_DEAD_SURFACE = [
                 }   
     }
     
+    shootBubble(key){
+
+        if (key?.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0) {
+            console.log("shoot");
+            this.isShooting = true
+            this.canCollect = false
+            this.animateObjectSprite(this.sharkie_Bubble_TRAP, 80)
+            this.createBubble(world.character)
+            this.shootCoolDown(700)
+            console.log();
+        }
+
+
+    }
+
+    createBubble(character){
+       this.world.bubble = new Bubble('assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png', character)
+        console.log(this);
+        this.shotBubble = true
+        this.decreasePoisonCount()
+
+    }
+
+
+    decreasePoisonCount(){
+        this.world.poisonbar.poisonCount.shift(0)
+    }
+
+    shootCoolDown(miliseconds){
+        setTimeout(() => {
+          this.applyCharacterMovement();
+          this.isShooting = false
+          this.canCollect = true
+        /*   this.shotBubble = false */
+        }, miliseconds);
+    }
+
     /**
      * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
      * It also works as Cooldown for collection and key.SPACE-listener

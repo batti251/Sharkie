@@ -11,6 +11,7 @@ level = new Level(5);
 
 
 
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     this.draw();
@@ -21,6 +22,16 @@ level = new Level(5);
     this.checkCollectiblesCollisions();
     this.finishedLevel();
     this.enemyJellyfishDetection();
+    this.shotBubble()
+  }
+
+  shotBubble(){
+    this.bubbleInterval = setInterval(() => {
+      if (this.character.shotBubble) {
+        return true
+      } else false
+    }, 100);
+    
   }
 
   /**
@@ -133,6 +144,9 @@ level = new Level(5);
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0) 
       this.drawObjects();
+      if (this.character.shotBubble) {
+      this.addImgObjectToMap(this.bubble)
+      }
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.imgAnimationLoop();

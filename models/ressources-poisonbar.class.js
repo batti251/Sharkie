@@ -30,7 +30,6 @@ poisonCache = [
         poison.x = -1000;
         poison.y = -1000;
         this.updatePoisonbar()
-        
     }
 
     /**

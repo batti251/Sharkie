@@ -23,7 +23,6 @@ enemies = [];
 coins = [];
 poison = [];
 
-
     constructor(level){
         this.levelLength = level;
         this.x = this.xStart + this.multiplicator
