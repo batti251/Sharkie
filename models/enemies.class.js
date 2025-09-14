@@ -18,7 +18,7 @@ angry = false
      * @param {*} speedX - px-value for X-Coordinate 
      */
     randomTurn(speedX){
-        setInterval(() => {            
+        this.randomTurnInterval = setInterval(() => {            
         this.coinToss = Math.random() * 1;
         if (this.coinToss > 0.5) {
                 this.enemyLeft(speedX);
@@ -35,7 +35,7 @@ angry = false
      * @param {Number} speedY - px-value for Y-Coordinate
      */
     setRandomCoordinateY(speedY){
-         setInterval(() => {
+         this.randomCoordinateYInterval = setInterval(() => {
             setTimeout(() => {
                 this.moveDown(speedY);
             }, Math.floor(Math.random() * 300 ) + 100);
@@ -56,7 +56,7 @@ angry = false
         clearInterval(this.resetIntervalY)
         this.resetIntervalY = setInterval(() => {
             if (this.y > 20) {
-            this.y = this.y - speedY;
+            this.y -= speedY;
             }
         }, 1000 / 60);
     }
@@ -98,29 +98,5 @@ angry = false
         this.enemyMoveLeft(speedX)
     }
     
-    /**
-     * This function reduces the X-Coordinate and let the Enemy move left 
-     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
-     * The Movement is set to 60 FPS
-     * @param {*} speedX - The px-value 
-     */
-    enemyMoveLeft(speedX){
-        this.resetIntervalX = setInterval(() => {
-            this.x = this.x - speedX;
-             this.mirrorImage = false
-        }, 1000 / 60);
-    }
 
-    /**
-     * This function increases the X-Coordinate and let the Enemy move right 
-     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
-     * The Movement is set to 60 FPS
-     * @param {*} speedX - The px-value 
-     */
-    enemyMoveRight(speedX){
-         this.resetIntervalX = setInterval(() => {
-            this.x = this.x + speedX;
-            this.mirrorImage = true
-        }, 1000 / 60);
-    }
 }

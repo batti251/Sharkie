@@ -323,11 +323,48 @@ class MoveableObjects extends GameObjects {
     this.sharkieDies = setTimeout(() => {
       this.animateObjectSprite(this.sharkie_DEAD, 100);
       setTimeout(() => {
-        this.animateObjectSprite(this.sharkie_DEAD_SURFACE, 200);
-        setInterval(() => {
-          this.y = this.y - 5;
-        }, 100);
+        this.animateObjectSprite(this.sharkie_DEAD_SURFACE, 300);
+        this.dead = true;
       }, 200);
+        this.deadToSurface(1)
+
     }, 100);
   }
+
+
+     deadToSurface(speedY){
+        this.deadSurfaceInterval = setInterval(() => {
+            if (this.dead) {
+            this.y -= speedY;
+            }
+        }, 1000 / 60);
+    }
+
+      /**
+     * This function reduces the X-Coordinate and let the Enemy move left 
+     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
+     * The Movement is set to 60 FPS
+     * @param {*} speedX - The px-value 
+     */
+    enemyMoveLeft(speedX){
+        this.resetIntervalX = setInterval(() => {
+            this.x -= speedX;
+             this.mirrorImage = false
+        }, 1000 / 60);
+    }
+
+    /**
+     * This function increases the X-Coordinate and let the Enemy move right 
+     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
+     * The Movement is set to 60 FPS
+     * @param {*} speedX - The px-value 
+     */
+    enemyMoveRight(speedX){
+         this.resetIntervalX = setInterval(() => {
+            this.x += speedX;
+            this.mirrorImage = true
+        }, 1000 / 60);
+    }
+
+
 }
