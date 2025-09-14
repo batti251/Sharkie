@@ -23,7 +23,6 @@ level = new Level(5);
     this.finishedLevel();
     this.enemyJellyfishDetection();
     this.findNearestBubbleTarget();
-    /* this.bubbleDelete(); */
   }
 
 
@@ -31,6 +30,8 @@ level = new Level(5);
 
 
 findNearestBubbleTarget() {
+  console.log(this.poisonbar.poisonCount);
+  
   clearInterval(this.targetInterval);
   this.targetInterval = setInterval(() => {
     if (!this.bubble) return;
@@ -90,6 +91,7 @@ collideBubbleWithTarget(){
       this.bubble.x = this.nearestObject.x;
       this.bubble.y = this.nearestObject.y;
       delete this.bubble 
+        console.log(this.poisonbar.poisonCount);
 }
 
 

@@ -12,6 +12,8 @@ hitted = false;
 slapCooldown = false
 slapCooldownTime = 1500;
 shotBubble = false
+keyDetection = false;
+
 sharkie_IDLE = [
     'assets/img/1.Sharkie/1.IDLE/1.png',
     'assets/img/1.Sharkie/1.IDLE/2.png',
@@ -167,7 +169,8 @@ sharkie_DEAD_SURFACE = [
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-            if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
+            if (key.SPACE === true && !this.slapCooldown && !this.hitted) {
+                this.keyDetection = true
                 this.slapCooldown = true
                 this.isSlapping = true
                 this.canCollect = false
@@ -177,22 +180,25 @@ sharkie_DEAD_SURFACE = [
                 setTimeout(() => {
                 this.hitboxWidth = 210
                 }, 600);
-                }   
+                }  
+                 if (!key.SPACE) {
+            this.keyDetection = false
+        } 
     }
     
     shootBubble(key){
-
-        if (key?.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0) {
+        if (key.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0 && !this.keyDetection) {
             console.log("shoot");
+            this.keyDetection = true
             this.isShooting = true
             this.canCollect = false
             this.animateObjectSprite(this.sharkie_Bubble_TRAP, 80)
             this.createBubble(world.character)
             this.shootCoolDown(700)
-            console.log();
         }
-
-
+        if (!key.Q) {
+            this.keyDetection = false
+        }
     }
 
     createBubble(character){
@@ -206,7 +212,11 @@ sharkie_DEAD_SURFACE = [
     }
 
     decreasePoisonCount(){
-        this.world.poisonbar.poisonCount.shift(0)
+        console.log(this.world.poisonbar.poisonCount);
+        
+        this.world.poisonbar.poisonCount.shift()
+        console.log(this.world.poisonbar.poisonCount);
+
     }
 
     shootCoolDown(miliseconds){
