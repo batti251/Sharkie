@@ -22,17 +22,75 @@ level = new Level(5);
     this.checkCollectiblesCollisions();
     this.finishedLevel();
     this.enemyJellyfishDetection();
-    this.shotBubble()
+    this.findNearestBubbleTarget()
   }
 
-  shotBubble(){
-    this.bubbleInterval = setInterval(() => {
-      if (this.character.shotBubble) {
-        return true
-      } else false
-    }, 100);
-    
+
+
+
+
+findNearestBubbleTarget() {
+  clearInterval(this.targetInterval);
+  this.targetInterval = setInterval(() => {
+    if (!this.bubble) return;
+    this.shortestDistance = Infinity;
+    this.level.enemies.forEach(object => {
+      this.updateNearestTarget(object)
+    });
+    this.updateBubbleTargeting()
+  }, 30);
+  
+}
+
+  updateNearestTarget(object){
+      if (object instanceof Jellyfish) {
+        this.nearestTargetX = object.x - this.bubble.x;
+        this.nearestTargetY = object.y - this.bubble.y;
+        this.nearestTargetXY = Math.sqrt(this.nearestTargetX * this.nearestTargetX + this.nearestTargetY * this.nearestTargetY);
+        if (this.nearestTargetXY < this.shortestDistance) {
+          this.shortestDistance = this.nearestTargetXY;
+          this.nearestObject = object;
+        }
+      }
   }
+
+
+
+
+updateBubbleTargeting(){
+     this.calculateBubbleDirection(this.nearestObject);
+      if (this.bubble.x  > this.nearestObject.x + this.hitRadius) {
+        return 
+      }
+      else if (this.distance > this.hitRadius) {
+       this.moveBubbleToTarget();
+      } else {
+        this.collideBubbleWithTarget(this.nearestObject);
+        clearInterval(this.targetInterval);
+      }
+}
+
+calculateBubbleDirection(){
+      this.dx = this.nearestObject.x - this.bubble.x;
+      this.dy = this.nearestObject.y - this.bubble.y;
+      this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+      this.hitRadius = 40;
+      this.speed = 8;
+}
+
+
+moveBubbleToTarget(){
+      let moveDist = Math.min(this.speed, this.distance);
+      this.bubble.x += (this.dx / this.distance) * moveDist;
+      this.bubble.y += (this.dy / this.distance) * moveDist;
+}
+
+collideBubbleWithTarget(){
+      this.nearestObject.dead = true
+      this.nearestObject.jellyfishDeadAnimation()
+      this.bubble.x = this.nearestObject.x;
+      this.bubble.y = this.nearestObject.y;
+}
 
   /**
    * This Function sets the end of the level
@@ -98,7 +156,7 @@ level = new Level(5);
       clearInterval(this.detectionJellyfish)
       this.detectionJellyfish = setInterval(() => {
         this.level.enemies.forEach(enemie => {
-          if(this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Jellyfish){
+          if(this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Jellyfish && !enemie.dead){
             enemie.angry = true;
          } 
           });
@@ -198,6 +256,9 @@ level = new Level(5);
      * It draws depending on the objects: img, x-coordinate, y-coordinate, width and height
      */
     addImgObjectToMap(object){
+      if (!object) {
+        return
+      }
       if (object.mirrorImage) {
             this.ctx.save()
             this.ctx.translate(object.width, 0);
@@ -207,7 +268,6 @@ level = new Level(5);
             this.ctx.lineWidth = 2;
             this.ctx.strokeStyle = "black";
             this.ctx.strokeRect(object.x +object.hitboxX, object.y + object.hitboxY, object.hitboxWidth, object.hitboxHeight);
-
       this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
         if (object.mirrorImage) {
               object.x = object.x * -1;

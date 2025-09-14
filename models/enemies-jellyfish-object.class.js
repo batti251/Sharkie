@@ -11,6 +11,7 @@ speedX = 0.25;
         this.x = x
         this.buildJellyfish(this.type);
         this.loadImgCache(this.jellyfish_IDLE);
+        this.loadImgCache(this.jellyfish_DEAD);
         this.animateObject(this.jellyfish_IDLE, 100)
         this.enemyMinionMovement(this.speedX, this.speedY);
         this.y = Math.floor(Math.random() * 200) + 200;
@@ -33,21 +34,35 @@ speedX = 0.25;
         switch (type) {
             case 1:
         this.jellyfish_IDLE = this.buildJellyGreenIDLE();
+        this.jellyfish_DEAD = this.buildJellyGreen_DEAD();
         this.damage = 80
                 break;
             case 2:
         this.jellyfish_IDLE = this.buildJellyPinkIDLE();
+        this.jellyfish_DEAD = this.buildJellyPink_DEAD();
         this.damage = 80
                 break;
             case 3:
         this.jellyfish_IDLE = this.buildJellyLilaIDLE();
+        this.jellyfish_DEAD = this.buildJellyLila_DEAD();
                 break;
             case 4:
         this.jellyfish_IDLE = this.buildJellyYellowIDLE();
+        this.jellyfish_DEAD = this.buildJellyYellow_DEAD();
                 break;
             default:
                 break;
         }
+    }
+
+
+    jellyfishDeadAnimation(){
+      this.animateObjectSprite(this.jellyfish_DEAD, 100);
+      this.angry = false;
+      clearInterval(this.randomCoordinateYInterval);
+      clearInterval(this.randomTurnInterval);
+      clearInterval(this.resetIntervalX);
+      this.deadToSurface(1);
     }
 
     /**
@@ -103,6 +118,49 @@ speedX = 0.25;
         `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png`,
         `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png`,
         `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png`
+      ]
+    }
+
+
+
+
+     buildJellyLila_DEAD(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Lila/L2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png`
+
+      ]
+    }
+
+
+    buildJellyYellow_DEAD(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png`
+      ]
+    }
+
+  
+    buildJellyGreen_DEAD(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Dead/green/g1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/green/g2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/green/g3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/green/g4.png`
+      ]
+    }
+
+ 
+    buildJellyPink_DEAD(){
+      return [
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Pink/P1.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Pink/P2.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Pink/P3.png`,
+        `assets/img/2.Enemy/2 Jelly fish/Dead/Pink/P4.png`
       ]
     }
 }

@@ -196,13 +196,14 @@ sharkie_DEAD_SURFACE = [
     }
 
     createBubble(character){
-       this.world.bubble = new Bubble('assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png', character)
-        console.log(this);
-        this.shotBubble = true
-        this.decreasePoisonCount()
+        setTimeout(() => {
+            this.world.bubble = new Bubble('assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png', character);
+            this.shotBubble = true;
+            this.decreasePoisonCount();
+        }, 700);
+
 
     }
-
 
     decreasePoisonCount(){
         this.world.poisonbar.poisonCount.shift(0)
