@@ -22,7 +22,8 @@ level = new Level(5);
     this.checkCollectiblesCollisions();
     this.finishedLevel();
     this.enemyJellyfishDetection();
-    this.findNearestBubbleTarget()
+    this.findNearestBubbleTarget();
+    /* this.bubbleDelete(); */
   }
 
 
@@ -39,11 +40,10 @@ findNearestBubbleTarget() {
     });
     this.updateBubbleTargeting()
   }, 30);
-  
 }
 
   updateNearestTarget(object){
-      if (object instanceof Jellyfish) {
+      if (!object.dead && object instanceof Jellyfish) {
         this.nearestTargetX = object.x - this.bubble.x;
         this.nearestTargetY = object.y - this.bubble.y;
         this.nearestTargetXY = Math.sqrt(this.nearestTargetX * this.nearestTargetX + this.nearestTargetY * this.nearestTargetY);
@@ -66,7 +66,6 @@ updateBubbleTargeting(){
        this.moveBubbleToTarget();
       } else {
         this.collideBubbleWithTarget(this.nearestObject);
-        clearInterval(this.targetInterval);
       }
 }
 
@@ -90,7 +89,10 @@ collideBubbleWithTarget(){
       this.nearestObject.jellyfishDeadAnimation()
       this.bubble.x = this.nearestObject.x;
       this.bubble.y = this.nearestObject.y;
+      delete this.bubble 
 }
+
+
 
   /**
    * This Function sets the end of the level
