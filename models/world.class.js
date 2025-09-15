@@ -7,9 +7,8 @@ keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
-level = new Level(5);
-
-
+level = new Level(0);
+levelFinished;
 
 
   constructor(canvas, keyboard) {
@@ -30,8 +29,6 @@ level = new Level(5);
 
 
 findNearestBubbleTarget() {
-  console.log(this.poisonbar.poisonCount);
-  
   clearInterval(this.targetInterval);
   this.targetInterval = setInterval(() => {
     if (!this.bubble) return;
@@ -103,9 +100,12 @@ collideBubbleWithTarget(){
   finishedLevel(){
     this.levelEnd = this.level.x - 1000
     setInterval(() => {
-      if (this.character.x == this.levelEnd) {
-        console.log("success");
-        // 
+      this.levelFinished = this.character.x >= this.levelEnd
+      if (this.levelFinished) {
+         this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
+        setTimeout(() => {
+         this.nextButton = new menuObj('assets/img/6.Botones/Try again/Mesa de trabajo 1.png', 860, 500, 200, 50, "button", "center"); 
+        }, 1000);
       }
     }, 200);
     
@@ -212,6 +212,8 @@ collideBubbleWithTarget(){
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.imgAnimationLoop();
+      this?.addImgObjectToMap(this.levelFinished)
+      this?.addImgObjectToMap(this.nextButton)
   } 
 
 

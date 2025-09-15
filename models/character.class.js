@@ -187,8 +187,8 @@ sharkie_DEAD_SURFACE = [
     }
     
     shootBubble(key){
-        if (key.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0 && !this.keyDetection) {
-            console.log("shoot");
+        if (key.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0 && !this.keyDetection && !this.world.bubble) {
+            key.Q = null
             this.keyDetection = true
             this.isShooting = true
             this.canCollect = false
