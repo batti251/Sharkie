@@ -7,12 +7,13 @@ keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
-level = new Level(0);
 levelFinished;
 
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, nextLevel) {
+    this.nextLevel = nextLevel
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
+    this.level = new Level(this.nextLevel);
     this.draw();
     this.keyboard = keyboard
     this.setWorld();
@@ -23,7 +24,6 @@ levelFinished;
     this.enemyJellyfishDetection();
     this.findNearestBubbleTarget();
   }
-
 
 
 
@@ -104,7 +104,7 @@ collideBubbleWithTarget(){
       if (this.levelFinished) {
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
         setTimeout(() => {
-         this.nextButton = new menuObj('assets/img/6.Botones/Try again/Mesa de trabajo 1.png', 860, 500, 200, 50, "button", "center"); 
+         this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
         }, 1000);
       }
     }, 200);
@@ -213,7 +213,7 @@ collideBubbleWithTarget(){
       this.drawHUD();
       this.imgAnimationLoop();
       this?.addImgObjectToMap(this.levelFinished)
-      this?.addImgObjectToMap(this.nextButton)
+      this?.addImgObjectToMap(this.nextLevelButton)
   } 
 
 

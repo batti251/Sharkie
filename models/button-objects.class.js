@@ -1,4 +1,4 @@
-class menuObj extends menuBackground{
+class menuObj extends GameObjects{
 type
 x = 200;
 y = 300;
@@ -20,9 +20,27 @@ height ;
         this.y2 = this.y + this.height;
         this.centralObj(width)
         this.getCanvasPosition();
+        this.nextLevel()
     }
 
-
+    /**
+     * This Function starts the next Level, when the Next-Button was clicked successfully
+     * It can only be clicked, when Level has been finished
+     * 
+     */
+    nextLevel(){
+         this.scaledMouseEvent = this.getCanvasPosition();
+        canvas.addEventListener("mousedown", (event) => {
+            this.mouseX = this.scaledMouseEvent.x * event.clientX;
+            this.mouseY = this.scaledMouseEvent.y * event.clientY;
+             if (this.isInHitbox(this.mouseX , this.mouseY) && world?.nextLevelButton) {
+                this.addLevel = world.level.levelLength + 1
+                world = new World(canvas, keyboard, this.addLevel);
+             }
+        }) 
+       
+       
+    }
 
     /**
      * This Function starts the game, when Start-Button was clicked successfully
@@ -34,7 +52,7 @@ height ;
             this.mouseX = this.scaledMouseEvent.x * event.clientX;
             this.mouseY = this.scaledMouseEvent.y * event.clientY;
             if (this.isInHitbox(this.mouseX , this.mouseY) && !world){
-                world = new World(canvas, keyboard);
+                world = new World(canvas, keyboard, 0);
             }
         })
    }
@@ -51,7 +69,7 @@ height ;
         }
     }
 
-       /**
+    /**
      * This Function sets indication, wether a menu-object was hitted within its defined Hitbox
      * 
      * @param {*} mouseX - x-coordinate from the mouseclick 
