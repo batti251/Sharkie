@@ -10,6 +10,26 @@ angry = false
 
 
 
+  /**
+   * This Function calls Enemies (Minions) to move
+   * If the Enemy gets angry-state the Movement is set to left, to try to hit the character
+   * The Turning-direction is set randomly, until character detection
+   * The Y-Coordinate is set randomly to vary the height-movement
+   *
+   * @param {Number} speedX - px-value for X-Coordinate
+   * @param {Number} speedY - px-value for Y-Coordinate
+   */
+  enemyMinionMovement(speedX, speedY) {
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      if (this.angry) {
+        this.enemyLeft(2.5);
+      }
+    }, 100);
+    this.randomTurn(speedX);
+    this.setRandomCoordinateY(speedY);
+  }
+
 
     /**
      * This Function wether let the Enemies move left, or right, depending on coinToss-Function
