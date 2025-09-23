@@ -98,11 +98,12 @@ collideBubbleWithTarget(){
    * 
    */
   finishedLevel(){
-    this.levelEnd = this.level.x - 1000
+    this.levelEnd = this.level.x - 2000
     setInterval(() => {
       this.levelFinished = this.character.x >= this.levelEnd
       if (this.levelFinished) {
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
+         this.keyboard = null
         setTimeout(() => {
          this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
         }, 1000);

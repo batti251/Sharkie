@@ -5,7 +5,6 @@ x1Start = 479;
 multiplicator = 1559;    
 enemyMultiplicator = 5;    
 
-
 background = [
   new Background('assets/img/3. Background/Layers/5. Water/L1.png', this.xStart, 0),
   new Background('assets/img/3. Background/Layers/4.Fondo 2/L1.png', this.xStart, 0),
@@ -24,6 +23,10 @@ coins = [];
 poison = [];
 
     constructor(level){
+      console.log(level);
+      console.log(world);
+      console.log(this);
+      
         this.levelLength = level;
         this.x = this.xStart + this.multiplicator
         this.x1 = this.x1Start  + this.multiplicator;
@@ -49,7 +52,7 @@ poison = [];
      * 
      */
     generateBackground(){
-        for (let index = 0; index < this.levelLength; index++) {
+        for (let index = 0; index < this.levelLength +1; index++) {
              this.backgroundTemplate = this.setBackgroundFrame();
              this.backgroundTemplate.forEach(layer => this.background.push(layer))
              this.increaseBackgroundX()
@@ -154,7 +157,8 @@ poison = [];
      * This function sets a random x-value for collectibles and enemies
      */
     setRandomPosition(){
-      this.randomXPosition = Math.floor(Math.random() * this.x) + 600;
+      this.randomXPosition = Math.floor(Math.random() * (this.x-2400)) + 600;
+      
     }
 
 }

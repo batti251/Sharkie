@@ -229,7 +229,7 @@ sharkie_DEAD_SURFACE = [
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveLeft(speed, key) {
-    if (key?.LEFT == true && this.x > -300) {
+    if (key?.LEFT == true && this.x > -100) {
       this.x -= speed;
       this.setCharacterPositionRight(speed);
       this.mirrorImage = true;
