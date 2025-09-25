@@ -13,7 +13,7 @@ levelFinished;
   constructor(canvas, keyboard, nextLevel) {
     this.nextLevel = nextLevel
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
-    this.level = new Level(this.nextLevel);
+    this.level = new LevelEndBoss(this.nextLevel);
     this.draw();
     this.keyboard = keyboard
     this.setWorld();

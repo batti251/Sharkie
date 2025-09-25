@@ -5,6 +5,7 @@ x1Start = 479;
 multiplicator = 1559;    
 enemyMultiplicator = 5;    
 
+
 background = [
   new Background('assets/img/3. Background/Layers/5. Water/L1.png', this.xStart, 0),
   new Background('assets/img/3. Background/Layers/4.Fondo 2/L1.png', this.xStart, 0),
@@ -23,10 +24,6 @@ coins = [];
 poison = [];
 
     constructor(level){
-      console.log(level);
-      console.log(world);
-      console.log(this);
-      
         this.levelLength = level;
         this.x = this.xStart + this.multiplicator
         this.x1 = this.x1Start  + this.multiplicator;
@@ -45,6 +42,11 @@ poison = [];
         this.generateCoins();
         this.generatePoison();
     }
+
+    generateEndboss(){
+       this.enemies.push(new Endboss('assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png'));
+    }
+
 
     /**
      * This Function generates the Background for the level
