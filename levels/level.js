@@ -45,7 +45,7 @@ poison = [];
 
     generateEndboss(){
        this.enemies.push(new Endboss('assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png'));
-    }
+        }
 
 
     /**

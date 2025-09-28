@@ -14,12 +14,12 @@ pufferfish_ANGRY;
         this.buildPufferfish(this.type);
         this.loadPufferfishImgCache();
         this.animateObject(this.pufferfish_IDLE, 100)
-        this.enemyMinionMovement(this.speedX, this.speedY);
+       // this.enemyMinionMovement(this.speedX, this.speedY);
         this.y = Math.floor(Math.random() * 200) + 200
         this.width = Math.floor(Math.random() * 100) +50
         /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
         this.height = this.width;
-        this.setHitbox(0, 4.5, 1.1, 1.5)
+        this.setHitbox(0, 20, 1.1, 1.5)
     }
 
     /**

@@ -20,7 +20,7 @@ coins_IDLE = [
         this.loadImgCache(this.coins_IDLE);
         this.animateObject(this.coins_IDLE, 220);
         this.y = Math.floor(Math.random() * 200) + 200;
-        this.setHitbox(5, 5, 1.5, 1.5);
+        this.setHitbox(8, 8, 1.5, 1.5);
         
     }
 

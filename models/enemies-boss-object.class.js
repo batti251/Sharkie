@@ -1,6 +1,9 @@
 class Endboss extends Enemies {
-  x = 100;
-  y = 0;
+  damage = 100;
+  height = 500;
+  width = 500;
+  x = 300;
+  y = 100;
 
   endboss_INTRODUCE = [
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
@@ -63,6 +66,8 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_HURT);
     this.loadImgCache(this.endboss_DEAD);
     this.endbossEntrance();
+    this.setHitbox(40, 270, 1.2, 3.5);
+/*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }
 
   endbossEntrance() {

@@ -21,7 +21,7 @@ poison_IDLE = [
         this.loadImgCache(this.poison_IDLE);
         this.animateObject(this.poison_IDLE, 220);
         this.y = Math.floor(Math.random() * 200) + 200;
-        this.setHitbox(10, 25, 2, 2);
+        this.setHitbox(18, 45, 2, 2);
     }
 
 
