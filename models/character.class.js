@@ -394,11 +394,8 @@ sharkie_DEAD_SURFACE = [
     }
 
     decreasePoisonCount(){
-        console.log(this.world.poisonbar.poisonCount);
-        
         this.world.poisonbar.poisonCount.shift()
-        console.log(this.world.poisonbar.poisonCount);
-
+        this.world.poisonbar.updatePoisonbar()
     }
 
     shootCoolDown(miliseconds){

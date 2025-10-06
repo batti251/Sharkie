@@ -38,9 +38,10 @@ poisonCache = [
      */
     updatePoisonbar(){
         this.maxPoison = world.level.poison.length
-        console.log(this.maxPoison);
-        
         this.collectedPoisonPercentage = this.poisonCount.length / this.maxPoison
+        if (this.collectedPoisonPercentage == 0) {
+            this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
+        }
         if (this.collectedPoisonPercentage >= 0.2) {
                 this.loadImg('assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png');
         }
