@@ -83,7 +83,7 @@ class MoveableObjects extends GameObjects {
    * @param {Array} sprites -
    */
   resetCurrentImg(sprites) {
-    if (this.lastSprite !== sprites && this.isSlapping || this.isShooting) {
+    if (this.lastSprite !== sprites && this.isAttacking || this.isShooting) {
       this.currentImg = 0;
     }
     this.lastSprite = sprites;

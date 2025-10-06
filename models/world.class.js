@@ -26,6 +26,7 @@ levelFinished;
     this.finishedBossLevel();
     this.enemyJellyfishDetection();
     this.findNearestBubbleTarget();
+    this.endbossAttack()
   }
 
 
@@ -183,7 +184,7 @@ collideBubbleWithTarget(){
       clearInterval(this.detectionJellyfish)
       this.detectionJellyfish = setInterval(() => {
         this.level.enemies.forEach(enemie => {
-          if(this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Jellyfish && !enemie.dead){
+          if(this.character.isDetected(enemie) && !enemie.angry && !(enemie instanceof Pufferfish) && !enemie.dead){
             enemie.angry = true;
          } 
           });
@@ -232,6 +233,16 @@ collideBubbleWithTarget(){
   }
 
 
+  endbossAttack(){
+    setInterval(() => {
+      this.level.enemies.forEach(object => {
+        if ((object instanceof Endboss) && object.angry && !object.bossAttackOnCooldown){
+          object.bossAttack()
+        }
+      })
+      
+    }, 300);
+  }
 
   setWorld(){
     this.character.world = this

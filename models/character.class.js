@@ -148,7 +148,7 @@ sharkie_DEAD_SURFACE = [
     clearInterval(this.characterMovementInterval);
     this.characterMovementInterval = setInterval(() => {
       this.moveCharacter(this.world.keyboard);
-      if (this.isMoving !== this.lastIsMoving && !this.isSlapping && !this.isShooting) {
+      if (this.isMoving !== this.lastIsMoving && !this.isAttacking && !this.isShooting) {
         this.lastIsMoving = this.isMoving;
         this.applyCharacterMovement();
       }
@@ -354,7 +354,7 @@ sharkie_DEAD_SURFACE = [
             if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
                 this.keyDetection = true
                 this.slapCooldown = true
-                this.isSlapping = true
+                this.isAttacking = true
                 this.canCollect = false
                 this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
                 this.expandHitbox()
@@ -415,7 +415,7 @@ sharkie_DEAD_SURFACE = [
     stallCharacterAnimationBy(miliseconds){
         setTimeout(() => {
           this.applyCharacterMovement();
-          this.isSlapping = false
+          this.isAttacking = false
           this.canCollect = true
           this.slapCooldown = false
           this.doesDamage = false

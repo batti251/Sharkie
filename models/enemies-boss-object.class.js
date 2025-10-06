@@ -4,6 +4,8 @@ class Endboss extends Enemies {
   height = 500;
   width = 500;
   y = 100;
+  bossAttackOnCooldown = true;
+
 
   endboss_INTRODUCE = [
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
@@ -72,6 +74,7 @@ class Endboss extends Enemies {
     this.endbossEntrance();
     this.x = x;
     this.setHitbox(40, 270, 1.2, 3.5);
+    this.bossAttackCooldown()
 /*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }
 
@@ -112,5 +115,26 @@ class Endboss extends Enemies {
     this.x += 10
     }, 1000/60);
   }
+
+
+  bossAttack(){
+    if (!this.bossAttackOnCooldown) {
+    this.bossAttackOnCooldown = true
+    this.isAttacking = true
+    this.animateObjectSprite(this.endboss_ATTACK, 100);
+    setTimeout(() => {
+       this.animateObjectSprite(this.endboss_FLOATING, 200);
+    }, 600);
+    this.bossAttackCooldown();
+     }
+    }
+
+    bossAttackCooldown(){
+      setTimeout(() => {
+        console.log("cooldown");
+        this.isAttacking = false
+        this.bossAttackOnCooldown = false
+      }, 5000);
+    }
 
 }
