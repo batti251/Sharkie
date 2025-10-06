@@ -3,7 +3,7 @@ currentImg = 0
 width = 400;
 height = 400;
 world;
-speedX = 4;
+speedX = 8;
 speedY = 4;
 maxLife = 1000;
 life = this.maxLife;
@@ -256,10 +256,10 @@ sharkie_DEAD_SURFACE = [
    */
   isInsideSlapBorder(object) {
     return (
-      this.x + this.finSlapX + this.finSlapHitboxWidth > object.x &&
+      this.x + this.finSlapX + this.finSlapHitboxWidth > object.x + object.hitboxX &&
       this.x + this.finSlapX < object.x + object.hitboxWidth &&
-      this.y + this.hitboxY + this.hitboxHeight > object.y &&
-      this.y + this.hitboxY < object.y + object.hitboxHeight
+      this.y + this.hitboxY + this.hitboxHeight > object.y + object.hitboxY &&
+      this.y + this.hitboxY < object.y + object.hitboxY + object.hitboxHeight
     );
   }
 

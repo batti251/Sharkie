@@ -2,7 +2,6 @@ class Endboss extends Enemies {
   damage = 100;
   height = 500;
   width = 500;
-  x = 300;
   y = 100;
 
   endboss_INTRODUCE = [
@@ -58,7 +57,7 @@ class Endboss extends Enemies {
     "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png",
   ];
 
-  constructor(path) {
+  constructor(path, x) {
     super().loadImg(path);
     this.loadImgCache(this.endboss_INTRODUCE);
     this.loadImgCache(this.endboss_FLOATING);
@@ -66,6 +65,7 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_HURT);
     this.loadImgCache(this.endboss_DEAD);
     this.endbossEntrance();
+    this.x = x;
     this.setHitbox(40, 270, 1.2, 3.5);
 /*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }

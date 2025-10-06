@@ -35,7 +35,7 @@ height ;
             this.mouseY = this.scaledMouseEvent.y * event.clientY;
              if (this.isInHitbox(this.mouseX , this.mouseY) && world?.nextLevelButton) {
                 this.addLevel = world.level.levelLength + 1
-                this.addLevel % 2 == 0 ? world = new World(canvas, keyboard, this.addLevel, "boss") : world = new World(canvas, keyboard, this.addLevel, "regular")
+                this.addLevel % 1 == 0 ? world = new World(canvas, keyboard, this.addLevel, "boss") : world = new World(canvas, keyboard, this.addLevel, "regular") //auf 2/3 anpassen
              }
         }) 
     }

@@ -20,6 +20,7 @@ levelFinished;
     this.setWorld();
     this.enemyDetection();
     this.checkCollisions();
+    this.checkEndbossCollisions();
     this.checkCollectiblesCollisions();
     this.finishedLevel();
     this.enemyJellyfishDetection();
@@ -99,10 +100,22 @@ collideBubbleWithTarget(){
    * 
    */
   finishedLevel(){
+    this.levelType = this.level.constructor
     this.levelEnd = this.level.x - 2000
-    setInterval(() => {
+    this.finishLevelInterval = setInterval(() => {
       this.levelFinished = this.character.x >= this.levelEnd
-      if (this.levelFinished) {
+      if (this.levelFinished && this.levelType == LevelRegular) {
+         this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
+         this.keyboard = null
+        setTimeout(() => {
+         this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
+        }, 1000);
+      } else if (this.levelFinished && this.levelType == LevelEndBoss) {
+        delete this.levelFinished 
+        world.level.bossSpawn();
+        clearInterval(this.finishLevelInterval)
+      }
+      else if (this.bossFinished){
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
          this.keyboard = null
         setTimeout(() => {
@@ -179,7 +192,7 @@ collideBubbleWithTarget(){
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
-        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted) {
+        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
                   object.x = -1000
               }  
         if(this.character.isInsideBorder(object) && this.character.life > 0){
@@ -194,6 +207,19 @@ collideBubbleWithTarget(){
       });
     }, 200);
   }
+
+
+    checkEndbossCollisions(){
+    clearInterval(this.collisionEndbossInterval)
+    this.collisionEndbossInterval = setInterval(() => {
+      this.level.enemies.forEach(object => {
+        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
+                  object.x += 300
+              }  
+      });
+    }, 200);
+  }
+
 
 
   setWorld(){
