@@ -93,4 +93,24 @@ class Endboss extends Enemies {
         this.deadToSurface(1)
     }, 100);
   }
+
+
+
+
+    bossDamage() {
+    this.life = this.life - 50;
+    this.bossKnockback()
+    this.animateObjectSprite(this.endboss_HURT, 100);
+    setTimeout(() => {
+      this.animateObjectSprite(this.endboss_FLOATING, 200);
+      clearInterval(this.knockbackInterval)
+    }, 500);
+  }
+
+  bossKnockback(){
+  this.knockbackInterval = setInterval(() => {
+    this.x += 10
+    }, 1000/60);
+  }
+
 }

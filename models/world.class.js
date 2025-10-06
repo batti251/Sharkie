@@ -222,8 +222,7 @@ collideBubbleWithTarget(){
     this.collisionEndbossInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
         if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
-                  object.x += 300;
-                  object.life -= 50;
+                  object.bossDamage()
                   if (object.life <= 0) {
                     object.bossDieAnimation()
                   }
