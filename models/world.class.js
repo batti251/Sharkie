@@ -10,10 +10,11 @@ poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ co
 levelFinished;
 
 
-  constructor(canvas, keyboard, nextLevel) {
+  constructor(canvas, keyboard, nextLevel, levelType) {
+    console.log(nextLevel);
     this.nextLevel = nextLevel
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
-    this.level = new LevelRegular(this.nextLevel);
+    levelType == "boss" ? this.level = new LevelEndBoss(this.nextLevel) : this.level = new LevelRegular(this.nextLevel);
     this.draw();
     this.keyboard = keyboard
     this.setWorld();
