@@ -23,6 +23,7 @@ levelFinished;
     this.checkEndbossCollisions();
     this.checkCollectiblesCollisions();
     this.finishedLevel();
+    this.finishedBossLevel();
     this.enemyJellyfishDetection();
     this.findNearestBubbleTarget();
   }
@@ -111,20 +112,27 @@ collideBubbleWithTarget(){
          this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
         }, 1000);
       } else if (this.levelFinished && this.levelType == LevelEndBoss) {
-        delete this.levelFinished 
+        this.levelFinished = false
         world.level.bossSpawn();
         clearInterval(this.finishLevelInterval)
       }
-      else if (this.bossFinished){
+      }, 200);
+    }
+
+
+      finishedBossLevel(){
+        setInterval(() => {
+        if (this.level.bossFinished){
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
          this.keyboard = null
         setTimeout(() => {
          this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
         }, 1000);
       }
-    }, 200);
-    
-  }
+        }, 200);
+      }
+      
+  
 
   /**
    * This Function detects collision from the character with the collectibles
@@ -214,7 +222,11 @@ collideBubbleWithTarget(){
     this.collisionEndbossInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
         if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
-                  object.x += 300
+                  object.x += 300;
+                  object.life -= 50;
+                  if (object.life <= 0) {
+                    object.bossDieAnimation()
+                  }
               }  
       });
     }, 200);
