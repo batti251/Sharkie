@@ -1,10 +1,61 @@
-body{
-    margin: 0;
-    overflow: hidden;
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #19D1D9;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #004987;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 
-#canvas{
-    width: 100vw;
-    height: 100vh;
+
+#canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.legal-notice {
+  height: 50%;
+  width: 30%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px #FFC049;
+  border-style: solid;
+  overflow-y: scroll;
+}
+
+.close-button{
+    width: fit-content;
+    cursor: pointer;
+}
+
+.close-icon{
+    background-color: #FFC049;
+    border-radius: 1.5rem;
+}
+
+.d-none{
+    display: none;
+}
+
+.d-flex{
+    display: flex;
 }

@@ -4,13 +4,14 @@ class Menu{
   hero = new menuObj('assets/sharkie-background.png', 0, 200, 400, 200 ,"hero", "center");
   button = new menuObj('assets/img/6.Botones/Start/3.png', 860, 500, 200, 50, "button", "center");
   instruction = new menuObj('assets/img/6.Botones/Instructions 2.png', 1200, 500, 500, 300 ,"instruction", "");
-  
+  legalNotice = new menuObj('assets/legal_notice.svg', 910, 700, 100, 50, "legal", "center")
 
 constructor(canvas) {
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     this.draw();
-    this.button.startGame()
+    this.button.startGame();
     this.button.isInHitbox();
+    this.legalNotice.showLegal();
 }
 
 
@@ -21,6 +22,7 @@ constructor(canvas) {
       this.addImgObjectToMap(this.button)
       this.addImgObjectToMap(this.instruction)
       this.addImgObjectToMap(this.hero)
+      this.addImgObjectToMap(this.legalNotice)
       this.imgAnimationLoop();
   } 
 
