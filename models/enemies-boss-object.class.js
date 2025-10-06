@@ -91,6 +91,7 @@ class Endboss extends Enemies {
       setTimeout(() => {
         this.animateObjectSprite(this.endboss_DEAD_SURFACE, 300);
         this.dead = true;
+        this.angry = false;
         world.level.bossFinished = true;
       }, 500);
         this.deadToSurface(1)
@@ -116,14 +117,21 @@ class Endboss extends Enemies {
     }, 1000/60);
   }
 
+  bossDash(){
+    this.dashInterval = setInterval(() => {
+    this.x -= 5
+    }, 1000/60);
+  }
 
   bossAttack(){
     if (!this.bossAttackOnCooldown) {
     this.bossAttackOnCooldown = true
     this.isAttacking = true
     this.animateObjectSprite(this.endboss_ATTACK, 100);
+    this.bossDash()
     setTimeout(() => {
        this.animateObjectSprite(this.endboss_FLOATING, 200);
+       clearInterval(this.dashInterval)
     }, 600);
     this.bossAttackCooldown();
      }
