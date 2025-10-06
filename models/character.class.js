@@ -406,7 +406,6 @@ sharkie_DEAD_SURFACE = [
           this.applyCharacterMovement();
           this.isShooting = false
           this.canCollect = true
-        /*   this.shotBubble = false */
         }, miliseconds);
     }
 
@@ -422,6 +421,7 @@ sharkie_DEAD_SURFACE = [
           this.isSlapping = false
           this.canCollect = true
           this.slapCooldown = false
+          this.doesDamage = false
         }, miliseconds);
     }
 
@@ -433,6 +433,7 @@ sharkie_DEAD_SURFACE = [
     expandHitbox(){
         this.oldHitBoxWidth = this.hitboxWidth
         setTimeout(() => {
+          this.doesDamage = true
             this.hitboxWidth = this.hitboxSlap
             this.finSlapX = this.oldHitBoxWidth + this.hitboxX
             this.finSlapHitboxWidth = this.hitboxSlap - this.oldHitBoxWidth

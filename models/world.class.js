@@ -178,7 +178,7 @@ collideBubbleWithTarget(){
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
-        if (this.character.isInsideSlapBorder(object) && this.character.isSlapping && !this.character.hitted) {
+        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted) {
                   object.x = -1000
               }  
         if(this.character.isInsideBorder(object) && this.character.life > 0){
