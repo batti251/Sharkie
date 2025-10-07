@@ -14,7 +14,7 @@ healthbarCache = [
 ];
     constructor(path){
         super().loadImg(path);
-        /* this.loadImgCache(this.healthbarCache) */
+        this.loadImgCache(this.healthbarCache)
     }
 
     /**

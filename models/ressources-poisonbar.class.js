@@ -6,7 +6,7 @@ height = 80;
 maxPoison;
 poisonCount = [];
 collectedPoisonPercentage;
-poisonCache = [
+poisonbarCache = [
     'assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png',
     'assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png',
     'assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png',
@@ -16,7 +16,7 @@ poisonCache = [
 ];
     constructor(path){
         super().loadImg(path);
-        /* this.loadImgCache(this.healthbarCache) */
+        this.loadImgCache(this.poisonbarCache)
     }
 
     /**

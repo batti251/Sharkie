@@ -229,7 +229,7 @@ collideBubbleWithTarget(){
         this.characterTakesDamage(object)
         this.checkEndbossCollisions(object)
       });
-    }, 200);
+    }, 100);
   }
 
 
