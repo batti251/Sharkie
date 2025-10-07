@@ -16,11 +16,12 @@ body {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #004987;
+  border-radius: 1rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #00D57E;
 }
 
 
@@ -39,11 +40,23 @@ body {
   transform: translate(-50%, -50%);
   border: 4px #FFC049;
   border-style: solid;
+  background-color: #46E9D9;
+}
+
+.legal-notice-text{
   overflow-y: scroll;
+  height: 80%;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: #46E9D9;
 }
 
 .close-button{
-    width: fit-content;
     cursor: pointer;
 }
 
