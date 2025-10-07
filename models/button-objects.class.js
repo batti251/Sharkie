@@ -40,42 +40,6 @@ height ;
         }) 
     }
 
-    /**
-     * This Function starts the game, when Start-Button was clicked successfully
-     * 
-     */
-    startGame(){
-        this.scaledMouseEvent = this.getCanvasPosition();
-        canvas.addEventListener("mousedown",(event) => {
-            this.mouseX = this.scaledMouseEvent.x * event.clientX;
-            this.mouseY = this.scaledMouseEvent.y * event.clientY;
-            if (this.isInHitbox(this.mouseX , this.mouseY) && !world){
-                world = new World(canvas, keyboard, 0);
-            }
-        })
-   }
-
-
-    /**
-     * This Function shows the legal notice, when Start-Button was clicked successfully
-     * 
-     */
-    showLegal(){
-        this.scaledMouseEvent = this.getCanvasPosition();
-        canvas.addEventListener("mousedown",(event) => {
-            this.mouseX = this.scaledMouseEvent.x * event.clientX;
-            this.mouseY = this.scaledMouseEvent.y * event.clientY;
-            console.log(this.isInHitbox(this.mouseX , this.mouseY));
-            if (this.isInHitbox(this.mouseX , this.mouseY) && !world){
-                document.getElementById('legal-notice-container').classList.toggle('d-none')
-                
-
-            }
-        })
-   }
-
-
-
    /**
     * This Function formats the addressed object in central position to the canvas
     * 

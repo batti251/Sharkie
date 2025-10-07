@@ -24,10 +24,25 @@ body {
   background: #00D57E;
 }
 
-button{
+.btn-start{
+  background-image: url('assets/img/6.Botones/Start/3.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: transparent;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border-style: none;
+  height: 33px;
+  width: 100px;
+}
+
+.btn-legal-notice{
   background-image: url('assets/legal-notice-chat.png');
   background-repeat: no-repeat;
-  background-color: #00AFD1;
+  background-color: transparent;
   background-size: 100%;
   cursor: pointer;
   border-style: none;
