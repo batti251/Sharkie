@@ -28,17 +28,4 @@ height;
         
        });
     }
-
-    /**
-     * This Function gets the canvas-width depending on its current viewport & calculates the factor for the actual x & y position
-     * 
-     * @returns - an object with the scaled x- & y-factor
-     *            This Factor is needed to multiply it with the mouse.event.client-coordinates
-     */
-    getCanvasPosition(){
-        this.canvasPosition = canvas.getBoundingClientRect()
-        this.scaledX = canvas.width  / this.canvasPosition.width;
-        this.scaledY = canvas.height / this.canvasPosition.height;
-        return {x: this.scaledX, y: this.scaledY}
-    }
 }
