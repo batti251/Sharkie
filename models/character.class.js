@@ -292,7 +292,8 @@ sharkie_DEAD_SURFACE = [
 
   /**
    * This Function decreases the targets life by 20
-   * Calls poisened-Animation for 150 miliseconds, then goes over into animation-mode
+   * When hit by Jellyfish character-shocked-Animation runs for 150miliseconds
+   * Else poisened-Animation is called, then turns into IDLE-mode
    *
    * @param {Object} defender - The Target that takes the Damage
    */

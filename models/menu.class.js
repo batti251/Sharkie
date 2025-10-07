@@ -2,7 +2,6 @@ class Menu{
   background = new menuBackground('assets/background.png');
   header = new menuObj('assets/sharkie-title.png', 0, -25, 300, 200 ,"title", "center");
   hero = new menuObj('assets/sharkie-background.png', 0, 200, 400, 200 ,"hero", "center");
-  instruction = new menuObj('assets/img/6.Botones/Instructions 2.png', 1200, 500, 500, 300 ,"instruction", "");
 
 constructor(canvas) {
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
@@ -14,7 +13,6 @@ constructor(canvas) {
       this.drawCanvas()
       this.addImgObjectToMap(this.background)
       this.addImgObjectToMap(this.header)
-      this.addImgObjectToMap(this.instruction)
       this.addImgObjectToMap(this.hero)
       this.imgAnimationLoop();
   } 

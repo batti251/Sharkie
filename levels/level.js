@@ -29,7 +29,6 @@ poison = [];
         this.x1 = this.x1Start  + this.multiplicator;
         this.generateLevelObjects();
     }
-
     
     /**
      * This Function generates all level-oriented Objects for the Level

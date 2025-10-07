@@ -7,6 +7,7 @@ keyboard;
 healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
+instruction = new Instruction('assets/img/6.Botones/Instructions 4.png', 1200, 500, 500, 300 ,"instruction", "");
 levelFinished;
 
 
@@ -15,7 +16,7 @@ levelFinished;
     this.nextLevel = nextLevel
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     levelType == "boss" ? this.level = new LevelEndBoss(this.nextLevel) : this.level = new LevelRegular(this.nextLevel);
-    this.draw();
+    this.draw(this.nextLevel);
     this.keyboard = keyboard
     this.setWorld();
     this.enemyDetection();
@@ -27,6 +28,10 @@ levelFinished;
     this.findNearestBubbleTarget();
     this.endbossAttack()
   }
+
+      explainLevel(level){
+        console.log(level);
+    }
 
 findNearestBubbleTarget() {
   clearInterval(this.targetInterval);
@@ -293,10 +298,10 @@ collideBubbleWithTarget(){
      * This Function loads the game-UI
      * 
      */
-    draw() {
+    draw(level) {
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0) 
-      this.drawObjects();
+      this.drawObjects(level);
       if (this.character.shotBubble) {
       this.addImgObjectToMap(this.bubble)
       }
@@ -305,6 +310,9 @@ collideBubbleWithTarget(){
       this.imgAnimationLoop();
       this?.addImgObjectToMap(this.levelFinished)
       this?.addImgObjectToMap(this.nextLevelButton)
+      this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
+     
+
   } 
 
 
@@ -313,12 +321,13 @@ collideBubbleWithTarget(){
      *  => Background, collectibles, enemies, character
      * 
      */
-     drawObjects(){
+     drawObjects(level){
         this.addImgObjectsToMap(this.level.background)
         this.addImgObjectsToMap(this.level.coins);
         this.addImgObjectsToMap(this.level.poison);
         this.addImgObjectsToMap(this.level.enemies)
-        this.addImgObjectToMap(this.character);
+        this.addImgObjectToMap(this.character)
+
     }
 
 

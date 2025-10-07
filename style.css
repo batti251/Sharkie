@@ -90,6 +90,7 @@ body {
 #canvas {
   width: 100vw;
   height: 100vh;
+  display: block;
 }
 
 .legal-notice {
@@ -133,3 +134,19 @@ header{
 .d-flex{
     display: flex;
 }
+
+
+/* @media only screen and (max-width: 720px){
+  #canvas{
+    width: 100%;
+  }
+}
+
+
+@media only screen and (max-height: 480px){
+  #canvas{
+    height: 100svh;
+  }
+} */
+
+
