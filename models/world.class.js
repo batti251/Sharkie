@@ -19,8 +19,7 @@ levelFinished;
     this.keyboard = keyboard
     this.setWorld();
     this.enemyDetection();
-    this.checkCollisions();
-    this.checkEndbossCollisions();
+    this.checkEnemyCollisions();
     this.checkCollectiblesCollisions();
     this.setLevelEnd()
     this.finishedLevel();
@@ -200,7 +199,7 @@ collideBubbleWithTarget(){
     /**
      * This Function triggers the angry-state of all enemies, when character is detected
      * This Function let the Pufferfishes trigger the transformation Animation
-     * They will move straight to the left
+     * They will move straight to the left, when triggered
      * 
      */
     enemyDetection(){
@@ -216,47 +215,62 @@ collideBubbleWithTarget(){
     }
 
   /**
-   * This Function indicates the Collision from the character with an Object
-   * It indicates collision during slap-animation
+   * This Function checks the Collision-forms from the character with an Enemy-Object with each iteration
    * This Function iterates each 200 miliseconds
-   * 
    */
-  checkCollisions(){
+  checkEnemyCollisions(){
     clearInterval(this.collisionInterval)
     this.collisionInterval = setInterval(() => {
       this.level.enemies.forEach(object => {
-        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
-                  object.x = -1000
-              }  
-        if(this.character.isInsideBorder(object) && this.character.life > 0){
-            this.character.damage(this.character);
-            this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
-              if (this.character.life <=0) {
-                this.keyboard = null
-                this.character.sharkieDieAnimation();
-                return
-              } else return
-          }
+        this.characterHitsEnemy(object);
+        this.characterTakesDamage(object)
+        this.checkEndbossCollisions(object)
       });
     }, 200);
   }
 
 
-    checkEndbossCollisions(){
-    clearInterval(this.collisionEndbossInterval)
-    this.collisionEndbossInterval = setInterval(() => {
-      this.level.enemies.forEach(object => {
+  /**
+   * This Function indicates collision during characters slap-animation with the referenced object
+   * @param {*} object - the referenced object => Boss only
+   */
+    checkEndbossCollisions(object){
         if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
-                  object.bossDamage()
-                  if (object.life <= 0) {
-                    object.bossDieAnimation()
-                  }
+            object.bossDamage()
+             if (object.life <= 0) {
+               object.bossDieAnimation()
+                }
               }  
-      });
-    }, 200);
-  }
+    }
 
+  /**
+   * This Function indicates collision during characters slap-animation with the referenced object
+   * @param {*} object - the referenced object => enemies, except Boss
+   */
+  characterHitsEnemy(object){
+      if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
+          object.x = -1000
+          } 
+    }
 
+  /**
+   * This Function indicates collision with the referenced object, when the character is not attacking
+   * @param {*} object - the referenced object => enemy 
+   */
+  characterTakesDamage(object){
+   if(this.character.isInsideBorder(object) && this.character.life > 0){
+        this.character.damage(this.character);
+        this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
+          if (this.character.life <=0) {
+            this.keyboard = null
+            this.character.sharkieDieAnimation();
+          }
+      }
+   }
+
+/**
+ * This Function calls the Boss-Attack, if the Attack is not on Cooldown
+ */
   endbossAttack(){
     setInterval(() => {
       this.level.enemies.forEach(object => {
@@ -264,7 +278,6 @@ collideBubbleWithTarget(){
           object.bossAttack()
         }
       })
-      
     }, 300);
   }
 
@@ -372,8 +385,8 @@ collideBubbleWithTarget(){
      * 
      */
     imgAnimationLoop(){
-    let self = this;
-    requestAnimationFrame(() => {self.draw()});
+     let self = this;
+     requestAnimationFrame(() => {self.draw()});
     }
 
 }
