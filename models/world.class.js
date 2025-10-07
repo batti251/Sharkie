@@ -219,7 +219,7 @@ collideBubbleWithTarget(){
 
   /**
    * This Function checks the Collision-forms from the character with an Enemy-Object with each iteration
-   * This Function iterates each 200 miliseconds
+   * This Function iterates each 100 miliseconds
    */
   checkEnemyCollisions(){
     clearInterval(this.collisionInterval)
@@ -229,7 +229,7 @@ collideBubbleWithTarget(){
         this.characterTakesDamage(object)
         this.checkEndbossCollisions(object)
       });
-    }, 100);
+    },200);
   }
 
 
@@ -262,7 +262,7 @@ collideBubbleWithTarget(){
    */
   characterTakesDamage(object){
    if(this.character.isInsideBorder(object) && this.character.life > 0){
-        this.character.damage(this.character);
+        this.character.damage(this.character,object);
         this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
           if (this.character.life <=0) {
             this.keyboard = null

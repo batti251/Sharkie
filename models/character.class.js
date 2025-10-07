@@ -99,6 +99,12 @@ sharkie_POISENED = [
     'assets/img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
 ]
 
+sharkie_SHOCKED = [
+  'assets/img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+  'assets/img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+  'assets/img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+]
+
 sharkie_DEAD = [
     'assets/img/1.Sharkie/6.dead/1.Poisoned/1.png',
     'assets/img/1.Sharkie/6.dead/1.Poisoned/2.png',
@@ -128,6 +134,7 @@ sharkie_DEAD_SURFACE = [
         this.loadImgCache(this.sharkie_SLEEPING);
         this.loadImgCache(this.sharkie_SWIM);
         this.loadImgCache(this.sharkie_POISENED);
+        this.loadImgCache(this.sharkie_SHOCKED);
         this.loadImgCache(this.sharkie_DEAD);
         this.loadImgCache(this.sharkie_DEAD_SURFACE);
         this.loadImgCache(this.sharkie_FIN_SLAP);
@@ -287,12 +294,12 @@ sharkie_DEAD_SURFACE = [
    * This Function decreases the targets life by 20
    * Calls poisened-Animation for 150 miliseconds, then goes over into animation-mode
    *
-   * @param {Object} object - The Target that takes the Damage
+   * @param {Object} defender - The Target that takes the Damage
    */
-  damage(object) {
+  damage(defender, damageDealer) {
     this.hitted = true;
-    object.life = object.life - 20;
-    this.animateObjectSprite(this.sharkie_POISENED, 100);
+    defender.life = defender.life - 20;
+    (damageDealer instanceof Jellyfish)? this.animateObjectSprite(this.sharkie_SHOCKED, 100):this.animateObjectSprite(this.sharkie_POISENED, 100)
     setTimeout(() => {
       this.applyCharacterMovement();
     }, 150);
