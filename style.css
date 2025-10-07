@@ -25,6 +25,23 @@ body {
 }
 
 
+.btn-try-again{
+  background-image: url('assets/img/6.Botones/Try again/Recurso 15.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-radius: 0.3rem;
+  background-color: transparent;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  border-style: none;
+  height: 50px;
+  width: 160px;
+}
+
+
 .btn-continue{
   background-image: url('assets/continue.png');
   background-repeat: no-repeat;

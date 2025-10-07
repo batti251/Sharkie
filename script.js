@@ -17,6 +17,16 @@ function toggleContinueButton() {
     continueButton.classList.toggle('d-none')
 }
 
+function toggleTryAgainButtton() {
+    let tryAgainButton = document.getElementById('try-again')
+    tryAgainButton.classList.toggle('d-none')
+}
+
+function tryAgainLevel() {
+    toggleTryAgainButtton()
+    let addLevel = world.level.levelLength
+    addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") 
+}
 
 /**
  * This Function starts the next Level, when the Next-Button was clicked successfully

@@ -28,9 +28,6 @@ levelFinished;
     this.endbossAttack()
   }
 
-
-
-
 findNearestBubbleTarget() {
   clearInterval(this.targetInterval);
   this.targetInterval = setInterval(() => {
@@ -54,9 +51,6 @@ findNearestBubbleTarget() {
         }
       }
   }
-
-
-
 
 updateBubbleTargeting(){
      this.calculateBubbleDirection(this.nearestObject);
@@ -123,6 +117,15 @@ collideBubbleWithTarget(){
       } 
       }, 200);
     }
+
+
+  showDefeatScreen(){
+       this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/Game Over/Recurso 10.png')
+       this.keyboard = null
+      setTimeout(() => {
+       toggleTryAgainButtton()
+      }, 1000);
+  }
 
 
   /**
@@ -264,6 +267,7 @@ collideBubbleWithTarget(){
           if (this.character.life <=0) {
             this.keyboard = null
             this.character.sharkieDieAnimation();
+            this.showDefeatScreen();
           }
       }
    }
@@ -388,5 +392,4 @@ collideBubbleWithTarget(){
      let self = this;
      requestAnimationFrame(() => {self.draw()});
     }
-
 }
