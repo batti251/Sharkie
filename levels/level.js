@@ -1,7 +1,7 @@
 class Level {
 levelLength;
-xStart = -300;
-x1Start = 479;
+xStart = -1859;
+x1Start = -1080;
 multiplicator = 1559;    
 enemyMultiplicator = 5;    
 
@@ -30,6 +30,7 @@ poison = [];
         this.generateLevelObjects();
     }
 
+    
     /**
      * This Function generates all level-oriented Objects for the Level
      * It generates Pufferfish, Jellyfish, Coins, Poison and the Background
@@ -54,7 +55,7 @@ poison = [];
      * 
      */
     generateBackground(){
-        for (let index = 0; index < this.levelLength +1; index++) {
+        for (let index = 0; index < this.levelLength +2; index++) {
              this.backgroundTemplate = this.setBackgroundFrame();
              this.backgroundTemplate.forEach(layer => this.background.push(layer))
              this.increaseBackgroundX()
@@ -159,7 +160,7 @@ poison = [];
      * This function sets a random x-value for collectibles and enemies
      */
     setRandomPosition(){
-      this.randomXPosition = Math.floor(Math.random() * (this.x-2400)) + 600;
+      this.randomXPosition = Math.floor(Math.random() * (this.x-2000)) + 600;
       
     }
 

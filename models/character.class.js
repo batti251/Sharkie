@@ -214,7 +214,7 @@ sharkie_DEAD_SURFACE = [
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveRight(speed, key) {
-    if (key?.RIGHT == true) {
+    if (key?.RIGHT == true && this.x <= this.world.levelBorder ) {
       this.x += speed;
       this.setCharacterPositionLeft(speed);
       this.mirrorImage = false;

@@ -124,6 +124,7 @@ collideBubbleWithTarget(){
 
 
       finishedBossLevel(){
+       this.levelBorder = this.level.x - 2000
        this.finishBossLevelInterval =  setInterval(() => {
         if (this.level.bossFinished){
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
