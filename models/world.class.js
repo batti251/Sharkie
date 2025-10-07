@@ -11,7 +11,7 @@ levelFinished;
 
 
   constructor(canvas, keyboard, nextLevel, levelType) {
-    console.log(nextLevel);
+    console.log("Level: " + nextLevel);
     this.nextLevel = nextLevel
     this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
     levelType == "boss" ? this.level = new LevelEndBoss(this.nextLevel) : this.level = new LevelRegular(this.nextLevel);
@@ -109,9 +109,11 @@ collideBubbleWithTarget(){
       if (this.levelFinished && this.levelType == LevelRegular) {
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
          this.keyboard = null
+          clearInterval(this.finishLevelInterval)
         setTimeout(() => {
-         this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
+              toggleContinueButton()
         }, 1000);
+        
       } else if (this.levelFinished && this.levelType == LevelEndBoss) {
         this.levelFinished = false
         world.level.bossSpawn();
@@ -122,12 +124,13 @@ collideBubbleWithTarget(){
 
 
       finishedBossLevel(){
-        setInterval(() => {
+       this.finishBossLevelInterval =  setInterval(() => {
         if (this.level.bossFinished){
          this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
          this.keyboard = null
+         clearInterval(this.finishBossLevelInterval)
         setTimeout(() => {
-         this.nextLevelButton = new menuObj('assets/img/6.Botones/Try again/Recurso 15.png', 860, 500, 200, 50, "button", "center"); 
+         toggleContinueButton()
         }, 1000);
       }
         }, 200);

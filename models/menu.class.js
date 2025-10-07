@@ -31,7 +31,7 @@ constructor(canvas) {
       }
 
 
-        addImgObjectToMap(object){
+      addImgObjectToMap(object){
       this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
       this.ctx.strokeRect(object.x, object.y, object.width, object.height);
 

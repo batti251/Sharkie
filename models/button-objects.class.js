@@ -20,25 +20,8 @@ height ;
         this.y2 = this.y + this.height;
         this.centralObj(width)
         this.getCanvasPosition();
-        this.nextLevel()
     }
 
-    /**
-     * This Function starts the next Level, when the Next-Button was clicked successfully
-     * It can only be clicked, when Level has been finished
-     * 
-     */
-    nextLevel(){
-         this.scaledMouseEvent = this.getCanvasPosition();
-        canvas.addEventListener("mousedown", (event) => {
-            this.mouseX = this.scaledMouseEvent.x * event.clientX;
-            this.mouseY = this.scaledMouseEvent.y * event.clientY;
-             if (this.isInHitbox(this.mouseX , this.mouseY) && world?.nextLevelButton) {
-                this.addLevel = world.level.levelLength + 1
-                this.addLevel % 1 == 0 ? world = new World(canvas, keyboard, this.addLevel, "boss") : world = new World(canvas, keyboard, this.addLevel, "regular") //auf 2/3 anpassen
-             }
-        }) 
-    }
 
    /**
     * This Function formats the addressed object in central position to the canvas

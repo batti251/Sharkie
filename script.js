@@ -11,3 +11,20 @@ function removeButtons(){
     let buttons = document.getElementsByTagName('button');
     [...buttons].forEach(btn => btn.classList.toggle('d-none'))
 }
+
+function toggleContinueButton() {
+    let continueButton = document.getElementById('continue')
+    continueButton.classList.toggle('d-none')
+}
+
+
+/**
+ * This Function starts the next Level, when the Next-Button was clicked successfully
+ * It can only be clicked, when Level has been finished
+ * 
+ */
+function nextLevel(){
+    toggleContinueButton()
+    let addLevel = world.level.levelLength + 1
+    addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") //auf 2/3 anpassen
+}

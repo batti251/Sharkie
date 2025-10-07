@@ -8,8 +8,6 @@ class LevelRegular extends Level{
         this.x = this.xStart + this.multiplicator
         this.x1 = this.x1Start  + this.multiplicator;
         this.generateLevelObjects();
-        console.log(level);
-        
     }
 
 }
