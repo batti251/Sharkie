@@ -25,7 +25,6 @@ levelFinished;
     this.setLevelEnd()
     this.finishedLevel();
     this.finishedBossLevel();
-    this.enemyJellyfishDetection();
     this.findNearestBubbleTarget();
     this.endbossAttack()
   }
@@ -198,36 +197,20 @@ collideBubbleWithTarget(){
     }, 200);
   }
 
-  
     /**
-     * This Function let the Pufferfishes trigger the transformation Animation and get into angry-state
-     * They will move towards the character
+     * This Function triggers the angry-state of all enemies, when character is detected
+     * This Function let the Pufferfishes trigger the transformation Animation
+     * They will move straight to the left
      * 
      */
     enemyDetection(){
       clearInterval(this.detection)
        this.detection = setInterval(() => {
             this.level.enemies.forEach(enemie => {
-            if (this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Pufferfish){
-              enemie?.enemyDetectionAnimation(enemie);
+            if (this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Enemies){
+              enemie instanceof Pufferfish? enemie.enemyDetectionAnimation(enemie): "";
               enemie.angry = true;
             } 
-          });
-        }, 100);
-    }
-
-    /**
-     * This Function let the Jellyfishes trigger the angry-state
-     * They will move towards the character
-     * 
-     */
-    enemyJellyfishDetection(){
-      clearInterval(this.detectionJellyfish)
-      this.detectionJellyfish = setInterval(() => {
-        this.level.enemies.forEach(enemie => {
-          if(this.character.isDetected(enemie) && !enemie.angry && !(enemie instanceof Pufferfish) && !enemie.dead){
-            enemie.angry = true;
-         } 
           });
         }, 100);
     }
