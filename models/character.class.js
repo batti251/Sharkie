@@ -145,6 +145,8 @@ sharkie_DEAD_SURFACE = [
    *
    */
   animateCharacterMovement() {
+    console.log(this);
+    
     clearInterval(this.characterMovementInterval);
     this.characterMovementInterval = setInterval(() => {
       this.moveCharacter(this.world.keyboard);

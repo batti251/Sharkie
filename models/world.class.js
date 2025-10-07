@@ -22,6 +22,7 @@ levelFinished;
     this.checkCollisions();
     this.checkEndbossCollisions();
     this.checkCollectiblesCollisions();
+    this.setLevelEnd()
     this.finishedLevel();
     this.finishedBossLevel();
     this.enemyJellyfishDetection();
@@ -92,53 +93,89 @@ collideBubbleWithTarget(){
       this.bubble.x = this.nearestObject.x;
       this.bubble.y = this.nearestObject.y;
       delete this.bubble 
-        console.log(this.poisonbar.poisonCount);
 }
 
-
+  /**
+   *This Function defines level-settings for the border and the end of the level
+  */
+  setLevelEnd(){
+      this.levelType = this.level.constructor
+      this.levelEnd = this.level.x - 2000
+      this.levelBorder = this.level.x - 2000
+  }
 
   /**
-   * This Function sets the end of the level
+   * This Function checks, if the defined finish-Border is passed
+   * @returns - Boolean, returns true, when the character is atleast at the same x-coordinate as the levelEnd or beyond
+   */
+  levelIsFinished(){
+    return this.character.x >= this.levelEnd
+  }
+
+  /**
+   * This Function sets the end of the regular-level
    * 
    */
   finishedLevel(){
-    this.levelType = this.level.constructor
-    this.levelEnd = this.level.x - 2000
     this.finishLevelInterval = setInterval(() => {
-      this.levelFinished = this.character.x >= this.levelEnd
-      if (this.levelFinished && this.levelType == LevelRegular) {
-         this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
-         this.keyboard = null
-          clearInterval(this.finishLevelInterval)
-        setTimeout(() => {
-              toggleContinueButton()
-        }, 1000);
-        
-      } else if (this.levelFinished && this.levelType == LevelEndBoss) {
-        this.levelFinished = false
-        world.level.bossSpawn();
-        clearInterval(this.finishLevelInterval)
-      }
+      this.levelIsFinished()
+      if (this.levelIsFinished() && this.levelType == LevelRegular) {
+         clearInterval(this.finishLevelInterval)
+        this.showVictoryScreen();
+      } 
       }, 200);
     }
 
 
-      finishedBossLevel(){
-       this.levelBorder = this.level.x - 2000
-       this.finishBossLevelInterval =  setInterval(() => {
-        if (this.level.bossFinished){
-         this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
-         this.keyboard = null
-         clearInterval(this.finishBossLevelInterval)
-        setTimeout(() => {
-         toggleContinueButton()
-        }, 1000);
-      }
-        }, 200);
-      }
-      
-  
+  /**
+   * This Function shows the Victory Screen, when the level is done successfuly
+   * It shows the Continue-Button to enter the next level
+   * It denies the keyboard-functions to prevent further character-movement
+   */
+  showVictoryScreen(){
+       this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
+       this.keyboard = null
+      setTimeout(() => {
+       toggleContinueButton()
+      }, 1000);
+  }
 
+  /**
+   * This Function sets the end of the boss-level
+   * 
+   */
+  finishedBossLevel(){
+    this.spawnBoss();
+    this.defeatBoss();
+  }
+
+  /**
+   * This Function listens, to spawn the boss when character passes the level-border
+   */
+  spawnBoss(){
+      this.spawnBossInterval = setInterval(() => {
+         if (this.levelIsFinished() && this.levelType == LevelEndBoss) {
+          world.level.bossSpawn();
+          clearInterval(this.spawnBossInterval)
+        } 
+      }, 200);
+  }
+
+  /**
+   * This Function listens, if the boss was defeated
+   * It shows the Victory-Screen, on success
+   */
+  defeatBoss(){
+    this.finishBossLevelInterval =  setInterval(() => {
+      this.levelIsFinished()
+      if (this.level.bossFinished){
+        clearInterval(this.finishBossLevelInterval)
+        this.showVictoryScreen();
+      }
+    }, 200);
+  }
+
+      
   /**
    * This Function detects collision from the character with the collectibles
    * If a collision is detected, it calls the fill-bar-function
