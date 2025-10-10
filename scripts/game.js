@@ -152,13 +152,12 @@ function clampToRadius(dx, dy) {
 function handleEnd(event) {
   event.preventDefault()
   const touches = event.changedTouches;
-  console.log(touches);
-  centerStick(touches)
+  centerStick()
 }
 
 /**
  * This Function moves the stick back to it's neutral position
  */
 function centerStick() {
-  stick.style.transform = 'translate (-50%,-50%)'
+  stick.style.transform = 'translate(-50%,-50%)'
 }
