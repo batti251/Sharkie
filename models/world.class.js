@@ -29,9 +29,6 @@ levelFinished;
     this.endbossAttack()
   }
 
-      explainLevel(level){
-        console.log(level);
-    }
 
 findNearestBubbleTarget() {
   clearInterval(this.targetInterval);

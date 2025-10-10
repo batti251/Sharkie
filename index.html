@@ -11,7 +11,7 @@
     <script src="models/game-objects.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/menu.class.js"></script>
-    <script src="scripts/game.js"></script>
+    <script src="scripts/game.js" defer></script>
     <script src="models/menuBackground-objects.class.js"></script>
     <script src="models/button-objects.class.js"></script>
     <script src="models/static-objects.class.js"></script>
@@ -45,6 +45,15 @@
 
     <canvas id ="canvas" width="1920" height="1080">
     </canvas>
+
+<div class="panel">
+  <div class="trackpad">
+    <div id="joystick">
+      <div id="stick"></div>
+    </div>
+  </div>
+</div>
+
 
     <button id="continue" class="btn-continue d-none" onclick="nextLevel()"></button>
     <button id="try-again" class="btn-try-again d-none" onclick="tryAgainLevel()"></button>

@@ -10,6 +10,7 @@ function startGame() {
 function removeButtons(){
     let buttons = document.getElementsByTagName('button');
     [...buttons].forEach(btn => btn.classList.add('d-none'))
+
 }
 
 function toggleContinueButton() {

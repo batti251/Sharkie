@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  touch-action: none; /* no touch manipulation */
 }
 
 /* width */
@@ -145,6 +146,37 @@ header{
 .text-white{
   color: rgba(238, 242, 243, 0.897);
 }
+
+
+.panel{
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+#joystick {
+  position: relative;
+  width: 180px;           /* pad size */
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid #888;
+}
+
+#stick {
+  position: absolute;
+  left: 50%; 
+  top: 50%;
+  width: 64px; 
+  height: 64px;     /* thumb size */
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid #555;
+  background: rgba(0,0,0,0.5);
+  transition: transform 80ms linear; /* kleiner Snap-Effekt beim Loslassen */
+  pointer-events: none; /* damit Touches auf dem Pad landen */
+}
+
+
 
 @keyframes turn {
   0% {
