@@ -81,12 +81,15 @@ let pad = document.getElementById('joystick')
 let stick = document.getElementById('stick')
 let padCenterCoordinate = {x: 0 , y: 0}
 pad.addEventListener("touchstart", handleStart);
-/*pad.addEventListener("touchend", handleEnd);
-pad.addEventListener("touchcancel", handleCancel);*/
+pad.addEventListener("touchend", handleEnd);
+/*pad.addEventListener("touchcancel", handleCancel);*/
 pad.addEventListener("touchmove", handleMove); 
 const ongoingTouches = [];
 
-
+/**
+ *  This Function is called, when the user puts the finger on the screen initialy
+ * @param {Event} event - the triggered Touch Event 
+ */
 function handleStart(event) {
   event.preventDefault();
   const touches = event.changedTouches;
@@ -112,7 +115,10 @@ function calcCenter() {
 
 const padRADIUS = 80; 
 
-
+/**
+ *  This Function is called, when the user moves the finger over the screen, while touching event is active
+ * @param {Event} event - the triggered Touch Event 
+ */
 function handleMove(event) {
   event.preventDefault();
   const touches = event.changedTouches;
@@ -139,4 +145,20 @@ function clampToRadius(dx, dy) {
   return { dx: dx * s, dy: dy * s };
 }
 
+/**
+ * This Function is called, when the user lifts the finger from the screen
+ * @param {Event} event - the triggered Touch Event 
+ */
+function handleEnd(event) {
+  event.preventDefault()
+  const touches = event.changedTouches;
+  console.log(touches);
+  centerStick(touches)
+}
 
+/**
+ * This Function moves the stick back to it's neutral position
+ */
+function centerStick() {
+  stick.style.transform = 'translate (-50%,-50%)'
+}
