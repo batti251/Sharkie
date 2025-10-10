@@ -71,3 +71,72 @@ document.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+function copyTouch({ identifier, pageX, pageY }) {
+  return { identifier, pageX, pageY };
+}
+
+
+let pad = document.getElementById('joystick')
+let stick = document.getElementById('stick')
+let padCenterCoordinate = {x: 0 , y: 0}
+pad.addEventListener("touchstart", handleStart);
+/*pad.addEventListener("touchend", handleEnd);
+pad.addEventListener("touchcancel", handleCancel);*/
+pad.addEventListener("touchmove", handleMove); 
+const ongoingTouches = [];
+
+
+function handleStart(event) {
+  event.preventDefault();
+  const touches = event.changedTouches;
+  
+   for (let i = 0; i < touches.length; i++) {
+    console.log(touches);
+    const touch = touches[i];
+    if (touch.target.id == 'joystick') {
+      ongoingTouches.push(copyTouch(touch));
+      calcCenter()
+    }
+  }
+}
+
+/**
+ * This Function calculates the middle-coordinates of the joystick-element, in relation to the screen-size
+ */
+function calcCenter() {
+      const rect = pad.getBoundingClientRect()
+      padCenterCoordinate.x = rect.left + window.scrollX + rect.width / 2;
+      padCenterCoordinate.y = rect.top  + window.scrollY + rect.height / 2;
+}
+
+const padRADIUS = 80; 
+
+
+function handleMove(event) {
+  event.preventDefault();
+  const touches = event.changedTouches;
+for (let index = 0; index < touches.length; index++) {
+  const t = touches[index]
+  let dx = t.pageX - padCenterCoordinate.x;
+  let dy = t.pageY - padCenterCoordinate.y;
+  let clamped = clampToRadius(dx, dy)
+  stick.style.transform = `translate(calc(-50% + ${clamped.dx}px) , calc(-50% + ${clamped.dy}px))`
+}
+}
+
+/**
+ * This Function limits the dx and dy coordinate from the stick to the defined padRADIUS
+ * It prevents the stick from fading out of the pad
+ * 
+ * @param {*} dx - the current stick x coordinate (center of the element)
+ * @param {*} dy - the current stick y coordinate (center of the element)
+ * @returns - new object with updated dx and dy coordinate multiplicated with the defined
+ */
+function clampToRadius(dx, dy) {
+  const len = Math.hypot(dx, dy);
+  const s = len > padRADIUS ? padRADIUS / len : 1;
+  return { dx: dx * s, dy: dy * s };
+}
+
+
