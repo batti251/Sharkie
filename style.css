@@ -150,14 +150,20 @@ header{
 
 .panel{
     position: absolute;
-    top: 50%;
+    bottom: 0;
     width: 100%;
+}
+
+
+.trackpad{
+  display: flex;
+  justify-content: space-between;
 }
 
 #joystick {
   position: relative;
-  width: 180px;           /* pad size */
-  height: 180px;
+  width: 122px;           /* pad size */
+  height: 122px;
   border-radius: 50%;
   border: 2px solid #888;
 }
@@ -176,6 +182,23 @@ header{
   pointer-events: none; /* damit Touches auf dem Pad landen */
 }
 
+.abilities{
+  width: 25%;
+  display: flex;
+  gap: 16px;
+}
+
+#finslap{
+ position: relative;
+width: 50%;
+border: 2px solid #555;
+}
+
+#bubbleshoot{
+ position: relative;
+  width: 50%;
+  border: 2px solid #555;
+}
 
 
 @keyframes turn {
