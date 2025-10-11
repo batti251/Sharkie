@@ -34,6 +34,13 @@ function removeVictoryScreen() {
     victory.classList.add('d-none')
 }
 
+function removeDefeatScreen() {
+    let defeat = document.getElementById('defeat-screen')
+    defeat.classList.add('d-none')
+}
+
+
+
 function toggleContinueButton() {
     let continueButton = document.getElementById('continue')
     continueButton.classList.toggle('d-none')
@@ -54,8 +61,11 @@ function toggleTryAgainButtton() {
     tryAgainButton.classList.toggle('d-none')
 }
 
+
+
 function tryAgainLevel() {
     toggleTryAgainButtton()
+    removeDefeatScreen()
     let addLevel = world.level.levelLength
     addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") 
 }
@@ -68,6 +78,7 @@ function tryAgainLevel() {
 function nextLevel(){
     removeContinueButton()
     removeVictoryScreen()
+    isMobileDevice()
     let addLevel = world.level.levelLength + 1
     addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") //auf 2/3 anpassen
 }

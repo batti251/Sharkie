@@ -123,7 +123,10 @@ collideBubbleWithTarget(){
 
 
   showDefeatScreen(){
-       this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/Game Over/Recurso 10.png')
+       let defeat = document.getElementById('defeat-screen')
+       let panel = document.getElementById('panel')
+       defeat.classList.remove('d-none')
+       panel.classList.add('d-none')
        this.keyboard = null
       setTimeout(() => {
        toggleTryAgainButtton()
@@ -138,7 +141,9 @@ collideBubbleWithTarget(){
    */
   showVictoryScreen(){
        let victory = document.getElementById('victory-screen')
+       let panel = document.getElementById('panel')
        victory.classList.remove('d-none')
+       panel.classList.add('d-none')
        this.keyboard = null
       setTimeout(() => {
        addContinueButton()
