@@ -76,14 +76,16 @@ function copyTouch({ identifier, pageX, pageY }) {
   return { identifier, pageX, pageY };
 }
 
-
+let panel = document.getElementById('panel')
 let pad = document.getElementById('joystick')
 let stick = document.getElementById('stick')
+let slapButton = document.getElementById('finslap')
+let shootButton = document.getElementById('bubbleshoot')
 let padCenterCoordinate = {x: 0 , y: 0}
-pad.addEventListener("touchstart", handleStart);
-pad.addEventListener("touchend", handleEnd);
+panel.addEventListener("touchstart", handleStart);
+panel.addEventListener("touchend", handleEnd);
 /*pad.addEventListener("touchcancel", handleCancel);*/
-pad.addEventListener("touchmove", handleMove); 
+panel.addEventListener("touchmove", handleMove); 
 const ongoingTouches = [];
 
 /**
@@ -93,13 +95,15 @@ const ongoingTouches = [];
 function handleStart(event) {
   event.preventDefault();
   const touches = event.changedTouches;
-  
    for (let i = 0; i < touches.length; i++) {
-    console.log(touches);
     const touch = touches[i];
     if (touch.target.id == 'joystick') {
       ongoingTouches.push(copyTouch(touch));
       calcCenter()
+    }
+    if (touch.target.id == 'finslap') {
+      ongoingTouches.push(copyTouch(touch));
+      keyboard.SPACE = true
     }
   }
 }
@@ -124,13 +128,27 @@ function handleMove(event) {
   const touches = event.changedTouches;
 for (let index = 0; index < touches.length; index++) {
   const t = touches[index]
+  if (t.target.id == 'joystick') {
+    padMoveCharacter(t)
+}
+ if (t.target.id == 'finslap') {
+      keyboard.SPACE = true
+    }
+}}
+
+/**
+ * This Function calls the character-movement, when using the trackpad
+ * 
+ * @param {*} t - the current touch-event
+ */
+function padMoveCharacter(t){
   let dx = t.pageX - padCenterCoordinate.x;
   let dy = t.pageY - padCenterCoordinate.y;
   let clamped = clampToRadius(dx, dy)
   stick.style.transform = `translate(calc(-50% + ${clamped.dx}px) , calc(-50% + ${clamped.dy}px))`
   setKeyboardDirection(dx, dy)
 }
-}
+
 
 /**
  * This function triggers defined keyboard-keys, accordingly to the coordinate the stick is pushed
@@ -163,12 +181,17 @@ function clampToRadius(dx, dy) {
 
 /**
  * This Function is called, when the user lifts the finger from the screen
+ * This Function resets the stick and ability-keys, when the touch-event ends
  * @param {Event} event - the triggered Touch Event 
  */
 function handleEnd(event) {
   event.preventDefault()
   const touches = event.changedTouches;
-  centerStick()
+  for (const touch of touches) {
+      if (touch.target.id == 'joystick') {
+      centerStick()
+  }}
+  keyboard.SPACE = false
 }
 
 /**

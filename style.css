@@ -148,7 +148,7 @@ header{
 }
 
 
-.panel{
+#panel{
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -192,12 +192,14 @@ header{
  position: relative;
 width: 50%;
 border: 2px solid #555;
+border-radius: 50%;
 }
 
 #bubbleshoot{
  position: relative;
   width: 50%;
   border: 2px solid #555;
+  border-radius: 50%;
 }
 
 
