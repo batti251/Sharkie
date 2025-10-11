@@ -115,9 +115,10 @@ collideBubbleWithTarget(){
       this.levelIsFinished()
       if (this.levelIsFinished() && this.levelType == LevelRegular) {
          clearInterval(this.finishLevelInterval)
-        this.showVictoryScreen();
+      this.showVictoryScreen();
       } 
       }, 200);
+
     }
 
 
@@ -136,10 +137,11 @@ collideBubbleWithTarget(){
    * It denies the keyboard-functions to prevent further character-movement
    */
   showVictoryScreen(){
-       this.levelFinished = new menuBackground('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png')
+       let victory = document.getElementById('victory-screen')
+       victory.classList.remove('d-none')
        this.keyboard = null
       setTimeout(() => {
-       toggleContinueButton()
+       addContinueButton()
       }, 1000);
   }
 

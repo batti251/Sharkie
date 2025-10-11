@@ -73,6 +73,38 @@ body {
   width: 100px;
 }
 
+#menu-background{
+  background-image: url('assets/background.png');
+  background-repeat: round;
+  background-size: cover;
+  height:100svh;
+  width:100svw;
+
+}
+
+.hero-title{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hero{
+  background-image: url('assets/sharkie-background.png');
+  background-repeat: round;
+  background-size: cover;
+  height: 80px;
+  width: 160px;
+}
+
+#victory-screen{
+  background-image: url('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png');
+  background-repeat: round;
+  background-size: cover;
+  height:100svh;
+  width:100svw;
+}
+
 .btn-legal-notice{
   background-image: url('assets/legal-notice-chat.png');
   background-repeat: no-repeat;
@@ -89,8 +121,8 @@ body {
 }
 
 #canvas {
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   display: block;
 }
 

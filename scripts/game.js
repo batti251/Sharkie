@@ -7,8 +7,7 @@ let keyboard = new Keyboard();
  */
 function init() {
     const canvas = document.getElementById('canvas');
-    /* world = new World(canvas, keyboard, 0); */
-    menu = new Menu(canvas)
+    world = new World(canvas, keyboard, 0);
 }
 
 
