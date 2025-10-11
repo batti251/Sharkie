@@ -64,6 +64,7 @@ body {
   width: 100svw;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   gap: 24px;
 }
 
@@ -206,6 +207,24 @@ header {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+#panel-top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: end;
+  margin: 0 0 0 -24px ;
+  gap: 16px;
+  height: 10vh;
+  width: 100%;
+  position: absolute;
+  align-items: center;
+  top: 10%;
 }
 
 .trackpad {
