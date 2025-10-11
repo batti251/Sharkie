@@ -6,7 +6,18 @@ function startGame() {
     removeButtons();
     removeMenu();
     world = new World(canvas, keyboard, 0);
+    isMobileDevice()
 }
+
+  function isMobileDevice(){
+  let mobileController = document.getElementById('panel')
+  if(('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints > 0)) {
+    mobileController.classList.remove('d-none')
+    }else {
+    mobileController.classList.add('d-none')
+    }
+}
+
 
 function removeButtons(){
     let buttons = document.getElementsByTagName('button');

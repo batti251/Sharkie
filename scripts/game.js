@@ -7,8 +7,10 @@ let keyboard = new Keyboard();
  */
 function init() {
     const canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, 0);
+    //world = new World(canvas, keyboard, 0);
 }
+
+
 
 
 document.addEventListener("keydown",(event) => {

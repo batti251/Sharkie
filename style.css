@@ -114,8 +114,8 @@ body {
   background-image: url('assets/sharkie-background.png');
   background-repeat: round;
   background-size: cover;
-    height: 120px;
-    width: 180px;
+height: 80px;
+    width: 160px;
 }
 
 #victory-screen{
@@ -154,8 +154,8 @@ body {
   background-image: url('assets/sharkie-title.png');
   background-repeat: round;
   background-size: cover;
-  height:20vh;
-  width:20vw;
+  height:10svh;
+  width:20svw;
 }
 
 header{
