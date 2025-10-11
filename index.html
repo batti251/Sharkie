@@ -41,11 +41,15 @@
         <img class="img-phone" src="assets/cell-phone.png" alt="mobile phone picture art" title="Ios icons created by Shashank Singh - Flaticon">
 </div>
 
-<div id="menu-background">
+<div id="menu-background" class="menu-background">
   <div class="hero-title">
-  <h1>Sharkie</h1>
+  <div class="sharkie-title"></div>
   <div class="hero"></div>
   </div>
+      <div class="btn-menu">
+    <button class="btn-start" onclick="startGame()"></button>
+    <button class="btn-legal-notice" onclick="toggleLegalNotice()"></button>
+    </div> 
 </div>
 
 <div id="victory-screen" class="d-none"></div>
@@ -69,10 +73,9 @@
     <button id="continue" class="btn-continue d-none" onclick="nextLevel()"></button>
     <button id="try-again" class="btn-try-again d-none" onclick="tryAgainLevel()"></button>
 
-    <button class="btn-start" onclick="startGame()"></button>
 
-    <button class="btn-legal-notice" onclick="toggleLegalNotice()"></button>
-
+    
+    
     <div id="legal-notice-container" class="legal-notice d-none">
         <header><div class="d-flex"></div><div class="close-button" onclick="toggleLegalNotice()"><img class="close-icon" src="assets/close-button.svg"></div></header>
        

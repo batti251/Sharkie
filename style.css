@@ -58,29 +58,50 @@ body {
   width: 100px;
 }
 
-.btn-start{
-  background-image: url('assets/img/6.Botones/Start/3.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-color: transparent;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  border-style: none;
-  height: 33px;
-  width: 100px;
-}
 
-#menu-background{
+.menu-background{
   background-image: url('assets/background.png');
   background-repeat: round;
   background-size: cover;
   height:100svh;
   width:100svw;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.btn-menu{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+
+.btn-start{
+  background-image: url('assets/img/6.Botones/Start/3.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border-style: none;
+  height: 52px;
+  width: 160px;
+}
+
+
+.btn-legal-notice{
+  background-image: url('assets/legal-notice-chat.png');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: 100%;
+  cursor: pointer;
+  border-style: none;
+  height: 72px;
+  width: 120px;
 
 }
+
 
 .hero-title{
     display: flex;
@@ -93,8 +114,8 @@ body {
   background-image: url('assets/sharkie-background.png');
   background-repeat: round;
   background-size: cover;
-  height: 80px;
-  width: 160px;
+    height: 120px;
+    width: 180px;
 }
 
 #victory-screen{
@@ -105,20 +126,6 @@ body {
   width:100svw;
 }
 
-.btn-legal-notice{
-  background-image: url('assets/legal-notice-chat.png');
-  background-repeat: no-repeat;
-  background-color: transparent;
-  background-size: 100%;
-  cursor: pointer;
-  border-style: none;
-  height: 46px;
-  width: 100px;
-  position: absolute;
-  left: 50%;
-  bottom: 20%;
-  transform: translate(-50%, -50%);
-}
 
 #canvas {
   width: 100svw;
@@ -141,6 +148,14 @@ body {
 .legal-notice-text{
   overflow-y: scroll;
   height: 80%;
+}
+
+.sharkie-title{
+  background-image: url('assets/sharkie-title.png');
+  background-repeat: round;
+  background-size: cover;
+  height:20vh;
+  width:20vw;
 }
 
 header{
