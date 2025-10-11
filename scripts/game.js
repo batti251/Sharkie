@@ -105,6 +105,10 @@ function handleStart(event) {
       ongoingTouches.push(copyTouch(touch));
       keyboard.SPACE = true
     }
+    if (touch.target.id =='bubbleshoot') {
+      ongoingTouches.push(copyTouch(touch));
+      keyboard.Q = true
+    }
   }
 }
 
@@ -133,6 +137,9 @@ for (let index = 0; index < touches.length; index++) {
 }
  if (t.target.id == 'finslap') {
       keyboard.SPACE = true
+    }
+  if (t.target.id =='bubbleshoot') {
+      keyboard.Q = true
     }
 }}
 
@@ -192,6 +199,7 @@ function handleEnd(event) {
       centerStick()
   }}
   keyboard.SPACE = false
+  keyboard.Q = false
 }
 
 /**
