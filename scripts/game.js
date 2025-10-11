@@ -122,7 +122,7 @@ function calcCenter() {
       padCenterCoordinate.y = rect.top  + window.scrollY + rect.height / 2;
 }
 
-const padRADIUS = 80; 
+const padRADIUS = 50; 
 const DEADZONE = 14
 /**
  *  This Function is called, when the user moves the finger over the screen, while touching event is active

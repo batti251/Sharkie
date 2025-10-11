@@ -1,6 +1,6 @@
 class Instruction extends GameObjects{
 x = 1280;
-y = 480;
+y = 280;
 width = 600;
 height = 400;
 maxCoins;

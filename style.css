@@ -11,7 +11,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #19D1D9;
+  background: #19d1d9;
 }
 
 /* Handle */
@@ -22,12 +22,11 @@ body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #00D57E;
+  background: #00d57e;
 }
 
-
-.btn-try-again{
-  background-image: url('assets/img/6.Botones/Try again/Recurso 15.png');
+.btn-try-again {
+  background-image: url("assets/img/6.Botones/Try again/Recurso 15.png");
   background-repeat: no-repeat;
   background-size: 100%;
   border-radius: 0.3rem;
@@ -42,9 +41,8 @@ body {
   width: 160px;
 }
 
-
-.btn-continue{
-  background-image: url('assets/continue.png');
+.btn-continue {
+  background-image: url("assets/continue.png");
   background-repeat: no-repeat;
   background-size: 100%;
   border-radius: 0.3rem;
@@ -58,28 +56,26 @@ body {
   width: 100px;
 }
 
-
-.menu-background{
-  background-image: url('assets/background.png');
+.menu-background {
+  background-image: url("assets/background.png");
   background-repeat: round;
   background-size: cover;
-  height:100svh;
-  width:100svw;
+  height: 100svh;
+  width: 100svw;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.btn-menu{
+.btn-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
 }
 
-
-.btn-start{
-  background-image: url('assets/img/6.Botones/Start/3.png');
+.btn-start {
+  background-image: url("assets/img/6.Botones/Start/3.png");
   background-repeat: no-repeat;
   background-size: 100%;
   background-color: transparent;
@@ -89,9 +85,8 @@ body {
   width: 160px;
 }
 
-
-.btn-legal-notice{
-  background-image: url('assets/legal-notice-chat.png');
+.btn-legal-notice {
+  background-image: url("assets/legal-notice-chat.png");
   background-repeat: no-repeat;
   background-color: transparent;
   background-size: 100%;
@@ -99,33 +94,30 @@ body {
   border-style: none;
   height: 72px;
   width: 120px;
-
 }
 
-
-.hero-title{
-    display: flex;
+.hero-title {
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.hero{
-  background-image: url('assets/sharkie-background.png');
+.hero {
+  background-image: url("assets/sharkie-background.png");
   background-repeat: round;
   background-size: cover;
-height: 80px;
-    width: 160px;
+  height: 80px;
+  width: 160px;
 }
 
-#victory-screen{
-  background-image: url('assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png');
+#victory-screen {
+  background-image: url("assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png");
   background-repeat: round;
   background-size: cover;
-  height:100svh;
-  width:100svw;
+  height: 100svh;
+  width: 100svw;
 }
-
 
 #canvas {
   width: 100svw;
@@ -140,115 +132,122 @@ height: 80px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  border: 4px #FFC049;
+  border: 4px #ffc049;
   border-style: solid;
-  background-color: #46E9D9;
+  background-color: #46e9d9;
 }
 
-.legal-notice-text{
+.legal-notice-text {
   overflow-y: scroll;
   height: 80%;
 }
 
-.sharkie-title{
-  background-image: url('assets/sharkie-title.png');
+.sharkie-title {
+  background-image: url("assets/sharkie-title.png");
   background-repeat: round;
   background-size: cover;
-  height:10svh;
-  width:20svw;
+  height: 10svh;
+  width: 20svw;
 }
 
-header{
+header {
   display: flex;
   justify-content: space-between;
   position: sticky;
   top: 0;
-  background-color: #46E9D9;
+  background-color: #46e9d9;
 }
 
-.close-button{
-    cursor: pointer;
+.close-button {
+  cursor: pointer;
 }
 
-.close-icon{
-    background-color: #FFC049;
-    border-radius: 1.5rem;
+.close-icon {
+  background-color: #ffc049;
+  border-radius: 1.5rem;
 }
 
-.d-none{
-    display: none;
+.d-none {
+  display: none;
 }
 
-.d-flex{
-    display: flex;
+.d-flex {
+  display: flex;
 }
 
-.img-phone{
+.img-phone {
   height: 100px;
   animation-name: turn;
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
-.text-white{
+.text-white {
   color: rgba(238, 242, 243, 0.897);
 }
 
-
-#panel{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+#panel {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
-
-.trackpad{
+.trackpad {
   display: flex;
   justify-content: space-between;
 }
 
 #joystick {
   position: relative;
-  width: 122px;           /* pad size */
+  background-color: #004987;
+  width: 122px; /* pad size */
   height: 122px;
   border-radius: 50%;
-  border: 2px solid #888;
+  border: 2px solid #ffc049;
 }
 
 #stick {
   position: absolute;
-  left: 50%; 
+  left: 50%;
   top: 50%;
-  width: 64px; 
-  height: 64px;     /* thumb size */
+  width: 64px;
+  height: 64px; /* thumb size */
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 2px solid #555;
-  background: rgba(0,0,0,0.5);
+  border: 2px solid #ffc049;
+  background: rgba(0, 0, 0, 0.7);
   transition: transform 80ms linear; /* kleiner Snap-Effekt beim Loslassen */
   pointer-events: none; /* damit Touches auf dem Pad landen */
 }
 
-.abilities{
-  width: 25%;
+.abilities {
+  width: 244px;
   display: flex;
   gap: 16px;
 }
 
-#finslap{
- position: relative;
-width: 50%;
-border: 2px solid #555;
-border-radius: 50%;
-}
-
-#bubbleshoot{
- position: relative;
+#finslap {
+  background-image: url("assets/btn-slap.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #004987;
+  position: relative;
   width: 50%;
-  border: 2px solid #555;
+  border: 4px solid #ffc049;
   border-radius: 50%;
 }
 
+#bubbleshoot {
+  background-image: url("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: center;
+  background-color: #004987;
+  position: relative;
+  width: 50%;
+  border: 4px solid #ffc049;
+  border-radius: 50%;
+}
 
 @keyframes turn {
   0% {
@@ -260,34 +259,31 @@ border-radius: 50%;
   }
 }
 
+@media screen and (orientation: portrait) {
+  .landscape {
+    height: 100svh;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.8);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-
-@media screen and (orientation:portrait) {
-    .landscape{
-      height: 100svh;
-      width: 100%;
-      background-color: rgb(0,0,0,0.8);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    button{
-      display: none;
-    }
+  button {
+    display: none;
+  }
 }
 
-@media screen and (orientation:landscape) {
-      .landscape{
-      display: none;
-    }
+@media screen and (orientation: landscape) {
+  .landscape {
+    display: none;
+  }
 }
-
 
 /* @media only screen and (max-width: 720px){
   #canvas{
@@ -301,5 +297,3 @@ border-radius: 50%;
     height: 100svh;
   }
 } */
-
-
