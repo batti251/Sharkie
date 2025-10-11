@@ -114,7 +114,7 @@ function calcCenter() {
 }
 
 const padRADIUS = 80; 
-
+const DEADZONE = 14
 /**
  *  This Function is called, when the user moves the finger over the screen, while touching event is active
  * @param {Event} event - the triggered Touch Event 
@@ -128,8 +128,24 @@ for (let index = 0; index < touches.length; index++) {
   let dy = t.pageY - padCenterCoordinate.y;
   let clamped = clampToRadius(dx, dy)
   stick.style.transform = `translate(calc(-50% + ${clamped.dx}px) , calc(-50% + ${clamped.dy}px))`
+  setKeyboardDirection(dx, dy)
 }
 }
+
+/**
+ * This function triggers defined keyboard-keys, accordingly to the coordinate the stick is pushed
+ * Both coordinates must pass the defined DEADZONE, before a key is set true
+ * 
+ * @param {*} dx - current x-coordinate, the stick is pushed
+ * @param {*} dy - current y-coordinate, the stick is pushed
+ */
+function setKeyboardDirection(dx, dy) {
+  keyboard.LEFT  = dx < -DEADZONE;
+  keyboard.RIGHT = dx >  DEADZONE;
+  keyboard.UP    = dy < -DEADZONE;
+  keyboard.DOWN  = dy >  DEADZONE;
+}
+
 
 /**
  * This Function limits the dx and dy coordinate from the stick to the defined padRADIUS
@@ -157,7 +173,9 @@ function handleEnd(event) {
 
 /**
  * This Function moves the stick back to it's neutral position
+ * It sets all keyboard-keys to false, to let the character stop
  */
 function centerStick() {
   stick.style.transform = 'translate(-50%,-50%)'
+  keyboard.LEFT = keyboard.RIGHT = keyboard.UP = keyboard.DOWN = false
 }
