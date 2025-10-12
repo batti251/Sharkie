@@ -452,7 +452,7 @@ sharkie_DEAD_SURFACE = [
         clearInterval(this.characterMovementInterval)
         clearTimeout(this.hitTimer)
         clearTimeout(this.fallAsleep)
-        clearTimeout(this.sharkieDies)
+        // clearTimeout(this.sharkieDies)
         this.characterMovementInterval = null
         this.hitTimer = null
         this.fallAsleep = null

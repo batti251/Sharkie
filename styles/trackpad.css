@@ -39,7 +39,7 @@
 }
 
 #finslap {
-  background-image: url("/assets/btn-slap.png");
+  background-image: url("../assets/btn-slap.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #004987;
@@ -51,7 +51,7 @@
 }
 
 #bubbleshoot {
-  background-image: url("/assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
+  background-image: url("../assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position-y: center;
