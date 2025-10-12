@@ -14,7 +14,7 @@ levelFinished;
   constructor(canvas, keyboard, nextLevel, levelType) {
     console.log("Level: " + nextLevel);
     this.nextLevel = nextLevel
-    this.ctx = canvas.getContext("2d"); // enables 2 dimensional Area
+    this.ctx = canvas.getContext("2d");
     levelType == "boss" ? this.level = new LevelEndBoss(this.nextLevel) : this.level = new LevelRegular(this.nextLevel);
     this.draw(this.nextLevel);
     this.keyboard = keyboard
@@ -94,8 +94,8 @@ collideBubbleWithTarget(){
   */
   setLevelEnd(){
       this.levelType = this.level.constructor
-      this.levelEnd = this.level.x - 2000
-      this.levelBorder = this.level.x - 2000
+      this.levelEnd = this.level.x - 1940
+      this.levelBorder = this.level.x - 1940
   }
 
   /**
@@ -115,6 +115,7 @@ collideBubbleWithTarget(){
       this.levelIsFinished()
       if (this.levelIsFinished() && this.levelType == LevelRegular) {
          clearInterval(this.finishLevelInterval)
+         this.levelFinished = true
       this.showVictoryScreen();
       } 
       }, 200);
@@ -128,11 +129,11 @@ collideBubbleWithTarget(){
        defeat.classList.remove('d-none')
        panel.classList.add('d-none')
        this.keyboard = null
+       this.clearAllIntervals()
       setTimeout(() => {
        toggleTryAgainButtton()
       }, 1000);
   }
-
 
   /**
    * This Function shows the Victory Screen, when the level is done successfuly
@@ -145,6 +146,7 @@ collideBubbleWithTarget(){
        victory.classList.remove('d-none')
        panel.classList.add('d-none')
        this.keyboard = null
+       this.clearAllIntervals()
       setTimeout(() => {
        addContinueButton()
       }, 1000);
@@ -192,14 +194,16 @@ collideBubbleWithTarget(){
    * 
    */
   checkCollectiblesCollisions(){
-    setInterval(() => {
+    clearInterval(this.coinsInterval)
+    clearInterval(this.poisonInterval)
+    this. coinsInterval = setInterval(() => {
       this.level.coins.forEach(coin => {
         if (this.character.isInsideBorder(coin) && this.character.canCollect) {
             this.coinbar.fillCoinbar(coin);
             }
            })
     }, 200);
-    setInterval(() => {
+    this.poisonInterval = setInterval(() => {
       this.level.poison.forEach(poison => {
         if (this.character.isInsideBorder(poison)) {
             this.poisonbar.fillPoisonbar(poison);
@@ -311,12 +315,12 @@ collideBubbleWithTarget(){
       }
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
-      this.imgAnimationLoop();
-      this?.addImgObjectToMap(this.levelFinished)
-      this?.addImgObjectToMap(this.nextLevelButton)
       this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
-     
-
+      if (this.levelFinished) {
+        this.stopAnimationLoop()
+      } else {
+      this.imgAnimationLoop();
+      }
   } 
 
 
@@ -398,11 +402,42 @@ collideBubbleWithTarget(){
 
 
     /**
-     * This Function repeats the draw()-function 
-     * 
+     * This Function repeats the draw()-function
+     * It is called, until the level is finished
      */
     imgAnimationLoop(){
      let self = this;
-     requestAnimationFrame(() => {self.draw()});
+     this.instance = requestAnimationFrame(() => {self.draw()});
     }
+
+    /**
+     * This Function stops the imgAnimationLoop
+     * It is called, when the level is finished
+     */
+    stopAnimationLoop(){
+     cancelAnimationFrame(this.instance);
+}
+
+
+  clearAllWorldIntervals(){
+    clearInterval(this.collisionInterval)
+    clearInterval(this.coinsInterval)
+    clearInterval(this.poisonInterval)
+    clearInterval(this.detection)
+    clearInterval(this.finishLevelInterval)
+    clearInterval(this.targetInterval)
+    clearInterval(this.spawnBossInterval)
+    clearInterval(this.finishBossLevelInterval)
+  }
+
+  clearAllIntervals(){
+    this.clearAllWorldIntervals()
+    this.character.clearCharacterIntervals()
+    this.level.enemies?.forEach(e => e.clearAllEnemieIntervals?.());
+    this.level.enemies?.forEach(e => e.clearBossIntervalls?.());
+  }
+
+
+
+  
 }

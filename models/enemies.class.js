@@ -118,4 +118,12 @@ angry = false
     }
     
 
+    clearAllEnemieIntervals(){
+        clearInterval(this.interval);
+        clearInterval(this.randomCoordinateYInterval);
+        clearInterval(this.randomTurnInterval);
+        clearInterval(this.resetIntervalX);
+        clearInterval(this.resetIntervalY);
+    }
+
 }

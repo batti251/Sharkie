@@ -9,7 +9,7 @@ class LevelEndBoss extends Level{
     }
 
     bossSpawn(){
-        this.bossX = this.x - 1000
+        this.bossX = this.x - this.multiplicator
         this.generateEndboss(this.bossX);
     }
 

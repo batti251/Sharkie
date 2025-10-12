@@ -448,6 +448,14 @@ sharkie_DEAD_SURFACE = [
     }
 
 
-
-
+    clearCharacterIntervals(){
+        clearInterval(this.characterMovementInterval)
+        clearTimeout(this.hitTimer)
+        clearTimeout(this.fallAsleep)
+        clearTimeout(this.sharkieDies)
+        this.characterMovementInterval = null
+        this.hitTimer = null
+        this.fallAsleep = null
+        this.sharkieDies = null
+    }
 }

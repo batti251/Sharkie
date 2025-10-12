@@ -66,10 +66,14 @@ function toggleTryAgainButtton() {
 
 
 function tryAgainLevel() {
-    toggleTryAgainButtton()
-    removeDefeatScreen()
-    let addLevel = world.level.levelLength
-    addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") 
+  toggleTryAgainButtton();
+  removeDefeatScreen();
+  isMobileDevice();
+  let addLevel = world.level.levelLength;
+  let levelType = (addLevel % 3 === 0) ? "boss" : "regular";
+
+  world.stopAnimationLoop();
+  world = new World(canvas, keyboard, addLevel, levelType);
 }
 
 /**
@@ -78,9 +82,11 @@ function tryAgainLevel() {
  * 
  */
 function nextLevel(){
-    removeContinueButton()
-    removeVictoryScreen()
-    isMobileDevice()
-    let addLevel = world.level.levelLength + 1
-    addLevel % 1 == 0 ? world = new World(canvas, keyboard, addLevel, "boss") : world = new World(canvas, keyboard, addLevel, "regular") //auf 2/3 anpassen
+  removeContinueButton();
+  removeVictoryScreen();
+  isMobileDevice();
+  let addLevel = (world.nextLevel ?? 0) + 1;
+  let levelType = (addLevel % 3 === 0) ? "boss" : "regular";
+  world.stopAnimationLoop();
+  world = new World(canvas, keyboard, addLevel, levelType);
 }

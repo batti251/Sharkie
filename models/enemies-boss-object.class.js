@@ -79,13 +79,15 @@ class Endboss extends Enemies {
   }
 
   endbossEntrance() {
+    clearTimeout(this.bossEntranceInterval)
     this.animateObject(this.endboss_INTRODUCE, 120);
-    setTimeout(() => {
+    this.bossEntranceInterval = setTimeout(() => {
       this.animateObject(this.endboss_FLOATING, 200);
     }, 1000);
   }
 
   bossDieAnimation(){
+    clearTimeout(this.bossDies)
       this.bossDies = setTimeout(() => {
       this.animateObjectSprite(this.endboss_DEAD, 100);
       setTimeout(() => {
@@ -125,6 +127,7 @@ class Endboss extends Enemies {
 
   bossAttack(){
     if (!this.bossAttackOnCooldown) {
+      clearTimeout(this.cooldownTimeout)
     this.bossAttackOnCooldown = true
     this.isAttacking = true
     this.animateObjectSprite(this.endboss_ATTACK, 100);
@@ -138,11 +141,21 @@ class Endboss extends Enemies {
     }
 
     bossAttackCooldown(){
-      setTimeout(() => {
-        console.log("cooldown");
+      clearTimeout(this.cooldownTimeout)
+      this.cooldownTimeout = setTimeout(() => {
         this.isAttacking = false
         this.bossAttackOnCooldown = false
       }, 5000);
+    }
+
+    clearBossIntervalls(){
+      clearInterval(this.knockbackInterval)
+      clearInterval(this.dashInterval)
+      clearTimeout(this.cooldownTimeout)
+      clearTimeout(this.bossDies)
+      clearInterval(this.randomCoordinateYInterval);
+      clearInterval(this.randomTurnInterval);
+      clearInterval(this.resetIntervalX);
     }
 
 }
