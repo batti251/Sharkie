@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharkie</title>
+    <link rel="stylesheet" href="assets/font/LuckiestGuy-Regular.ttf">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/button.css">
+    <link rel="stylesheet" href="styles/overlay.css">
 
     <script src="script.js"></script>
     <script src="models/keyboard.class.js"></script>
@@ -43,12 +46,11 @@
 
 <div id="menu-background" class="menu-background">
   <div class="hero-title">
-  <div class="sharkie-title"></div>
+  <h1 class="sharkie-title">Sharkie</h1>
   <div class="hero"></div>
   </div>
       <div class="btn-menu">
-    <button class="btn-start" onclick="startGame()"></button>
-    <button class="btn-legal-notice" onclick="toggleLegalNotice()"></button>
+    <button class="btn-start" onclick="startGame()">START</button>
     </div> 
 </div>
 
@@ -60,6 +62,7 @@
   <nav>
     <button>Audio</button>
     <button>Fullscreen</button>
+    <button class="btn-legal-notice" onclick="toggleLegalNotice()">Legal Notice</button>
   </nav>
 </header>
 
@@ -79,14 +82,14 @@
   </div>
 
 
-    <button id="continue" class="btn-continue d-none" onclick="nextLevel()"></button>
-    <button id="try-again" class="btn-try-again d-none" onclick="tryAgainLevel()"></button>
+    <button id="continue" class="btn-continue center-container d-none" onclick="nextLevel()">Continue</button>
+    <button id="try-again" class="btn-try-again center-container d-none" onclick="tryAgainLevel()">Try Again</button>
 
 
     
     
-    <div id="legal-notice-container" class="legal-notice d-none">
-        <header><div class="d-flex"></div><div class="close-button" onclick="toggleLegalNotice()"><img class="close-icon" src="assets/close-button.svg"></div></header>
+    <div id="legal-notice-container" class="legal-notice center-container d-none">
+        <div class="legal-notice-closebar"><div class="d-flex"></div><button class="btn-close"  onclick="toggleLegalNotice()">X</button></div>
        
        <div class="legal-notice-text">
         <h1>Impressum</h1>

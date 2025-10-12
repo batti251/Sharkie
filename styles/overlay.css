@@ -1,0 +1,23 @@
+#victory-screen {
+  background-image: url("/assets/img/6.Botones/Tittles/You win/Mesa de trabajo 1.png");
+  background-repeat: round;
+  background-size: cover;
+  height: 100svh;
+  width: 100svw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#defeat-screen {
+  background-image: url("/assets/img/6.Botones/Tittles/Game Over/Recurso 9.png");
+  background-repeat: round;
+  background-size: cover;
+  height: 15vh;
+  position: absolute;
+  width: 80%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
