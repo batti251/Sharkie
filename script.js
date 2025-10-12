@@ -21,7 +21,9 @@ function startGame() {
 
 function removeButtons(){
     let buttons = document.getElementsByTagName('button');
+    let trackpad = [...buttons].filter((id) => id.parentElement.parentElement.className == 'trackpad');
     [...buttons].forEach(btn => btn.classList.add('d-none'))
+    trackpad.forEach(btn => btn.classList.remove('d-none'))
 }
 
 function removeMenu() {

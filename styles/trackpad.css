@@ -1,0 +1,64 @@
+#panel {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.trackpad {
+  display: flex;
+  justify-content: space-between;
+}
+
+#joystick {
+  position: relative;
+  background-color: #004987;
+  width: 122px; /* pad size */
+  height: 122px;
+  border-radius: 50%;
+  border: 2px solid #ffc049;
+}
+
+#stick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px; /* thumb size */
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid #ffc049;
+  background: rgba(0, 0, 0, 0.7);
+  transition: transform 80ms linear; /* kleiner Snap-Effekt beim Loslassen */
+  pointer-events: none; /* damit Touches auf dem Pad landen */
+}
+
+.abilities {
+  width: 244px;
+  display: flex;
+  gap: 16px;
+}
+
+#finslap {
+  background-image: url("/assets/btn-slap.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #004987;
+  position: relative;
+  width: 50%;
+  border: 4px solid #ffc049;
+  border-radius: 50%;
+  height: unset;
+}
+
+#bubbleshoot {
+  background-image: url("/assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: center;
+  background-color: #004987;
+  position: relative;
+  width: 50%;
+  border: 4px solid #ffc049;
+  border-radius: 50%;
+  height: unset;
+}
