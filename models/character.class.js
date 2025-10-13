@@ -126,8 +126,11 @@ sharkie_DEAD_SURFACE = [
 
     constructor(path, x, y){
         super().loadImg(path);
-
-        this.x = x 
+      this.swimAudio = new Audio('audio/swim.mp3'); 
+      this.finslapAudio = new Audio('audio/finslap.wav');
+      this.jellyHitAudio = new Audio('audio/electric-zap.wav');
+      this.regularHitAudio = new Audio('audio/hit.wav');
+      this.x = x 
         this.y = y
         this.loadImgCache(this.sharkie_IDLE);
         this.loadImgCache(this.sharkie_Long_IDLE);
@@ -180,6 +183,7 @@ sharkie_DEAD_SURFACE = [
    * @param {object} key - Object with the listened Keyboard Keys
    */
   moveCharacter(key) {
+    
     this.moveUp(this.speedY, key);
     this.moveDown(this.speedY, key);
     this.moveRight(this.speedX, key);
@@ -200,6 +204,8 @@ sharkie_DEAD_SURFACE = [
   moveUp(speed, key) {
     if (key?.UP == true && this.y > -100) {
       this.y = this.y - speed;
+    this.swimAudio.play()
+
     }
   }
   /**
@@ -212,6 +218,8 @@ sharkie_DEAD_SURFACE = [
   moveDown(speed, key) {
     if (key?.DOWN == true && this.y < 680) {
       this.y = this.y + speed;
+    this.swimAudio.play()
+
     }
   }
 
@@ -227,6 +235,8 @@ sharkie_DEAD_SURFACE = [
       this.x += speed;
       this.setCharacterPositionLeft(speed);
       this.mirrorImage = false;
+    this.swimAudio.play()
+
     }
   }
 
@@ -242,6 +252,8 @@ sharkie_DEAD_SURFACE = [
       this.x -= speed;
       this.setCharacterPositionRight(speed);
       this.mirrorImage = true;
+    this.swimAudio.play()
+
     }
   }
 
@@ -362,6 +374,7 @@ sharkie_DEAD_SURFACE = [
      */
     finSlap(key){
             if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
+              this.finslapAudio.play()
                 this.keyDetection = true
                 this.slapCooldown = true
                 this.isAttacking = true

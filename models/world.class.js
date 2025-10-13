@@ -276,14 +276,15 @@ collideBubbleWithTarget(){
   characterTakesDamage(object){
    if(this.character.isInsideBorder(object) && this.character.life > 0){
         this.character.damage(this.character,object);
+      object instanceof Jellyfish ? this.character.jellyHitAudio.play() : this.character.regularHitAudio.play();
         this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
+        }
           if (this.character.life <=0) {
             this.keyboard = null
             this.character.sharkieDieAnimation();
             this.showDefeatScreen();
           }
       }
-   }
 
 /**
  * This Function calls the Boss-Attack, if the Attack is not on Cooldown
