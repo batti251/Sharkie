@@ -12,23 +12,19 @@ body {
   font-style: normal;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: #19d1d9;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #004987;
   border-radius: 1rem;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #00d57e;
 }
@@ -42,8 +38,8 @@ h1 {
   background-image: url("assets/background.png");
   background-repeat: round;
   background-size: cover;
-  height: 100svh;
-  width: 100svw;
+  height: 100dvh;
+  width: 100dvw;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -66,8 +62,8 @@ h1 {
 }
 
 #canvas {
-  width: 100svw;
-  height: 100svh;
+  width: 100dvw;
+  height: 100dvh;
   display: block;
 }
 
