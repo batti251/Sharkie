@@ -75,6 +75,8 @@ class Endboss extends Enemies {
     this.x = x;
     this.setHitbox(40, 270, 1.2, 3.5);
     this.bossAttackCooldown()
+    this.bossEntranceAudio = new Audio('audio/boss-entrance.mp3');
+    this.bossBiteAudio = new Audio('audio/boss-bite.wav');
 /*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }
 
@@ -83,6 +85,8 @@ class Endboss extends Enemies {
     this.animateObject(this.endboss_INTRODUCE, 120);
     this.bossEntranceInterval = setTimeout(() => {
       this.animateObject(this.endboss_FLOATING, 200);
+      this.bossEntranceAudio.play();
+
     }, 1000);
   }
 
@@ -137,6 +141,10 @@ class Endboss extends Enemies {
        clearInterval(this.dashInterval)
     }, 600);
     this.bossAttackCooldown();
+    this.biteInterval = setTimeout(() => {
+          this.bossBiteAudio.play();
+    }, 400);
+
      }
     }
 
@@ -153,6 +161,7 @@ class Endboss extends Enemies {
       clearInterval(this.dashInterval)
       clearTimeout(this.cooldownTimeout)
       clearTimeout(this.bossDies)
+      clearTimeout(this.biteInterval)
       clearInterval(this.randomCoordinateYInterval);
       clearInterval(this.randomTurnInterval);
       clearInterval(this.resetIntervalX);

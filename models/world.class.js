@@ -200,6 +200,8 @@ collideBubbleWithTarget(){
       this.level.coins.forEach(coin => {
         if (this.character.isInsideBorder(coin) && this.character.canCollect) {
             this.coinbar.fillCoinbar(coin);
+            coin.coinAudio.play();
+            
             }
            })
     }, 200);
@@ -207,6 +209,7 @@ collideBubbleWithTarget(){
       this.level.poison.forEach(poison => {
         if (this.character.isInsideBorder(poison)) {
             this.poisonbar.fillPoisonbar(poison);
+            poison.poisonAudio.play();
            }
            })
     }, 200);

@@ -353,16 +353,19 @@ sharkie_DEAD_SURFACE = [
    *
    */
   sharkieDieAnimation() {
-    this.sharkieDies = setTimeout(() => {
-      this.animateObjectSprite(this.sharkie_DEAD, 100);
+    if (!this.sharkieDiesInterval) {
+    this.sharkieDiesInterval = setTimeout(() => {
+      this.animateObjectSprite(this.sharkie_DEAD, 80);
       setTimeout(() => {
         this.animateObjectSprite(this.sharkie_DEAD_SURFACE, 300);
         this.dead = true;
-      }, 200);
+      }, 300);
         this.deadToSurface(1)
-
-    }, 100);
-  }
+    }, 200)
+    } else 
+      return
+    }
+    
 
 
 
@@ -465,10 +468,7 @@ sharkie_DEAD_SURFACE = [
         clearInterval(this.characterMovementInterval)
         clearTimeout(this.hitTimer)
         clearTimeout(this.fallAsleep)
-        // clearTimeout(this.sharkieDies)
-        this.characterMovementInterval = null
-        this.hitTimer = null
-        this.fallAsleep = null
-        this.sharkieDies = null
+ 
+
     }
 }

@@ -22,6 +22,7 @@ poison_IDLE = [
         this.animateObject(this.poison_IDLE, 220);
         this.y = Math.floor(Math.random() * 200) + 200;
         this.setHitbox(18, 45, 2, 2);
+        this.poisonAudio = new Audio('audio/poison-collect.wav');
     }
 
 

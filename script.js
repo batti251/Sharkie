@@ -76,7 +76,7 @@ function tryAgainLevel() {
   removeDefeatScreen();
   isMobileDevice();
   let addLevel = world.level.levelLength;
-  let levelType = addLevel % 3 === 0 ? "boss" : "regular";
+  let levelType = addLevel % 1 === 0 ? "boss" : "regular";
 
   world.stopAnimationLoop();
   world = new World(canvas, keyboard, addLevel, levelType);
@@ -92,7 +92,7 @@ function nextLevel() {
   removeVictoryScreen();
   isMobileDevice();
   let addLevel = (world.nextLevel ?? 0) + 1;
-  let levelType = addLevel % 3 === 0 ? "boss" : "regular";
+  let levelType = addLevel % 1 === 0 ? "boss" : "regular";
   world.stopAnimationLoop();
   world = new World(canvas, keyboard, addLevel, levelType);
 }
