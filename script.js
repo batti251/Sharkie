@@ -61,13 +61,18 @@ function addContinueButton() {
   continueButton.classList.remove("d-none");
 }
 
-function toggleTryAgainButtton() {
+function addTryAgainButtton() {
   let tryAgainButton = document.getElementById("try-again");
-  tryAgainButton.classList.toggle("d-none");
+  tryAgainButton.classList.remove("d-none");
+}
+
+function removeTryAgainButton() {
+  let tryAgainButton = document.getElementById("try-again");
+  tryAgainButton.classList.add("d-none");
 }
 
 function tryAgainLevel() {
-  toggleTryAgainButtton();
+  removeTryAgainButton();
   removeDefeatScreen();
   isMobileDevice();
   let addLevel = world.level.levelLength;

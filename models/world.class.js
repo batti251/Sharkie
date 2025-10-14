@@ -131,7 +131,7 @@ collideBubbleWithTarget(){
        this.keyboard = null
        this.clearAllIntervals()
       setTimeout(() => {
-       toggleTryAgainButtton()
+       addTryAgainButtton()
       }, 1000);
   }
 
