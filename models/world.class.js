@@ -254,7 +254,7 @@ collideBubbleWithTarget(){
    * @param {*} object - the referenced object => Boss only
    */
     checkEndbossCollisions(object){
-        if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
+        if (this.character.abilities.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
             object.bossDamage()
              if (object.life <= 0) {
                object.bossDieAnimation()
@@ -267,7 +267,7 @@ collideBubbleWithTarget(){
    * @param {*} object - the referenced object => enemies, except Boss
    */
   characterHitsEnemy(object){
-      if (this.character.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
+      if (this.character.abilities.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
           object.x = -1000
           } 
     }

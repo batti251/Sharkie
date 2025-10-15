@@ -3,16 +3,14 @@ currentImg = 0
 width = 400;
 height = 400;
 world;
-speedX = 8;
-speedY = 4;
 maxLife = 1000;
 life = this.maxLife;
 canCollect = true;
 hitted = false;
-slapCooldown = false
-slapCooldownTime = 1500;
+fallAsleep;
+hitboxSlap = 240;
+hitboxReset = 120;
 shotBubble = false
-keyDetection = false;
 
 
 sharkie_IDLE = [
@@ -125,7 +123,10 @@ sharkie_DEAD_SURFACE = [
 ]
 
     constructor(path, x, y){
-        super().loadImg(path);
+        super()
+        this.loadImg(path);
+        this.abilities =  new CharacterAbilities(this);
+        this.movement = new CharacterMovement(this);
       this.swimAudio = new Audio('audio/swim.mp3'); 
       this.finslapAudio = new Audio('audio/finslap.wav');
       this.jellyHitAudio = new Audio('audio/electric-zap.wav');
@@ -146,145 +147,6 @@ sharkie_DEAD_SURFACE = [
         this.setHitbox(100, 200, 1.9, 4);
     }
 
-/**
-   * This Function picks the needed Sprite-Array depending on the characters Status
-   * When Character moves = [Swim-Array]
-   * When Character doesn't move = [Idle-Array]
-   * When Character doesn't move > 15 seconds = [sleep-Array]
-   * It sets the active Character Movement to 60 FPS
-   *
-   */
-  animateCharacterMovement() {
-    console.log(this);
-    
-    clearInterval(this.characterMovementInterval);
-    this.characterMovementInterval = setInterval(() => {
-      this.moveCharacter(this.world.keyboard);
-      if (this.isMoving !== this.lastIsMoving && !this.isAttacking && !this.isShooting) {
-        this.lastIsMoving = this.isMoving;
-        this.applyCharacterMovement();
-      }
-    }, 1000 / 60);
-  }
-
-      
-    /**
-     * This Function calls the character swim-Animation
-     * 
-     */
-    characterSwims(){
-        this.animateObjectSprite(this.sharkie_SWIM, 100);
-    }
-
-
-/**
-   * This Function calls the actual Moveset from the Character
-   *
-   * @param {object} key - Object with the listened Keyboard Keys
-   */
-  moveCharacter(key) {
-    
-    this.moveUp(this.speedY, key);
-    this.moveDown(this.speedY, key);
-    this.moveRight(this.speedX, key);
-    this.moveLeft(this.speedX, key);
-    this.finSlap(key);
-    this.negatefinSlapX();
-    this.shootBubble(key);
-    this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
-  }
-
-    /**
-   * This function reduces the Y-Coordinate and let the Object move up
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
-   *
-   * @param {Number} speed - The px-value
-   * @param {Object} key - Object with the listened Keyboard Keys
-   */
-  moveUp(speed, key) {
-    if (key?.UP == true && this.y > -100) {
-      this.y = this.y - speed;
-    this.swimAudio.play()
-
-    }
-  }
-  /**
-   * This function raises the Y-Coordinate and let the Object move down
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
-   *
-   * @param {Number} speed - The px-value
-   * @param {Object} key - Object with the listened Keyboard Keys
-   */
-  moveDown(speed, key) {
-    if (key?.DOWN == true && this.y < 680) {
-      this.y = this.y + speed;
-    this.swimAudio.play()
-
-    }
-  }
-
-  /**
-   * This function raises the X-Coordinate and let the Object move right
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
-   *
-   * @param {Number} speed - The px-value
-   * @param {Object} key - Object with the listened Keyboard Keys
-   */
-  moveRight(speed, key) {
-    if (key?.RIGHT == true && this.x <= this.world.levelBorder ) {
-      this.x += speed;
-      this.setCharacterPositionLeft(speed);
-      this.mirrorImage = false;
-    this.swimAudio.play()
-
-    }
-  }
-
-  /**
-   * This Function reduces the X-Coordinate and let the Object move left
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
-   *
-   * @param {Number} speed - The px-value
-   * @param {Object} key - Object with the listened Keyboard Keys
-   */
-  moveLeft(speed, key) {
-    if (key?.LEFT == true && this.x > -100) {
-      this.x -= speed;
-      this.setCharacterPositionRight(speed);
-      this.mirrorImage = true;
-    this.swimAudio.play()
-
-    }
-  }
-
-    /**
-   * This Function negates the finSlapX-coordinate to have a proper detection if the character swims to the left, to hit an enemy
-   *
-   */
-  negatefinSlapX() {
-    if (this.mirrorImage) {
-      this.finSlapX = this.hitboxX - this.finSlapHitboxWidth;
-    } else {
-      this.finSlapX = this.hitboxX + this.hitboxWidth;
-    }
-  }
-
-  /**
-   * This Function checks, if the characters finslap-Hitbox is colliding with the objects hitbox
-   *
-   * @param {Object} object - The dedicated Object: Enemies
-   * @returns - returns true, to indicate a Collision, returns false if no Collision is detected
-   */
-  isInsideSlapBorder(object) {
-    return (
-      this.x + this.finSlapX + this.finSlapHitboxWidth > object.x + object.hitboxX &&
-      this.x + this.finSlapX < object.x + object.hitboxWidth &&
-      this.y + this.hitboxY + this.hitboxHeight > object.y + object.hitboxY &&
-      this.y + this.hitboxY < object.y + object.hitboxY + object.hitboxHeight
-    );
-  }
-
-
     /**
      * This Function calls the character sleep-Animation 
      * The Timer is set to 15 seconds until it starts the Animation
@@ -303,7 +165,7 @@ sharkie_DEAD_SURFACE = [
 
 
   /**
-   * This Function decreases the targets life by 20
+   * This Function decreases the characters life by 20
    * When hit by Jellyfish character-shocked-Animation runs for 150miliseconds
    * Else poisened-Animation is called, then turns into IDLE-mode
    *
@@ -314,7 +176,7 @@ sharkie_DEAD_SURFACE = [
     defender.life = defender.life - 20;
     (damageDealer instanceof Jellyfish)? this.animateObjectSprite(this.sharkie_SHOCKED, 100):this.animateObjectSprite(this.sharkie_POISENED, 100)
     setTimeout(() => {
-      this.applyCharacterMovement();
+      this.movement.applyCharacterMovement();
     }, 150);
     this.notHittedReset(500);
   }
@@ -337,19 +199,10 @@ sharkie_DEAD_SURFACE = [
   }
 
   /**
-   * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on hiis moving-state
-   *
-   */
-  applyCharacterMovement() {
-    if (this.isMoving) {
-      this.characterSwims();
-    } else {
-      this.characterFallAsleep();
-    }
-  }
-
-  /**
    * This Function calls the dead Animation for Sharkie
+   * After short delay the dead-to-surface-Function is called
+   * It also has a debounce-method, to avoid multiple calls
+   * @returns - returns, when sharkieDiesInterval is already set
    *
    */
   sharkieDieAnimation() {
@@ -368,107 +221,15 @@ sharkie_DEAD_SURFACE = [
     
 
 
-
     /**
-     * This Function let the character attack with his fin.
-     * During slap-animation the character cannot collect collectibles
-     * 
-     * @param {Object} key - Object with the listened Keyboard Keys
-     */
-    finSlap(key){
-            if (key?.SPACE === true && !this.slapCooldown && !this.hitted) {
-              this.finslapAudio.play()
-                this.keyDetection = true
-                this.slapCooldown = true
-                this.isAttacking = true
-                this.canCollect = false
-                this.animateObjectSprite(this.sharkie_FIN_SLAP, 80)
-                this.expandHitbox()
-                this.stallCharacterAnimationBy(720)
-                setTimeout(() => {
-                this.hitboxWidth = 210
-                }, 600);
-                }  
-                 if (!key?.SPACE) {
-            this.keyDetection = false
-        } 
-    }
-    
-    shootBubble(key){
-        if (key?.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0 && !this.keyDetection && !this.world.bubble) {
-            key.Q = null
-            this.keyDetection = true
-            this.isShooting = true
-            this.canCollect = false
-            this.animateObjectSprite(this.sharkie_Bubble_TRAP, 80)
-            this.createBubble(world.character)
-            this.shootCoolDown(700)
-        }
-        if (!key?.Q) {
-            this.keyDetection = false
-        }
-    }
-
-    createBubble(character){
-        setTimeout(() => {
-            this.world.bubble = new Bubble('assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png', character);
-            this.shotBubble = true;
-            this.decreasePoisonCount();
-        }, 700);
-
-
-    }
-
-    decreasePoisonCount(){
-        this.world.poisonbar.poisonCount.shift()
-        this.world.poisonbar.updatePoisonbar()
-    }
-
-    shootCoolDown(miliseconds){
-        setTimeout(() => {
-          this.applyCharacterMovement();
-          this.isShooting = false
-          this.canCollect = true
-        }, miliseconds);
-    }
-
-    /**
-     * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
-     * It also works as Cooldown for collection and key.SPACE-listener
-     * 
-     * @param {Number} miliseconds - Timer, when Function should be called 
-     */
-    stallCharacterAnimationBy(miliseconds){
-        setTimeout(() => {
-          this.applyCharacterMovement();
-          this.isAttacking = false
-          this.canCollect = true
-          this.slapCooldown = false
-          this.doesDamage = false
-        }, miliseconds);
-    }
-
-    /**
-     * This Function increases Hitbox from character slighty
-     * New Hitbox width 140px,  
+     * This Function clears all Intervals and Timeouts, when game is over
+     * This avoids multiple Intervals running in the background, when game is restarted
      * 
      */
-    expandHitbox(){
-        this.oldHitBoxWidth = this.hitboxWidth
-        setTimeout(() => {
-          this.doesDamage = true
-            this.hitboxWidth = this.hitboxSlap
-            this.finSlapX = this.oldHitBoxWidth + this.hitboxX
-            this.finSlapHitboxWidth = this.hitboxSlap - this.oldHitBoxWidth
-                    }, 400);
-    }
-
-
     clearCharacterIntervals(){
         clearInterval(this.characterMovementInterval)
         clearTimeout(this.hitTimer)
         clearTimeout(this.fallAsleep)
- 
-
+        clearTimeout(this.finslapTimer)
     }
 }

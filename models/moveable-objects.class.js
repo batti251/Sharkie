@@ -1,23 +1,13 @@
 class MoveableObjects extends GameObjects {
   width = 200;
   height = 200;
-  speed = 0.25;
-  speedY;
-  speedX;
   mirrorImage;
-  coinToss;
-  resetIntervalX;
-  resetIntervalY;
   maxLife;
-  max;
   life;
-  isMoving;
-  lastIsMoving;
-  fallAsleep;
+
   hitboxWidth;
   hitboxHeight;
-  hitboxSlap = 240;
-  hitboxReset = 120;
+
 
   /**
    * This Function calls the Objects Animations
@@ -29,7 +19,7 @@ class MoveableObjects extends GameObjects {
    */
   animateObject(sprites, miliseconds) {
     if (sprites.some((element) => element.includes("Sharkie"))) {
-      this.animateCharacterMovement();
+      this.movement.animateCharacterMovement();
     } else this.animateObjectSprite(sprites, miliseconds);
   }
 
@@ -91,33 +81,8 @@ class MoveableObjects extends GameObjects {
 
 
 
-  /**
-   * This Function moves the camera, so the charactar will be set left on the screen
-   * If the character is not on the left screen, the camera will move slightly faster until the character is posiitioned on the left screen again
-   *
-   * @param {*} speed
-   */
-  setCharacterPositionLeft(speed) {
-    if (this.world.cameraX + this.x > 0) {
-      this.world.cameraX -= speed + 5;
-    } else {
-      this.world.cameraX -= speed;
-    }
-  }
 
-  /**
-   * This Function moves the camera, so the charactar will be set right on the screen
-   * If the character is not on the right screen, the camera will move slightly faster until the character is positioned on the right screen again
-   *
-   * @param {*} speed
-   */
-  setCharacterPositionRight(speed) {
-    if (this.world.cameraX + this.x < canvas.width - 500) {
-      this.world.cameraX += speed + 5;
-    } else {
-      this.world.cameraX += speed;
-    }
-  }
+
 
   /**
    * This Function sets the Hitbox of the Objects, scaled by any size

@@ -1,13 +1,17 @@
 class Enemies extends MoveableObjects{
 currentImg = 0
+speed = 0.25;
 speedX = 0.75;
 speedY = 0.25;
 randomHeightInterval = 500;
 randomTurnIntervaL = 3000;
 damage;
 angry = false
-
-
+coinToss;
+resetIntervalX;
+resetIntervalY;
+isMoving;
+lastIsMoving;
 
   /**
    * This Function calls Enemies (Minions) to move
