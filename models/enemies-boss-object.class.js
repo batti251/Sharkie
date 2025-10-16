@@ -80,6 +80,13 @@ class Endboss extends Enemies {
 /*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }
 
+  /**
+   * This function plays the Boss-Entrance-Animation once at the beginning of the level
+   * It sets a Timeout to start the floating-Animation after the entrance is finished
+   * It plays a specific Audio when the floating-Animation starts
+   * It clears the bossEntranceInterval to avoid multiple calls
+   * 
+   */
   endbossEntrance() {
     clearTimeout(this.bossEntranceInterval)
     this.animateObject(this.endboss_INTRODUCE, 120);
@@ -90,25 +97,44 @@ class Endboss extends Enemies {
     }, 1000);
   }
 
+  /**
+   * This function plays the Boss-Death-Animation, when life is 0 or below
+   * It sets the dead-Property to true, to avoid further interactions with the Boss
+   * It calls the deadToSurface-Function to let the Boss float to the surface
+   * It sets the bossFinished-Property in level to true, to end the level
+   * It clears all Intervals and Timeouts, to avoid further movements or actions of the Boss
+   */
   bossDieAnimation(){
     clearTimeout(this.bossDies)
       this.bossDies = setTimeout(() => {
-      this.animateObjectSprite(this.endboss_DEAD, 100);
-      setTimeout(() => {
-        this.animateObjectSprite(this.endboss_DEAD_SURFACE, 300);
-        this.dead = true;
-        this.angry = false;
-        world.level.bossFinished = true;
-      }, 500);
-        this.deadToSurface(1)
-    }, 100);
+        this.animateObjectSprite(this.endboss_DEAD, 100);
+        setTimeout(() => {
+          this.animateObjectSprite(this.endboss_DEAD_SURFACE, 300);
+          this.setBossDeathState()
+        }, 500);
+          this.deadToSurface(1)
+     }, 100);
+  }
+
+  /**
+   * This function lets the Boss float to the surface when he dies
+   * It sets the dead-Property to true, to avoid further interactions with the Boss
+   * It sets the bossFinished-Property in level to true, to end the level
+   */
+  setBossDeathState(){
+    this.dead = true;
+    this.angry = false;
+    world.level.bossFinished = true;
   }
 
 
-
-
+  /**
+   * This function reduces the life of the Boss by 50, when he gets hit
+   * It calls the bossKnockback-Function to let him move back a bit
+   * It plays the hurt-Animation and after short delay the floating-Animation again
+   */
     bossDamage() {
-    this.life = this.life - 50;
+    this.life -= 50;
     this.bossKnockback()
     this.animateObjectSprite(this.endboss_HURT, 100);
     setTimeout(() => {
@@ -117,45 +143,103 @@ class Endboss extends Enemies {
     }, 500);
   }
 
+  /**
+   * This function let the Boss move back when he gets hit
+   * 
+   */
   bossKnockback(){
   this.knockbackInterval = setInterval(() => {
     this.x += 10
     }, 1000/60);
   }
 
+
+/**
+ * This function let the Boss dash to the left when he attacks
+ */
   bossDash(){
     this.dashInterval = setInterval(() => {
     this.x -= 5
     }, 1000/60);
   }
 
+  /**
+   * This Function calls the Boss-Attack, when not on Cooldown
+   * It has a debounce-method, to avoid multiple calls
+  * @returns - returns, when bossAttackOnCooldown is true
+   */
   bossAttack(){
     if (!this.bossAttackOnCooldown) {
       clearTimeout(this.cooldownTimeout)
-    this.bossAttackOnCooldown = true
-    this.isAttacking = true
-    this.animateObjectSprite(this.endboss_ATTACK, 100);
-    this.bossDash()
-    setTimeout(() => {
-       this.animateObjectSprite(this.endboss_FLOATING, 200);
-       clearInterval(this.dashInterval)
-    }, 600);
-    this.bossAttackCooldown();
-    this.biteInterval = setTimeout(() => {
-          this.bossBiteAudio.play();
-    }, 400);
-
+      this.setBossAttackState();
+      this.bossAttackAnimation();
+      this.bossDash();
+      this.bossAttackCooldown();
+      this.playSound(this.bossBiteAudio, 400);
      }
     }
 
+    /**
+     * This Function sets the Boss-Attack-State to true
+     * It is used to avoid multiple Attacks, when Boss is already attacking
+     * It is reset after the cooldown-Time in the bossAttackCooldown-Function
+     */
+     setBossAttackState(){
+      this.bossAttackOnCooldown = true
+      this.isAttacking = true
+     }
+
+     /**
+      * This Function resets the Boss-Attack-State to false
+      * It is called after the cooldown-Time in the bossAttackCooldown-Function
+      */
+     removeBossAttackState(){
+      this.bossAttackOnCooldown = false
+      this.isAttacking = false
+     }
+
+    /**
+     * This Function plays a specific Audio after a defined time
+     * 
+     * @param {*} audio - the specific Audio
+     * @param {*} time - time in miliseconds, when Audio should be played
+     */
+    playSound(audio, time){
+    this.biteInterval = setTimeout(() => {
+              audio.play();
+        }, time);
+    }
+
+    /**
+     * This Function calls the Boss-Attack-Animation
+     * After short delay the floating-Animation is called again
+     * It clears the dash-Interval
+     */
+    bossAttackAnimation(){
+    this.animateObjectSprite(this.endboss_ATTACK, 100);
+    setTimeout(() => {
+          this.animateObjectSprite(this.endboss_FLOATING, 200);
+          clearInterval(this.dashInterval)
+        }, 600);
+    }
+
+    /**
+     * This Function sets a cooldown for the Boss-Attack
+     * After 5 seconds the Boss attacks again
+     * It has a debounce-method, to avoid multiple calls
+     * @returns - returns, when cooldownTimeout is already set
+     */
     bossAttackCooldown(){
       clearTimeout(this.cooldownTimeout)
       this.cooldownTimeout = setTimeout(() => {
-        this.isAttacking = false
-        this.bossAttackOnCooldown = false
+        this.removeBossAttackState();
       }, 5000);
     }
 
+    /**
+     * This Function clears all Intervals and Timeouts, when game is over
+     * This avoids multiple Intervals running in the background, when game is restarted
+     */
     clearBossIntervalls(){
       clearInterval(this.knockbackInterval)
       clearInterval(this.dashInterval)
@@ -165,6 +249,14 @@ class Endboss extends Enemies {
       clearInterval(this.randomCoordinateYInterval);
       clearInterval(this.randomTurnInterval);
       clearInterval(this.resetIntervalX);
+      clearInterval(this.resetIntervalY);
+      clearTimeout(this.bossEntranceInterval)
+      clearTimeout(this.bossDies)
+      clearTimeout(this.bossEntranceInterval)
+      clearTimeout(this.biteInterval)
+      clearTimeout(this.cooldownTimeout)
+      clearTimeout(this.bossDies)
+      clearTimeout(this.biteInterval)
     }
 
 }

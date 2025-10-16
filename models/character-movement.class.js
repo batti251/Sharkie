@@ -2,7 +2,7 @@ class CharacterMovement{
 speedX = 8;
 speedY = 4;
 isMoving = false;
-lastIsMoving = false;
+lastIsMoving = true;
 
     constructor(character) {
        this.character = character
