@@ -14,9 +14,10 @@ poisonbarCache = [
     'assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png',
     'assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png'
 ];
-    constructor(path){
+    constructor(path, world){
         super().loadImg(path);
         this.loadImgCache(this.poisonbarCache)
+        this.world = world
     }
 
     /**

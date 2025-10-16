@@ -1,15 +1,15 @@
 class World {
-character = new Character('assets/img/1.Sharkie/1.IDLE/1.png', 0, 0)
+character = new Character('assets/img/1.Sharkie/1.IDLE/1.png', 0, 0, this)
 canvas;
 ctx;
 cameraX = 0;
 keyboard;
-healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png');
+healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png', this);
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
-poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png')
+poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png', this)
 instruction = new Instruction('assets/img/6.Botones/Instructions 4.png');
 levelFinished;
-
+combat = new Combat(this);
 
   constructor(canvas, keyboard, nextLevel, levelType) {
     console.log("Level: " + nextLevel);
@@ -19,75 +19,27 @@ levelFinished;
     this.draw(this.nextLevel);
     this.keyboard = keyboard
     this.setWorld();
-    this.enemyDetection();
-    this.checkEnemyCollisions();
-    this.checkCollectiblesCollisions();
     this.setLevelEnd()
     this.finishedLevel();
     this.finishedBossLevel();
-    this.findNearestBubbleTarget();
     this.endbossAttack()
   }
 
 
-findNearestBubbleTarget() {
-  clearInterval(this.targetInterval);
-  this.targetInterval = setInterval(() => {
-    if (!this.bubble) return;
-    this.shortestDistance = Infinity;
-    this.level.enemies.forEach(object => {
-      this.updateNearestTarget(object)
-    });
-    this.updateBubbleTargeting()
-  }, 30);
-}
-
-  updateNearestTarget(object){
-      if (!object.dead && object instanceof Jellyfish) {
-        this.nearestTargetX = object.x - this.bubble.x;
-        this.nearestTargetY = object.y - this.bubble.y;
-        this.nearestTargetXY = Math.sqrt(this.nearestTargetX * this.nearestTargetX + this.nearestTargetY * this.nearestTargetY);
-        if (this.nearestTargetXY < this.shortestDistance) {
-          this.shortestDistance = this.nearestTargetXY;
-          this.nearestObject = object;
-        }
-      }
-  }
-
-updateBubbleTargeting(){
-     this.calculateBubbleDirection(this.nearestObject);
-      if (this.bubble.x  > this.nearestObject.x + this.hitRadius) {
-        return 
-      }
-      else if (this.distance > this.hitRadius) {
-       this.moveBubbleToTarget();
-      } else {
-        this.collideBubbleWithTarget(this.nearestObject);
-      }
-}
-
-calculateBubbleDirection(){
-      this.dx = this.nearestObject.x - this.bubble.x;
-      this.dy = this.nearestObject.y - this.bubble.y;
-      this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-      this.hitRadius = 40;
-      this.speed = 8;
-}
+   /**
+    * This Function triggers the game defeat, when characters life is 0 or below
+    * It sets the keyboard to null, to avoid further movements
+    * It calls the sharkieDieAnimation-Function from Character
+    * It calls the showDefeatScreen-Function from World after short delay
+    */
+    gameDefeat(){
+        this.keyboard = null
+        this.character.sharkieDieAnimation();
+        this.showDefeatScreen();
+        this.clearAllWorldIntervals();
+    }
 
 
-moveBubbleToTarget(){
-      let moveDist = Math.min(this.speed, this.distance);
-      this.bubble.x += (this.dx / this.distance) * moveDist;
-      this.bubble.y += (this.dy / this.distance) * moveDist;
-}
-
-collideBubbleWithTarget(){
-      this.nearestObject.dead = true
-      this.nearestObject.jellyfishDeadAnimation()
-      this.bubble.x = this.nearestObject.x;
-      this.bubble.y = this.nearestObject.y;
-      delete this.bubble 
-}
 
   /**
    *This Function defines level-settings for the border and the end of the level
@@ -187,107 +139,8 @@ collideBubbleWithTarget(){
     }, 200);
   }
 
-      
-  /**
-   * This Function detects collision from the character with the collectibles
-   * If a collision is detected, it calls the fill-bar-function
-   * 
-   */
-  checkCollectiblesCollisions(){
-    clearInterval(this.coinsInterval)
-    clearInterval(this.poisonInterval)
-    this. coinsInterval = setInterval(() => {
-      this.level.coins.forEach(coin => {
-        if (this.character.isInsideBorder(coin) && this.character.canCollect) {
-            this.coinbar.fillCoinbar(coin);
-            coin.coinAudio.play();
-            
-            }
-           })
-    }, 200);
-    this.poisonInterval = setInterval(() => {
-      this.level.poison.forEach(poison => {
-        if (this.character.isInsideBorder(poison)) {
-            this.poisonbar.fillPoisonbar(poison);
-            poison.poisonAudio.play();
-           }
-           })
-    }, 200);
-  }
-
-    /**
-     * This Function triggers the angry-state of all enemies, when character is detected
-     * This Function let the Pufferfishes trigger the transformation Animation
-     * They will move straight to the left, when triggered
-     * 
-     */
-    enemyDetection(){
-      clearInterval(this.detection)
-       this.detection = setInterval(() => {
-            this.level.enemies.forEach(enemie => {
-            if (this.character.isDetected(enemie) && !enemie.angry && enemie instanceof Enemies){
-              enemie instanceof Pufferfish? enemie.enemyDetectionAnimation(enemie): "";
-              enemie.angry = true;
-            } 
-          });
-        }, 100);
-    }
-
-  /**
-   * This Function checks the Collision-forms from the character with an Enemy-Object with each iteration
-   * This Function iterates each 100 miliseconds
-   */
-  checkEnemyCollisions(){
-    clearInterval(this.collisionInterval)
-    this.collisionInterval = setInterval(() => {
-      this.level.enemies.forEach(object => {
-        this.characterHitsEnemy(object);
-        this.characterTakesDamage(object)
-        this.checkEndbossCollisions(object)
-      });
-    },200);
-  }
 
 
-  /**
-   * This Function indicates collision during characters slap-animation with the referenced object
-   * @param {*} object - the referenced object => Boss only
-   */
-    checkEndbossCollisions(object){
-        if (this.character.abilities.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && (object instanceof Endboss)) {
-            object.bossDamage()
-             if (object.life <= 0) {
-               object.bossDieAnimation()
-                }
-              }  
-    }
-
-  /**
-   * This Function indicates collision during characters slap-animation with the referenced object
-   * @param {*} object - the referenced object => enemies, except Boss
-   */
-  characterHitsEnemy(object){
-      if (this.character.abilities.isInsideSlapBorder(object) && this.character.doesDamage && !this.character.hitted && !(object instanceof Endboss)) {
-          object.x = -1000
-          } 
-    }
-
-  /**
-   * This Function indicates collision with the referenced object, when the character is not attacking
-   * @param {*} object - the referenced object => enemy 
-   */
-  characterTakesDamage(object){
-   if(this.character.isInsideBorder(object) && this.character.life > 0){
-        this.character.damage(this.character,object);
-      object instanceof Jellyfish ? this.character.jellyHitAudio.play() : this.character.regularHitAudio.play();
-        this.healthbar.updatehealthbar(this.character.maxLife, this.character.life);
-        }
-          if (this.character.life <=0) {
-            this.keyboard = null
-            this.character.sharkieDieAnimation();
-            this.showDefeatScreen();
-          }
-      }
 
 /**
  * This Function calls the Boss-Attack, if the Attack is not on Cooldown
@@ -424,10 +277,10 @@ collideBubbleWithTarget(){
 
 
   clearAllWorldIntervals(){
-    clearInterval(this.collisionInterval)
+    clearInterval(this.combat.collisionInterval)
     clearInterval(this.coinsInterval)
     clearInterval(this.poisonInterval)
-    clearInterval(this.detection)
+    clearInterval(this.combat.detection)
     clearInterval(this.finishLevelInterval)
     clearInterval(this.targetInterval)
     clearInterval(this.spawnBossInterval)

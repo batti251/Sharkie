@@ -5,6 +5,7 @@ keyDetection = false;
 
     constructor(character) {
        this.character = character
+       
     }
 
 
@@ -47,7 +48,7 @@ keyDetection = false;
      * @param {*} key 
      */
     shootBubble(key){
-        if (key?.Q === true && !this.shootCooldown && !this.hitted && this.world.poisonbar.poisonCount.length > 0 && !this.keyDetection && !this.world.bubble) {
+        if (key?.Q === true && !this.hitted && this.character.world.poisonbar.poisonCount.length > 0 && !this.keyDetection && !this.character.world.bubble) {
             key.Q = null
             this.keyDetection = true
             this.character.isShooting = true
@@ -92,7 +93,7 @@ keyDetection = false;
      */
     shootCoolDown(miliseconds){
         setTimeout(() => {
-          this.character.applyCharacterMovement();
+          this.character.movement.applyCharacterMovement();
           this.character.isShooting = false
           this.character.canCollect = true
         }, miliseconds);
