@@ -124,10 +124,10 @@ class Character extends MoveableObjects {
     this.loadImg(path);
     this.abilities = new CharacterAbilities(this);
     this.movement = new CharacterMovement(this);
-    this.swimAudio = new Audio("audio/swim.mp3");
-    this.finslapAudio = new Audio("audio/finslap.wav");
-    this.jellyHitAudio = new Audio("audio/electric-zap.wav");
-    this.regularHitAudio = new Audio("audio/hit.wav");
+    this.swimAudio = AudioManager.register(new Audio("audio/swim.mp3"));
+    this.finslapAudio = AudioManager.register(new Audio("audio/finslap.wav"));
+    this.jellyHitAudio = AudioManager.register(new Audio("audio/electric-zap.wav"));
+    this.regularHitAudio = AudioManager.register(new Audio("audio/hit.wav"));
     this.x = x;
     this.y = y;
     this.loadImgCache(this.sharkie_IDLE);

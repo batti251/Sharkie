@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/overlay.css">
 
     <script src="script.js"></script>
+    <script src="models/audio-manager.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/game-objects.class.js"></script>
     <script src="models/world.class.js"></script>
@@ -64,11 +65,22 @@
 
 <header id="panel-top">
   <nav>
-    <button>Audio</button>
+    <div class="d-flex align-center">
+      <div id="sound-percentage"></div>
+      <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="AudioManager.setVolume(this.value)">
+    </div> 
+    <button>Pause</button> 
     <button onclick="toggleFullscreen()">Fullscreen</button>
     <button class="btn-legal-notice" onclick="toggleLegalNotice()">Legal Notice</button>
   </nav>
 </header>
+
+<div id="audio-setting" class="center-container d-none">
+  <div class="range-container">
+
+
+  </div>
+</div>
 
     <canvas id ="canvas" width="1920" height="1080">
     </canvas>

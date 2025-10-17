@@ -135,6 +135,10 @@ nav {
   position: absolute;
 }
 
+.range-container{
+  height: 20vh;
+}
+
 
 @keyframes turn {
   0% {
@@ -164,6 +168,11 @@ nav {
   button {
     display: none;
   }
+}
+
+
+.align-center{
+  align-items: center;
 }
 
 @media screen and (orientation: landscape) {
