@@ -17,18 +17,18 @@ function isMobileDevice() {
     navigator.maxTouchPoints > 0
   ) {
     mobileController.classList.remove("d-none");
+    console.log("touch");
+    
   } else {
     mobileController.classList.add("d-none");
   }
 }
 
 function removeButtons() {
+  let important = document.getElementsByClassName('game-relevant')
   let buttons = document.getElementsByTagName("button");
-  let trackpad = [...buttons].filter(
-    (id) => id.parentElement.parentElement.className == "trackpad"
-  );
   [...buttons].forEach((btn) => btn.classList.add("d-none"));
-  trackpad.forEach((btn) => btn.classList.remove("d-none"));
+  [...important].forEach((btn) => btn.classList.remove("d-none"));
 }
 
 function removeMenu() {
@@ -72,13 +72,12 @@ function removeTryAgainButton() {
 }
 
 function tryAgainLevel() {
+  resetIntervalTimeouts()
   removeTryAgainButton();
   removeDefeatScreen();
   isMobileDevice();
   let addLevel = world.level.levelLength;
   let levelType = addLevel % 1 === 0 ? "boss" : "regular";
-
-  world.stopAnimationLoop();
   world = new World(canvas, keyboard, addLevel, levelType);
 }
 
@@ -88,12 +87,12 @@ function tryAgainLevel() {
  *
  */
 function nextLevel() {
+  resetIntervalTimeouts()
   removeContinueButton();
   removeVictoryScreen();
   isMobileDevice();
   let addLevel = (world.nextLevel ?? 0) + 1;
   let levelType = addLevel % 1 === 0 ? "boss" : "regular";
-  world.stopAnimationLoop();
   world = new World(canvas, keyboard, addLevel, levelType);
 }
 
@@ -138,4 +137,74 @@ function closeFullscreen() {
   } else if (document.msExitFullscreen) {
     document.msExitFullscreen();
   }
+}
+
+/**
+ * This Function wether pauses or resumes the game, depending on the world.paused state
+ */
+function toggleGame(){
+  world.paused? resumeGame() : pauseGame()
+}
+
+/**
+ * This Function resumes the Game and continues Animation rendering
+ * It sets the world.paused state to false
+ * 
+ */
+function resumeGame(){
+  world.paused = false
+  world.imgAnimationLoop()
+}
+
+/**
+ * This Function pause the Game and stops Animation rendering
+ * It sets the world.paused state to true
+ */
+function pauseGame(){
+  world.paused = true
+  world.stopAnimationLoop()
+  intervalIds.forEach(clearInterval)
+  timeoutIds.forEach(clearTimeout)
+}
+
+let intervalIds = []
+let timeoutIds = []
+let i = 1
+
+/**
+ * This function gives an intervalfunction an unique id
+ * The id is pushed into the intervalIds-Array, to clear Intervals properly on levelend and pause
+ * @param {*} fn - the function that is called in the interval-function
+ * @param {*} time - set miliseconds of the interval-function
+ * @returns - returns the unique id, to prevent interval stacking
+ */
+function setStoppableInterval(fn, time){
+  let id = setInterval(fn, time);
+  intervalIds.push(id)
+  return id
+}
+
+/**
+ * This function gives a timeoutfunction an unique id
+ * The id is pushed into the timeoutIds-Array, to clear Timeouts properly on levelend and pause
+ * @param {*} fn - the function that is called in the timeout-function
+ * @param {*} time - set miliseconds of the timeout-function
+ * @returns - returns the unique id, to prevent timeout stacking
+ */
+function setStoppableTimeout(fn, time){
+  let id = setTimeout(fn, time);
+  timeoutIds.push(id)
+  return id
+}
+
+/**
+ * This Function resets all collected intervals and timeouts
+ * It sets the Array-length to 0
+ * 
+ */
+function resetIntervalTimeouts(){
+    intervalIds.forEach(clearInterval)
+  timeoutIds.forEach(clearTimeout)
+  intervalIds.length = 0;
+  timeoutIds.length  = 0;
 }

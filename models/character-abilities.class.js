@@ -18,8 +18,9 @@ keyDetection = false;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
+
             if (key?.SPACE === true && !this.slapCooldown && !this.character.hitted) {
-              this.character.finslapTimer = setTimeout(() => {
+              this.character.finslapTimer = setStoppableTimeout(() => {
                 this.character.finslapAudio.play();
               }, 300);
                 this.keyDetection = true
@@ -29,7 +30,7 @@ keyDetection = false;
                 this.character.animateObjectSprite(this.character.sharkie_FIN_SLAP, 80)
                 this.expandHitbox()
                 this.stallCharacterAnimationBy(720)
-                setTimeout(() => {
+                setStoppableTimeout(() => {
                 this.character.hitboxWidth = 210
                 }, 600);
                 }  
@@ -68,7 +69,7 @@ keyDetection = false;
      * @param {*} character - The Character, to set the bubble-position
      */
     createBubble(character){
-        setTimeout(() => {
+        setStoppableTimeout(() => {
             this.character.world.bubble = new Bubble('assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png', character);
             this.shotBubble = true;
             this.decreasePoisonCount();
@@ -92,7 +93,7 @@ keyDetection = false;
      * @param {*} miliseconds - Timer, when Function should be called
      */
     shootCoolDown(miliseconds){
-        setTimeout(() => {
+        setStoppableTimeout(() => {
           this.character.movement.applyCharacterMovement();
           this.character.isShooting = false
           this.character.canCollect = true
@@ -106,7 +107,7 @@ keyDetection = false;
      * @param {Number} miliseconds - Timer, when Function should be called 
      */
     stallCharacterAnimationBy(miliseconds){
-        setTimeout(() => {
+        setStoppableTimeout(() => {
           this.character.movement.applyCharacterMovement();
           this.character.isAttacking = false
           this.character.canCollect = true
@@ -125,7 +126,7 @@ keyDetection = false;
      */
     expandHitbox(){
         this.character.oldHitBoxWidth = this.character.hitboxWidth
-        setTimeout(() => {
+        setStoppableTimeout(() => {
           this.character.doesDamage = true
             this.character.hitboxWidth = this.character.hitboxSlap
             this.character.finSlapX = this.character.oldHitBoxWidth + this.character.hitboxX

@@ -88,9 +88,9 @@ class Endboss extends Enemies {
    * 
    */
   endbossEntrance() {
-    clearTimeout(this.bossEntranceInterval)
+    clearTimeout(this.bossEntranceTimeout)
     this.animateObject(this.endboss_INTRODUCE, 120);
-    this.bossEntranceInterval = setTimeout(() => {
+    this.bossEntranceTimeout = setStoppableTimeout(() => {
       this.animateObject(this.endboss_FLOATING, 200);
       this.bossEntranceAudio.play();
 
@@ -106,9 +106,9 @@ class Endboss extends Enemies {
    */
   bossDieAnimation(){
     clearTimeout(this.bossDies)
-      this.bossDies = setTimeout(() => {
+      this.bossDies = setStoppableTimeout(() => {
         this.animateObjectSprite(this.endboss_DEAD, 100);
-        setTimeout(() => {
+        setStoppableTimeout(() => {
           this.animateObjectSprite(this.endboss_DEAD_SURFACE, 300);
           this.setBossDeathState()
         }, 500);
@@ -137,7 +137,7 @@ class Endboss extends Enemies {
     this.life -= 50;
     this.bossKnockback()
     this.animateObjectSprite(this.endboss_HURT, 100);
-    setTimeout(() => {
+    setStoppableTimeout(() => {
       this.animateObjectSprite(this.endboss_FLOATING, 200);
       clearInterval(this.knockbackInterval)
     }, 500);
@@ -148,7 +148,7 @@ class Endboss extends Enemies {
    * 
    */
   bossKnockback(){
-  this.knockbackInterval = setInterval(() => {
+  this.knockbackInterval = setStoppableInterval(() => {
     this.x += 10
     }, 1000/60);
   }
@@ -158,7 +158,7 @@ class Endboss extends Enemies {
  * This function let the Boss dash to the left when he attacks
  */
   bossDash(){
-    this.dashInterval = setInterval(() => {
+    this.dashInterval = setStoppableInterval(() => {
     this.x -= 5
     }, 1000/60);
   }
@@ -205,7 +205,7 @@ class Endboss extends Enemies {
      * @param {*} time - time in miliseconds, when Audio should be played
      */
     playSound(audio, time){
-    this.biteInterval = setTimeout(() => {
+    this.biteTimeout = setStoppableTimeout(() => {
               audio.play();
         }, time);
     }
@@ -217,7 +217,7 @@ class Endboss extends Enemies {
      */
     bossAttackAnimation(){
     this.animateObjectSprite(this.endboss_ATTACK, 100);
-    setTimeout(() => {
+    setStoppableTimeout(() => {
           this.animateObjectSprite(this.endboss_FLOATING, 200);
           clearInterval(this.dashInterval)
         }, 600);
@@ -231,7 +231,7 @@ class Endboss extends Enemies {
      */
     bossAttackCooldown(){
       clearTimeout(this.cooldownTimeout)
-      this.cooldownTimeout = setTimeout(() => {
+      this.cooldownTimeout = setStoppableTimeout(() => {
         this.removeBossAttackState();
       }, 5000);
     }

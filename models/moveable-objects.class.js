@@ -39,7 +39,7 @@ class MoveableObjects extends GameObjects {
    * @param {*} speedY 
    */
      deadToSurface(speedY){
-        this.deadSurfaceInterval = setInterval(() => {
+        this.deadSurfaceInterval = setStoppableInterval(() => {
             if (this.dead) {
             this.y -= speedY;
             }
@@ -59,7 +59,7 @@ class MoveableObjects extends GameObjects {
   animateObjectSprite(sprites, miliseconds) {
     this.resetCurrentImg(sprites);
     clearInterval(this.objectSpriteInterval);
-    this.objectSpriteInterval = setInterval(() => {
+    this.objectSpriteInterval = setStoppableInterval(() => {
       let i = this.currentImg % sprites.length;
       let path = sprites[i];
       this.img = this.imgCache[path];
@@ -123,7 +123,7 @@ class MoveableObjects extends GameObjects {
      * @param {*} speedX - The px-value 
      */
     enemyMoveLeft(speedX){
-        this.resetIntervalX = setInterval(() => {
+        this.resetIntervalX = setStoppableInterval(() => {
             this.x -= speedX;
              this.mirrorImage = false
         }, 1000 / 60);
@@ -136,7 +136,7 @@ class MoveableObjects extends GameObjects {
      * @param {*} speedX - The px-value 
      */
     enemyMoveRight(speedX){
-         this.resetIntervalX = setInterval(() => {
+         this.resetIntervalX = setStoppableInterval(() => {
             this.x += speedX;
             this.mirrorImage = true
         }, 1000 / 60);

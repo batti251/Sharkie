@@ -3,13 +3,9 @@ currentImg = 0
 speed = 0.25;
 speedX = 0.75;
 speedY = 0.25;
-randomHeightInterval = 500;
-randomTurnIntervaL = 3000;
 damage;
 angry = false
 coinToss;
-resetIntervalX;
-resetIntervalY;
 isMoving;
 lastIsMoving;
 
@@ -24,7 +20,7 @@ lastIsMoving;
    */
   enemyMinionMovement(speedX, speedY) {
     clearInterval(this.interval);
-    this.interval = setInterval(() => {
+    this.interval = setStoppableInterval(() => {
       if (this.angry) {
         this.enemyLeft(2.5);
       }
@@ -33,7 +29,6 @@ lastIsMoving;
     this.setRandomCoordinateY(speedY);
   }
 
-
     /**
      * This Function wether let the Enemies move left, or right, depending on coinToss-Function
      * The Function is called every 2 seconds 
@@ -41,7 +36,7 @@ lastIsMoving;
      * @param {*} speedX - px-value for X-Coordinate 
      */
     randomTurn(speedX){
-        this.randomTurnInterval = setInterval(() => {            
+        this.randomTurnInterval = setStoppableInterval(() => {            
         this.coinToss = Math.random() * 1;
         if (this.coinToss > 0.5) {
                 this.enemyLeft(speedX);
@@ -58,15 +53,15 @@ lastIsMoving;
      * @param {Number} speedY - px-value for Y-Coordinate
      */
     setRandomCoordinateY(speedY){
-         this.randomCoordinateYInterval = setInterval(() => {
-            setTimeout(() => {
+         this.randomCoordinateYInterval = setStoppableInterval(() => {
+            setStoppableTimeout(() => {
                 this.moveDown(speedY);
             }, Math.floor(Math.random() * 300 ) + 100);
             
-            setTimeout(() => {
+            setStoppableTimeout(() => {
                 this.moveUp(speedY);
             }, Math.floor(Math.random() * 300 ) + 100);
-        }, this.randomHeightInterval);
+        }, 500);
     }
 
    /**
@@ -77,7 +72,7 @@ lastIsMoving;
      */
     moveUp(speedY){
         clearInterval(this.resetIntervalY)
-        this.resetIntervalY = setInterval(() => {
+        this.resetIntervalY = setStoppableInterval(() => {
             if (this.y > 20) {
             this.y -= speedY;
             }
@@ -92,7 +87,7 @@ lastIsMoving;
      */
      moveDown(speedY){
         clearInterval(this.resetIntervalY)
-        this.resetIntervalY = setInterval(() => {
+        this.resetIntervalY = setStoppableInterval(() => {
             if (this.y < 400) {
             this.y = this.y + speedY;
             }
@@ -120,14 +115,4 @@ lastIsMoving;
         clearInterval(this.resetIntervalX)
         this.enemyMoveLeft(speedX)
     }
-    
-
-    clearAllEnemieIntervals(){
-        clearInterval(this.interval);
-        clearInterval(this.randomCoordinateYInterval);
-        clearInterval(this.randomTurnInterval);
-        clearInterval(this.resetIntervalX);
-        clearInterval(this.resetIntervalY);
-    }
-
 }

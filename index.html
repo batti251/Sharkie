@@ -65,36 +65,29 @@
 
 <header id="panel-top">
   <nav>
-    <div class="d-flex align-center">
-      <div id="sound-percentage"></div>
-      <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="AudioManager.setVolume(this.value)">
-    </div> 
-    <button>Pause</button> 
-    <button onclick="toggleFullscreen()">Fullscreen</button>
-    <button class="btn-legal-notice" onclick="toggleLegalNotice()">Legal Notice</button>
+      <div class="d-flex align-center">
+        <div id="sound-percentage"></div>
+        <input type="range" min="0" max="1" step="0.01" value="0.5" oninput="AudioManager.setVolume(this.value)">
+      </div> 
+      <button class="game-relevant" onclick="toggleGame()">Pause</button> 
+      <button onclick="toggleFullscreen()">Fullscreen</button>
+      <button class="btn-legal-notice" onclick="toggleLegalNotice()">Legal Notice</button>
   </nav>
 </header>
-
-<div id="audio-setting" class="center-container d-none">
-  <div class="range-container">
-
-
-  </div>
-</div>
 
     <canvas id ="canvas" width="1920" height="1080">
     </canvas>
 
-<div id="panel" class="d-none">
+<div id="panel" class="d-none game-relevant">
   <div class="trackpad">
     <div>
-    <button id="joystick">
+    <button id="joystick" class="game-relevant">
       <div id="stick"></div>
     </button>
     </div>
     <div class="abilities">
-      <button id="finslap"></button>
-      <button id="bubbleshoot"></button>
+      <button id="finslap" class="game-relevant"></button>
+      <button id="bubbleshoot" class="game-relevant"></button>
     </div>
 </div>
   </div>

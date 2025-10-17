@@ -153,7 +153,7 @@ class Character extends MoveableObjects {
    */
   checkCollectiblesCollisions() {
     clearInterval(this.collectibleInterval);
-    this.collectibleInterval = setInterval(() => {
+    this.collectibleInterval = setStoppableInterval(() => {
       this.collectItemListener(this.world.level.poison);
       this.collectItemListener(this.world.level.coins);
     }, 200);
@@ -218,9 +218,9 @@ class Character extends MoveableObjects {
   characterFallAsleep() {
     clearTimeout(this.fallAsleep);
     this.animateObjectSprite(this.sharkie_IDLE, 100);
-    this.fallAsleep = setTimeout(() => {
+    this.fallAsleep = setStoppableTimeout(() => {
       this.animateObjectSprite(this.sharkie_Long_IDLE, 100);
-      setTimeout(() => {
+      setStoppableTimeout(() => {
         this.animateObjectSprite(this.sharkie_SLEEPING, 300);
       }, 700);
     }, 15000);
@@ -239,7 +239,7 @@ class Character extends MoveableObjects {
     damageDealer instanceof Jellyfish
       ? this.animateObjectSprite(this.sharkie_SHOCKED, 100)
       : this.animateObjectSprite(this.sharkie_POISENED, 100);
-    setTimeout(() => {
+    setStoppableTimeout(() => {
       this.movement.applyCharacterMovement();
     }, 150);
     this.notHittedReset(500);
@@ -253,10 +253,10 @@ class Character extends MoveableObjects {
    * @param {Number} miliseconds - Timer, when Function should be called
    */
   notHittedReset(miliseconds) {
-    if (this.hitTimer) {
+    if (this.hitTimeout) {
       clearTimeout(this.hitTimer);
     }
-    this.hitTimer = setTimeout(() => {
+    this.hitTimeout = setStoppableTimeout(() => {
       this.hitted = false;
       this.hitTimer = null;
     }, miliseconds);
@@ -271,9 +271,9 @@ class Character extends MoveableObjects {
    */
   sharkieDieAnimation() {
     if (!this.sharkieDiesInterval) {
-      this.sharkieDiesInterval = setTimeout(() => {
+      this.sharkieDiesInterval = setStoppableTimeout(() => {
         this.animateObjectSprite(this.sharkie_DEAD, 80);
-        setTimeout(() => {
+        setStoppableTimeout(() => {
           this.animateObjectSprite(this.sharkie_DEAD_SURFACE, 300);
           this.dead = true;
         }, 300);
@@ -282,15 +282,4 @@ class Character extends MoveableObjects {
     } else return;
   }
 
-  /**
-   * This Function clears all Intervals and Timeouts, when game is over
-   * This avoids multiple Intervals running in the background, when game is restarted
-   *
-   */
-  clearCharacterIntervals() {
-    clearInterval(this.characterMovementInterval);
-    clearTimeout(this.hitTimer);
-    clearTimeout(this.fallAsleep);
-    clearTimeout(this.finslapTimer);
-  }
 }

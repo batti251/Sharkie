@@ -20,7 +20,7 @@ lastIsMoving = true;
    */
   animateCharacterMovement() {
     clearInterval(this.characterMovementInterval);
-    this.characterMovementInterval = setInterval(() => {
+    this.characterMovementInterval = setStoppableInterval(() => {
       this.moveCharacter(this.character.world.keyboard);
       if (this.isMoving != this.lastIsMoving && !this.character.isAttacking && !this.character.isShooting) {
         this.lastIsMoving = this.isMoving;

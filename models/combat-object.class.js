@@ -13,7 +13,7 @@ class Combat {
    */
   enemyDetection() {
     clearInterval(this.detection);
-    this.detection = setInterval(() => {
+    this.detection = setStoppableInterval(() => {
       this.world.level.enemies.forEach((enemie) => {
         if (this.world.character.isDetected(enemie) && !enemie.angry) {
           this.triggerAngryEnemy(enemie);
@@ -40,7 +40,7 @@ class Combat {
    */
   checkEnemyCollisions() {
     clearInterval(this.collisionInterval);
-    this.collisionInterval = setInterval(() => {
+    this.collisionInterval = setStoppableInterval(() => {
       this.world.level.enemies.forEach((object) => {
         this.characterHitsListener(object);
         this.characterDamageListener(object);
@@ -153,7 +153,7 @@ class Combat {
    */
   findNearestBubbleTarget() {
     clearInterval(this.targetInterval);
-    this.targetInterval = setInterval(() => {
+    this.targetInterval = setStoppableInterval(() => {
       if (!this.bubble) return;
       this.shortestDistance = Infinity;
       this.level.enemies.forEach((object) => {

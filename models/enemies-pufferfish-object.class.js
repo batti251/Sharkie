@@ -113,10 +113,10 @@ pufferfish_ANGRY;
      * 
      */
     enemyDetectionAnimation(enemie){
-        clearTimeout(this.enemyDetector)
-            this.enemyDetector = setTimeout(() => {
+        clearTimeout(this.enemyPuffTimeout)
+            this.enemyPuffTimeout = setStoppableTimeout(() => {
                      this.animateObjectSprite(this.pufferfish_TRANSITION, 100);
-                       setTimeout(() => {
+                       setStoppableTimeout(() => {
                         enemie.animateObjectSprite(this.pufferfish_ANGRY, 200);
                     }, 100);
             }, 200);

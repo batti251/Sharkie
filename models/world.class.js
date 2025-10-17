@@ -36,7 +36,6 @@ combat = new Combat(this);
         this.keyboard = null
         this.character.sharkieDieAnimation();
         this.showDefeatScreen();
-        this.clearAllWorldIntervals();
     }
 
 
@@ -63,12 +62,10 @@ combat = new Combat(this);
    * 
    */
   finishedLevel(){
-    this.finishLevelInterval = setInterval(() => {
-      this.levelIsFinished()
+    let finishInterval = setStoppableInterval(() => {
       if (this.levelIsFinished() && this.levelType == LevelRegular) {
-         clearInterval(this.finishLevelInterval)
-         this.levelFinished = true
       this.showVictoryScreen();
+      clearInterval(finishInterval)
       } 
       }, 200);
 
@@ -81,9 +78,10 @@ combat = new Combat(this);
        defeat.classList.remove('d-none')
        panel.classList.add('d-none')
        this.keyboard = null
-       this.clearAllIntervals()
-      setTimeout(() => {
+      let showButtonTimeout = setStoppableTimeout(() => {
        addTryAgainButtton()
+       clearTimeout(showButtonTimeout)
+       pauseGame()
       }, 1000);
   }
 
@@ -98,9 +96,10 @@ combat = new Combat(this);
        victory.classList.remove('d-none')
        panel.classList.add('d-none')
        this.keyboard = null
-       this.clearAllIntervals()
-      setTimeout(() => {
+       pauseGame()
+      let showButtonTimeout = setStoppableTimeout(() => {
        addContinueButton()
+       clearTimeout(showButtonTimeout)
       }, 1000);
   }
 
@@ -117,10 +116,10 @@ combat = new Combat(this);
    * This Function listens, to spawn the boss when character passes the level-border
    */
   spawnBoss(){
-      this.spawnBossInterval = setInterval(() => {
+      let bossInterval = setStoppableInterval(() => {
          if (this.levelIsFinished() && this.levelType == LevelEndBoss) {
-          world.level.bossSpawn();
-          clearInterval(this.spawnBossInterval)
+         world.level.bossSpawn();
+         clearInterval(bossInterval);
         } 
       }, 200);
   }
@@ -130,10 +129,10 @@ combat = new Combat(this);
    * It shows the Victory-Screen, on success
    */
   defeatBoss(){
-    this.finishBossLevelInterval =  setInterval(() => {
+    let killedBossInterval = setStoppableInterval(() => {
       this.levelIsFinished()
       if (this.level.bossFinished){
-        clearInterval(this.finishBossLevelInterval)
+        clearInterval(killedBossInterval)
         this.showVictoryScreen();
       }
     }, 200);
@@ -146,7 +145,7 @@ combat = new Combat(this);
  * This Function calls the Boss-Attack, if the Attack is not on Cooldown
  */
   endbossAttack(){
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.level.enemies.forEach(object => {
         if ((object instanceof Endboss) && object.angry && !object.bossAttackOnCooldown){
           object.bossAttack()
@@ -274,27 +273,4 @@ combat = new Combat(this);
     stopAnimationLoop(){
      cancelAnimationFrame(this.instance);
 }
-
-
-  clearAllWorldIntervals(){
-    clearInterval(this.combat.collisionInterval)
-    clearInterval(this.coinsInterval)
-    clearInterval(this.poisonInterval)
-    clearInterval(this.combat.detection)
-    clearInterval(this.finishLevelInterval)
-    clearInterval(this.targetInterval)
-    clearInterval(this.spawnBossInterval)
-    clearInterval(this.finishBossLevelInterval)
-  }
-
-  clearAllIntervals(){
-    this.clearAllWorldIntervals()
-    this.character.clearCharacterIntervals()
-    this.level.enemies?.forEach(e => e.clearAllEnemieIntervals?.());
-    this.level.enemies?.forEach(e => e.clearBossIntervalls?.());
-  }
-
-
-
-  
 }

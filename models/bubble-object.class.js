@@ -13,6 +13,4 @@ bubble_Array = ['assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
         this.loadImgCache(this.bubble_Array);
         this.enemyMoveRight(3); //rename
     }
-
-
 }
