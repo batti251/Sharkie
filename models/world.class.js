@@ -8,7 +8,6 @@ healthbar = new Healthbar('assets/img/4. Marcadores/green/Life/100_  copia 2.png
 coinbar = new Coinbar('assets/img/4. Marcadores/green/Coin/0_  copia 4.png');
 poisonbar = new Poisonbar('assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png', this)
 instruction = new Instruction('assets/img/6.Botones/Instructions 4.png');
-levelFinished;
 combat = new Combat(this);
 
   constructor(canvas, keyboard, nextLevel, levelType) {
@@ -33,7 +32,7 @@ combat = new Combat(this);
     * It calls the showDefeatScreen-Function from World after short delay
     */
     gameDefeat(){
-        this.keyboard = null
+        //this.keyboard = null
         this.character.sharkieDieAnimation();
         this.showDefeatScreen();
     }
@@ -77,7 +76,8 @@ combat = new Combat(this);
        let panel = document.getElementById('panel')
        defeat.classList.remove('d-none')
        panel.classList.add('d-none')
-       this.keyboard = null
+      // this.keyboard = null
+       this.levelFinished = false;
       let showButtonTimeout = setStoppableTimeout(() => {
        addTryAgainButtton()
        clearTimeout(showButtonTimeout)
@@ -95,7 +95,9 @@ combat = new Combat(this);
        let panel = document.getElementById('panel')
        victory.classList.remove('d-none')
        panel.classList.add('d-none')
-       this.keyboard = null
+      // this.keyboard = null
+       this.levelFinished = true;
+
        pauseGame()
       let showButtonTimeout = setStoppableTimeout(() => {
        addContinueButton()
@@ -172,12 +174,8 @@ combat = new Combat(this);
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
-      if (this.levelFinished) {
-        this.stopAnimationLoop()
-      } else {
       this.imgAnimationLoop();
       }
-  } 
 
 
     /**

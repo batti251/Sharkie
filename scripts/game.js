@@ -36,6 +36,12 @@ document.addEventListener("keydown",(event) => {
     case "q":
       keyboard.Q = true;
       break;
+    case "Escape":
+    keyboard.ESC = true;
+    break;
+    case "Enter":
+    keyboard.ENTER = true;
+    break;
     default:
       break;
   }
@@ -66,6 +72,12 @@ document.addEventListener("keyup", (event) => {
     case "q":
       keyboard.Q = false;
       break;
+    case "Escape":
+    keyboard.ESC = false;
+    break;
+    case "Enter":
+    keyboard.ENTER = false;
+    break;
     default:
       break;
   }
