@@ -1,5 +1,4 @@
 let world;
-let menu;
 let keyboard = new Keyboard();
 /**
  * This function initializes the Canvas-Screen
