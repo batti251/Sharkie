@@ -167,7 +167,7 @@ combat = new Combat(this);
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0) 
       this.drawObjects(level);
-      if (this.character.shotBubble) {
+      if (this.bubble) {
       this.addImgObjectToMap(this.bubble)
       }
       this.ctx.translate(-this.cameraX, 0) 

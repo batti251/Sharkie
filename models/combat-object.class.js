@@ -3,7 +3,6 @@ class Combat {
     this.world = world;
     this.enemyDetection();
     this.checkEnemyCollisions();
-    this.findNearestBubbleTarget();
   }
 
   /**
@@ -129,8 +128,8 @@ class Combat {
     this.playHurtSound(object);
     this.world.character.takesDamage = true;
     this.world.healthbar.HealthbarListener(
-      this.world.character.maxLife,
-      this.world.character.life
+    this.world.character.maxLife,
+    this.world.character.life
     ); // Update the health bar after taking damage
   }
 
@@ -147,97 +146,5 @@ class Combat {
       : this.world.character.regularHitAudio.play();
   }
 
-  /**
-   *
-   *
-   */
-  findNearestBubbleTarget() {
-    clearInterval(this.targetInterval);
-    this.targetInterval = setStoppableInterval(() => {
-      if (!this.bubble) return;
-      this.shortestDistance = Infinity;
-      this.level.enemies.forEach((object) => {
-        this.updateNearestTarget(object);
-      });
-      this.updateBubbleTargeting();
-    }, 30);
-  }
-
-  /**
-   * This Function updates the nearest Target for the Bubble
-   * It calculates the distance from the bubble to each Jellyfish
-   * If the distance is shorter than the previous shortest distance, it updates the nearestObject
-   *
-   * @param {*} object
-   */
-  updateNearestTarget(object) {
-    if (!object.dead && object instanceof Jellyfish) {
-      this.nearestTargetX = object.x - this.bubble.x;
-      this.nearestTargetY = object.y - this.bubble.y;
-      this.nearestTargetXY = Math.sqrt(
-        this.nearestTargetX * this.nearestTargetX +
-          this.nearestTargetY * this.nearestTargetY
-      );
-      if (this.nearestTargetXY < this.shortestDistance) {
-        this.shortestDistance = this.nearestTargetXY;
-        this.nearestObject = object;
-      }
-    }
-  }
-
-  /**
-   * This Function updates the Bubble-Targeting
-   * It calculates the direction to the nearest target
-   * If the bubble is not yet close enough to the target, the bubble moves towards the target
-   * If the bubble reaches the target, it triggers the collision function
-   *
-   */
-  updateBubbleTargeting() {
-    this.calculateBubbleDirection(this.nearestObject);
-    if (this.bubble.x > this.nearestObject.x + this.hitRadius) {
-      return;
-    } else if (this.distance > this.hitRadius) {
-      this.moveBubbleToTarget();
-    } else {
-      this.collideBubbleWithTarget(this.nearestObject);
-    }
-  }
-
-  /**
-   * This Function calculates the direction from the bubble to the nearest target
-   * It calculates the distance from the bubble to the nearest target
-   * It sets the hitRadius and speed for the bubble
-   */
-  calculateBubbleDirection() {
-    this.dx = this.nearestObject.x - this.bubble.x;
-    this.dy = this.nearestObject.y - this.bubble.y;
-    this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-    this.hitRadius = 40;
-    this.speed = 8;
-  }
-
-  /**
-   * This Function moves the bubble towards the nearest target
-   * It calculates the movement distance based on the bubble speed and the remaining distance to the target
-   *
-   */
-  moveBubbleToTarget() {
-    let moveDist = Math.min(this.speed, this.distance);
-    this.bubble.x += (this.dx / this.distance) * moveDist;
-    this.bubble.y += (this.dy / this.distance) * moveDist;
-  }
-
-  /**
-   * This Function handles the collision between the bubble and the nearest target
-   * It sets the nearest target as dead and triggers its death animation
-   * It moves the bubble to the target's position and then deletes the bubble
-   *
-   */
-  collideBubbleWithTarget() {
-    this.nearestObject.dead = true;
-    this.nearestObject.jellyfishDeadAnimation();
-    this.bubble.x = this.nearestObject.x;
-    this.bubble.y = this.nearestObject.y;
-    delete this.bubble;
-  }
+  
 }

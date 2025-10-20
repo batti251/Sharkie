@@ -134,9 +134,7 @@ keyDetection = false;
                     }, 400);
     }
 
-
-
-    /**
+  /**
    * This Function negates the finSlapX-coordinate to have a proper detection if the character swims to the left, to hit an enemy
    *
    */
