@@ -196,7 +196,6 @@ function backToMenu(){
  */
 function pauseGame(){
   world.paused = true
-  world.stopAnimationLoop()
   intervalIds.forEach(clearInterval)
   timeoutIds.forEach(clearTimeout)
 }

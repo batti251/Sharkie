@@ -28,6 +28,14 @@ poison = [];
         this.x = this.xStart + this.multiplicator
         this.x1 = this.x1Start  + this.multiplicator;
         this.generateLevelObjects();
+        this.setBackgroundAudio()
+    }
+
+    setBackgroundAudio(){
+    this.backgroundAudio = AudioManager.register(new Audio('audio/ocean.wav'));
+    this.backgroundAudio.volume = 0.4
+    this.backgroundAudio.loop = true
+    this.backgroundAudio.play()
     }
     
     /**

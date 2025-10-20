@@ -22,7 +22,9 @@ combat = new Combat(this);
     this.finishedLevel();
     this.finishedBossLevel();
     this.endbossAttack()
+
   }
+
 
 
    /**
@@ -32,7 +34,6 @@ combat = new Combat(this);
     * It calls the showDefeatScreen-Function from World after short delay
     */
     gameDefeat(){
-        //this.keyboard = null
         this.character.sharkieDieAnimation();
         this.showDefeatScreen();
     }
@@ -173,9 +174,6 @@ combat = new Combat(this);
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
-      if (this.levelFinished) {
-        this.stopAnimationLoop()
-      }
       this.imgAnimationLoop();
       }
 
@@ -262,14 +260,8 @@ combat = new Combat(this);
      */
     imgAnimationLoop(){
      let self = this;
+     console.log("go");
+     
      this.instance = requestAnimationFrame(() => {self.draw()});
     }
-
-    /**
-     * This Function stops the imgAnimationLoop
-     * It is called, when the level is finished
-     */
-    stopAnimationLoop(){
-     cancelAnimationFrame(this.instance);
-}
 }
