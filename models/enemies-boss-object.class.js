@@ -5,7 +5,7 @@ class Endboss extends Enemies {
   width = 500;
   y = 100;
   bossAttackOnCooldown = true;
-
+  boss = true;
 
   endboss_INTRODUCE = [
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
@@ -71,14 +71,27 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_ATTACK);
     this.loadImgCache(this.endboss_HURT);
     this.loadImgCache(this.endboss_DEAD);
-    this.endbossEntrance();
     this.x = x;
     this.setHitbox(40, 270, 1.2, 3.5);
-    this.bossAttackCooldown()
     this.bossEntranceAudio = AudioManager.register(new Audio('audio/boss-entrance.mp3'));
     this.bossBiteAudio = AudioManager.register(new Audio('audio/boss-bite.wav'));
 /*     this.enemyMinionMovement(this.speedX, this.speedY); */
   }
+
+
+  /**
+   * This Function let the boss appear on the screen
+   * It sets its Attack on cooldown, to prevent Introduce-Animation-Cancelling
+   * It spawns 1000px additionally from the set levelEnd
+   * It plays the boss Entrance Audio 
+   */
+    bossSpawn(){
+        this.bossEntranceAudio.play();
+        this.bossAttackCooldown()
+        this.endbossEntrance();
+        this.x = world.levelEnd + 1000
+    }
+
 
   /**
    * This function plays the Boss-Entrance-Animation once at the beginning of the level
@@ -87,15 +100,14 @@ class Endboss extends Enemies {
    * It clears the bossEntranceInterval to avoid multiple calls
    * 
    */
-  endbossEntrance() {
-    clearTimeout(this.bossEntranceTimeout)
-    this.animateObject(this.endboss_INTRODUCE, 120);
-    this.bossEntranceTimeout = setStoppableTimeout(() => {
-      this.animateObject(this.endboss_FLOATING, 200);
-      this.bossEntranceAudio.play();
+    endbossEntrance() {
+        clearTimeout(this.bossEntranceTimeout)
+        this.animateObject(this.endboss_INTRODUCE, 120);
+        this.bossEntranceTimeout = setStoppableTimeout(() => {
+        this.animateObject(this.endboss_FLOATING, 200);
+        }, 1000);
+    }
 
-    }, 1000);
-  }
 
   /**
    * This function plays the Boss-Death-Animation, when life is 0 or below

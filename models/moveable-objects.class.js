@@ -16,7 +16,7 @@ class MoveableObjects extends GameObjects {
    * @param {Array} sprites - Array of image-paths
    * @param {Number} miliseconds - specified interval for setInterval()
    *
-   */
+   */ //refactor
   animateObject(sprites, miliseconds) {
     if (sprites.some((element) => element.includes("Sharkie"))) {
       this.movement.animateCharacterMovement();

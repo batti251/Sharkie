@@ -76,7 +76,6 @@ combat = new Combat(this);
        let panel = document.getElementById('panel')
        defeat.classList.remove('d-none')
        panel.classList.add('d-none')
-      // this.keyboard = null
        this.levelFinished = false;
       let showButtonTimeout = setStoppableTimeout(() => {
        addTryAgainButtton()
@@ -95,7 +94,6 @@ combat = new Combat(this);
        let panel = document.getElementById('panel')
        victory.classList.remove('d-none')
        panel.classList.add('d-none')
-      // this.keyboard = null
        this.levelFinished = true;
 
        pauseGame()
@@ -118,9 +116,10 @@ combat = new Combat(this);
    * This Function listens, to spawn the boss when character passes the level-border
    */
   spawnBoss(){
+    let boss = this.level.enemies.filter(enemie => enemie.boss)
       let bossInterval = setStoppableInterval(() => {
          if (this.levelIsFinished() && this.levelType == LevelEndBoss) {
-         world.level.bossSpawn();
+         boss[0].bossSpawn();
          clearInterval(bossInterval);
         } 
       }, 200);
@@ -174,6 +173,9 @@ combat = new Combat(this);
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
+      if (this.levelFinished) {
+        this.stopAnimationLoop()
+      }
       this.imgAnimationLoop();
       }
 
@@ -189,7 +191,6 @@ combat = new Combat(this);
         this.addImgObjectsToMap(this.level.poison);
         this.addImgObjectsToMap(this.level.enemies)
         this.addImgObjectToMap(this.character)
-
     }
 
 

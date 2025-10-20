@@ -29,7 +29,18 @@ lastIsMoving = true;
     }, 1000 / 60);
   }
 
-      
+  /**
+   * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on it's moving-state
+   *
+   */
+  applyCharacterMovement() {
+    if (this.isMoving) {
+      this.characterSwims();
+    } else {
+      this.character.characterFallAsleep();
+    }
+  }
+
     /**
      * This Function calls the character swim-Animation
      * 
@@ -85,81 +96,103 @@ lastIsMoving = true;
   }
 
   /**
-   * This function raises the X-Coordinate and let the Object move right
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
+   * This Function moves the character right, when Right-key is pressed
+   * There are 3 different states:
+   * character x-coordinate <= levelborder => the character moves regulary including moving the Camera (from the beginning until level-end)
+   * character x-coordinate <= levelborder => the character moves regulary without moving Camera (at the end of the leven)
+   * character x-coordinate >= levelborder + 1200 => barrier to prevent character from moving outside the level
    *
    * @param {Number} speed - The px-value
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveRight(speed, key) {
-    if (key?.RIGHT == true && this.character.x <= this.character.world.levelBorder ) {
-      this.character.x += speed;
-      this.setCharacterPositionLeft(speed);
-      this.character.mirrorImage = false;
-    this.character.swimAudio.play()
-
+      if (key?.RIGHT == true && this.character.x >= this.character.world.levelBorder + 1200){
+      }
+     else if (key?.RIGHT == true && this.character.x <= this.character.world.levelBorder) {
+      this.moveWithCameraRight(speed)
+    }
+     else if(key?.RIGHT == true && this.character.x >= this.character.world.levelBorder){
+      this.moveWithoutCameraRight(speed)
     }
   }
 
   /**
-   * This Function reduces the X-Coordinate and let the Object move left
-   * Returns either true, for Swim-Animation, or false for Idle-Animation
+   * This function raises the X-Coordinate and let the Object move right
+   * It moves the Camera so the Character appears on the left side of the screen
+   * It faces the character to the right
+   * It plays the Swim-Audio
+   * @param {Number} speed - The px-value
+   */
+  moveWithCameraRight(speed){
+      this.character.x += speed;
+      this.setCharacterPositionLeft(speed);
+      this.character.mirrorImage = false;
+      this.character.swimAudio.play()
+  }
+
+  /**
+   * This function raises the X-Coordinate and let the Object move right
+   * It does not move the character, to imply the end of the Level
+   * It faces the character to the right
+   * It plays the Swim-Audio
+   * @param {Number} speed - The px-value
+   */
+  moveWithoutCameraRight(speed){
+      this.character.x += speed;
+      this.character.mirrorImage = false;
+      this.character.swimAudio.play()
+  }
+
+  /**
+   * This Function moves the character left, when LEFT-key is pressed and the characters x-coordinate is bigger than -100
    *
    * @param {Number} speed - The px-value
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveLeft(speed, key) {
     if (key?.LEFT == true && this.character.x > -100) {
+      this.moveWithCameraLeft(speed)
+    }
+  }
+
+  /**
+   * This function decreases the X-Coordinate and let the Object move left
+   * It moves the Camera so the Character appears on the right side of the screen
+   * It faces the character to the left
+   * It plays the Swim-Audio
+   * @param {Number} speed - The px-value
+   */
+  moveWithCameraLeft(speed){
       this.character.x -= speed;
       this.setCharacterPositionRight(speed);
       this.character.mirrorImage = true;
-    this.character.swimAudio.play()
-
-    }
+      this.character.swimAudio.play()
   }
-
-  
-  /**
-   * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on it's moving-state
-   *
-   */
-  applyCharacterMovement() {
-    if (this.isMoving) {
-      this.characterSwims();
-    } else {
-      this.character.characterFallAsleep();
-    }
-  }
-
-
   
   /**
    * This Function moves the camera, so the character will be set left on the screen
-   * If the character is not on the left screen, the camera will move slightly faster until the character is posiitioned on the left screen again
+   * If the character is not on the left screen, the camera will move slightly faster until the character is positioned on the left screen again
    *
    * @param {*} speed
    */
   setCharacterPositionLeft(speed) {
     if (this.character.world.cameraX + this.character.x > 0) {
-      this.character.world.cameraX -= speed + 5;
+      this.character.world.cameraX -= speed + 10;
     } else {
       this.character.world.cameraX -= speed;
     }
   }
 
-    /**
+  /**
    * This Function moves the camera, so the charactar will be set right on the screen
-   * If the character is not on the right screen, the camera will move slightly faster until the character is positioned on the right screen again
    *
    * @param {*} speed
    */
   setCharacterPositionRight(speed) {
-    if (this.character.world.cameraX + this.character.x < canvas.width - 500) {
-      this.character.world.cameraX += speed + 5;
+    if (this.character.world.cameraX + this.character.x <= canvas.width - 1200) {
+      this.character.world.cameraX += speed + 10;
     } else {
       this.character.world.cameraX += speed;
     }
   }
-
-
 }
