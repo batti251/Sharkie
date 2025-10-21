@@ -29,6 +29,8 @@ poison = [];
         this.x1 = this.x1Start  + this.multiplicator;
         this.generateLevelObjects();
         this.setBackgroundAudio()
+        this.victoryAudio = AudioManager.register(new Audio('audio/victory.wav'))
+        this.defeatAudio = AudioManager.register(new Audio('audio/defeat.wav'))
     }
 
     setBackgroundAudio(){

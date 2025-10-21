@@ -35,6 +35,32 @@ function addLegalTextTemplate(){
             Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. <br>
             Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. <br>
             Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.<br>
+            <br><br>
+
+            
+ <section>
+  <h2>Attribution</h2>
+   <ul>
+    <li>favicon: <a href="https://www.flaticon.com/free-icons/shark" title="shark icons">Shark icons created by Smashicons - Flaticon</a></li>
+    <li>defeat sound:  <a href="https://freesound.org/people/suntemple/sounds/253174/">Retro You Lose SFX </a> by <a href="https://freesound.org/people/suntemple/">suntemple</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a></li>
+    <li>victory sound: <a href="https://freesound.org/people/LittleRobotSoundFactory/sounds/274179/">Jingle_Win_Synth_01.wav</a> by <a href="https://freesound.org/people/LittleRobotSoundFactory/">LittleRobotSoundFactory</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0</a></li>
+    <li>ocean sound: <a href="https://freesound.org/people/Fission9/sounds/504641/">Underwater Ambience</a> by <a href="https://freesound.org/people/Fission9/">Fission9</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a></li>
+    <li>finslap sound: <a href="https://freesound.org/people/D001447733/sounds/464623/">Enemy_Hit.wav</a> by <a href="https://freesound.org/people/D001447733/">D001447733</a> | License: <a href="http://creativecommons.org/licenses/by/3.0/">Attribution 3.0</a></li>
+    <li>boss-bite sound: <a href="https://freesound.org/people/OllieBacon/sounds/517147/">Bite.wav</a> by <a href="https://freesound.org/people/OllieBacon/">OllieBacon</a> | License: <a href="http://creativecommons.org/licenses/by/3.0/">Attribution 3.0</a></li>
+    <li>boss-entrance sound: <a href="https://freesound.org/people/mjudo12/sounds/74908/">freewilly.mp3</a> by <a href="https://freesound.org/people/mjudo12/">mjudo12</a> | License: <a href="http://creativecommons.org/licenses/by/3.0/">Attribution 3.0</a></li>
+    <li>poison-collect sound: <a href="https://freesound.org/people/SilverIllusionist/sounds/411178/">Pick up Item 2.wav</a> by <a href="https://freesound.org/people/SilverIllusionist/">SilverIllusionist</a> | License: <a href="https://creativecommons.org/licenses/by/4.0/">Attribution 4.0</a></li>
+    <li>coin-collect sound: <a href="https://freesound.org/people/bradwesson/sounds/135936/">CollectCoin.wav</a> by <a href="https://freesound.org/people/bradwesson/">bradwesson</a> | License: <a href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution NonCommercial 4.0</a></li>
+    <li>hit sound: <a href="https://freesound.org/people/AuDRoger/sounds/471214/">whaa !.wav</a> by <a href="https://freesound.org/people/AuDRoger/">AuDRoger</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a></li>
+    <li>electric-zap sound: <a href="https://freesound.org/people/JoelAudio/sounds/136542/">ELECTRIC_ZAP_001.wav</a> by <a href="https://freesound.org/people/JoelAudio/">JoelAudio</a> | License: <a href="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0</a></li>
+    <li>swim sound: <a href="https://pixabay.com/users/freesound_community-46691455/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=44183">freesound_community</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=44183">Pixabay</a></li>
+    <li>Sharkie Design, Backgrounds, Layers, Enemies, Fonts created and selected by <a href="https://developerakademie.com/">Developer Akademie GmbH</a></li>
+    <li>Menu Background created by AI, inspired by <a href="https://developerakademie.com/">Developer Akademie GmbH</a></li>
+    <li>Menu Sharkie created by AI, inspred by <a href="https://developerakademie.com/">Developer Akademie GmbH</a></li>
+    
+    </ul>
+    </section>
+
+
             Erstellt mit dem <a href="https://impressum-generator.de" rel="dofollow">Impressum-Generator</a> von WebsiteWissen.com, dem Ratgeber für <a href="https://websitewissen.com/website-erstellen" rel="dofollow">Website-Erstellung</a>, <a href="https://websitewissen.com/homepage-baukasten-vergleich" rel="dofollow">Homepage-Baukästen</a> und <a href="https://websitewissen.com/shopsysteme-vergleich" rel="dofollow">Shopsysteme</a>. Rechtstext von der <a href="https://www.kanzlei-hasselbach.de/" rel="dofollow">Kanzlei Hasselbach</a>. 
            </div>
             `

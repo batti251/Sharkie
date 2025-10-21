@@ -77,7 +77,8 @@ combat = new Combat(this);
        defeat.classList.remove('d-none')
        panel.classList.add('d-none')
        this.levelFinished = false;
-      let showButtonTimeout = setStoppableTimeout(() => {
+       this.level.defeatAudio.play();
+       let showButtonTimeout = setStoppableTimeout(() => {
        addTryAgainButtton()
        clearTimeout(showButtonTimeout)
        pauseGame()
@@ -96,6 +97,7 @@ combat = new Combat(this);
        panel.classList.add('d-none')
        this.levelFinished = true;
        pauseGame()
+       this.level.victoryAudio.play();
        let showButtonTimeout = setStoppableTimeout(() => {
        addContinueButton()
        clearTimeout(showButtonTimeout)
