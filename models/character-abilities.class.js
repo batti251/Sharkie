@@ -18,7 +18,6 @@ keyDetection = false;
      * @param {Object} key - Object with the listened Keyboard Keys
      */
     finSlap(key){
-
             if (key?.SPACE === true && !this.slapCooldown && !this.character.hitted) {
               this.character.finslapTimer = setStoppableTimeout(() => {
                 this.character.finslapAudio.play();

@@ -13,10 +13,10 @@ speedX = 0.25;
         this.loadImgCache(this.jellyfish_IDLE);
         this.loadImgCache(this.jellyfish_DEAD);
         this.animateObject(this.jellyfish_IDLE, 100)
-        //this.enemyMinionMovement(this.speedX, this.speedY);
+        this.enemyMinionMovement(this.speedX, this.speedY);
         this.y = Math.floor(Math.random() * 200) + 200;
         this.width = Math.floor(Math.random() * 100) + 60;
-        /* this.speedX = Math.floor(Math.random() * 2) + this.speedX; */
+        this.speedX = Math.floor(Math.random() * 2) + this.speedX;
         this.height = this.width;
         this.setHitbox(25, 10, 1.9, 1.5)
     }
@@ -55,7 +55,7 @@ speedX = 0.25;
         }
     }
 
-
+    
     jellyfishDeadAnimation(){
       this.animateObjectSprite(this.jellyfish_DEAD, 100);
       this.angry = false;

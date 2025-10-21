@@ -14,7 +14,7 @@ class Combat {
     clearInterval(this.detection);
     this.detection = setStoppableInterval(() => {
       this.world.level.enemies.forEach((enemie) => {
-        if (this.world.character.isDetected(enemie) && !enemie.angry) {
+        if (this.world.character.isDetected(enemie) && !enemie.dead) {
           this.triggerAngryEnemy(enemie);
         }
       });
@@ -106,7 +106,8 @@ class Combat {
   characterDamageListener(object) {
     if (
       this.world.character.isInsideBorder(object) &&
-      this.world.character.life > 0
+      this.world.character.life > 0 &&
+      !this.world.character.doesDamage
     ) {
       this.characterTakesDamage(object);
     }
@@ -130,7 +131,7 @@ class Combat {
     this.world.healthbar.HealthbarListener(
     this.world.character.maxLife,
     this.world.character.life
-    ); // Update the health bar after taking damage
+    );
   }
 
   /**

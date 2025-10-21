@@ -75,7 +75,7 @@ class Endboss extends Enemies {
     this.setHitbox(40, 270, 1.2, 3.5);
     this.bossEntranceAudio = AudioManager.register(new Audio('audio/boss-entrance.mp3'));
     this.bossBiteAudio = AudioManager.register(new Audio('audio/boss-bite.wav'));
-/*     this.enemyMinionMovement(this.speedX, this.speedY); */
+    this.enemyMinionMovement(this.speedX, this.speedY);
   }
 
 
@@ -245,7 +245,7 @@ class Endboss extends Enemies {
       clearTimeout(this.cooldownTimeout)
       this.cooldownTimeout = setStoppableTimeout(() => {
         this.removeBossAttackState();
-      }, 5000);
+      }, 2000);
     }
 
     /**
