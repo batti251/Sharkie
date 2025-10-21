@@ -181,12 +181,17 @@ function closeFullscreen() {
  * This Function wether pauses or resumes the game, depending on the world.paused state
  */
 function backToMenu(){
-  console.log(canvas);
   pauseGame();
-  console.log(canvas);
-  console.log(window);
-  
   window.location.href = "/index.html"
+}
+
+/**
+ * This Function sets the changed sound value to the session storage
+ * 
+ * @param {*} v - the set sound value between 0.01 - 1.00 => in 0.01 steps
+ */
+function setSessionVolume(v){
+  sessionStorage.setItem("volume",v)
 }
 
 

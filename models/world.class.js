@@ -22,7 +22,6 @@ combat = new Combat(this);
     this.finishedLevel();
     this.finishedBossLevel();
     this.endbossAttack()
-
   }
 
 
@@ -96,9 +95,8 @@ combat = new Combat(this);
        victory.classList.remove('d-none')
        panel.classList.add('d-none')
        this.levelFinished = true;
-
        pauseGame()
-      let showButtonTimeout = setStoppableTimeout(() => {
+       let showButtonTimeout = setStoppableTimeout(() => {
        addContinueButton()
        clearTimeout(showButtonTimeout)
       }, 1000);
@@ -168,9 +166,7 @@ combat = new Combat(this);
       this.drawCanvas()
       this.ctx.translate(this.cameraX, 0) 
       this.drawObjects(level);
-      if (this.bubble) {
-      this.addImgObjectToMap(this.bubble)
-      }
+      this.bubble? this.addImgObjectToMap(this.bubble) : ""
       this.ctx.translate(-this.cameraX, 0) 
       this.drawHUD();
       this.nextLevel == 0? this.addImgObjectToMap(this.instruction):"";
@@ -183,7 +179,7 @@ combat = new Combat(this);
      *  => Background, collectibles, enemies, character
      * 
      */
-     drawObjects(level){
+     drawObjects(){
         this.addImgObjectsToMap(this.level.background)
         this.addImgObjectsToMap(this.level.coins);
         this.addImgObjectsToMap(this.level.poison);
@@ -260,8 +256,6 @@ combat = new Combat(this);
      */
     imgAnimationLoop(){
      let self = this;
-     console.log("go");
-     
      this.instance = requestAnimationFrame(() => {self.draw()});
     }
 }

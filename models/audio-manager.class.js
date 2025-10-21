@@ -1,6 +1,5 @@
 class AudioManager{
     static audioArray = [];
-    static volume = 0.5
 
 
     /**
@@ -13,7 +12,8 @@ class AudioManager{
      * @returns - returns the Audio to its parent object
      */
     static register(audio){
-        audio.volume = this.volume;
+        let sound = document.getElementById('sound-range')
+        audio.volume = sessionStorage.getItem("volume")? sound.value = sessionStorage.getItem("volume"): sound.value = setSessionVolume("0.5");
         this.audioArray.push(audio)
         return audio;
     }

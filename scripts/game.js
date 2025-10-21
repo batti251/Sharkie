@@ -2,13 +2,21 @@ let world;
 let keyboard = new Keyboard();
 /**
  * This function initializes the Canvas-Screen
- * 
+ * It also loads preset Volume if it was changed by the user
  */
 function init() {
     const canvas = document.getElementById('canvas');
+    getVolumePreset()
 }
 
-
+/**
+ * This Function wether sets the volume value to 0.5, or gets the volume from the session storage
+ * It allows to keep individual sound-changes from the user
+ */
+function getVolumePreset(){
+    let sound = document.getElementById('sound-range')
+    sessionStorage.getItem("volume")? sound.value = sessionStorage.getItem("volume"): sound.value = setSessionVolume("0.5")
+}
 
 
 document.addEventListener("keydown",(event) => {
