@@ -4,10 +4,8 @@ class MoveableObjects extends GameObjects {
   mirrorImage;
   maxLife;
   life;
-
   hitboxWidth;
   hitboxHeight;
-
 
   /**
    * This Function calls the Objects Animations
@@ -23,7 +21,7 @@ class MoveableObjects extends GameObjects {
     } else this.animateObjectSprite(sprites, miliseconds);
   }
 
-    /**
+  /**
    * This Function triggers the enemies character detection
    *
    * @param {Object} object - The dedicated Object: Enemies
@@ -33,21 +31,19 @@ class MoveableObjects extends GameObjects {
     return this.x + this.hitboxX + this.hitboxWidth - object.x > -600;
   }
 
-    /**
-   * This Function lets the object Y-coordinate decrease, to have a death-effect in Water 
-   * 
-   * @param {*} speedY 
+  /**
+   * This Function lets the object Y-coordinate decrease, to have a death-effect in Water
+   *
+   * @param {*} speedY
    */
-     deadToSurface(speedY){
-        this.deadSurfaceInterval = setStoppableInterval(() => {
-            if (this.dead) {
-            this.y -= speedY;
-            }
-        }, 1000 / 60);
-    }
+  deadToSurface(speedY) {
+    this.deadSurfaceInterval = setStoppableInterval(() => {
+      if (this.dead) {
+        this.y -= speedY;
+      }
+    }, 1000 / 60);
+  }
 
-
-    
   /**
    * This Function updates the displayed image in each iteration
    * The Iteration is done every 100 miliseconds per frame
@@ -73,16 +69,11 @@ class MoveableObjects extends GameObjects {
    * @param {Array} sprites -
    */
   resetCurrentImg(sprites) {
-    if (this.lastSprite !== sprites && this.isAttacking || this.isShooting) {
+    if ((this.lastSprite !== sprites && this.isAttacking) || this.isShooting) {
       this.currentImg = 0;
     }
     this.lastSprite = sprites;
   }
-
-
-
-
-
 
   /**
    * This Function sets the Hitbox of the Objects, scaled by any size
@@ -112,35 +103,32 @@ class MoveableObjects extends GameObjects {
       this.x + this.hitboxX < object.x + object.hitboxWidth &&
       this.y + this.hitboxY + this.hitboxHeight > object.y + object.hitboxY &&
       this.y + this.hitboxY < object.y + object.hitboxY + object.hitboxHeight
-    )//;
+    ); //;
   }
 
+  /**
+   * This function reduces the X-Coordinate and let the Enemy move left
+   * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
+   * The Movement is set to 60 FPS
+   * @param {*} speedX - The px-value
+   */
+  enemyMoveLeft(speedX) {
+    this.resetIntervalX = setStoppableInterval(() => {
+      this.x -= speedX;
+      this.mirrorImage = false;
+    }, 1000 / 60);
+  }
 
-      /**
-     * This function reduces the X-Coordinate and let the Enemy move left 
-     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
-     * The Movement is set to 60 FPS
-     * @param {*} speedX - The px-value 
-     */
-    enemyMoveLeft(speedX){
-        this.resetIntervalX = setStoppableInterval(() => {
-            this.x -= speedX;
-             this.mirrorImage = false
-        }, 1000 / 60);
-    }
-
-    /**
-     * This function increases the X-Coordinate and let the Enemy move right 
-     * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
-     * The Movement is set to 60 FPS
-     * @param {*} speedX - The px-value 
-     */
-    enemyMoveRight(speedX){
-         this.resetIntervalX = setStoppableInterval(() => {
-            this.x += speedX;
-            this.mirrorImage = true
-        }, 1000 / 60);
-    }
-
-
+  /**
+   * This function increases the X-Coordinate and let the Enemy move right
+   * It sets the Image, according to the Boolean, to turn the Enemy to the correct direction
+   * The Movement is set to 60 FPS
+   * @param {*} speedX - The px-value
+   */
+  enemyMoveRight(speedX) {
+    this.resetIntervalX = setStoppableInterval(() => {
+      this.x += speedX;
+      this.mirrorImage = true;
+    }, 1000 / 60);
+  }
 }

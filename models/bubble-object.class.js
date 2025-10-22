@@ -1,24 +1,25 @@
-class Bubble extends MoveableObjects{
-height = 50;
-width = 50;
+class Bubble extends MoveableObjects {
+  height = 50;
+  width = 50;
 
-bubble_Array = ['assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
+  bubble_Array = ["assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png"];
 
+  constructor(path, character) {
+    super().loadImg(path);
+    this.character = character;
+    this.x =
+      this.character.x + this.character.hitboxWidth + this.character.hitboxX;
+    this.y =
+      this.character.y +
+      this.character.hitboxHeight +
+      this.character.hitboxY / 2;
+    this.loadImgCache(this.bubble_Array);
+    this.findNearestBubbleTarget();
+    this.enemyMoveRight(3); //rename
+  }
 
-    constructor(path, character){
-        super().loadImg(path);
-        this.character = character
-        this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX
-        this.y = this.character.y + this.character.hitboxHeight + (this.character.hitboxY / 2);
-        this.loadImgCache(this.bubble_Array);
-        this.findNearestBubbleTarget();
-        this.enemyMoveRight(3); //rename
-    }
-
-
-/**
-   *
-   *
+  /**
+   * This function sets the bubbleTarget-Interval to find and aim to the nearest Target
    */
   findNearestBubbleTarget() {
     clearInterval(this.targetInterval);
@@ -35,9 +36,11 @@ bubble_Array = ['assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
   /**
    * This Function updates the nearest Target for the Bubble
    * It calculates the distance from the bubble to each Jellyfish
-   * If the distance is shorter than the previous shortest distance, it updates the nearestObject
+   * Its based on the Euclidean distance
+   * If the distance is shorter than the previous shortest distance, it updates the nearestObject to this dedicated object => nearestObject
+   * The nearestObject is needed for the updateBubbleTargeting-Function
    *
-   * @param {*} object
+   * @param {*} object - the dedicated enemy
    */
   updateNearestTarget(object) {
     if (!object.dead && object instanceof Jellyfish) {
@@ -64,6 +67,7 @@ bubble_Array = ['assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
   updateBubbleTargeting() {
     this.calculateBubbleDirection(this.nearestObject);
     if (this.x > this.nearestObject.x + this.hitRadius) {
+      //delete bubble here
       return;
     } else if (this.distance > this.hitRadius) {
       this.moveBubbleToTarget();
@@ -73,7 +77,7 @@ bubble_Array = ['assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
   }
 
   /**
-   * This Function calculates the direction from the bubble to the nearest target
+   * This Function calculates the vector-direction from the bubble to the nearest target
    * It calculates the distance from the bubble to the nearest target
    * It sets the hitRadius and speed for the bubble
    */

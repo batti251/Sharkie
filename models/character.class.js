@@ -281,5 +281,4 @@ class Character extends MoveableObjects {
       }, 200);
     } else return;
   }
-
 }

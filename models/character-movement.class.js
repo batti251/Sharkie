@@ -1,16 +1,14 @@
-class CharacterMovement{
-speedX = 8;
-speedY = 4;
-isMoving = false;
-lastIsMoving = true;
+class CharacterMovement {
+  speedX = 8;
+  speedY = 4;
+  isMoving = false;
+  lastIsMoving = true;
 
-    constructor(character) {
-       this.character = character
-    }
+  constructor(character) {
+    this.character = character;
+  }
 
-
-    
-/**
+  /**
    * This Function picks the needed Sprite-Array depending on the characters Status
    * When Character moves = [Swim-Array]
    * When Character doesn't move = [Idle-Array]
@@ -22,7 +20,11 @@ lastIsMoving = true;
     clearInterval(this.characterMovementInterval);
     this.characterMovementInterval = setStoppableInterval(() => {
       this.moveCharacter(this.character.world.keyboard);
-      if (this.isMoving != this.lastIsMoving && !this.character.isAttacking && !this.character.isShooting) {
+      if (
+        this.isMoving != this.lastIsMoving &&
+        !this.character.isAttacking &&
+        !this.character.isShooting
+      ) {
         this.lastIsMoving = this.isMoving;
         this.applyCharacterMovement();
       }
@@ -41,17 +43,16 @@ lastIsMoving = true;
     }
   }
 
-    /**
-     * This Function calls the character swim-Animation
-     * 
-     */
-    characterSwims(){
-        this.character.animateObjectSprite(this.character.sharkie_SWIM, 100);
-    }
+  /**
+   * This Function calls the character swim-Animation
+   *
+   */
+  characterSwims() {
+    this.character.animateObjectSprite(this.character.sharkie_SWIM, 100);
+  }
 
-
-/**
-   * This Function calls the actual Moveset from the Character
+  /**
+   * This Function calls the Movesets and Abilities from the Character
    *
    * @param {object} key - Object with the listened Keyboard Keys
    */
@@ -66,7 +67,7 @@ lastIsMoving = true;
     this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
   }
 
-    /**
+  /**
    * This function reduces the Y-Coordinate and let the Object move up
    * Returns either true, for Swim-Animation, or false for Idle-Animation
    *
@@ -76,8 +77,7 @@ lastIsMoving = true;
   moveUp(speed, key) {
     if (key?.UP == true && this.character.y > -100) {
       this.character.y = this.character.y - speed;
-    this.character.swimAudio.play()
-
+      this.character.swimAudio.play();
     }
   }
   /**
@@ -90,8 +90,7 @@ lastIsMoving = true;
   moveDown(speed, key) {
     if (key?.DOWN == true && this.character.y < 680) {
       this.character.y = this.character.y + speed;
-    this.character.swimAudio.play()
-
+      this.character.swimAudio.play();
     }
   }
 
@@ -106,13 +105,20 @@ lastIsMoving = true;
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveRight(speed, key) {
-      if (key?.RIGHT == true && this.character.x >= this.character.world.levelBorder + 1200){
-      }
-     else if (key?.RIGHT == true && this.character.x <= this.character.world.levelBorder) {
-      this.moveWithCameraRight(speed)
-    }
-     else if(key?.RIGHT == true && this.character.x >= this.character.world.levelBorder){
-      this.moveWithoutCameraRight(speed)
+    if (
+      key?.RIGHT == true &&
+      this.character.x >= this.character.world.levelBorder + 1200
+    ) {
+    } else if (
+      key?.RIGHT == true &&
+      this.character.x <= this.character.world.levelBorder
+    ) {
+      this.moveWithCameraRight(speed);
+    } else if (
+      key?.RIGHT == true &&
+      this.character.x >= this.character.world.levelBorder
+    ) {
+      this.moveWithoutCameraRight(speed);
     }
   }
 
@@ -123,11 +129,11 @@ lastIsMoving = true;
    * It plays the Swim-Audio
    * @param {Number} speed - The px-value
    */
-  moveWithCameraRight(speed){
-      this.character.x += speed;
-      this.setCharacterPositionLeft(speed);
-      this.character.mirrorImage = false;
-      this.character.swimAudio.play()
+  moveWithCameraRight(speed) {
+    this.character.x += speed;
+    this.setCharacterPositionLeft(speed);
+    this.character.mirrorImage = false;
+    this.character.swimAudio.play();
   }
 
   /**
@@ -137,10 +143,10 @@ lastIsMoving = true;
    * It plays the Swim-Audio
    * @param {Number} speed - The px-value
    */
-  moveWithoutCameraRight(speed){
-      this.character.x += speed;
-      this.character.mirrorImage = false;
-      this.character.swimAudio.play()
+  moveWithoutCameraRight(speed) {
+    this.character.x += speed;
+    this.character.mirrorImage = false;
+    this.character.swimAudio.play();
   }
 
   /**
@@ -151,7 +157,7 @@ lastIsMoving = true;
    */
   moveLeft(speed, key) {
     if (key?.LEFT == true && this.character.x > -100) {
-      this.moveWithCameraLeft(speed)
+      this.moveWithCameraLeft(speed);
     }
   }
 
@@ -162,13 +168,13 @@ lastIsMoving = true;
    * It plays the Swim-Audio
    * @param {Number} speed - The px-value
    */
-  moveWithCameraLeft(speed){
-      this.character.x -= speed;
-      this.setCharacterPositionRight(speed);
-      this.character.mirrorImage = true;
-      this.character.swimAudio.play()
+  moveWithCameraLeft(speed) {
+    this.character.x -= speed;
+    this.setCharacterPositionRight(speed);
+    this.character.mirrorImage = true;
+    this.character.swimAudio.play();
   }
-  
+
   /**
    * This Function moves the camera, so the character will be set left on the screen
    * If the character is not on the left screen, the camera will move slightly faster until the character is positioned on the left screen again
@@ -189,7 +195,10 @@ lastIsMoving = true;
    * @param {*} speed
    */
   setCharacterPositionRight(speed) {
-    if (this.character.world.cameraX + this.character.x <= canvas.width - 1200) {
+    if (
+      this.character.world.cameraX + this.character.x <=
+      canvas.width - 1200
+    ) {
       this.character.world.cameraX += speed + 10;
     } else {
       this.character.world.cameraX += speed;

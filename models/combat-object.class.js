@@ -64,7 +64,7 @@ class Combat {
       !this.world.character.hitted &&
       !(object instanceof Endboss)
     ) {
-      this.killEnemie(object)
+      this.killEnemie(object);
     }
   }
 
@@ -73,9 +73,11 @@ class Combat {
    * It filters the enemies-array, to keep only the enemies that are not dead
    * It is called after an enemy is hit by the character
    */
-  killEnemie(object){
+  killEnemie(object) {
     object.isDead = true;
-    this.world.level.enemies = this.world.level.enemies.filter(object => !object.isDead)
+    this.world.level.enemies = this.world.level.enemies.filter(
+      (object) => !object.isDead
+    );
   }
 
   /**
@@ -129,8 +131,8 @@ class Combat {
     this.playHurtSound(object);
     this.world.character.takesDamage = true;
     this.world.healthbar.HealthbarListener(
-    this.world.character.maxLife,
-    this.world.character.life
+      this.world.character.maxLife,
+      this.world.character.life
     );
   }
 
@@ -146,6 +148,4 @@ class Combat {
       ? this.world.character.jellyHitAudio.play()
       : this.world.character.regularHitAudio.play();
   }
-
-  
 }
