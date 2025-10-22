@@ -8,32 +8,73 @@ class CharacterAbilities {
   }
 
   /**
-   * This Function let the character attack with his fin.
-   * During slap-animation the character cannot collect collectibles
-   * It has a cooldown of 1500miliseconds, until the character can slap again
-   * It has a key-detection, to avoid multiple slaps being executed, when key.SPACE is pressed for longer time
+   * This Function calls the finslap-attack
+   * It checks, if the character is able to use the finslap-attack
+   * It calls the Slap-Function if its true
+   * It resets keyDetection after it, to allow another finslap-calling
    *
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   finSlap(key) {
-    if (key?.SPACE === true && !this.slapCooldown && !this.character.hitted) {
-      this.character.finslapTimer = setStoppableTimeout(() => {
-        this.character.finslapAudio.play();
-      }, 300);
-      this.keyDetection = true;
-      this.slapCooldown = true;
-      this.character.isAttacking = true;
-      this.character.canCollect = false;
-      this.character.animateObjectSprite(this.character.sharkie_FIN_SLAP, 80);
-      this.expandHitbox();
-      this.stallCharacterAnimationBy(720);
-      setStoppableTimeout(() => {
-        this.character.hitboxWidth = 210;
-      }, 600);
+    if (this.userCanFinslap(key)) {
+      this.characterSlaps()
     }
     if (!key?.SPACE) {
       this.keyDetection = false;
     }
+  }
+
+  /**
+   * This Function calls the actual finslap-animation
+   * It plays the according Slap-Audio
+   * It sets certain States, to prevent unappropriate behavior
+   * It calls the slap-animation
+   * It expand the characters hitbox 
+   * It resets characters animation after 720 miliseconds
+   * It resets the characterhitbox
+   */
+  characterSlaps(){
+    this.playSlapAudio()
+    this.setFinslapState();
+    this.character.animateObjectSprite(this.character.sharkie_FIN_SLAP, 80);
+    this.expandHitbox();
+    this.stallCharacterAnimationBy(720);
+    setStoppableTimeout(() => {
+      this.character.hitboxWidth = 210;
+    }, 600);
+  }
+
+  /**
+   * This function plays the Slap-Audio, after 300 miliseconds
+   */
+  playSlapAudio(){
+    this.character.finslapTimer = setStoppableTimeout(() => {
+    this.character.finslapAudio.play();
+      }, 300);
+  }
+
+  /**
+   * This Function checks if the User can Finslap
+   * The Space-Key has to be triggered, the attack must not be on cooldown, character must not be hit
+   * 
+   * @param {*} key  - Object with the listened Keyboard Keys
+   * @returns - returns either true or false, based on the conditions
+   */
+  userCanFinslap(key) {
+    return key?.SPACE === true && !this.slapCooldown && !this.character.hitted;
+  }
+
+  /**
+   * This Function sets certain states to prevent unappropriate behavior
+   * Sets canCollect to false to prevent collecting during ShootingState
+   * Sets isAttacking-State to prevent bugs in slap-animation
+   * It has a key-detection, to avoid multiple slaps being executed, when key.SPACE is pressed for longer time
+   */
+  setFinslapState() {
+    this.keyDetection = true;
+    this.slapCooldown = true;
+    this.character.isAttacking = true;
+    this.character.canCollect = false;
   }
 
   /**
@@ -46,41 +87,45 @@ class CharacterAbilities {
   shootBubble(key) {
     if (this.userCanShoot(key)) {
       this.setShootingState(key);
-      this.character.animateObjectSprite(this.character.sharkie_Bubble_TRAP, 80);
+      this.character.animateObjectSprite(
+        this.character.sharkie_Bubble_TRAP,
+        80
+      );
       this.createBubble(world.character);
       this.shootCoolDown(700, key);
     }
-   
-  }
-
-/**
- * This Function sets certain states to prevent unappropriate behavior
- * Sets canCollect to prevent collecting during ShootingState
- * Sets isShooting-State to prevent bug in shooting-animation
- * It has a key-detection, to avoid multiple bubbles being shot, when key.Q is pressed for longer time
- * @param {*} key  - the key-events
- */
-  setShootingState(key){
-      key.Q = null;
-      this.keyDetection = true;
-      this.character.isShooting = true;
-      this.character.canCollect = false;
   }
 
   /**
-   * This Function checks if a bubble can be shoot. 
+   * This Function sets certain states to prevent unappropriate behavior
+   * Sets canCollect to false to prevent collecting during ShootingState
+   * Sets isShooting-State to prevent bugs in shooting-animation
+   * It has a key-detection, to avoid multiple bubbles being shot, when key.Q is pressed for longer time
+   * @param {*} key  - the key-events
+   */
+  setShootingState(key) {
+    key.Q = null;
+    this.keyDetection = true;
+    this.character.isShooting = true;
+    this.character.canCollect = false;
+  }
+
+  /**
+   * This Function checks if a bubble can be shoot.
    * Therefore the Q-Key has to be triggered, the character must not be hitted and a poison must be collected before
-   * It cannot appear multiple bubbles 
-   * 
-   * @param {*} key - the key-events 
+   * It cannot appear multiple bubbles
+   *
+   * @param {*} key - the key-events
    * @returns - returns either true or false, based on the conditions
    */
-  userCanShoot(key){
-    return key?.Q === true &&
+  userCanShoot(key) {
+    return (
+      key?.Q === true &&
       !this.hitted &&
       this.character.world.poisonbar.poisonCount.length > 0 &&
       !this.keyDetection &&
       !this.character.world.bubble
+    );
   }
 
   /**
@@ -90,7 +135,10 @@ class CharacterAbilities {
    */
   createBubble(character) {
     setStoppableTimeout(() => {
-      character.world.bubble = new Bubble("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",character);
+      character.world.bubble = new Bubble(
+        "assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",
+        character
+      );
       this.shotBubble = true;
       this.decreasePoisonCount();
     }, 700);
@@ -111,23 +159,23 @@ class CharacterAbilities {
    * It works as Cooldown for collection and key.Q-listener
    *
    * @param {*} miliseconds - Timer, when Function should be called
-   * @param {*} key - the key-events 
+   * @param {*} key - the key-events
    */
   shootCoolDown(miliseconds, key) {
     setStoppableTimeout(() => {
       this.character.movement.applyCharacterMovement();
       this.character.isShooting = false;
       this.character.canCollect = true;
-       if (!key?.Q) {
-      this.keyDetection = false;
-    }
+      if (!key?.Q) {
+        this.keyDetection = false;
+      }
     }, miliseconds);
   }
 
   /**
    * This Function calls CharacterMovement after short delay to grant smooth movement-transition after slap
    * It works as Cooldown for collection and key.SPACE-listener
-   *
+   * It resets all States, that where set before
    * @param {Number} miliseconds - Timer, when Function should be called
    */
   stallCharacterAnimationBy(miliseconds) {
@@ -153,8 +201,10 @@ class CharacterAbilities {
     setStoppableTimeout(() => {
       this.character.doesDamage = true;
       this.character.hitboxWidth = this.character.hitboxSlap;
-      this.character.finSlapX = this.character.oldHitBoxWidth + this.character.hitboxX;
-      this.character.finSlapHitboxWidth = this.character.hitboxSlap - this.character.oldHitBoxWidth;
+      this.character.finSlapX =
+        this.character.oldHitBoxWidth + this.character.hitboxX;
+      this.character.finSlapHitboxWidth =
+        this.character.hitboxSlap - this.character.oldHitBoxWidth;
     }, 400);
   }
 
@@ -164,9 +214,11 @@ class CharacterAbilities {
    */
   negatefinSlapX() {
     if (this.character.mirrorImage) {
-      this.character.finSlapX = this.character.hitboxX - this.character.finSlapHitboxWidth;
+      this.character.finSlapX =
+        this.character.hitboxX - this.character.finSlapHitboxWidth;
     } else {
-      this.character.finSlapX = this.character.hitboxX + this.character.hitboxWidth;
+      this.character.finSlapX =
+        this.character.hitboxX + this.character.hitboxWidth;
     }
   }
 
