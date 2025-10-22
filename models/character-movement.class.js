@@ -105,21 +105,40 @@ class CharacterMovement {
    * @param {Object} key - Object with the listened Keyboard Keys
    */
   moveRight(speed, key) {
-    if (
-      key?.RIGHT == true &&
-      this.character.x >= this.character.world.levelBorder + 1200
-    ) {
-    } else if (
-      key?.RIGHT == true &&
-      this.character.x <= this.character.world.levelBorder
-    ) {
+    if (this.characterReachesExpandLevelEnd(key)) {
+    } else if (this.characterMovesRegular(key)) {
       this.moveWithCameraRight(speed);
-    } else if (
-      key?.RIGHT == true &&
-      this.character.x >= this.character.world.levelBorder
-    ) {
+    } else if (this.characterMovesInBossArea(key)) {
       this.moveWithoutCameraRight(speed);
     }
+  }
+
+  /**
+   * This Function checks, if the user reaches the expanded levelborder
+   * ExpandLevelborder = world.levelborder + 1200 
+   * @param {*} key - Object with the listened Keyboard Keys
+   * @returns - true or false, based on the condition
+   */
+  characterReachesExpandLevelEnd(key){
+    return key?.RIGHT == true && this.character.x >= this.character.world.levelBorder + 1200
+  }
+
+  /**
+   * This Function checks, if the user is allowed to move right in the boss area
+   * @param {*} key - Object with the listened Keyboard Keys
+   * @returns - true or false, based on the condition
+   */
+  characterMovesInBossArea(key){
+    return key?.RIGHT == true && this.character.x >= this.character.world.levelBorder
+  }
+
+  /**
+   * This Function checks, if the user is allowed to move right, until to the levelborder
+   * @param {*} key - Object with the listened Keyboard Keys
+   * @returns - true or false, based on the condition
+   */
+  characterMovesRegular(key){
+      return key?.RIGHT == true && this.character.x <= this.character.world.levelBorder
   }
 
   /**
