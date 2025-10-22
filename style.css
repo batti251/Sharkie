@@ -35,7 +35,7 @@ h1 {
 }
 
 .menu-background {
-  background-image: url("assets/background.png");
+  background-image: url("assets/img/background.png");
   background-repeat: round;
   background-size: cover;
   height: 100dvh;
@@ -55,7 +55,7 @@ h1 {
 }
 
 .hero {
-  background-image: url("assets/sharkie-background.png");
+  background-image: url("assets/img/sharkie-background.png");
   background-repeat: round;
   background-size: cover;
   height: 80px;

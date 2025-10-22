@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="styles/button.css">
     <link rel="stylesheet" href="styles/trackpad.css">
     <link rel="stylesheet" href="styles/overlay.css">
-    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <script src="script.js"></script>
+    <script src="assets/html/template.js"></script>
     <script src="models/audio-manager.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/game-objects.class.js"></script>
@@ -39,70 +40,63 @@
 
 </head>
 <body onload="init()">
-    
-           
-
  
-    <div class="landscape">
-
+<div class="landscape">
         <b class="text-white">please turn your device</b>
-        <img class="img-phone" src="assets/cell-phone.png" alt="mobile phone picture art" title="Ios icons created by Shashank Singh - Flaticon">
+        <img class="img-phone" src="assets/img/cell-phone.png" alt="mobile phone picture art" title="Ios icons created by Shashank Singh - Flaticon">
 </div>
 
-<div id="menu-background" class="menu-background">
-    <div class="hero-title center-container">
-    <h1 class="sharkie-title">Sharkie</h1>
-    <div class="hero"></div>
-  </div>
-    <div class="btn-menu center-container">
-    <button class="btn-start" onclick="startGame()">START</button>
-    </div> 
-</div>
-
-<div id="victory-screen" class="d-none"></div>
-<div id="defeat-screen" class="d-none"></div>
-
-
-<header id="panel-top">
-  <nav>
-      <div class="d-flex align-center">
-        <div id="sound-percentage"></div>
-        <input id="sound-range" type="range" min="0" max="1" step="0.01"oninput="AudioManager.setVolume(this.value)" onchange="setSessionVolume(this.value)">
+  <div id="menu-background" class="menu-background">
+      <div class="hero-title center-container">
+      <h1 class="sharkie-title">Sharkie</h1>
+      <div class="hero"></div>
+    </div>
+      <div class="btn-menu center-container">
+      <button class="btn-start" onclick="startGame()">START</button>
       </div> 
-      <button class="game-relevant d-none" onclick="backToMenu()">Back to Menu</button> 
-      <button onclick="toggleFullscreen()">Fullscreen</button>
-      <button class="btn-legal-notice" onclick="openLegalNotice()">Legal Notice</button>
-  </nav>
-</header>
+  </div>
+
+  <div id="victory-screen" class="d-none"></div>
+  <div id="defeat-screen" class="d-none"></div>
+
+
+  <header id="panel-top">
+    <nav>
+        <div class="d-flex align-center">
+          <div id="sound-percentage"></div>
+          <input id="sound-range" type="range" min="0" max="1" step="0.01"oninput="AudioManager.setVolume(this.value)" onchange="setSessionVolume(this.value)">
+        </div> 
+        <button class="game-relevant d-none" onclick="backToMenu()">Back to Menu</button> 
+        <button onclick="toggleFullscreen()">Fullscreen</button>
+        <button class="btn-legal-notice" onclick="openLegalNotice()">Legal Notice</button>
+    </nav>
+  </header>
 
     <canvas id ="canvas" width="1920" height="1080">
     </canvas>
 
-<div id="panel" class="d-none game-relevant">
-  <div class="trackpad">
-    <div>
-    <button id="joystick" class="game-relevant">
-      <div id="stick"></div>
-    </button>
+    <div id="panel" class="d-none game-relevant">
+      <div class="trackpad">
+        <div>
+        <button id="joystick" class="game-relevant">
+          <div id="stick"></div>
+        </button>
+        </div>
+        <div class="abilities">
+          <button id="finslap" class="game-relevant"></button>
+          <button id="bubbleshoot" class="game-relevant"></button>
+        </div>
+      </div>
     </div>
-    <div class="abilities">
-      <button id="finslap" class="game-relevant"></button>
-      <button id="bubbleshoot" class="game-relevant"></button>
-    </div>
-</div>
-  </div>
 
 
     <button id="continue" class="btn-continue center-container d-none" onclick="nextLevel()">Continue</button>
     <button id="try-again" class="btn-try-again center-container d-none" onclick="tryAgainLevel()">Try Again</button>
 
-
-    
-    
-    <div id="legal-notice-container" class="legal-notice center-container d-none">
+    <div id="legal-notice-container" class="legal-notice center-container d-none"></div>
       
-         </div>
+         
  
-    </div>
+</div>
 </body>
 </html>

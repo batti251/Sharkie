@@ -7,12 +7,8 @@ class Bubble extends MoveableObjects {
   constructor(path, character) {
     super().loadImg(path);
     this.character = character;
-    this.x =
-      this.character.x + this.character.hitboxWidth + this.character.hitboxX;
-    this.y =
-      this.character.y +
-      this.character.hitboxHeight +
-      this.character.hitboxY / 2;
+    this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
+    this.y = this.character.y + this.character.hitboxHeight + this.character.hitboxY / 2;
     this.loadImgCache(this.bubble_Array);
     this.findNearestBubbleTarget();
     this.enemyMoveRight(3); //rename
