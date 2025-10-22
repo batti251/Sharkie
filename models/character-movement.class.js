@@ -121,7 +121,7 @@ class CharacterMovement {
    */
   characterReachesExpandLevelEnd(key){
     return key?.RIGHT == true && this.character.x >= this.character.world.levelBorder + 1200
-  }
+  } 
 
   /**
    * This Function checks, if the user is allowed to move right in the boss area

@@ -33,22 +33,16 @@ class Jellyfish extends Enemies {
   buildJellyfish(type) {
     switch (type) {
       case 1:
-        this.jellyfish_IDLE = this.buildJellyGreenIDLE();
-        this.jellyfish_DEAD = this.buildJellyGreen_DEAD();
-        this.damage = 80;
+        this.buildJellyfishTypeOne();
         break;
       case 2:
-        this.jellyfish_IDLE = this.buildJellyPinkIDLE();
-        this.jellyfish_DEAD = this.buildJellyPink_DEAD();
-        this.damage = 80;
+        this.buildJellyfishtypeTwo();
         break;
       case 3:
-        this.jellyfish_IDLE = this.buildJellyLilaIDLE();
-        this.jellyfish_DEAD = this.buildJellyLila_DEAD();
+        this.buildJellyfishTypeThree();
         break;
       case 4:
-        this.jellyfish_IDLE = this.buildJellyYellowIDLE();
-        this.jellyfish_DEAD = this.buildJellyYellow_DEAD();
+        this.buildJellyfishTypeFour();
         break;
       default:
         break;
@@ -56,7 +50,48 @@ class Jellyfish extends Enemies {
   }
 
   /**
+   * This Function builds the green jellyfish
+   * It sets the according IDLE and DEAD Array into Img-Cache
+   * The Jellyfish has a Damage-Value of 80
+   */
+  buildJellyfishTypeOne() {
+    this.jellyfish_IDLE = this.buildJellyGreenIDLE();
+    this.jellyfish_DEAD = this.buildJellyGreen_DEAD();
+    this.damage = 80;
+  }
+
+  /**
+   * This Function builds the pink jellyfish
+   * It sets the according IDLE and DEAD Array into Img-Cache
+   * The Jellyfish has a Damage-Value of 80
+   */
+  buildJellyfishtypeTwo() {
+    this.jellyfish_IDLE = this.buildJellyPinkIDLE();
+    this.jellyfish_DEAD = this.buildJellyPink_DEAD();
+    this.damage = 80;
+  }
+
+  /**
+   * This Function builds the lila jellyfish
+   * It sets the according IDLE and DEAD Array into Img-Cache
+   */
+  buildJellyfishTypeThree() {
+    this.jellyfish_IDLE = this.buildJellyLilaIDLE();
+    this.jellyfish_DEAD = this.buildJellyLila_DEAD();
+  }
+
+  /**
+   * This Function builds the yellow jellyfish
+   * It sets the according IDLE and DEAD Array into Img-Cache
+   */
+  buildJellyfishTypeFour() {
+    this.jellyfish_IDLE = this.buildJellyYellowIDLE();
+    this.jellyfish_DEAD = this.buildJellyYellow_DEAD();
+  }
+
+  /**
    * This Function calls the Dead(bubbled)-Animation
+   * It sets the according IDLE and DEAD Array into Img-Cache
    * It is called, when the Jelly was hit by a bubble
    */
   jellyfishDeadAnimation() {
