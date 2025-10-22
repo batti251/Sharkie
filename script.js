@@ -209,7 +209,7 @@ function closeFullscreen() {
  */
 function backToMenu() {
   pauseGame();
-  window.location.href = "/index.html";
+  window.location.href = "https://sebastian-buenz.developerakademie.net/Sharkie/index.html";
 }
 
 /**
