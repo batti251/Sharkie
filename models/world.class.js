@@ -11,17 +11,16 @@ class World {
   combat = new Combat(this);
 
   constructor(canvas, keyboard, nextLevel, levelType) {
-    console.log("Level: " + nextLevel);
     this.nextLevel = nextLevel;
     this.ctx = canvas.getContext("2d");
     levelType == "boss" ? (this.level = new LevelEndBoss(this.nextLevel)) : (this.level = new LevelRegular(this.nextLevel));
-    this.draw(this.nextLevel);
     this.keyboard = keyboard;
     this.setWorld();
     this.setLevelEnd();
     this.finishedLevel();
     this.finishedBossLevel();
     this.endbossAttack();
+    this.draw();
   }
 
   /**
@@ -40,8 +39,8 @@ class World {
    */
   setLevelEnd() {
     this.levelType = this.level.constructor;
-    this.levelEnd = this.level.x - 1940;
-    this.levelBorder = this.level.x - 1940;
+    this.levelEnd = this.level.x - canvas.width -20;
+    this.levelBorder = this.level.x - canvas.width -20;
   }
 
   /**
@@ -70,6 +69,7 @@ class World {
    * It shows the Try-Again-Button, to restart the current level
    */
   showDefeatScreen() {
+    this.stopLoop = true
     this.levelFinished = false;
     triggerScreenOverlay("defeat");
     this.level.defeatAudio.play();
@@ -86,6 +86,7 @@ class World {
    * It denies the keyboard-functions to prevent further character-movement
    */
   showVictoryScreen() {
+    this.stopLoop = true
     this.levelFinished = true;
     triggerScreenOverlay("victory")
     pauseGame();
@@ -157,16 +158,21 @@ class World {
    * This Function loads the game-UI
    *
    */
-  draw(level) {
+  draw() {
     this.drawCanvas();
     this.ctx.translate(this.cameraX, 0);
-    this.drawObjects(level);
+    this.drawObjects();
     this.bubble ? this.addImgObjectToMap(this.bubble) : "";
     this.ctx.translate(-this.cameraX, 0);
     this.drawHUD();
     this.nextLevel == 0 ? this.addImgObjectToMap(this.instruction) : "";
-    this.imgAnimationLoop();
+    if (this.stopLoop) {
+        this.stopAnimationLoop()
+      } else {
+      this.imgAnimationLoop();
+      }
   }
+
 
   /**
    * This function draws all Objects, that move relative to the camera
@@ -219,22 +225,7 @@ class World {
       this.ctx.scale(-1, 1);
       object.x = object.x * -1;
     }
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeStyle = "black";
-    this.ctx.strokeRect(
-      object.x + object.hitboxX,
-      object.y + object.hitboxY,
-      object.hitboxWidth,
-      object.hitboxHeight
-    );
-    //this.ctx.strokeRect(object.x, object.y, object.hitboxWidth, object.hitboxHeight);
-    this.ctx.drawImage(
-      object.img,
-      object.x,
-      object.y,
-      object.width,
-      object.height
-    );
+    this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
     if (object.mirrorImage) {
       object.x = object.x * -1;
       this.ctx.restore();
@@ -257,8 +248,16 @@ class World {
    */
   imgAnimationLoop() {
     let self = this;
-    this.instance = requestAnimationFrame(() => {
+      this.instance = requestAnimationFrame(() => {
       self.draw();
     });
   }
+
+ /**
+     * This Function stops the imgAnimationLoop
+     * It is called, when the level is finished
+     */
+  stopAnimationLoop(){
+     cancelAnimationFrame(this.instance);
+}
 }

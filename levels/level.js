@@ -3,58 +3,18 @@ class Level {
   xStart = -1859;
   x1Start = -1080;
   multiplicator = 1559;
-  enemyMultiplicator = 5;
+  enemyMultiplicator = 3;
   background = [
-    new Background(
-      "assets/img/3. Background/Layers/5. Water/L1.png",
-      this.xStart,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/4.Fondo 2/L1.png",
-      this.xStart,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/3.Fondo 1/L1.png",
-      this.xStart,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/2. Floor/L1.png",
-      this.xStart,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/1. Light/1.png",
-      this.xStart,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/5. Water/L2.png",
-      this.x1Start,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/4.Fondo 2/L2.png",
-      this.x1Start,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/3.Fondo 1/L2.png",
-      this.x1Start,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/2. Floor/L2.png",
-      this.x1Start,
-      0
-    ),
-    new Background(
-      "assets/img/3. Background/Layers/1. Light/2.png",
-      this.x1Start,
-      0
-    ),
+    new Background("assets/img/3. Background/Layers/5. Water/L1.png",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.png",this.xStart, 0),
+    new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.png",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/2. Floor/L1.png",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/1. Light/1.png",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/5. Water/L2.png",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.png",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.png",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/2. Floor/L2.png",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/1. Light/2.png",this.x1Start,0),
   ];
   enemies = [];
   coins = [];

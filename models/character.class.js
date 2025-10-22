@@ -3,7 +3,7 @@ class Character extends MoveableObjects {
   width = 400;
   height = 400;
   world;
-  maxLife = 1000;
+  maxLife = 500;
   life = this.maxLife;
   canCollect = true;
   hitted = false;
