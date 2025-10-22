@@ -38,20 +38,12 @@ class Healthbar extends GameObjects {
    */
   updatehealthbar(maxLife, currentLife) {
     let healthbarIndicator = currentLife / maxLife;
-    if (healthbarIndicator <= 0.8) {
-      this.loadImg(this.healthbarCache[4]);
-    }
-    if (healthbarIndicator <= 0.6) {
-      this.loadImg(this.healthbarCache[3]);
-    }
-    if (healthbarIndicator <= 0.4) {
-      this.loadImg(this.healthbarCache[2]);
-    }
-    if (healthbarIndicator <= 0.2) {
-      this.loadImg(this.healthbarCache[1]);
-    }
-    if (healthbarIndicator <= 0) {
-      this.loadImg(this.healthbarCache[0]);
-    }
+    let updatedBar = this.healthbarCache[5];
+    if (healthbarIndicator <= 0.8) updatedBar = this.healthbarCache[4];
+    if (healthbarIndicator <= 0.6) updatedBar = this.healthbarCache[3];
+    if (healthbarIndicator <= 0.4) updatedBar = this.healthbarCache[2];
+    if (healthbarIndicator <= 0.2) updatedBar = this.healthbarCache[1];
+    if (healthbarIndicator <= 0) updatedBar = this.healthbarCache[0];
+    this.loadImg(updatedBar);
   }
 }

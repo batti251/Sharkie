@@ -40,22 +40,13 @@ class Coinbar extends GameObjects {
    */
   updateCoinbar() {
     this.maxCoins = world.level.coins.length;
-    this.collectedCoinsPercentage = this.coinCount.length / this.maxCoins;
-
-    if (this.collectedCoinsPercentage >= 0.2) {
-      this.loadImg("assets/img/4. Marcadores/green/Coin/20_  copia 2.png");
-    }
-    if (this.collectedCoinsPercentage >= 0.4) {
-      this.loadImg("assets/img/4. Marcadores/green/Coin/40_  copia 4.png");
-    }
-    if (this.collectedCoinsPercentage >= 0.6) {
-      this.loadImg("assets/img/4. Marcadores/green/Coin/60_  copia 4.png");
-    }
-    if (this.collectedCoinsPercentage >= 0.8) {
-      this.loadImg("assets/img/4. Marcadores/green/Coin/80_  copia 4.png");
-    }
-    if (this.collectedCoinsPercentage >= 1) {
-      this.loadImg("assets/img/4. Marcadores/green/Coin/100_ copia 4.png");
-    }
+    let collectedCoinsPercentage = this.coinCount.length / this.maxCoins;
+    let updatedBar = this.coinbarCache[0];
+    if (collectedCoinsPercentage >= 0.2) updatedBar = this.coinbarCache[1];
+    if (collectedCoinsPercentage >= 0.4) updatedBar = this.coinbarCache[2];
+    if (collectedCoinsPercentage >= 0.6) updatedBar = this.coinbarCache[3];
+    if (collectedCoinsPercentage >= 0.8) updatedBar = this.coinbarCache[4];
+    if (collectedCoinsPercentage >= 1.0) updatedBar = this.coinbarCache[5];
+    this.loadImg(updatedBar);
   }
 }

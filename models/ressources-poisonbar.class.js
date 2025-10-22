@@ -14,7 +14,7 @@ class Poisonbar extends GameObjects {
     "assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png",
     "assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png",
   ];
-  
+
   constructor(path, world) {
     super().loadImg(path);
     this.loadImgCache(this.poisonbarCache);
@@ -40,36 +40,13 @@ class Poisonbar extends GameObjects {
    */
   updatePoisonbar() {
     this.maxPoison = world.level.poison.length;
-    this.collectedPoisonPercentage = this.poisonCount.length / this.maxPoison;
-    if (this.collectedPoisonPercentage == 0) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png"
-      );
-    }
-    if (this.collectedPoisonPercentage >= 0.2) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/20_ copia 3.png"
-      );
-    }
-    if (this.collectedPoisonPercentage >= 0.4) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/40_ copia 2.png"
-      );
-    }
-    if (this.collectedPoisonPercentage >= 0.6) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/60_ copia 2.png"
-      );
-    }
-    if (this.collectedPoisonPercentage >= 0.8) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/80_ copia 2.png"
-      );
-    }
-    if (this.collectedPoisonPercentage >= 1) {
-      this.loadImg(
-        "assets/img/4. Marcadores/green/poisoned bubbles/100_ copia 3.png"
-      );
-    }
+    let collectedPoisonPercentage = this.poisonCount.length / this.maxPoison;
+    let updatedBar = this.poisonbarCache[0];
+    if (collectedPoisonPercentage >= 0.2) updatedBar = this.poisonbarCache[1];
+    if (collectedPoisonPercentage >= 0.4) updatedBar = this.poisonbarCache[2];
+    if (collectedPoisonPercentage >= 0.6) updatedBar = this.poisonbarCache[3];
+    if (collectedPoisonPercentage >= 0.8) updatedBar = this.poisonbarCache[4];
+    if (collectedPoisonPercentage >= 1.0) updatedBar = this.poisonbarCache[5];
+    this.loadImg(updatedBar);
   }
 }
