@@ -37,36 +37,50 @@ class CharacterAbilities {
   }
 
   /**
-   * This Function lets the character shoot a bubble, when key.Q is pressed
-   * During shoot-animation the character cannot collect collectibles
+   * This Function lets the character shoot a bubble, userCanShoot-condition is true
    * It has a cooldown of 700miliseconds, until the character can shoot again
    * The character can only shoot, when poisonCount is > 0
-   * It has a key-detection, to avoid multiple bubbles being shot, when key.Q is pressed for longer time
    *
-   * @param {*} key
+   * @param {*} key - the key-events
    */
   shootBubble(key) {
-    if (
-      key?.Q === true &&
-      !this.hitted &&
-      this.character.world.poisonbar.poisonCount.length > 0 &&
-      !this.keyDetection &&
-      !this.character.world.bubble
-    ) {
+    if (this.userCanShoot(key)) {
+      this.setShootingState(key);
+      this.character.animateObjectSprite(this.character.sharkie_Bubble_TRAP, 80);
+      this.createBubble(world.character);
+      this.shootCoolDown(700, key);
+    }
+   
+  }
+
+/**
+ * This Function sets certain states to prevent unappropriate behavior
+ * Sets canCollect to prevent collecting during ShootingState
+ * Sets isShooting-State to prevent bug in shooting-animation
+ * It has a key-detection, to avoid multiple bubbles being shot, when key.Q is pressed for longer time
+ * @param {*} key  - the key-events
+ */
+  setShootingState(key){
       key.Q = null;
       this.keyDetection = true;
       this.character.isShooting = true;
       this.character.canCollect = false;
-      this.character.animateObjectSprite(
-        this.character.sharkie_Bubble_TRAP,
-        80
-      );
-      this.createBubble(world.character);
-      this.shootCoolDown(700);
-    }
-    if (!key?.Q) {
-      this.keyDetection = false;
-    }
+  }
+
+  /**
+   * This Function checks if a bubble can be shoot. 
+   * Therefore the Q-Key has to be triggered, the character must not be hitted and a poison must be collected before
+   * It cannot appear multiple bubbles 
+   * 
+   * @param {*} key - the key-events 
+   * @returns - returns either true or false, based on the conditions
+   */
+  userCanShoot(key){
+    return key?.Q === true &&
+      !this.hitted &&
+      this.character.world.poisonbar.poisonCount.length > 0 &&
+      !this.keyDetection &&
+      !this.character.world.bubble
   }
 
   /**
@@ -76,10 +90,7 @@ class CharacterAbilities {
    */
   createBubble(character) {
     setStoppableTimeout(() => {
-      character.world.bubble = new Bubble(
-        "assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",
-        character
-      );
+      character.world.bubble = new Bubble("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",character);
       this.shotBubble = true;
       this.decreasePoisonCount();
     }, 700);
@@ -100,12 +111,16 @@ class CharacterAbilities {
    * It works as Cooldown for collection and key.Q-listener
    *
    * @param {*} miliseconds - Timer, when Function should be called
+   * @param {*} key - the key-events 
    */
-  shootCoolDown(miliseconds) {
+  shootCoolDown(miliseconds, key) {
     setStoppableTimeout(() => {
       this.character.movement.applyCharacterMovement();
       this.character.isShooting = false;
       this.character.canCollect = true;
+       if (!key?.Q) {
+      this.keyDetection = false;
+    }
     }, miliseconds);
   }
 
@@ -138,10 +153,8 @@ class CharacterAbilities {
     setStoppableTimeout(() => {
       this.character.doesDamage = true;
       this.character.hitboxWidth = this.character.hitboxSlap;
-      this.character.finSlapX =
-        this.character.oldHitBoxWidth + this.character.hitboxX;
-      this.character.finSlapHitboxWidth =
-        this.character.hitboxSlap - this.character.oldHitBoxWidth;
+      this.character.finSlapX = this.character.oldHitBoxWidth + this.character.hitboxX;
+      this.character.finSlapHitboxWidth = this.character.hitboxSlap - this.character.oldHitBoxWidth;
     }, 400);
   }
 
@@ -151,11 +164,9 @@ class CharacterAbilities {
    */
   negatefinSlapX() {
     if (this.character.mirrorImage) {
-      this.character.finSlapX =
-        this.character.hitboxX - this.character.finSlapHitboxWidth;
+      this.character.finSlapX = this.character.hitboxX - this.character.finSlapHitboxWidth;
     } else {
-      this.character.finSlapX =
-        this.character.hitboxX + this.character.hitboxWidth;
+      this.character.finSlapX = this.character.hitboxX + this.character.hitboxWidth;
     }
   }
 
@@ -167,16 +178,10 @@ class CharacterAbilities {
    */
   isInsideSlapBorder(object) {
     return (
-      this.character.x +
-        this.character.finSlapX +
-        this.character.finSlapHitboxWidth >
-        object.x + object.hitboxX &&
-      this.character.x + this.character.finSlapX <
-        object.x + object.hitboxWidth &&
-      this.character.y + this.character.hitboxY + this.character.hitboxHeight >
-        object.y + object.hitboxY &&
-      this.character.y + this.character.hitboxY <
-        object.y + object.hitboxY + object.hitboxHeight
+      this.character.x + this.character.finSlapX + this.character.finSlapHitboxWidth > object.x + object.hitboxX &&
+      this.character.x + this.character.finSlapX < object.x + object.hitboxWidth &&
+      this.character.y + this.character.hitboxY + this.character.hitboxHeight > object.y + object.hitboxY &&
+      this.character.y + this.character.hitboxY < object.y + object.hitboxY + object.hitboxHeight
     );
   }
 }
