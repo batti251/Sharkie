@@ -1,6 +1,6 @@
 /**
  * This Function opens the legal-notice-container
- * It generates via HTML-Template 
+ * It generates via HTML-Template
  */
 function openLegalNotice() {
   let legalContainer = document.getElementById("legal-notice-container");
@@ -9,7 +9,7 @@ function openLegalNotice() {
 }
 
 /**
- * This Function closes the legal-notice-container 
+ * This Function closes the legal-notice-container
  */
 function closeLegalNotice() {
   let legalContainer = document.getElementById("legal-notice-container");
@@ -86,7 +86,7 @@ function addLegalTextTemplate() {
  * It hides all none game-relevant objects
  * It creates the first level (Instruction-Level)
  * It detects if the used device is a touchdevice, to set the touchpanel accordingly
- * 
+ *
  */
 function startGame() {
   removeButtons();
@@ -96,7 +96,7 @@ function startGame() {
 }
 
 /**
- * This Function checks if the current window supports touch-events 
+ * This Function checks if the current window supports touch-events
  * => touch device, like mobilephone, or tablet
  */
 function isMobileDevice() {
@@ -283,6 +283,17 @@ function pauseGame() {
   world.paused = true;
   intervalIds.forEach(clearInterval);
   timeoutIds.forEach(clearTimeout);
+}
+
+/**
+ * This Function shows the defeat, or victory-screen depending on the incident
+ * @param {String} state - the dedicated incident: "victory" or "defeat"
+ */
+function triggerScreenOverlay(state) {
+  let screen = document.getElementById(`${state}-screen`);
+  let panel = document.getElementById("panel");
+  screen.classList.remove("d-none");
+  panel.classList.add("d-none");
 }
 
 let intervalIds = [];

@@ -70,11 +70,8 @@ class World {
    * It shows the Try-Again-Button, to restart the current level
    */
   showDefeatScreen() {
-    let defeat = document.getElementById("defeat-screen");
-    let panel = document.getElementById("panel");
-    defeat.classList.remove("d-none");
-    panel.classList.add("d-none");
     this.levelFinished = false;
+    triggerScreenOverlay("defeat");
     this.level.defeatAudio.play();
     let showButtonTimeout = setStoppableTimeout(() => {
       addTryAgainButtton();
@@ -89,11 +86,8 @@ class World {
    * It denies the keyboard-functions to prevent further character-movement
    */
   showVictoryScreen() {
-    let victory = document.getElementById("victory-screen");
-    let panel = document.getElementById("panel");
-    victory.classList.remove("d-none");
-    panel.classList.add("d-none");
     this.levelFinished = true;
+    triggerScreenOverlay("victory")
     pauseGame();
     this.level.victoryAudio.play();
     let showButtonTimeout = setStoppableTimeout(() => {
