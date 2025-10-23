@@ -232,6 +232,15 @@ class World {
       this.ctx.scale(-1, 1);
       object.x = object.x * -1;
     }
+     this.ctx.lineWidth = 2;
+    this.ctx.strokeStyle = "black";
+    this.ctx.strokeRect(
+      object.x + object.hitboxX,
+      object.y + object.hitboxY,
+      object.hitboxWidth,
+      object.hitboxHeight
+    );
+    
     this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
     if (object.mirrorImage) {
       object.x = object.x * -1;

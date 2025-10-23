@@ -17,7 +17,7 @@ class Pufferfish extends Enemies {
     this.width = Math.floor(Math.random() * 100) + 50;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;
     this.height = this.width;
-    this.setHitbox(0, 20, 1.1, 1.5);
+    this.setHitbox(5, 8, 1.12, 1.1);
   }
 
   /**
@@ -111,9 +111,9 @@ class Pufferfish extends Enemies {
     this.enemyPuffTimeout = setStoppableTimeout(() => {
       this.animateObjectSprite(this.pufferfish_TRANSITION, 100);
       setStoppableTimeout(() => {
-        enemie.animateObjectSprite(this.pufferfish_ANGRY, 200);
-      }, 100);
-    }, 200);
+        this.animateObjectSprite(this.pufferfish_ANGRY, 200);
+      }, 200);
+    }, 100);
   }
 
   /**

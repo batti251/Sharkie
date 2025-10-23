@@ -141,7 +141,7 @@ class Character extends MoveableObjects {
     this.loadImgCache(this.sharkie_FIN_SLAP);
     this.loadImgCache(this.sharkie_Bubble_TRAP);
     this.animateObject(this.sharkie_IDLE, 100);
-    this.setHitbox(100, 200, 1.9, 4);
+    this.setHitbox(80, 200, 1.67, 4);
     this.checkCollectiblesCollisions();
     this.world = world;
   }

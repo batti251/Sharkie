@@ -29,8 +29,8 @@ class Combat {
    * @param {*} enemie - The dedicated Object: Enemies
    */
   triggerAngryEnemy(enemie) {
-    enemie instanceof Pufferfish ? enemie.enemyDetectionAnimation(enemie) : "";
     enemie.angry = true;
+    enemie instanceof Pufferfish ? enemie.enemyDetectionAnimation() : "";
   }
 
   /**

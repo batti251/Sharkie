@@ -17,8 +17,8 @@ class Jellyfish extends Enemies {
     this.y = Math.floor(Math.random() * 200) + 200;
     this.width = Math.floor(Math.random() * 100) + 60;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;
-    this.height = this.width;
-    this.setHitbox(25, 10, 1.9, 1.5);
+    this.height = this.width *1.5;
+    this.setHitbox(10, 8, 1.2, 1.2);
   }
 
   /**

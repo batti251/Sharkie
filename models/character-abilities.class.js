@@ -40,7 +40,7 @@ class CharacterAbilities {
     this.expandHitbox();
     this.stallCharacterAnimationBy(720);
     setStoppableTimeout(() => {
-      this.character.hitboxWidth = 210;
+      this.character.setHitbox(80, 200, 1.67, 4);
     }, 600);
   }
 
@@ -201,10 +201,8 @@ class CharacterAbilities {
     setStoppableTimeout(() => {
       this.character.doesDamage = true;
       this.character.hitboxWidth = this.character.hitboxSlap;
-      this.character.finSlapX =
-        this.character.oldHitBoxWidth + this.character.hitboxX;
-      this.character.finSlapHitboxWidth =
-        this.character.hitboxSlap - this.character.oldHitBoxWidth;
+      this.character.finSlapX = this.character.oldHitBoxWidth + this.character.hitboxX;
+      this.character.finSlapHitboxWidth = this.character.hitboxSlap - this.character.oldHitBoxWidth;
     }, 400);
   }
 
