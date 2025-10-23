@@ -201,7 +201,7 @@ class CharacterMovement {
    * @param {*} speed
    */
   setCharacterPositionLeft(speed) {
-    if (this.character.world.cameraX + this.character.x > 0) {
+    if (this.character.world.cameraX + this.character.x > 600) {
       this.character.world.cameraX -= speed + 10;
     } else {
       this.character.world.cameraX -= speed;

@@ -2,7 +2,7 @@ class World {
   character = new Character("assets/img/1.Sharkie/1.IDLE/1.png", 0, 0, this);
   canvas;
   ctx;
-  cameraX = 0;
+  cameraX = 300;
   keyboard;
   healthbar = new Healthbar("assets/img/4. Marcadores/green/Life/100_  copia 2.png",this);
   coinbar = new Coinbar("assets/img/4. Marcadores/green/Coin/0_  copia 4.png");
