@@ -1,5 +1,12 @@
 let world;
 let keyboard = new Keyboard();
+let panel = document.getElementById("panel");
+let pad = document.getElementById("joystick");
+let stick = document.getElementById("stick");
+let slapButton = document.getElementById("finslap");
+let shootButton = document.getElementById("bubbleshoot");
+let padCenterCoordinate = { x: 0, y: 0 };
+
 /**
  * This function initializes the Canvas-Screen
  * It also loads preset Volume if it was changed by the user
@@ -113,15 +120,9 @@ function copyTouch({ identifier, pageX, pageY }) {
   return { identifier, pageX, pageY };
 }
 
-let panel = document.getElementById("panel");
-let pad = document.getElementById("joystick");
-let stick = document.getElementById("stick");
-let slapButton = document.getElementById("finslap");
-let shootButton = document.getElementById("bubbleshoot");
-let padCenterCoordinate = { x: 0, y: 0 };
+
 panel.addEventListener("touchstart", handleStart);
 panel.addEventListener("touchend", handleEnd);
-/*pad.addEventListener("touchcancel", handleCancel);*/
 panel.addEventListener("touchmove", handleMove);
 const ongoingTouches = [];
 

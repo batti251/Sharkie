@@ -1,5 +1,5 @@
 class Background extends MoveableObjects {
-  width = 780;
+  width = 1920;
 
   constructor(imgPath, x, y) {
     super();

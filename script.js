@@ -1,3 +1,9 @@
+let intervalIds = [];
+let timeoutIds = [];
+let resumeTimeouts = [];
+let resumeIntervals = [];
+let i = 1;
+
 /**
  * This Function opens the legal-notice-container
  * It generates via HTML-Template
@@ -242,11 +248,7 @@ function triggerScreenOverlay(state) {
   panel.classList.add("d-none");
 }
 
-let intervalIds = [];
-let timeoutIds = [];
-let resumeTimeouts = [];
-let resumeIntervals = [];
-let i = 1;
+
 
 /**
  * This function gives an intervalfunction an unique id

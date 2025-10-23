@@ -1,8 +1,8 @@
 class Level {
   levelLength;
-  xStart = -1859;
-  x1Start = -1080;
-  multiplicator = 1559;
+  xStart = -3840;
+  x1Start = -1920;
+  multiplicator = 3840;
   enemyMultiplicator = 3;
   background = [
     new Background("assets/img/3. Background/Layers/5. Water/L1.png",this.xStart,0),
@@ -47,8 +47,8 @@ class Level {
    * It generates Pufferfish, Jellyfish, Coins, Poison and the Background
    *
    */
-  generateLevelObjects() {
-    this.generateBackground();
+  generateLevelObjects(x) {
+    this.generateBackground(x);
     this.generatePufferfish();
     this.generateJellyfish();
     this.generateCoins();
@@ -60,8 +60,8 @@ class Level {
    * Depending on the defined level-length the amount of background-frames will be lined up next to each other
    *
    */
-  generateBackground() {
-    for (let index = 0; index < this.levelLength + 2; index++) {
+  generateBackground(x) {
+    for (let index = 0; index < x; index++) {
       this.backgroundTemplate = this.setBackgroundFrame();
       this.backgroundTemplate.forEach((layer) => this.background.push(layer));
       this.increaseBackgroundX();

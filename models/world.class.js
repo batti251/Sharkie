@@ -13,7 +13,7 @@ class World {
   constructor(canvas, keyboard, nextLevel, levelType) {
     this.nextLevel = nextLevel;
     this.ctx = canvas.getContext("2d");
-    levelType == "boss" ? (this.level = new LevelEndBoss(this.nextLevel)) : (this.level = new LevelRegular(this.nextLevel));
+    this.setLevel(nextLevel,levelType)
     this.keyboard = keyboard;
     this.setWorld();
     this.setLevelEnd();
@@ -21,6 +21,13 @@ class World {
     this.finishedBossLevel();
     this.endbossAttack();
     this.draw();
+  }
+
+  setLevel(nextLevel,levelType){
+    if (nextLevel == 0 ) {
+      this.level = new LevelInstruction(this.nextLevel)
+      return
+    } else levelType == "boss" ? (this.level = new LevelEndBoss(this.nextLevel)) : (this.level = new LevelRegular(this.nextLevel))
   }
 
   /**
@@ -57,7 +64,7 @@ class World {
    */
   finishedLevel() {
     let finishInterval = setStoppableInterval(() => {
-      if (this.levelIsFinished() && this.levelType == LevelRegular) {
+      if (this.levelIsFinished() && (this.levelType == LevelRegular || this.levelType == LevelInstruction )) {
         this.showVictoryScreen();
         clearInterval(finishInterval);
       }
