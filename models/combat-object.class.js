@@ -14,7 +14,7 @@ class Combat {
     clearInterval(this.detection);
     this.detection = setStoppableInterval(() => {
       this.world.level.enemies.forEach((enemie) => {
-        if (this.world.character.isDetected(enemie) && !enemie.dead) {
+        if (this.world.character.isDetected(enemie) && !enemie.dead && !enemie.angry) {
           this.triggerAngryEnemy(enemie);
         }
       });
@@ -30,7 +30,7 @@ class Combat {
    */
   triggerAngryEnemy(enemie) {
     enemie.angry = true;
-    enemie instanceof Pufferfish ? enemie.enemyDetectionAnimation() : "";
+    enemie instanceof Pufferfish ? enemie.enemyDetectionAnimation(enemie) : "";
   }
 
   /**

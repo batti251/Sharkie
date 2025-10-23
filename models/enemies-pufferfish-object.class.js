@@ -109,9 +109,9 @@ class Pufferfish extends Enemies {
   enemyDetectionAnimation(enemie) {
     clearTimeout(this.enemyPuffTimeout);
     this.enemyPuffTimeout = setStoppableTimeout(() => {
-      this.animateObjectSprite(this.pufferfish_TRANSITION, 100);
+      enemie.animateObjectSprite(this.pufferfish_TRANSITION, 100);
       setStoppableTimeout(() => {
-        this.animateObjectSprite(this.pufferfish_ANGRY, 200);
+        enemie.animateObjectSprite(this.pufferfish_ANGRY, 200);
       }, 200);
     }, 100);
   }
