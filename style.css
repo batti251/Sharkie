@@ -17,7 +17,8 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #19d1d9;
+  background: #d89538;
+  border-radius: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -70,17 +71,21 @@ h1 {
 
 .legal-notice {
   font-family: sans-serif;
-  height: 70%;
-  width: 60%;
+  width: 72%;
   border: 4px #ffc049;
   border-style: solid;
-  background-color: #46e9d9;
+  background-color: #c48630;
+}
+
+#attribution-list{
+  text-align: left;
 }
 
 .legal-notice-text {
   overflow-y: scroll;
-  height: 70%;
+  height: 70vh;
   padding: 8px;
+  text-align: center;
 }
 
 header {
