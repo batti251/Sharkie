@@ -123,8 +123,8 @@ class CharacterAbilities {
       key?.Q === true &&
       !this.hitted &&
       this.character.world.poisonbar.poisonCount.length > 0 &&
-      !this.keyDetection &&
-      !this.character.world.bubble
+      !this.keyDetection /* &&
+      !this.character.world.bubble */
     );
   }
 
@@ -135,10 +135,7 @@ class CharacterAbilities {
    */
   createBubble(character) {
     setStoppableTimeout(() => {
-      character.world.bubble = new Bubble(
-        "assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",
-        character
-      );
+      character.world.bubbles.push(new Bubble("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",character));
       this.shotBubble = true;
       this.decreasePoisonCount();
     }, 700);

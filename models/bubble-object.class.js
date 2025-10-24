@@ -1,26 +1,29 @@
 class Bubble extends MoveableObjects {
   height = 50;
   width = 50;
-
   bubble_Array = ["assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png"];
+  bubbleSpawns = true;
 
   constructor(path, character) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
+    this.loadImgCache(this.bubble_Array);
     this.character = character;
     this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
     this.y = this.character.y + this.character.hitboxHeight + this.character.hitboxY / 2;
-    this.loadImgCache(this.bubble_Array);
     this.findNearestBubbleTarget();
     this.enemyMoveRight(3); //rename
   }
 
   /**
    * This function sets the bubbleTarget-Interval to find and aim to the nearest Target
+   * bubbleSpawn acts as Guard Clause to ensure bubble was spawned properly 
+   * 
    */
   findNearestBubbleTarget() {
     clearInterval(this.targetInterval);
     this.targetInterval = setStoppableInterval(() => {
-      if (!world.bubble) return;
+      if (!this.bubbleSpawns) return;
       this.shortestDistance = Infinity;
       this.character.world.level.enemies.forEach((object) => {
         this.updateNearestTarget(object);
@@ -39,7 +42,7 @@ class Bubble extends MoveableObjects {
    * @param {*} object - the dedicated enemy
    */
   updateNearestTarget(object) {
-    if (!object.dead && object instanceof Jellyfish) {
+    if (!object.dead && (object instanceof Jellyfish)) {
       this.nearestTargetX = object?.x - this.x;
       this.nearestTargetY = object?.y - this.y;
       this.nearestTargetXY = Math.sqrt(
@@ -63,7 +66,8 @@ class Bubble extends MoveableObjects {
   updateBubbleTargeting() {
     this.calculateBubbleDirection(this.nearestObject);
     if (this.x > this.nearestObject.x + this.hitRadius) {
-      //delete bubble here
+      this.bubblePops = true
+      this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
       return;
     } else if (this.distance > this.hitRadius) {
       this.moveBubbleToTarget();
@@ -99,14 +103,18 @@ class Bubble extends MoveableObjects {
   /**
    * This Function handles the collision between the bubble and the nearest target
    * It sets the nearest target as dead and triggers its death animation
-   * It moves the bubble to the target's position and then deletes the bubble
+   * It also sets the Status-Flag bubblePops true, to filter it out of the bubbles-array
    *
    */
   collideBubbleWithTarget() {
     this.nearestObject.dead = true;
+    this.bubblePops = true
     this.nearestObject.jellyfishDeadAnimation();
     this.x = this.nearestObject.x;
     this.y = this.nearestObject.y;
-    delete world.bubble;
+    this.bubbleSpawns = false
+    this.bubblePops = true
+    this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
+    
   }
 }

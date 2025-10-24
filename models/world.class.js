@@ -9,6 +9,7 @@ class World {
   poisonbar = new Poisonbar("assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png",this);
   instruction = new Instruction("assets/img/6.Botones/Instructions 4.png");
   combat = new Combat(this);
+  bubbles = [];
 
   constructor(canvas, keyboard, nextLevel, levelType) {
     this.nextLevel = nextLevel;
@@ -183,7 +184,7 @@ class World {
 
   /**
    * This function draws all Objects, that move relative to the camera
-   *  => Background, collectibles, enemies, character
+   *  => Background, collectibles, enemies, character, bubbles
    *
    */
   drawObjects() {
@@ -192,7 +193,10 @@ class World {
     this.addImgObjectsToMap(this.level.poison);
     this.addImgObjectsToMap(this.level.enemies);
     this.addImgObjectToMap(this.character);
-  }
+    this.bubbles?.length > 0 ? this.addImgObjectsToMap(this.bubbles) : "";
+            
+    }
+    
 
   /**
    * This Function draws all Objects, that don't move relative to the camera
