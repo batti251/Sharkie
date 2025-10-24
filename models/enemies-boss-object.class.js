@@ -75,7 +75,20 @@ class Endboss extends Enemies {
     this.setHitbox(40, 270, 1.2, 3.5);
     this.bossEntranceAudio = AudioManager.register(new Audio("audio/boss-entrance.mp3"));
     this.bossBiteAudio = AudioManager.register(new Audio("audio/boss-bite.wav"));
-    this.enemyMinionMovement(this.speedX, this.speedY);
+  }
+
+  /**
+   * This Function calculates its position compared to the characters position
+   * Each second it will refresh the conditions of x and y from the Boss compared to the character and retarget the character
+   * This gives the Boss a complete Moveset always aiming the character, no matter where the character is 
+   */
+  bossFocus(){
+    setStoppableInterval(() => {
+      let characterPositionX = world.character.x
+      let characterPositionY = world.character.y
+      this.x < characterPositionX ? this.enemyRight(4) : this.enemyLeft(4);
+      this.y < characterPositionY ? this.moveDown(2) : this.moveUp(2)
+    },1000)
   }
 
   /**
@@ -89,6 +102,7 @@ class Endboss extends Enemies {
     this.bossAttackCooldown();
     this.endbossEntrance();
     this.x = world.levelEnd + 1000;
+    this.bossFocus()
   }
 
   /**
@@ -166,7 +180,7 @@ class Endboss extends Enemies {
    */
   bossDash() {
     this.dashInterval = setStoppableInterval(() => {
-      this.x -= 5;
+    this.mirrorImage ? this.x += 5 : this.x -= 5;
     }, 1000 / 60);
   }
 

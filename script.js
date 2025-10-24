@@ -43,7 +43,7 @@ document.addEventListener("click", (event) => {
 function startGame() {
   removeButtons();
   removeMenu();
-  world = new World(canvas, keyboard, 1);
+  world = new World(canvas, keyboard, 1, "boss");
   isMobileDevice();
 }
 
