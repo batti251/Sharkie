@@ -6,7 +6,8 @@ class Jellyfish extends Enemies {
   speedX = 0.25;
 
   constructor(path, type, x) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.type = type;
     this.x = x;
     this.buildJellyfish(this.type);

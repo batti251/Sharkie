@@ -12,12 +12,13 @@ class COINS extends MoveableObjects {
   ];
 
   constructor(imgPath, x) {
-    super().loadImg(imgPath);
+    super();
+    this.loadImg(imgPath);
     this.x = x;
     this.loadImgCache(this.coins_IDLE);
     this.animateObject(this.coins_IDLE, 220);
     this.y = Math.floor(Math.random() * 200) + 200;
-    this.setHitbox(8, 8, 1.5, 1.5);
+    this.setHitbox(-2, 2, 1, 1);
     this.collectAudio = AudioManager.register(new Audio("audio/coin-collect.wav"));
   }
 }

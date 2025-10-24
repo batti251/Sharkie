@@ -13,7 +13,8 @@ class Healthbar extends GameObjects {
     "assets/img/4. Marcadores/green/Life/100_  copia 2.png",
   ];
   constructor(path, world) {
-    super().loadImg(path);
+    super()
+    this.loadImg(path);
     this.loadImgCache(this.healthbarCache);
     this.world = world;
   }

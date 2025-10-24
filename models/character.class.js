@@ -8,7 +8,7 @@ class Character extends MoveableObjects {
   canCollect = true;
   hitted = false;
   fallAsleep;
-  hitboxSlap = 240;
+  hitboxSlap = 260;
   hitboxReset = 120;
   shotBubble = false;
 
@@ -242,7 +242,7 @@ class Character extends MoveableObjects {
     setStoppableTimeout(() => {
       this.movement.applyCharacterMovement();
     }, 150);
-    this.notHittedReset(500);
+    this.resetHittedState(1000);
   }
 
   /**
@@ -252,7 +252,7 @@ class Character extends MoveableObjects {
    *
    * @param {Number} miliseconds - Timer, when Function should be called
    */
-  notHittedReset(miliseconds) {
+  resetHittedState(miliseconds) {
     if (this.hitTimeout) {
       clearTimeout(this.hitTimer);
     }

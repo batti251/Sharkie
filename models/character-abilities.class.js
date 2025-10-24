@@ -123,8 +123,7 @@ class CharacterAbilities {
       key?.Q === true &&
       !this.hitted &&
       this.character.world.poisonbar.poisonCount.length > 0 &&
-      !this.keyDetection /* &&
-      !this.character.world.bubble */
+      !this.keyDetection
     );
   }
 
@@ -211,10 +210,10 @@ class CharacterAbilities {
     if (this.character.mirrorImage) {
       this.character.finSlapX =
         this.character.hitboxX - this.character.finSlapHitboxWidth;
-    } else {
+    } /* else {
       this.character.finSlapX =
         this.character.hitboxX + this.character.hitboxWidth;
-    }
+    } */
   }
 
   /**
@@ -226,7 +225,7 @@ class CharacterAbilities {
   isInsideSlapBorder(object) {
     return (
       this.character.x + this.character.finSlapX + this.character.finSlapHitboxWidth > object.x + object.hitboxX &&
-      this.character.x + this.character.finSlapX < object.x + object.hitboxWidth &&
+      this.character.x + this.character.finSlapX < object.x + object.hitboxX + object.hitboxWidth &&
       this.character.y + this.character.hitboxY + this.character.hitboxHeight > object.y + object.hitboxY &&
       this.character.y + this.character.hitboxY < object.y + object.hitboxY + object.hitboxHeight
     );

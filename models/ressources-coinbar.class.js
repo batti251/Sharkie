@@ -16,7 +16,8 @@ class Coinbar extends GameObjects {
     "assets/img/4. Marcadores/green/Coin/100_ copia 4.png",
   ];
   constructor(path, world) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.loadImgCache(this.coinbarCache);
     this.world = world;
   }

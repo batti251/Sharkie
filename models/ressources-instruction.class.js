@@ -9,7 +9,8 @@ class Instruction extends GameObjects {
   instructionCache = ["assets/img/6.Botones/Instructions 3.png"];
   
   constructor(path) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.loadImgCache(this.instructionCache);
   }
 }

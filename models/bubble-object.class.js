@@ -12,6 +12,7 @@ class Bubble extends MoveableObjects {
     this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
     this.y = this.character.y + this.character.hitboxHeight + this.character.hitboxY / 2;
     this.findNearestBubbleTarget();
+    this.updateBossTarget(object)
     this.enemyMoveRight(3); //rename
   }
 

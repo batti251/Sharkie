@@ -16,7 +16,8 @@ class Poisonbar extends GameObjects {
   ];
 
   constructor(path, world) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.loadImgCache(this.poisonbarCache);
     this.world = world;
   }

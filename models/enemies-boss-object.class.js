@@ -65,7 +65,8 @@ class Endboss extends Enemies {
   ];
 
   constructor(path, x) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.loadImgCache(this.endboss_INTRODUCE);
     this.loadImgCache(this.endboss_FLOATING);
     this.loadImgCache(this.endboss_ATTACK);

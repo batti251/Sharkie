@@ -170,7 +170,6 @@ class World {
     this.drawCanvas();
     this.ctx.translate(this.cameraX, 0);
     this.drawObjects();
-    this.bubble ? this.addImgObjectToMap(this.bubble) : "";
     this.ctx.translate(-this.cameraX, 0);
     this.drawHUD();
     this.nextLevel == 0 ? this.addImgObjectToMap(this.instruction) : "";

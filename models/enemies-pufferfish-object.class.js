@@ -6,7 +6,8 @@ class Pufferfish extends Enemies {
   pufferfish_ANGRY;
 
   constructor(path, type, x) {
-    super().loadImg(path);
+    super();
+    this.loadImg(path);
     this.type = type;
     this.x = x;
     this.buildPufferfish(this.type);
