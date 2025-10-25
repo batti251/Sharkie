@@ -9,16 +9,31 @@ class Bubble extends MoveableObjects {
     this.loadImg(path);
     this.loadImgCache(this.bubble_Array);
     this.character = character;
-    this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
     this.y = this.character.y + this.character.hitboxHeight + this.character.hitboxY / 2;
+    this.facingLeft = world.character.mirrorImage;
+    this.alignBubbleDirection()
     this.findNearestBubbleTarget();
-    this.enemyMoveRight(3);
+  }
+
+  /**
+   * This Function determines the spawn position and move-direction
+   * It depends on the character.mirrorImage state, which is set as true when the character moves/views left
+   * 
+   */
+  alignBubbleDirection(){
+    if (this.facingLeft) {
+      this.x = this.character.x;
+      this.enemyMoveLeft(3);
+    } else {
+      this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
+      this.enemyMoveRight(3);
+    }
   }
 
   /**
    * This function sets the bubbleTarget-Interval to find and aim to the nearest Target
-   * bubbleSpawn acts as Guard Clause to ensure bubble was spawned properly 
-   * 
+   * bubbleSpawn acts as Guard Clause to ensure bubble was spawned properly
+   *
    */
   findNearestBubbleTarget() {
     clearInterval(this.targetInterval);
@@ -47,12 +62,13 @@ class Bubble extends MoveableObjects {
       this.nearestTargetY = object?.y + object?.hitboxY - this.y;
       this.nearestTargetXY = Math.sqrt(
         this.nearestTargetX * this.nearestTargetX +
-          this.nearestTargetY * this.nearestTargetY);
+          this.nearestTargetY * this.nearestTargetY
+      );
       if (this.nearestTargetXY < this.shortestDistance) {
         this.shortestDistance = this.nearestTargetXY;
         this.nearestObject = object;
       }
-    } 
+    }
   }
 
   /**
@@ -64,8 +80,9 @@ class Bubble extends MoveableObjects {
    */
   updateBubbleTargeting() {
     this.calculateBubbleDirection();
-    if (this.x > this.nearestObject.x + this.hitRadius) {
-      this.bubblePops = true
+    let missed = this.detectMiss()
+    if (missed) {
+      this.bubblePops = true;
       this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
       return;
     } else if (this.distance > this.hitRadius) {
@@ -73,6 +90,15 @@ class Bubble extends MoveableObjects {
     } else {
       this.collideBubbleWithTarget(this.nearestObject);
     }
+  }
+
+  /**
+   * This Function checks a possible miss from the Bubble in either direction
+   * @returns - returns true for both possible directions 
+   */
+  detectMiss(){
+    return (!this.facingLeft && this.x > this.nearestObject.x + this.hitRadius) ||
+                 (this.facingLeft && this.x < this.nearestObject.x - this.hitRadius)
   }
 
   /**
@@ -107,13 +133,19 @@ class Bubble extends MoveableObjects {
    *
    */
   collideBubbleWithTarget() {
-    this.bubblePops = true
-    this.nearestObject instanceof Jellyfish? this.nearestObject.dead = true : "";
-    this.nearestObject instanceof Endboss ? this.nearestObject.bossDamage() : this.nearestObject.jellyfishDeadAnimation()
+    this.bubblePops = true;
+    this.nearestObject instanceof Jellyfish
+      ? (this.nearestObject.dead = true)
+      : "";
+    this.nearestObject instanceof Endboss
+      ? this.nearestObject.bossDamage()
+      : this.nearestObject.jellyfishDeadAnimation();
     this.x = this.nearestObject.x;
     this.y = this.nearestObject.y;
-    this.bubbleSpawns = false
-    this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
-    clearInterval(this.targetInterval)
+    this.bubbleSpawns = false;
+    this.character.world.bubbles = this.character.world.bubbles.filter(
+      (bubble) => bubble.bubblePops != true
+    );
+    clearInterval(this.targetInterval);
   }
 }

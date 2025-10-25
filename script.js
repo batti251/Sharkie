@@ -43,7 +43,7 @@ document.addEventListener("click", (event) => {
 function startGame() {
   removeButtons();
   removeMenu();
-  world = new World(canvas, keyboard, 0);
+  world = new World(canvas, keyboard, 1, "boss");
   isMobileDevice();
 }
 
@@ -149,7 +149,7 @@ function tryAgainLevel() {
   removeDefeatScreen();
   isMobileDevice();
   let addLevel = world.level.levelLength;
-  let levelType = addLevel % 3 === 0 ? "boss" : "regular";
+  let levelType = addLevel % 1 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
 }
 
