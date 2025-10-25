@@ -100,10 +100,10 @@ class MoveableObjects extends GameObjects {
   isInsideBorder(object) {
     return (
       this.x + this.hitboxX + this.hitboxWidth > object.x + object.hitboxX &&
-      this.x + this.hitboxX < object.x + object.hitboxWidth &&
+      this.x + this.hitboxX < object.x  + object.hitboxX + object.hitboxWidth &&
       this.y + this.hitboxY + this.hitboxHeight > object.y + object.hitboxY &&
       this.y + this.hitboxY < object.y + object.hitboxY + object.hitboxHeight
-    ); //;
+    ); 
   }
 
   /**

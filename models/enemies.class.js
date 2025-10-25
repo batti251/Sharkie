@@ -58,7 +58,6 @@ class Enemies extends MoveableObjects {
       setStoppableTimeout(() => {
         this.moveDown(speedY);
       }, Math.floor(Math.random() * 300) + 100);
-
       setStoppableTimeout(() => {
         this.moveUp(speedY);
       }, Math.floor(Math.random() * 300) + 100);
@@ -74,7 +73,7 @@ class Enemies extends MoveableObjects {
   moveUp(speedY) {
     clearInterval(this.resetIntervalY);
     this.resetIntervalY = setStoppableInterval(() => {
-      if (this.y > 20) {
+      if (this.y > -100) {
         this.y -= speedY;
       }
     }, 1000 / 60);
@@ -89,7 +88,7 @@ class Enemies extends MoveableObjects {
   moveDown(speedY) {
     clearInterval(this.resetIntervalY);
     this.resetIntervalY = setStoppableInterval(() => {
-      if (this.y < 400) {
+      if (this.y < 680) {
         this.y = this.y + speedY;
       }
     }, 1000 / 60);

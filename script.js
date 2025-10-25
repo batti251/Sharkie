@@ -43,7 +43,7 @@ document.addEventListener("click", (event) => {
 function startGame() {
   removeButtons();
   removeMenu();
-  world = new World(canvas, keyboard, 1, "boss");
+  world = new World(canvas, keyboard, 0);
   isMobileDevice();
 }
 
@@ -59,7 +59,6 @@ function isMobileDevice() {
     navigator.maxTouchPoints > 0
   ) {
     mobileController.classList.remove("d-none");
-    console.log("touch");
   } else {
     mobileController.classList.add("d-none");
   }
@@ -150,7 +149,7 @@ function tryAgainLevel() {
   removeDefeatScreen();
   isMobileDevice();
   let addLevel = world.level.levelLength;
-  let levelType = addLevel % 1 === 0 ? "boss" : "regular";
+  let levelType = addLevel % 3 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
 }
 

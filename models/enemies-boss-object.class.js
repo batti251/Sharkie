@@ -160,10 +160,14 @@ class Endboss extends Enemies {
     this.life -= 50;
     this.bossKnockback();
     this.animateObjectSprite(this.endboss_HURT, 100);
-    setStoppableTimeout(() => {
+    this.floatTimeout = setStoppableTimeout(() => {
       this.animateObjectSprite(this.endboss_FLOATING, 200);
       clearInterval(this.knockbackInterval);
     }, 500);
+    if (this.life <= 0) {
+      clearTimeout(this.floatTimeout)
+       this.bossDieAnimation()
+      }
   }
 
   /**
