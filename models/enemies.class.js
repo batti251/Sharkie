@@ -8,7 +8,6 @@ class Enemies extends MoveableObjects {
   coinToss;
   isMoving;
   lastIsMoving;
-
   /**
    * This Function calls Enemies (Minions) to move
    * If the Enemy gets angry-state the Movement is set to left, to try to hit the character

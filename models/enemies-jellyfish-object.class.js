@@ -5,16 +5,18 @@ class Jellyfish extends Enemies {
   speedY = 0.6;
   speedX = 0.25;
 
-  constructor(path, type, x) {
+  constructor(path, type, x, canMove) {
     super();
     this.loadImg(path);
     this.type = type;
     this.x = x;
+    this.canMove = canMove
     this.buildJellyfish(this.type);
     this.loadImgCache(this.jellyfish_IDLE);
     this.loadImgCache(this.jellyfish_DEAD);
     this.animateObject(this.jellyfish_IDLE, 100);
-    this.enemyMinionMovement(this.speedX, this.speedY);
+    if (!this.canMove) {
+    } else {this.enemyMinionMovement(this.speedX, this.speedY);}
     this.y = Math.floor(Math.random() * 200) + 200;
     this.width = Math.floor(Math.random() * 100) + 60;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;

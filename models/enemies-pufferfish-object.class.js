@@ -5,15 +5,19 @@ class Pufferfish extends Enemies {
   pufferfish_TRANSITION;
   pufferfish_ANGRY;
 
-  constructor(path, type, x) {
+  constructor(path, type, x, canMove) {
     super();
     this.loadImg(path);
     this.type = type;
     this.x = x;
+    this.canMove = canMove
     this.buildPufferfish(this.type);
     this.loadPufferfishImgCache();
     this.animateObject(this.pufferfish_IDLE, 100);
-    this.enemyMinionMovement(this.speedX, this.speedY);
+    if (!this.canMove) {
+       
+    } else {this.enemyMinionMovement(this.speedX, this.speedY);}
+    
     this.y = Math.floor(Math.random() * 200) + 200;
     this.width = Math.floor(Math.random() * 100) + 50;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;

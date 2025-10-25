@@ -151,7 +151,8 @@ class Level {
         new Pufferfish(
           `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png`,
           this.randomPufferType,
-          this.randomXPosition
+          this.randomXPosition,
+          true
         )
       );
     }
@@ -171,7 +172,8 @@ class Level {
         new Jellyfish(
           `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,
           this.randomJellyType,
-          this.randomXPosition
+          this.randomXPosition,
+          true
         )
       );
     }
