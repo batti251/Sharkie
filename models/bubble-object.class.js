@@ -12,8 +12,7 @@ class Bubble extends MoveableObjects {
     this.x = this.character.x + this.character.hitboxWidth + this.character.hitboxX;
     this.y = this.character.y + this.character.hitboxHeight + this.character.hitboxY / 2;
     this.findNearestBubbleTarget();
-    this.updateBossTarget(object)
-    this.enemyMoveRight(3); //rename
+    this.enemyMoveRight(3);
   }
 
   /**
@@ -35,7 +34,7 @@ class Bubble extends MoveableObjects {
 
   /**
    * This Function updates the nearest Target for the Bubble
-   * It calculates the distance from the bubble to each Jellyfish
+   * It calculates the distance from the bubble to all Jellyfishes and the Endboss
    * Its based on the Euclidean distance
    * If the distance is shorter than the previous shortest distance, it updates the nearestObject to this dedicated object => nearestObject
    * The nearestObject is needed for the updateBubbleTargeting-Function
@@ -43,18 +42,17 @@ class Bubble extends MoveableObjects {
    * @param {*} object - the dedicated enemy
    */
   updateNearestTarget(object) {
-    if (!object.dead && (object instanceof Jellyfish)) {
-      this.nearestTargetX = object?.x - this.x;
-      this.nearestTargetY = object?.y - this.y;
+    if (!object.dead && !(object instanceof Pufferfish)) {
+      this.nearestTargetX = object?.x + object?.hitboxWidth - this.x;
+      this.nearestTargetY = object?.y + object?.hitboxY - this.y;
       this.nearestTargetXY = Math.sqrt(
         this.nearestTargetX * this.nearestTargetX +
-          this.nearestTargetY * this.nearestTargetY
-      );
+          this.nearestTargetY * this.nearestTargetY);
       if (this.nearestTargetXY < this.shortestDistance) {
         this.shortestDistance = this.nearestTargetXY;
         this.nearestObject = object;
       }
-    }
+    } 
   }
 
   /**
@@ -65,7 +63,7 @@ class Bubble extends MoveableObjects {
    *
    */
   updateBubbleTargeting() {
-    this.calculateBubbleDirection(this.nearestObject);
+    this.calculateBubbleDirection();
     if (this.x > this.nearestObject.x + this.hitRadius) {
       this.bubblePops = true
       this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
@@ -84,7 +82,7 @@ class Bubble extends MoveableObjects {
    */
   calculateBubbleDirection() {
     this.dx = this.nearestObject.x - this.x;
-    this.dy = this.nearestObject.y - this.y;
+    this.dy = this.nearestObject.y + this.nearestObject.hitboxY - this.y;
     this.distance = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
     this.hitRadius = 40;
     this.speed = 8;
@@ -104,18 +102,18 @@ class Bubble extends MoveableObjects {
   /**
    * This Function handles the collision between the bubble and the nearest target
    * It sets the nearest target as dead and triggers its death animation
-   * It also sets the Status-Flag bubblePops true, to filter it out of the bubbles-array
+   * If the nearestObject is the Endboss, dead-status is passed, to allow multiple bubble hits.
+   * It also sets the Status-Flag bubblePops true, to filter the Bubble out of the bubbles-array
    *
    */
   collideBubbleWithTarget() {
-    this.nearestObject.dead = true;
     this.bubblePops = true
-    this.nearestObject.jellyfishDeadAnimation();
+    this.nearestObject instanceof Jellyfish? this.nearestObject.dead = true : "";
+    this.nearestObject instanceof Endboss ? this.nearestObject.bossDamage() : this.nearestObject.jellyfishDeadAnimation()
     this.x = this.nearestObject.x;
     this.y = this.nearestObject.y;
     this.bubbleSpawns = false
-    this.bubblePops = true
     this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
-    
+    clearInterval(this.targetInterval)
   }
 }
