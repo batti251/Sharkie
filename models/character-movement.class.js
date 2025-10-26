@@ -208,20 +208,4 @@ class CharacterMovement {
       this.character.world.cameraX -= speed;
     }
   }
-
-  /**
-   * This Function moves the camera, so the charactar will be set right on the screen
-   *
-   * @param {*} speed
-   */
-  setCharacterPositionRight(speed) {
-    if (
-      this.character.world.cameraX + this.character.x <=
-      canvas.width - 200
-    ) {
-      this.character.world.cameraX += speed + 10;
-    } else {
-      this.character.world.cameraX += speed;
-    }
-  }
 }

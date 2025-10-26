@@ -54,9 +54,11 @@ function startGame() {
   isMobileDevice();
 }
 
+/**
+ * This Function shows the current Level the user is playing
+ */
 function setLevelUI() {
   let level = document.getElementById('current-level')
-  
   switch (world.nextLevel) {
     case 0:
       level.innerHTML = "TUTORIAL"
@@ -65,7 +67,6 @@ function setLevelUI() {
       level.innerHTML = "LEVEL: " + world.nextLevel
       break;
   }
-  
 }
 
 /**

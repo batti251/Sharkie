@@ -37,11 +37,8 @@ class Level {
    */
   setBackgroundAudio() {
     this.backgroundAudio = AudioManager.register(new Audio("audio/ocean.wav"));
-    this.backgroundAudio.volume = 0.4;
     this.backgroundAudio.loop = true;
     this.backgroundAudio.play();
-    console.log(this.backgroundAudio.volume);
-    
   }
 
   /**
