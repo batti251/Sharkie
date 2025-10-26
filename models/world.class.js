@@ -13,9 +13,9 @@ class World {
 
   constructor(canvas, keyboard, nextLevel, levelType) {
     this.nextLevel = nextLevel;
-    this.ctx = canvas.getContext("2d");
     this.setLevel(nextLevel,levelType)
     this.keyboard = keyboard;
+    this.ctx = canvas.getContext("2d");
     this.setWorld();
     this.setLevelEnd();
     this.finishedLevel();
@@ -24,10 +24,19 @@ class World {
     this.draw();
   }
 
+  /**
+   * This Function sets the Level, when the World is loaded
+   * It starts a Tutorial-Level to get used to the mechanics
+   * After it depends on the set parameters
+   * 
+   * @param {Number} nextLevel - the entered level
+   * @param {String} levelType - "regular" : level with only puffer- and jellyfishes 
+   *                           - "boss" :  regular level and also a bossfight at the end of the level
+   * @returns 
+   */
   setLevel(nextLevel,levelType){
     if (nextLevel == 0 ) {
       this.level = new LevelInstruction(this.nextLevel)
-      return
     } else levelType == "boss" ? (this.level = new LevelEndBoss(this.nextLevel)) : (this.level = new LevelRegular(this.nextLevel))
   }
 
@@ -158,6 +167,9 @@ class World {
     }, 300);
   }
 
+  /**
+   * This function enables to pass world from the characters object
+   */
   setWorld() {
     this.character.world = this;
   }

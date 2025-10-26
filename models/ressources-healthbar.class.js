@@ -32,12 +32,6 @@ class Healthbar extends GameObjects {
     }
   }
 
-
-  updateHealthbar(percentage){
-    let index = this.healthbarCache[percentage];
-    this.img = this.imgCache[index]
-  }
-
   /**
    * This Function updates the character Healthbar depending on it's percentual Life
    *

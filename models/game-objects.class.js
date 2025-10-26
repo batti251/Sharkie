@@ -29,6 +29,13 @@ class GameObjects {
     });
 }
 
+  /**
+   * This Function updates the current Image
+   * It loads the path from the objects imgCache
+   * 
+   * @param {Array} statusbarCache - the imgCache of the dedicated statusbar-object
+   * @param {Number} percentage - number to index this.img
+   */
   updateImg(statusbarCache, percentage){
     let index = statusbarCache[percentage];
     this.img = this.imgCache[index]

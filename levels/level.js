@@ -75,56 +75,17 @@ class Level {
    */
   setBackgroundFrame() {
     return [
-      new Background(
-        "assets/img/3. Background/Layers/5. Water/L1.png",
-        this.x,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/4.Fondo 2/L1.png",
-        this.x,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/3.Fondo 1/L1.png",
-        this.x,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/2. Floor/L1.png",
-        this.x,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/1. Light/1.png",
-        this.x,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/5. Water/L2.png",
-        this.x1,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/4.Fondo 2/L2.png",
-        this.x1,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/3.Fondo 1/L2.png",
-        this.x1,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/2. Floor/L2.png",
-        this.x1,
-        0
-      ),
-      new Background(
-        "assets/img/3. Background/Layers/1. Light/2.png",
-        this.x1,
-        0
-      ),
+      new Background("assets/img/3. Background/Layers/5. Water/L1.png", this.x, 0),
+      new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.png", this.x, 0),
+      new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.png", this.x, 0),
+      new Background("assets/img/3. Background/Layers/2. Floor/L1.png", this.x, 0),
+      new Background("assets/img/3. Background/Layers/1. Light/1.png", this.x, 0),
+      new Background("assets/img/3. Background/Layers/5. Water/L2.png", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.png", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.png", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/2. Floor/L2.png", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/1. Light/2.png", this.x1, 0),
+
     ];
   }
 
