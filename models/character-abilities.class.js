@@ -123,7 +123,8 @@ class CharacterAbilities {
       key?.Q === true &&
       !this.hitted &&
       this.character.world.poisonbar.poisonCount.length > 0 &&
-      !this.keyDetection
+      !this.keyDetection &&
+      !this.character.isShooting
     );
   }
 
