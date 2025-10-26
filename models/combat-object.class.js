@@ -45,7 +45,7 @@ class Combat {
         this.characterDamageListener(object);
         this.checkEndbossCollisions(object);
       });
-    }, 200);
+    }, 180);
   }
 
   /**

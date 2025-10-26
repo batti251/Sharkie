@@ -156,7 +156,7 @@ class Character extends MoveableObjects {
     this.collectibleInterval = setStoppableInterval(() => {
       this.collectItemListener(this.world.level.poison);
       this.collectItemListener(this.world.level.coins);
-    }, 200);
+    }, 100);
   }
 
   /**

@@ -12,9 +12,7 @@ class AudioManager {
    */
   static register(audio) {
     let sound = document.getElementById("sound-range");
-    audio.volume = sessionStorage.getItem("volume")
-      ? (sound.value = sessionStorage.getItem("volume"))
-      : (sound.value = setSessionVolume("0.5"));
+    audio.volume = sessionStorage.getItem("volume")? (sound.value = sessionStorage.getItem("volume")): (sound.value = setSessionVolume("0.5"));
     this.audioArray.push(audio);
     return audio;
   }

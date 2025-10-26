@@ -40,6 +40,8 @@ class Level {
     this.backgroundAudio.volume = 0.4;
     this.backgroundAudio.loop = true;
     this.backgroundAudio.play();
+    console.log(this.backgroundAudio.volume);
+    
   }
 
   /**
