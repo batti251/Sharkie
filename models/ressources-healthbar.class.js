@@ -3,6 +3,7 @@ class Healthbar extends GameObjects {
   y = -20;
   width = 300;
   height = 80;
+  percentage = 100
 
   healthbarCache = [
     "assets/img/4. Marcadores/green/Life/0_  copia 3.png",
@@ -27,8 +28,14 @@ class Healthbar extends GameObjects {
    */
   HealthbarListener(maxLife, currentLife) {
     if (this.world.character.takesDamage == true) {
-      this.updatehealthbar(maxLife, currentLife);
+      this.setHealthbarIndicator(maxLife, currentLife);
     }
+  }
+
+
+  updateHealthbar(percentage){
+    let index = this.healthbarCache[percentage];
+    this.img = this.imgCache[index]
   }
 
   /**
@@ -37,14 +44,15 @@ class Healthbar extends GameObjects {
    * @param {*} maxLife - Objects max Life
    * @param {*} currentLife - Objects current Life
    */
-  updatehealthbar(maxLife, currentLife) {
+  setHealthbarIndicator(maxLife, currentLife) {
     let healthbarIndicator = currentLife / maxLife;
-    let updatedBar = this.healthbarCache[5];
-    if (healthbarIndicator <= 0.8) updatedBar = this.healthbarCache[4];
-    if (healthbarIndicator <= 0.6) updatedBar = this.healthbarCache[3];
-    if (healthbarIndicator <= 0.4) updatedBar = this.healthbarCache[2];
-    if (healthbarIndicator <= 0.2) updatedBar = this.healthbarCache[1];
-    if (healthbarIndicator <= 0) updatedBar = this.healthbarCache[0];
-    this.loadImg(updatedBar);
+    if (healthbarIndicator <= 1) this.updateImg(this.healthbarCache, 5);
+    if (healthbarIndicator <= 0.8) this.updateImg(this.healthbarCache, 4);
+    if (healthbarIndicator <= 0.6) this.updateImg(this.healthbarCache, 3);
+    if (healthbarIndicator <= 0.4) this.updateImg(this.healthbarCache, 2);
+    if (healthbarIndicator <= 0.2) this.updateImg(this.healthbarCache, 1);
+    if (healthbarIndicator <= 0) this.updateImg(this.healthbarCache, 0);
   }
+
+
 }

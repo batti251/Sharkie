@@ -32,22 +32,20 @@ class Poisonbar extends GameObjects {
     this.poisonCount.push(poison);
     poison.x = -1000;
     poison.y = -1000;
-    this.updatePoisonbar();
+    this.setPoisonbarIndicator();
   }
 
   /**
    * This Function updates the Coinbar, depending on the current amount of collected coins
    *
    */
-  updatePoisonbar() {
-    this.maxPoison = world.level.poison.length;
-    let collectedPoisonPercentage = this.poisonCount.length / this.maxPoison;
-    let updatedBar = this.poisonbarCache[0];
-    if (collectedPoisonPercentage >= 0.2) updatedBar = this.poisonbarCache[1];
-    if (collectedPoisonPercentage >= 0.4) updatedBar = this.poisonbarCache[2];
-    if (collectedPoisonPercentage >= 0.6) updatedBar = this.poisonbarCache[3];
-    if (collectedPoisonPercentage >= 0.8) updatedBar = this.poisonbarCache[4];
-    if (collectedPoisonPercentage >= 1.0) updatedBar = this.poisonbarCache[5];
-    this.loadImg(updatedBar);
+  setPoisonbarIndicator() {
+    let collectedPoisonPercentage = this.poisonCount.length / world.level.poison.length;
+    if (collectedPoisonPercentage == 0) this.updateImg(this.poisonbarCache, 0);
+    if (collectedPoisonPercentage >= 0.2) this.updateImg(this.poisonbarCache, 1);
+    if (collectedPoisonPercentage >= 0.4) this.updateImg(this.poisonbarCache, 2);
+    if (collectedPoisonPercentage >= 0.6) this.updateImg(this.poisonbarCache, 3);
+    if (collectedPoisonPercentage >= 0.8) this.updateImg(this.poisonbarCache, 4);
+    if (collectedPoisonPercentage >= 1.0) this.updateImg(this.poisonbarCache, 5);
   }
 }

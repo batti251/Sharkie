@@ -130,7 +130,7 @@ class Combat {
     this.world.character.damage(this.world.character, object);
     this.playHurtSound(object);
     this.world.character.takesDamage = true;
-    this.world.healthbar.HealthbarListener(
+    this.world.healthbar.setHealthbarIndicator(
       this.world.character.maxLife,
       this.world.character.life
     );

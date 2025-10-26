@@ -32,22 +32,21 @@ class Coinbar extends GameObjects {
     this.coinCount.push(coin);
     coin.x = -1000;
     coin.y = -1000;
-    this.updateCoinbar();
+    this.setHealthbarIndicator();
   }
 
   /**
    * This Function updates the Coinbar, depending on the current amount of collected coins
    *
    */
-  updateCoinbar() {
+  setHealthbarIndicator() {
     this.maxCoins = world.level.coins.length;
     let collectedCoinsPercentage = this.coinCount.length / this.maxCoins;
-    let updatedBar = this.coinbarCache[0];
-    if (collectedCoinsPercentage >= 0.2) updatedBar = this.coinbarCache[1];
-    if (collectedCoinsPercentage >= 0.4) updatedBar = this.coinbarCache[2];
-    if (collectedCoinsPercentage >= 0.6) updatedBar = this.coinbarCache[3];
-    if (collectedCoinsPercentage >= 0.8) updatedBar = this.coinbarCache[4];
-    if (collectedCoinsPercentage >= 1.0) updatedBar = this.coinbarCache[5];
-    this.loadImg(updatedBar);
+    if (collectedCoinsPercentage == 0) this.updateImg(this.coinbarCache, 0);
+    if (collectedCoinsPercentage >= 0.2) this.updateImg(this.coinbarCache, 1);
+    if (collectedCoinsPercentage >= 0.4) this.updateImg(this.coinbarCache, 2);
+    if (collectedCoinsPercentage >= 0.6) this.updateImg(this.coinbarCache, 3);
+    if (collectedCoinsPercentage >= 0.8) this.updateImg(this.coinbarCache, 4);
+    if (collectedCoinsPercentage >= 1.0) this.updateImg(this.coinbarCache, 5);
   }
 }

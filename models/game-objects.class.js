@@ -27,5 +27,10 @@ class GameObjects {
       imgFrame.src = sprite;
       this.imgCache[sprite] = imgFrame;
     });
+}
+
+  updateImg(statusbarCache, percentage){
+    let index = statusbarCache[percentage];
+    this.img = this.imgCache[index]
   }
 }
