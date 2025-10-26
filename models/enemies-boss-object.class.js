@@ -6,7 +6,7 @@ class Endboss extends Enemies {
   y = 100;
   bossAttackOnCooldown = true;
   boss = true;
-
+  canMove = true;
   endboss_INTRODUCE = [
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
@@ -73,6 +73,7 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_HURT);
     this.loadImgCache(this.endboss_DEAD);
     this.x = x;
+    this.handleEnemyMovement()
     this.setHitbox(40, 270, 1.2, 3.5);
     this.bossEntranceAudio = AudioManager.register(new Audio("audio/boss-entrance.mp3"));
     this.bossBiteAudio = AudioManager.register(new Audio("audio/boss-bite.wav"));

@@ -15,8 +15,7 @@ class Jellyfish extends Enemies {
     this.loadImgCache(this.jellyfish_IDLE);
     this.loadImgCache(this.jellyfish_DEAD);
     this.animateObject(this.jellyfish_IDLE, 100);
-    if (!this.canMove) {
-    } else {this.enemyMinionMovement(this.speedX, this.speedY);}
+    this.handleEnemyMovement()
     this.y = Math.floor(Math.random() * 200) + 200;
     this.width = Math.floor(Math.random() * 100) + 60;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;

@@ -147,7 +147,7 @@ class CharacterAbilities {
    */
   decreasePoisonCount() {
     this.character.world.poisonbar.poisonCount.shift();
-    this.character.world.poisonbar.updatePoisonbar();
+    this.character.world.poisonbar.setPoisonbarIndicator();
   }
 
   /**

@@ -8,6 +8,17 @@ class Enemies extends MoveableObjects {
   coinToss;
   isMoving;
   lastIsMoving;
+
+  /**
+   * This Function sets the enemies movement capability 
+   * Enemie in Tutorial level cannot move
+   * In regular Level all enemies are allowed to move
+   */
+  handleEnemyMovement(){
+        if (!this.canMove) {
+      } else {this.enemyMinionMovement(this.speedX, this.speedY);}
+  }
+
   /**
    * This Function calls Enemies (Minions) to move
    * If the Enemy gets angry-state the Movement is set to left, to try to hit the character
