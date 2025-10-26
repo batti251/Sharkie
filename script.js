@@ -4,6 +4,12 @@ let resumeTimeouts = [];
 let resumeIntervals = [];
 let i = 1;
 
+function showLevel(x) {
+  console.log(world);
+  console.log(x);
+  
+}
+
 /**
  * This Function opens the legal-notice-container
  * It generates via HTML-Template
@@ -44,7 +50,22 @@ function startGame() {
   removeButtons();
   removeMenu();
   world = new World(canvas, keyboard, 0);
+  setLevelUI()
   isMobileDevice();
+}
+
+function setLevelUI() {
+  let level = document.getElementById('current-level')
+  
+  switch (world.nextLevel) {
+    case 0:
+      level.innerHTML = "TUTORIAL"
+      break;
+    default:
+      level.innerHTML = "LEVEL: " + world.nextLevel
+      break;
+  }
+  
 }
 
 /**
@@ -151,6 +172,7 @@ function tryAgainLevel() {
   let addLevel = world.level.levelLength;
   let levelType = addLevel % 3 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
+  setLevelUI()
 }
 
 /**
@@ -166,6 +188,7 @@ function nextLevel() {
   let addLevel = (world.nextLevel ?? 0) + 1;
   let levelType = addLevel % 3 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
+  setLevelUI()
 }
 
 /**

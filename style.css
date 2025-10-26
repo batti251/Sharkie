@@ -145,6 +145,11 @@ nav {
   height: 20vh;
 }
 
+#current-level{
+  padding-right: 16px;
+  display: flex;
+}
+
 
 @keyframes turn {
   0% {

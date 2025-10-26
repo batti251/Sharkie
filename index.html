@@ -64,6 +64,7 @@
   <header id="panel-top">
     <nav>
         <div class="d-flex align-center">
+          <div id="current-level" class="game-relevant"></div>
           <div id="sound-percentage"></div>
           <input id="sound-range" type="range" min="0" max="1" step="0.01"oninput="AudioManager.setVolume(this.value)" onchange="setSessionVolume(this.value)">
         </div> 
