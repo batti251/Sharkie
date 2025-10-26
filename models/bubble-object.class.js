@@ -80,16 +80,23 @@ class Bubble extends MoveableObjects {
    */
   updateBubbleTargeting() {
     this.calculateBubbleDirection();
-    let missed = this.detectMiss()
-    if (missed) {
-      this.bubblePops = true;
-      this.character.world.bubbles = this.character.world.bubbles.filter((bubble) => bubble.bubblePops != true);
+    if (this.detectMiss()) {
+      this.deleteBubble()
       return;
     } else if (this.distance > this.hitRadius) {
       this.moveBubbleToTarget();
     } else {
       this.collideBubbleWithTarget(this.nearestObject);
     }
+  }
+
+  /**
+   * This Function deletes the Bubble 
+   */
+  deleteBubble(){
+      this.bubblePops = true;
+      clearInterval(this.targetInterval)
+      world.bubbles = world.bubbles.filter((bubble) => bubble.bubblePops != true);
   }
 
   /**
@@ -133,19 +140,9 @@ class Bubble extends MoveableObjects {
    *
    */
   collideBubbleWithTarget() {
-    this.bubblePops = true;
-    this.nearestObject instanceof Jellyfish
-      ? (this.nearestObject.dead = true)
-      : "";
-    this.nearestObject instanceof Endboss
-      ? this.nearestObject.bossDamage()
-      : this.nearestObject.jellyfishDeadAnimation();
-    this.x = this.nearestObject.x;
-    this.y = this.nearestObject.y;
+    this.nearestObject instanceof Jellyfish? (this.nearestObject.dead = true) : ""; 
+    this.nearestObject instanceof Endboss ? this.nearestObject.bossDamage() : this.nearestObject.jellyfishDeadAnimation();
     this.bubbleSpawns = false;
-    this.character.world.bubbles = this.character.world.bubbles.filter(
-      (bubble) => bubble.bubblePops != true
-    );
-    clearInterval(this.targetInterval);
+    this.deleteBubble()
   }
 }

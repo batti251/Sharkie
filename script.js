@@ -4,12 +4,6 @@ let resumeTimeouts = [];
 let resumeIntervals = [];
 let i = 1;
 
-function showLevel(x) {
-  console.log(world);
-  console.log(x);
-  
-}
-
 /**
  * This Function opens the legal-notice-container
  * It generates via HTML-Template
