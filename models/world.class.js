@@ -1,5 +1,5 @@
 class World {
-  character = new Character("assets/img/1.Sharkie/1.IDLE/1.png", 0, 0, this);
+  character = new Character("assets/img/1.Sharkie/1.IDLE/1.png", 300, 0, this);
   canvas;
   ctx;
   cameraX = 300;

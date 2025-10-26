@@ -115,12 +115,12 @@ class CharacterMovement {
 
   /**
    * This Function checks, if the user reaches the expanded levelborder
-   * ExpandLevelborder = world.levelborder + 1200 
+   * ExpandLevelborder = world.levelborder +400
    * @param {*} key - Object with the listened Keyboard Keys
    * @returns - true or false, based on the condition
    */
   characterReachesExpandLevelEnd(key){
-    return key?.RIGHT == true && this.character.x >= this.character.world.levelBorder + 1200
+    return this.character.x >= this.character.world.levelBorder + 400
   } 
 
   /**
@@ -177,6 +177,7 @@ class CharacterMovement {
   moveLeft(speed, key) {
     if (key?.LEFT == true && this.character.x > -100) {
       this.moveWithCameraLeft(speed);
+    } else if (this.characterReachesExpandLevelEnd(key)) {
     }
   }
 
@@ -189,7 +190,7 @@ class CharacterMovement {
    */
   moveWithCameraLeft(speed) {
     this.character.x -= speed;
-    this.setCharacterPositionRight(speed);
+    this.character.world.cameraX += speed;
     this.character.mirrorImage = true;
     this.character.swimAudio.play();
   }
@@ -216,7 +217,7 @@ class CharacterMovement {
   setCharacterPositionRight(speed) {
     if (
       this.character.world.cameraX + this.character.x <=
-      canvas.width - 1200
+      canvas.width - 200
     ) {
       this.character.world.cameraX += speed + 10;
     } else {
