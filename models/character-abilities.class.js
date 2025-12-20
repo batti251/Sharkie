@@ -113,7 +113,7 @@ class CharacterAbilities {
   /**
    * This Function checks if a bubble can be shoot.
    * Therefore the Q-Key has to be triggered, the character must not be hitted and a poison must be collected before
-   * It cannot appear multiple bubbles
+   * It cannot appear multiple bubble-shots
    *
    * @param {*} key - the key-events
    * @returns - returns either true or false, based on the conditions
