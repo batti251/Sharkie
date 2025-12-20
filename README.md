@@ -62,7 +62,7 @@ The project focuses on applying Object-Oriented Programming principles in JavaSc
 ---
 
 ## Preview
-![Gameplay GIF](./assets/gif/sharkie.gif)
+![Gameplay GIF](/assets/gif/sharkie.gif)
 
 ---
 
