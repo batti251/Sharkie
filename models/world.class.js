@@ -21,6 +21,9 @@ class World {
     this.finishedLevel();
     this.finishedBossLevel();
     this.endbossAttack();
+  }
+
+  start() {
     this.gameLoop();
   }
 

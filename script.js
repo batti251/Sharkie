@@ -40,10 +40,13 @@ document.addEventListener("click", (event) => {
  * It detects if the used device is a touchdevice, to set the touchpanel accordingly
  *
  */
-function startGame() {
+async function startGame() {
   removeButtons();
   removeMenu();
+
   world = new World(canvas, keyboard, 0);
+  await AssetLoader.waitForAll();
+  world.start()
   setLevelUI()
   isMobileDevice();
 }
@@ -159,7 +162,7 @@ function removeTryAgainButton() {
  * This Function restarts the current level
  * This Function is called during the defeat-screen
  */
-function tryAgainLevel() {
+async function tryAgainLevel() {
   resetIntervalTimeouts();
   removeTryAgainButton();
   removeDefeatScreen();
@@ -167,6 +170,8 @@ function tryAgainLevel() {
   let addLevel = world.level.levelLength;
   let levelType = addLevel % 3 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
+  await AssetLoader.waitForAll();
+  world.start()
   setLevelUI()
 }
 
@@ -175,7 +180,7 @@ function tryAgainLevel() {
  * It can only be clicked, when Level has been finished
  *
  */
-function nextLevel() {
+async function nextLevel() {
   resetIntervalTimeouts();
   removeContinueButton();
   removeVictoryScreen();
@@ -183,6 +188,8 @@ function nextLevel() {
   let addLevel = (world.nextLevel ?? 0) + 1;
   let levelType = addLevel % 3 === 0 ? "boss" : "regular";
   world = new World(canvas, keyboard, addLevel, levelType);
+  await AssetLoader.waitForAll();
+  world.start()
   setLevelUI()
 }
 

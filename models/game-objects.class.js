@@ -12,8 +12,7 @@ class GameObjects {
    * @param {String} path - The given path to an image (.png)
    */
   loadImg(path) {
-    this.img = new Image();
-    this.img.src = path;
+    this.img = AssetLoader.loadImage(path);
   }
 
   /**
@@ -23,9 +22,7 @@ class GameObjects {
    */
   loadImgCache(sprites) {
     sprites.forEach((sprite) => {
-      let imgFrame = new Image();
-      imgFrame.src = sprite;
-      this.imgCache[sprite] = imgFrame;
+      this.imgCache[sprite] = AssetLoader.loadImage(sprite);
     });
 }
 
