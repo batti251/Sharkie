@@ -10,14 +10,16 @@ class Enemies extends MoveableObjects {
   lastIsMoving;
 
   /**
-   * This Function sets the enemies movement capability 
-   * Enemie in Tutorial level cannot move
-   * In regular Level all enemies are allowed to move
+   * 
+   * @returns - when moveableObject is marked as immobile
    */
-  handleEnemyMovement(){
-        if (!this.canMove) {
-      } else {this.enemyMinionMovement(this.speedX, this.speedY);}
+  startEnemyMovement(){
+    if (!this.canMove) {
+      return
+    }
+    this.enemyMinionMovement( this.speedX, this.speedY)
   }
+
 
   /**
    * This Function calls Enemies (Minions) to move
@@ -65,14 +67,60 @@ class Enemies extends MoveableObjects {
    */
   setRandomCoordinateY(speedY) {
     this.randomCoordinateYInterval = setStoppableInterval(() => {
-      setStoppableTimeout(() => {
-        this.moveDown(speedY);
-      }, Math.floor(Math.random() * 300) + 100);
-      setStoppableTimeout(() => {
-        this.moveUp(speedY);
-      }, Math.floor(Math.random() * 300) + 100);
+      setStoppableTimeout(
+        () => {
+          this.moveDown(speedY);
+        },
+        Math.floor(Math.random() * 300) + 100,
+      );
+      setStoppableTimeout(
+        () => {
+          this.moveUp(speedY);
+        },
+        Math.floor(Math.random() * 300) + 100,
+      );
     }, 500);
   }
+
+
+  /**
+   * This Function sets the enemies movement capability
+   * Enemie in Tutorial level cannot move
+   * In regular Level all enemies are allowed to move
+   */
+  handleEnemyMovement() {
+    if (!this.canMove) {
+      return
+    } else {
+      this.updateMovementX();
+      this.updateMovementY();
+    }
+  }
+
+  /**
+   * updates x-coordinate, depending on directionX-flag
+   */
+  updateMovementX() {
+    if (this.directionX == -1) {
+      this.x -= this.speedX;
+    }
+    if (this.directionX === 1) {
+      this.x += this.speedX;
+    }
+  }
+
+  /**
+   * updates y-coordinate, depending on directionX-flag
+   */
+  updateMovementY(){
+    if (this.directionY == -1 && this.y > -100) {
+      this.y -= this.speedY
+    } 
+    if (this.directionY == 1 && this.y < 680) {
+      this.y += this.speedY
+    } 
+  }
+
 
   /**
    * This function reduces the Y-Coordinate and let the Enemy move up
@@ -81,12 +129,8 @@ class Enemies extends MoveableObjects {
    * @param {Number} speed - The px-value
    */
   moveUp(speedY) {
-    clearInterval(this.resetIntervalY);
-    this.resetIntervalY = setStoppableInterval(() => {
-      if (this.y > -100) {
-        this.y -= speedY;
-      }
-    }, 1000 / 60);
+    this.speedY = speedY;
+    this.directionY = -1;
   }
 
   /**
@@ -96,12 +140,8 @@ class Enemies extends MoveableObjects {
    * @param {Number} speed - The px-value
    */
   moveDown(speedY) {
-    clearInterval(this.resetIntervalY);
-    this.resetIntervalY = setStoppableInterval(() => {
-      if (this.y < 680) {
-        this.y = this.y + speedY;
-      }
-    }, 1000 / 60);
+    this.speedY = speedY;
+    this.directionY = 1;
   }
 
   /**
@@ -110,7 +150,6 @@ class Enemies extends MoveableObjects {
    * @param {Number} speed - The px-value
    */
   enemyRight(speedX) {
-    clearInterval(this.resetIntervalX);
     this.enemyMoveRight(speedX);
   }
 
@@ -121,7 +160,6 @@ class Enemies extends MoveableObjects {
    * @param {Number} speed - The px-value
    */
   enemyLeft(speedX) {
-    clearInterval(this.resetIntervalX);
     this.enemyMoveLeft(speedX);
   }
 }

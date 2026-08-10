@@ -6,6 +6,8 @@ class MoveableObjects extends GameObjects {
   life;
   hitboxWidth;
   hitboxHeight;
+  directionX = 0;
+  directionY = 0;
 
   /**
    * This Function calls the Objects Animations
@@ -100,10 +102,10 @@ class MoveableObjects extends GameObjects {
   isInsideBorder(object) {
     return (
       this.x + this.hitboxX + this.hitboxWidth > object.x + object.hitboxX &&
-      this.x + this.hitboxX < object.x  + object.hitboxX + object.hitboxWidth &&
+      this.x + this.hitboxX < object.x + object.hitboxX + object.hitboxWidth &&
       this.y + this.hitboxY + this.hitboxHeight > object.y + object.hitboxY &&
       this.y + this.hitboxY < object.y + object.hitboxY + object.hitboxHeight
-    ); 
+    );
   }
 
   /**
@@ -113,10 +115,9 @@ class MoveableObjects extends GameObjects {
    * @param {*} speedX - The px-value
    */
   enemyMoveLeft(speedX) {
-    this.resetIntervalX = setStoppableInterval(() => {
-      this.x -= speedX;
-      this.mirrorImage = false;
-    }, 1000 / 60);
+    this.speedX = speedX;
+    this.directionX = -1;
+    this.mirrorImage = false;
   }
 
   /**
@@ -126,9 +127,8 @@ class MoveableObjects extends GameObjects {
    * @param {*} speedX - The px-value
    */
   enemyMoveRight(speedX) {
-    this.resetIntervalX = setStoppableInterval(() => {
-      this.x += speedX;
-      this.mirrorImage = true;
-    }, 1000 / 60);
+    this.speedX = speedX;
+    this.directionX = 1;
+    this.mirrorImage = true;
   }
 }

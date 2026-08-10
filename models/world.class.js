@@ -195,6 +195,9 @@ class World {
 
   update(){
     this.character.movement.moveCharacter(this.keyboard)
+    this.level.enemies.forEach((enemy) => {
+      enemy.handleEnemyMovement()
+    })
   }
 
 

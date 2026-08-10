@@ -36,9 +36,9 @@ class Level {
    * Different to other Audio, this Audio is looped.
    */
   setBackgroundAudio() {
-    this.backgroundAudio = AudioManager.register(new Audio("audio/ocean.wav"));
+    /* this.backgroundAudio = AudioManager.register(new Audio("audio/ocean.wav"));
     this.backgroundAudio.loop = true;
-    this.backgroundAudio.play();
+    this.backgroundAudio.play(); */
   }
 
   /**

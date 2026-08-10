@@ -14,12 +14,12 @@ class Pufferfish extends Enemies {
     this.buildPufferfish(this.type);
     this.loadPufferfishImgCache();
     this.animateObject(this.pufferfish_IDLE, 100);
-    this.handleEnemyMovement()
     this.y = Math.floor(Math.random() * 200) + 200;
     this.width = Math.floor(Math.random() * 100) + 50;
     this.speedX = Math.floor(Math.random() * 2) + this.speedX;
     this.height = this.width;
     this.setHitbox(5, 8, 1.12, 1.1);
+    this.startEnemyMovement()
   }
 
   /**
