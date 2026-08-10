@@ -65,6 +65,17 @@ class CharacterMovement {
     this.character.abilities.negatefinSlapX();
     this.character.abilities.shootBubble(key);
     this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
+    this.playMovementAudio();
+  }
+
+  /**
+   * Plays the characters swim-sound 
+   * @returns - when character is not moving
+   */
+  playMovementAudio() {
+    if (!this.isMoving) {
+      return;
+    } else this.character.swimAudio.play();
   }
 
   /**
@@ -77,7 +88,6 @@ class CharacterMovement {
   moveUp(speed, key) {
     if (key?.UP == true && this.character.y > -100) {
       this.character.y = this.character.y - speed;
-      this.character.swimAudio.play();
     }
   }
   /**
@@ -90,7 +100,6 @@ class CharacterMovement {
   moveDown(speed, key) {
     if (key?.DOWN == true && this.character.y < 680) {
       this.character.y = this.character.y + speed;
-      this.character.swimAudio.play();
     }
   }
 
@@ -119,17 +128,19 @@ class CharacterMovement {
    * @param {*} key - Object with the listened Keyboard Keys
    * @returns - true or false, based on the condition
    */
-  characterReachesExpandLevelEnd(key){
-    return this.character.x >= this.character.world.levelBorder + 400
-  } 
+  characterReachesExpandLevelEnd(key) {
+    return this.character.x >= this.character.world.levelBorder + 400;
+  }
 
   /**
    * This Function checks, if the user is allowed to move right in the boss area
    * @param {*} key - Object with the listened Keyboard Keys
    * @returns - true or false, based on the condition
    */
-  characterMovesInBossArea(key){
-    return key?.RIGHT == true && this.character.x >= this.character.world.levelBorder
+  characterMovesInBossArea(key) {
+    return (
+      key?.RIGHT == true && this.character.x >= this.character.world.levelBorder
+    );
   }
 
   /**
@@ -137,8 +148,10 @@ class CharacterMovement {
    * @param {*} key - Object with the listened Keyboard Keys
    * @returns - true or false, based on the condition
    */
-  characterMovesRegular(key){
-      return key?.RIGHT == true && this.character.x <= this.character.world.levelBorder
+  characterMovesRegular(key) {
+    return (
+      key?.RIGHT == true && this.character.x <= this.character.world.levelBorder
+    );
   }
 
   /**
@@ -152,7 +165,6 @@ class CharacterMovement {
     this.character.x += speed;
     this.setCharacterPositionLeft(speed);
     this.character.mirrorImage = false;
-    this.character.swimAudio.play();
   }
 
   /**
@@ -165,7 +177,6 @@ class CharacterMovement {
   moveWithoutCameraRight(speed) {
     this.character.x += speed;
     this.character.mirrorImage = false;
-    this.character.swimAudio.play();
   }
 
   /**
@@ -192,7 +203,6 @@ class CharacterMovement {
     this.character.x -= speed;
     this.character.world.cameraX += speed;
     this.character.mirrorImage = true;
-    this.character.swimAudio.play();
   }
 
   /**
