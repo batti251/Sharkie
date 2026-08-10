@@ -8,40 +8,7 @@ class CharacterMovement {
     this.character = character;
   }
 
-  /**
-   * This Function picks the needed Sprite-Array depending on the characters Status
-   * When Character moves = [Swim-Array]
-   * When Character doesn't move = [Idle-Array]
-   * When Character doesn't move > 15 seconds = [sleep-Array]
-   * It sets the active Character Movement to 60 FPS
-   *
-   */
-  animateCharacterMovement() {
-    clearInterval(this.characterMovementInterval);
-    this.characterMovementInterval = setStoppableInterval(() => {
-      this.moveCharacter(this.character.world.keyboard);
-      if (
-        this.isMoving != this.lastIsMoving &&
-        !this.character.isAttacking &&
-        !this.character.isShooting
-      ) {
-        this.lastIsMoving = this.isMoving;
-        this.applyCharacterMovement();
-      }
-    }, 1000 / 60);
-  }
 
-  /**
-   * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on it's moving-state
-   *
-   */
-  applyCharacterMovement() {
-    if (this.isMoving) {
-      this.characterSwims();
-    } else {
-      this.character.characterFallAsleep();
-    }
-  }
 
   /**
    * This Function calls the character swim-Animation
@@ -66,10 +33,42 @@ class CharacterMovement {
     this.character.abilities.shootBubble(key);
     this.isMoving = key?.UP || key?.DOWN || key?.LEFT || key?.RIGHT;
     this.playMovementAudio();
+    this.animateCharacterMovement();
+  }
+
+    /**
+   * This Function picks the needed Sprite-Array depending on the characters Status
+   * When Character moves = [Swim-Array]
+   * When Character doesn't move = [Idle-Array]
+   * When Character doesn't move > 15 seconds = [sleep-Array]
+   * It sets the active Character Movement to 60 FPS
+   *
+   */
+  animateCharacterMovement() {
+    if (
+      this.isMoving != this.lastIsMoving &&
+      !this.character.isAttacking &&
+      !this.character.isShooting
+    ) {
+      this.lastIsMoving = this.isMoving;
+      this.applyCharacterMovement();
+    }
   }
 
   /**
-   * Plays the characters swim-sound 
+   * This Function wether chooses the Character Swim-Animation, or sleep-animation, depending on it's moving-state
+   *
+   */
+  applyCharacterMovement() {
+    if (this.isMoving) {
+      this.characterSwims();
+    } else {
+      this.character.characterFallAsleep();
+    }
+  }
+  
+  /**
+   * Plays the characters swim-sound
    * @returns - when character is not moving
    */
   playMovementAudio() {

@@ -21,7 +21,7 @@ class World {
     this.finishedLevel();
     this.finishedBossLevel();
     this.endbossAttack();
-    this.draw();
+    this.gameLoop();
   }
 
   /**
@@ -178,7 +178,8 @@ class World {
    * This Function loads the game-UI
    *
    */
-  draw() {
+  gameLoop() {
+    this.update();
     this.drawCanvas();
     this.ctx.translate(this.cameraX, 0);
     this.drawObjects();
@@ -190,6 +191,10 @@ class World {
       } else {
       this.imgAnimationLoop();
       }
+  }
+
+  update(){
+    this.character.movement.moveCharacter(this.keyboard)
   }
 
 
@@ -271,7 +276,7 @@ class World {
   imgAnimationLoop() {
     let self = this;
       this.instance = requestAnimationFrame(() => {
-      self.draw();
+      self.gameLoop();
     });
   }
 
