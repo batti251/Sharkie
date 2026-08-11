@@ -135,7 +135,7 @@ class CharacterAbilities {
    */
   createBubble(character) {
     setStoppableTimeout(() => {
-      character.world.bubbles.push(new Bubble("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png",character));
+      character.world.bubbles.push(new Bubble("assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.webp",character));
       this.shotBubble = true;
       this.decreasePoisonCount();
     }, 700);

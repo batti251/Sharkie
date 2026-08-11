@@ -57,11 +57,11 @@ class Pufferfish extends Enemies {
    */
   buildPufferIDLE(type) {
     return [
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim1.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim2.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim3.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim4.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim5.png`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim1.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim2.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim3.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim4.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/${type}.swim5.webp`,
     ];
   }
 
@@ -76,11 +76,11 @@ class Pufferfish extends Enemies {
    */
   buildPufferTRANSITION(type) {
     return [
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition1.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition2.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition3.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition4.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition5.png`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition1.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition2.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition3.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition4.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/2.transition/${type}.transition5.webp`,
     ];
   }
 
@@ -95,11 +95,11 @@ class Pufferfish extends Enemies {
    */
   buildPufferANGRY(type) {
     return [
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim1.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim2.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim3.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim4.png`,
-      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim5.png`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim1.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim2.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim3.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim4.webp`,
+      `assets/img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/${type}.bubbleswim5.webp`,
     ];
   }
 

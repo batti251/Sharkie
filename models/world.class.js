@@ -1,13 +1,13 @@
 class World {
-  character = new Character("assets/img/1.Sharkie/1.IDLE/1.png", 300, 0, this);
+  character = new Character("assets/img/1.Sharkie/1.IDLE/1.webp", 300, 0, this);
   canvas;
   ctx;
   cameraX = 300;
   keyboard;
-  healthbar = new Healthbar("assets/img/4. Marcadores/green/Life/100_  copia 2.png",this);
-  coinbar = new Coinbar("assets/img/4. Marcadores/green/Coin/0_  copia 4.png");
-  poisonbar = new Poisonbar("assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.png",this);
-  instruction = new Instruction("assets/img/6.Botones/Instructions 4.png");
+  healthbar = new Healthbar("assets/img/4. Marcadores/green/Life/100_  copia 2.webp",this);
+  coinbar = new Coinbar("assets/img/4. Marcadores/green/Coin/0_  copia 4.webp");
+  poisonbar = new Poisonbar("assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.webp",this);
+  instruction = new Instruction("assets/img/6.Botones/Instructions 4.webp");
   combat = new Combat(this);
   bubbles = [];
 

@@ -1,6 +1,9 @@
 class AudioManager {
   static audioArray = [];
 
+  static audios = {};
+  static volume = 0.5;
+
   /**
    * This Function registers a new Audio, on its class constructor. I.e. character-class swim-Audio
    * This Function sets the volume from the new Audio-Object to the preset volume of this Audio Manager. Currently 0.5
@@ -10,10 +13,13 @@ class AudioManager {
    * @param {Audio} audio - the new Audio-object
    * @returns - returns the Audio to its parent object
    */
-  static register(audio) {
-    let sound = document.getElementById("sound-range");
-    audio.volume = sessionStorage.getItem("volume")? (sound.value = sessionStorage.getItem("volume")): (sound.value = setSessionVolume("0.5"));
-    this.audioArray.push(audio);
+  static getAudio(path) {
+    if (this.audios[path]) {
+      return this.audios[path];
+    }
+    let audio = new Audio(path);
+    audio.volume = sessionStorage.getItem("volume") ?? this.volume;
+    this.audios[path] = audio;
     return audio;
   }
 
@@ -23,23 +29,24 @@ class AudioManager {
    * It changes the volume of each audio-object, that was pushed into tthe audioArray
    * updateSoundPercentage is called, to give user feedback about the volume-value
    *
-   * @param {*} v - the volume-indicator
+   * @param {*} volume - the volume-indicator
    */
-  static setVolume(v) {
-    this.volume = v;
-    this.audioArray.forEach((audio) => (audio.volume = v));
-    this.updateSoundPercentage(v);
+  static setVolume(volume) {
+    this.volume = volume;
+    Object.values(this.audios).forEach((audio) => {
+      audio.volume = volume;
+    });
+    this.updateSoundPercentage(volume);
   }
 
   /**
    *  This function updates the volume counter, to give the User direct feedback about the set volume
    * It's multiply by 100, for %-view
    *
-   * @param {*} v - the new Audio volume
+   * @param {*} volume - the new Audio volume
    */
-  static updateSoundPercentage(v) {
+  static updateSoundPercentage(volume) {
     let counter = document.getElementById("sound-percentage");
-    let percentage = v * 100;
-    counter.innerHTML = percentage.toFixed(0) + "%";
+    counter.innerHTML = `${(volume * 100).toFixed(0)}%`;
   }
 }

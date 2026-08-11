@@ -7,60 +7,60 @@ class Endboss extends Enemies {
   bossAttackOnCooldown = true;
   boss = true;
   endboss_INTRODUCE = [
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/3.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/4.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/5.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/6.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/7.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/8.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/9.png",
-    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/10.png",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/2.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/3.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/4.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/5.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/6.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/7.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/8.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/9.webp",
+    "assets/img/2.Enemy/3 Final Enemy/1.Introduce/10.webp",
   ];
 
   endboss_FLOATING = [
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/1.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/2.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/3.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/4.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/5.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/6.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/7.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/8.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/9.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/10.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/11.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/12.png",
-    "assets/img/2.Enemy/3 Final Enemy/2.floating/13.png",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/1.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/2.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/3.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/4.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/5.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/6.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/7.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/8.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/9.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/10.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/11.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/12.webp",
+    "assets/img/2.Enemy/3 Final Enemy/2.floating/13.webp",
   ];
 
   endboss_ATTACK = [
-    "assets/img/2.Enemy/3 Final Enemy/Attack/1.png",
-    "assets/img/2.Enemy/3 Final Enemy/Attack/2.png",
-    "assets/img/2.Enemy/3 Final Enemy/Attack/3.png",
-    "assets/img/2.Enemy/3 Final Enemy/Attack/4.png",
-    "assets/img/2.Enemy/3 Final Enemy/Attack/5.png",
-    "assets/img/2.Enemy/3 Final Enemy/Attack/6.png",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/1.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/2.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/3.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/4.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/5.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Attack/6.webp",
   ];
 
   endboss_HURT = [
-    "assets/img/2.Enemy/3 Final Enemy/Hurt/1.png",
-    "assets/img/2.Enemy/3 Final Enemy/Hurt/2.png",
-    "assets/img/2.Enemy/3 Final Enemy/Hurt/3.png",
-    "assets/img/2.Enemy/3 Final Enemy/Hurt/4.png",
+    "assets/img/2.Enemy/3 Final Enemy/Hurt/1.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Hurt/2.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Hurt/3.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Hurt/4.webp",
   ];
 
   endboss_DEAD = [
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png",
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png",
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png",
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png",
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.webp",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp",
   ];
 
   endboss_DEAD_SURFACE = [
-    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png",
+    "assets/img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.webp",
   ];
 
   constructor(path, x) {
@@ -73,8 +73,8 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_DEAD);
     this.x = x;
     this.setHitbox(40, 270, 1.2, 3.5);
-    this.bossEntranceAudio = AudioManager.register(new Audio("audio/boss-entrance.mp3"));
-    this.bossBiteAudio = AudioManager.register(new Audio("audio/boss-bite.wav"));
+    this.bossEntranceAudio = AudioManager.getAudio("audio/boss-entrance.mp3");
+    this.bossBiteAudio = AudioManager.getAudio("audio/boss-bite.wav");
   }
 
   /**

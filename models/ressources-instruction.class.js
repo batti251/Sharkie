@@ -6,7 +6,7 @@ class Instruction extends GameObjects {
   maxCoins;
   coinCount = [];
   collectedCoinsPercentage;
-  instructionCache = ["assets/img/6.Botones/Instructions 3.png"];
+  instructionCache = ["assets/img/6.Botones/Instructions 3.webp"];
   
   constructor(path) {
     super();

@@ -5,10 +5,10 @@ class COINS extends MoveableObjects {
   value = 1;
   collected = false;
   coins_IDLE = [
-    "assets/img/4. Marcadores/1. Coins/1.png",
-    "assets/img/4. Marcadores/1. Coins/2.png",
-    "assets/img/4. Marcadores/1. Coins/3.png",
-    "assets/img/4. Marcadores/1. Coins/4.png",
+    "assets/img/4. Marcadores/1. Coins/1.webp",
+    "assets/img/4. Marcadores/1. Coins/2.webp",
+    "assets/img/4. Marcadores/1. Coins/3.webp",
+    "assets/img/4. Marcadores/1. Coins/4.webp",
   ];
 
   constructor(imgPath, x) {
@@ -19,6 +19,6 @@ class COINS extends MoveableObjects {
     this.animateObject(this.coins_IDLE, 220);
     this.y = Math.floor(Math.random() * 200) + 200;
     this.setHitbox(-2, 2, 1, 1);
-    this.collectAudio = AudioManager.register(new Audio("audio/coin-collect.wav"));
+    this.collectAudio = AudioManager.getAudio("audio/coin-collect.wav");
   }
 }

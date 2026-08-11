@@ -21,7 +21,7 @@ class LevelInstruction extends Level {
     for (let index = 0; index < 2; index++) {
       this.setRandomTypes();
       this.setRandomPosition();
-      this.enemies.push(new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png`,this.randomPufferType,this.randomXPosition,false
+      this.enemies.push(new Pufferfish(`assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp`,this.randomPufferType,this.randomXPosition,false
         )
       );
     }
@@ -36,7 +36,7 @@ class LevelInstruction extends Level {
     for (let index = 0; index < 2; index++) {
       this.setRandomTypes();
       this.setRandomPosition();
-      this.enemies.push(new Jellyfish(`assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,this.randomJellyType,this.randomXPosition, false)
+      this.enemies.push(new Jellyfish(`assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.webp`,this.randomJellyType,this.randomXPosition, false)
       );
     }
   }
@@ -50,7 +50,7 @@ class LevelInstruction extends Level {
     for (let index = 0; index < 2; index++) {
       this.setRandomPosition();
       this.poison.push(
-        new POISONS(`assets/img/4. Marcadores/Posión/Animada/1.png`,500)
+        new POISONS(`assets/img/4. Marcadores/Posión/Animada/1.webp`,500)
       );
     }
   }

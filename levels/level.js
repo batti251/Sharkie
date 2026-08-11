@@ -5,16 +5,16 @@ class Level {
   multiplicator = 3840;
   enemyMultiplicator = 3;
   background = [
-    new Background("assets/img/3. Background/Layers/5. Water/L1.png",this.xStart,0),
-    new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.png",this.xStart, 0),
-    new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.png",this.xStart,0),
-    new Background("assets/img/3. Background/Layers/2. Floor/L1.png",this.xStart,0),
-    new Background("assets/img/3. Background/Layers/1. Light/1.png",this.xStart,0),
-    new Background("assets/img/3. Background/Layers/5. Water/L2.png",this.x1Start,0),
-    new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.png",this.x1Start,0),
-    new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.png",this.x1Start,0),
-    new Background("assets/img/3. Background/Layers/2. Floor/L2.png",this.x1Start,0),
-    new Background("assets/img/3. Background/Layers/1. Light/2.png",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/5. Water/L1.webp",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.webp",this.xStart, 0),
+    new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.webp",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/2. Floor/L1.webp",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/1. Light/1.webp",this.xStart,0),
+    new Background("assets/img/3. Background/Layers/5. Water/L2.webp",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.webp",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.webp",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/2. Floor/L2.webp",this.x1Start,0),
+    new Background("assets/img/3. Background/Layers/1. Light/2.webp",this.x1Start,0),
   ];
   enemies = [];
   coins = [];
@@ -26,8 +26,8 @@ class Level {
     this.x1 = this.x1Start + this.multiplicator;
     this.generateLevelObjects();
     this.setBackgroundAudio();
-    this.victoryAudio = AudioManager.register(new Audio("audio/victory.wav"));
-    this.defeatAudio = AudioManager.register(new Audio("audio/defeat.wav"));
+    this.victoryAudio = AudioManager.getAudio("audio/victory.wav");
+    this.defeatAudio = AudioManager.getAudio("audio/defeat.wav");
   }
 
   /**
@@ -36,7 +36,7 @@ class Level {
    * Different to other Audio, this Audio is looped.
    */
   setBackgroundAudio() {
-    /* this.backgroundAudio = AudioManager.register(new Audio("audio/ocean.wav"));
+    /* this.backgroundAudio = AudioManager.getAudio(new Audio("audio/ocean.wav"));
     this.backgroundAudio.loop = true;
     this.backgroundAudio.play(); */
   }
@@ -74,16 +74,16 @@ class Level {
    */
   setBackgroundFrame() {
     return [
-      new Background("assets/img/3. Background/Layers/5. Water/L1.png", this.x, 0),
-      new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.png", this.x, 0),
-      new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.png", this.x, 0),
-      new Background("assets/img/3. Background/Layers/2. Floor/L1.png", this.x, 0),
-      new Background("assets/img/3. Background/Layers/1. Light/1.png", this.x, 0),
-      new Background("assets/img/3. Background/Layers/5. Water/L2.png", this.x1, 0),
-      new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.png", this.x1, 0),
-      new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.png", this.x1, 0),
-      new Background("assets/img/3. Background/Layers/2. Floor/L2.png", this.x1, 0),
-      new Background("assets/img/3. Background/Layers/1. Light/2.png", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/5. Water/L1.webp", this.x, 0),
+      new Background("assets/img/3. Background/Layers/4.Fondo 2/L1.webp", this.x, 0),
+      new Background("assets/img/3. Background/Layers/3.Fondo 1/L1.webp", this.x, 0),
+      new Background("assets/img/3. Background/Layers/2. Floor/L1.webp", this.x, 0),
+      new Background("assets/img/3. Background/Layers/1. Light/1.webp", this.x, 0),
+      new Background("assets/img/3. Background/Layers/5. Water/L2.webp", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/4.Fondo 2/L2.webp", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/3.Fondo 1/L2.webp", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/2. Floor/L2.webp", this.x1, 0),
+      new Background("assets/img/3. Background/Layers/1. Light/2.webp", this.x1, 0),
 
     ];
   }
@@ -109,7 +109,7 @@ class Level {
       this.setRandomPosition();
       this.enemies.push(
         new Pufferfish(
-          `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png`,
+          `assets/img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.webp`,
           this.randomPufferType,
           this.randomXPosition,
           true
@@ -130,7 +130,7 @@ class Level {
       this.setRandomPosition();
       this.enemies.push(
         new Jellyfish(
-          `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png`,
+          `assets/img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.webp`,
           this.randomJellyType,
           this.randomXPosition,
           true
@@ -150,7 +150,7 @@ class Level {
       this.setRandomPosition();
       this.coins.push(
         new COINS(
-          `assets/img/4. Marcadores/1. Coins/1.png`,
+          `assets/img/4. Marcadores/1. Coins/1.webp`,
           this.randomXPosition
         )
       );
@@ -168,7 +168,7 @@ class Level {
       this.setRandomPosition();
       this.poison.push(
         new POISONS(
-          `assets/img/4. Marcadores/Posión/Animada/1.png`,
+          `assets/img/4. Marcadores/Posión/Animada/1.webp`,
           this.randomXPosition
         )
       );

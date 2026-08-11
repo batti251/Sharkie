@@ -1,7 +1,7 @@
 class Bubble extends MoveableObjects {
   height = 50;
   width = 50;
-  bubble_Array = ["assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.png"];
+  bubble_Array = ["assets/img/1.Sharkie/4.Attack/Bubble trap/Bubble.webp"];
   bubbleSpawns = true;
 
   constructor(path, character) {

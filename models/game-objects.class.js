@@ -9,7 +9,7 @@ class GameObjects {
   /**
    * This Function loads a single image and sets it as the current imge of this object
    *
-   * @param {String} path - The given path to an image (.png)
+   * @param {String} path - The given path to an image (.webp)
    */
   loadImg(path) {
     this.img = AssetLoader.loadImage(path);
