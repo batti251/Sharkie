@@ -142,7 +142,6 @@ class Character extends MoveableObjects {
     this.loadImgCache(this.sharkie_Bubble_TRAP);
     this.animateObject(this.sharkie_IDLE, 100);
     this.setHitbox(80, 200, 1.67, 4);
-    this.checkCollectiblesCollisions();
     this.world = world;
   }
 
@@ -152,11 +151,8 @@ class Character extends MoveableObjects {
    *
    */
   checkCollectiblesCollisions() {
-    clearInterval(this.collectibleInterval);
-    this.collectibleInterval = setStoppableInterval(() => {
       this.collectItemListener(this.world.level.poison);
       this.collectItemListener(this.world.level.coins);
-    }, 1000 / 60);
   }
 
   /**

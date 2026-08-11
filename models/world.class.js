@@ -4,16 +4,22 @@ class World {
   ctx;
   cameraX = 300;
   keyboard;
-  healthbar = new Healthbar("assets/img/4. Marcadores/green/Life/100_  copia 2.webp",this);
+  healthbar = new Healthbar(
+    "assets/img/4. Marcadores/green/Life/100_  copia 2.webp",
+    this,
+  );
   coinbar = new Coinbar("assets/img/4. Marcadores/green/Coin/0_  copia 4.webp");
-  poisonbar = new Poisonbar("assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.webp",this);
+  poisonbar = new Poisonbar(
+    "assets/img/4. Marcadores/green/poisoned bubbles/0_ copia 2.webp",
+    this,
+  );
   instruction = new Instruction("assets/img/6.Botones/Instructions 4.webp");
   combat = new Combat(this);
   bubbles = [];
 
   constructor(canvas, keyboard, nextLevel, levelType) {
     this.nextLevel = nextLevel;
-    this.setLevel(nextLevel,levelType)
+    this.setLevel(nextLevel, levelType);
     this.keyboard = keyboard;
     this.ctx = canvas.getContext("2d");
     this.setWorld();
@@ -29,16 +35,19 @@ class World {
    * This Function sets the Level, when the World is loaded
    * It starts a Tutorial-Level to get used to the mechanics
    * After it depends on the set parameters
-   * 
+   *
    * @param {Number} nextLevel - the entered level
-   * @param {String} levelType - "regular" : level with only puffer- and jellyfishes 
+   * @param {String} levelType - "regular" : level with only puffer- and jellyfishes
    *                           - "boss" :  regular level and also a bossfight at the end of the level
-   * @returns 
+   * @returns
    */
-  setLevel(nextLevel,levelType){
-    if (nextLevel == 0 ) {
-      this.level = new LevelInstruction(this.nextLevel)
-    } else levelType == "boss" ? (this.level = new LevelEndBoss(this.nextLevel)) : (this.level = new LevelRegular(this.nextLevel))
+  setLevel(nextLevel, levelType) {
+    if (nextLevel == 0) {
+      this.level = new LevelInstruction(this.nextLevel);
+    } else
+      levelType == "boss"
+        ? (this.level = new LevelEndBoss(this.nextLevel))
+        : (this.level = new LevelRegular(this.nextLevel));
   }
 
   /**
@@ -57,8 +66,8 @@ class World {
    */
   setLevelEnd() {
     this.levelType = this.level.constructor;
-    this.levelEnd = this.level.x - canvas.width -20;
-    this.levelBorder = this.level.x - canvas.width -20;
+    this.levelEnd = this.level.x - canvas.width - 20;
+    this.levelBorder = this.level.x - canvas.width - 20;
   }
 
   /**
@@ -75,7 +84,10 @@ class World {
    */
   finishedLevel() {
     let finishInterval = setStoppableInterval(() => {
-      if (this.levelIsFinished() && (this.levelType == LevelRegular || this.levelType == LevelInstruction )) {
+      if (
+        this.levelIsFinished() &&
+        (this.levelType == LevelRegular || this.levelType == LevelInstruction)
+      ) {
         this.showVictoryScreen();
         clearInterval(finishInterval);
       }
@@ -87,7 +99,7 @@ class World {
    * It shows the Try-Again-Button, to restart the current level
    */
   showDefeatScreen() {
-    this.stopLoop = true
+    this.stopLoop = true;
     this.levelFinished = false;
     triggerScreenOverlay("defeat");
     this.level.defeatAudio.play();
@@ -104,9 +116,9 @@ class World {
    * It denies the keyboard-functions to prevent further character-movement
    */
   showVictoryScreen() {
-    this.stopLoop = true
+    this.stopLoop = true;
     this.levelFinished = true;
-    triggerScreenOverlay("victory")
+    triggerScreenOverlay("victory");
     pauseGame();
     this.level.victoryAudio.play();
     let showButtonTimeout = setStoppableTimeout(() => {
@@ -135,65 +147,55 @@ class World {
     this.drawHUD();
     this.nextLevel == 0 ? this.addImgObjectToMap(this.instruction) : "";
     if (this.stopLoop) {
-        this.stopAnimationLoop()
-      } else {
+      this.stopAnimationLoop();
+    } else {
       this.imgAnimationLoop();
-      }
+    }
   }
 
-  update(){
-    this.character.movement.moveCharacter(this.keyboard)
+  update() {
+    this.character.movement.moveCharacter(this.keyboard);
     this.level.enemies.forEach((enemy) => {
-      enemy.handleEnemyMovement()
-    })
+      enemy.handleEnemyMovement();
+    });
+    this.character.checkCollectiblesCollisions();
     this.updateBoss();
   }
-bossSpawned = false;
 
-updateBoss() {
+  bossSpawned = false;
+
+  updateBoss() {
     if (this.levelType !== LevelEndBoss) {
-        return;
+      return;
     }
-    let boss = this.level.enemies.find(
-        (enemy) => enemy instanceof Endboss
-    );
+    let boss = this.level.enemies.find((enemy) => enemy instanceof Endboss);
     if (!boss) {
-        return;
+      return;
     }
     this.handleBossSpawn(boss);
     this.handleBossAttack(boss);
     this.handleBossDefeat();
-}
+  }
 
-handleBossSpawn(boss) {
-    if (
-        !this.bossSpawned &&
-        this.levelIsFinished()
-    ) {
-        this.bossSpawned = true;
-        boss.bossSpawn();
+  handleBossSpawn(boss) {
+    if (!this.bossSpawned && this.levelIsFinished()) {
+      this.bossSpawned = true;
+      boss.bossSpawn();
     }
-}
+  }
 
-handleBossAttack(boss) {
-    if (
-        boss.angry &&
-        !boss.bossAttackOnCooldown
-    ) {
-        boss.bossAttack();
+  handleBossAttack(boss) {
+    if (boss.angry && !boss.bossAttackOnCooldown) {
+      boss.bossAttack();
     }
-}
+  }
 
-handleBossDefeat() {
-    if (
-        this.level.bossFinished &&
-        !this.levelFinished
-    ) {
-        this.levelFinished = true;
-        this.showVictoryScreen();
+  handleBossDefeat() {
+    if (this.level.bossFinished && !this.levelFinished) {
+      this.levelFinished = true;
+      this.showVictoryScreen();
     }
-}
-
+  }
 
   /**
    * This function draws all Objects, that move relative to the camera
@@ -207,9 +209,7 @@ handleBossDefeat() {
     this.addImgObjectsToMap(this.level.enemies);
     this.addImgObjectToMap(this.character);
     this.bubbles?.length > 0 ? this.addImgObjectsToMap(this.bubbles) : "";
-            
-    }
-    
+  }
 
   /**
    * This Function draws all Objects, that don't move relative to the camera
@@ -232,6 +232,21 @@ handleBossDefeat() {
     this.ctx.fillRect(0, 0, canvas.width, canvas.height); // adds x, y, width and height to the canvas + fillstyle
   }
 
+  isInViewport(object) {
+    let buffer = 300;
+    let left = -this.cameraX - buffer;
+    let right = -this.cameraX + canvas.width + buffer;
+    return object.x + object.width >= left && object.x <= right;
+  }
+
+  addImgObjectsToMap(objectArray) {
+    objectArray.forEach((object) => {
+        if (this.isInViewport(object)) {
+            this.addImgObjectToMap(object);
+        }
+    });
+}
+
   /**
    * This function draws a single Image to the Canvas
    *
@@ -249,7 +264,13 @@ handleBossDefeat() {
       this.ctx.scale(-1, 1);
       object.x = object.x * -1;
     }
-    this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
+    this.ctx.drawImage(
+      object.img,
+      object.x,
+      object.y,
+      object.width,
+      object.height,
+    );
     if (object.mirrorImage) {
       object.x = object.x * -1;
       this.ctx.restore();
@@ -272,16 +293,16 @@ handleBossDefeat() {
    */
   imgAnimationLoop() {
     let self = this;
-      this.instance = requestAnimationFrame(() => {
+    this.instance = requestAnimationFrame(() => {
       self.gameLoop();
     });
   }
 
- /**
-     * This Function stops the imgAnimationLoop
-     * It is called, when the level is finished
-     */
-  stopAnimationLoop(){
-     cancelAnimationFrame(this.instance);
-}
+  /**
+   * This Function stops the imgAnimationLoop
+   * It is called, when the level is finished
+   */
+  stopAnimationLoop() {
+    cancelAnimationFrame(this.instance);
+  }
 }
