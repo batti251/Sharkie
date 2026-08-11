@@ -19,8 +19,6 @@ class World {
     this.setWorld();
     this.setLevelEnd();
     this.finishedLevel();
-    this.finishedBossLevel();
-    this.endbossAttack();
   }
 
   start() {
@@ -118,59 +116,6 @@ class World {
   }
 
   /**
-   * This Function sets the end of the boss-level
-   *
-   */
-  finishedBossLevel() {
-    this.spawnBoss();
-    this.defeatBoss();
-  }
-
-  /**
-   * This Function listens, to spawn the boss when character passes the level-border
-   */
-  spawnBoss() {
-    let boss = this.level.enemies.filter((enemie) => enemie.boss);
-    let bossInterval = setStoppableInterval(() => {
-      if (this.levelIsFinished() && this.levelType == LevelEndBoss) {
-        boss[0].bossSpawn();
-        clearInterval(bossInterval);
-      }
-    }, 200);
-  }
-
-  /**
-   * This Function listens, if the boss was defeated
-   * It shows the Victory-Screen, on success
-   */
-  defeatBoss() {
-    let killedBossInterval = setStoppableInterval(() => {
-      this.levelIsFinished();
-      if (this.level.bossFinished) {
-        clearInterval(killedBossInterval);
-        this.showVictoryScreen();
-      }
-    }, 200);
-  }
-
-  /**
-   * This Function calls the Boss-Attack, if the Attack is not on Cooldown
-   */
-  endbossAttack() {
-    setStoppableInterval(() => {
-      this.level.enemies.forEach((object) => {
-        if (
-          object instanceof Endboss &&
-          object.angry &&
-          !object.bossAttackOnCooldown
-        ) {
-          object.bossAttack();
-        }
-      });
-    }, 300);
-  }
-
-  /**
    * This function enables to pass world from the characters object
    */
   setWorld() {
@@ -201,7 +146,53 @@ class World {
     this.level.enemies.forEach((enemy) => {
       enemy.handleEnemyMovement()
     })
+    this.updateBoss();
   }
+bossSpawned = false;
+
+updateBoss() {
+    if (this.levelType !== LevelEndBoss) {
+        return;
+    }
+    let boss = this.level.enemies.find(
+        (enemy) => enemy instanceof Endboss
+    );
+    if (!boss) {
+        return;
+    }
+    this.handleBossSpawn(boss);
+    this.handleBossAttack(boss);
+    this.handleBossDefeat();
+}
+
+handleBossSpawn(boss) {
+    if (
+        !this.bossSpawned &&
+        this.levelIsFinished()
+    ) {
+        this.bossSpawned = true;
+        boss.bossSpawn();
+    }
+}
+
+handleBossAttack(boss) {
+    if (
+        boss.angry &&
+        !boss.bossAttackOnCooldown
+    ) {
+        boss.bossAttack();
+    }
+}
+
+handleBossDefeat() {
+    if (
+        this.level.bossFinished &&
+        !this.levelFinished
+    ) {
+        this.levelFinished = true;
+        this.showVictoryScreen();
+    }
+}
 
 
   /**

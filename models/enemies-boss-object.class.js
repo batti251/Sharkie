@@ -6,6 +6,9 @@ class Endboss extends Enemies {
   y = 100;
   bossAttackOnCooldown = true;
   boss = true;
+  isDashing = false;
+  isKnockedBack = false;
+
   endboss_INTRODUCE = [
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/1.webp",
     "assets/img/2.Enemy/3 Final Enemy/1.Introduce/2.webp",
@@ -72,6 +75,7 @@ class Endboss extends Enemies {
     this.loadImgCache(this.endboss_HURT);
     this.loadImgCache(this.endboss_DEAD);
     this.x = x;
+    this.canMove = true;
     this.setHitbox(40, 270, 1.2, 3.5);
     this.bossEntranceAudio = AudioManager.getAudio("audio/boss-entrance.mp3");
     this.bossBiteAudio = AudioManager.getAudio("audio/boss-bite.wav");
@@ -80,15 +84,15 @@ class Endboss extends Enemies {
   /**
    * This Function calculates its position compared to the characters position
    * Each second it will refresh the conditions of x and y from the Boss compared to the character and retarget the character
-   * This gives the Boss a complete Moveset always aiming the character, no matter where the character is 
+   * This gives the Boss a complete Moveset always aiming the character, no matter where the character is
    */
-  bossFocus(){
+  bossFocus() {
     setStoppableInterval(() => {
-      let characterPositionX = world.character.x
-      let characterPositionY = world.character.y
+      let characterPositionX = world.character.x;
+      let characterPositionY = world.character.y;
       this.x < characterPositionX ? this.enemyRight(4) : this.enemyLeft(4);
-      this.y < characterPositionY ? this.moveDown(2) : this.moveUp(2)
-    },1000)
+      this.y < characterPositionY ? this.moveDown(2) : this.moveUp(2);
+    }, 1000);
   }
 
   /**
@@ -102,7 +106,7 @@ class Endboss extends Enemies {
     this.bossAttackCooldown();
     this.endbossEntrance();
     this.x = world.levelEnd + 1000;
-    this.bossFocus()
+    this.bossFocus();
   }
 
   /**
@@ -161,12 +165,12 @@ class Endboss extends Enemies {
     this.animateObjectSprite(this.endboss_HURT, 100);
     this.floatTimeout = setStoppableTimeout(() => {
       this.animateObjectSprite(this.endboss_FLOATING, 200);
-      clearInterval(this.knockbackInterval);
+      this.isKnockedBack = false;
     }, 500);
     if (this.life <= 0) {
-      clearTimeout(this.floatTimeout)
-       this.bossDieAnimation()
-      }
+      clearTimeout(this.floatTimeout);
+      this.bossDieAnimation();
+    }
   }
 
   /**
@@ -174,18 +178,36 @@ class Endboss extends Enemies {
    *
    */
   bossKnockback() {
-    this.knockbackInterval = setStoppableInterval(() => {
-      this.x += 10;
-    }, 1000 / 60);
+    this.isKnockedBack = true;
   }
 
   /**
    * This function let the Boss dash to the left when he attacks
    */
   bossDash() {
-    this.dashInterval = setStoppableInterval(() => {
-    this.mirrorImage ? this.x += 5 : this.x -= 5;
-    }, 1000 / 60);
+    this.isDashing = true;
+  }
+
+  handleEnemyMovement() {
+    super.handleEnemyMovement();
+    this.updateBossDash();
+    this.updateBossKnockback();
+  }
+
+  updateBossDash() {
+    if (!this.isDashing) {
+      return;
+    }
+
+    this.mirrorImage ? (this.x += 5) : (this.x -= 5);
+  }
+
+  updateBossKnockback() {
+    if (!this.isKnockedBack) {
+      return;
+    }
+
+    this.x += 10;
   }
 
   /**
@@ -244,7 +266,7 @@ class Endboss extends Enemies {
     this.animateObjectSprite(this.endboss_ATTACK, 100);
     setStoppableTimeout(() => {
       this.animateObjectSprite(this.endboss_FLOATING, 200);
-      clearInterval(this.dashInterval);
+      this.isDashing = false;
     }, 600);
   }
 
@@ -266,21 +288,7 @@ class Endboss extends Enemies {
    * This avoids multiple Intervals running in the background, when game is restarted
    */
   clearBossIntervalls() {
-    clearInterval(this.knockbackInterval);
-    clearInterval(this.dashInterval);
     clearTimeout(this.cooldownTimeout);
     clearTimeout(this.bossDies);
-    clearTimeout(this.biteInterval);
-    clearInterval(this.randomCoordinateYInterval);
-    clearInterval(this.randomTurnInterval);
-    clearInterval(this.resetIntervalX);
-    clearInterval(this.resetIntervalY);
-    clearTimeout(this.bossEntranceInterval);
-    clearTimeout(this.bossDies);
-    clearTimeout(this.bossEntranceInterval);
-    clearTimeout(this.biteInterval);
-    clearTimeout(this.cooldownTimeout);
-    clearTimeout(this.bossDies);
-    clearTimeout(this.biteInterval);
   }
 }
